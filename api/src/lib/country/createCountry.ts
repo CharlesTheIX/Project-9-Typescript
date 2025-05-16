@@ -2,16 +2,15 @@ import * as gbl from '../../globals';
 import Model from '../../models/country.model';
 import getCountryByDisplayName from './getCountryByDisplayName';
 
-export default async (props: Country): Promise<APIResponse> => {
+export default async (props: Country): Promise<ApiResponse> => {
   const { displayName, names, flagRectangle, mapRectangle, continent } = props;
 
   try {
-    const existingCountry = await getCountryByDisplayName(displayName);
-    console.log(existingCountry);
+    const existingDoc = await getCountryByDisplayName(displayName);
 
-    if (!existingCountry.error) return { ...gbl.response_CONFLICT, message: `Country with the display name ${displayName} already exists.` };
+    if (!existingDoc.error) return { ...gbl.response_CONFLICT, message: `Country with the display name ${displayName} already exists.` };
 
-    const newCountry = new Model({
+    const newDoc = new Model({
       names,
       continent,
       displayName,
@@ -19,11 +18,11 @@ export default async (props: Country): Promise<APIResponse> => {
       flagRectangle,
     });
 
-    if (!newCountry) return { ...gbl.response_BAD, message: 'Country not created.' };
+    if (!newDoc) return { ...gbl.response_BAD, message: 'Country not created.' };
 
-    const createdCountry = await newCountry.save();
+    const createdDoc = await newDoc.save();
 
-    if (!createdCountry) return { ...gbl.response_BAD, message: 'Country not created.' };
+    if (!createdDoc) return { ...gbl.response_BAD, message: 'Country not created.' };
 
     return { ...gbl.response_DB_UPDATED };
   } catch (error: any) {

@@ -1,18 +1,17 @@
 import * as gbl from '@/globals';
 import { NextResponse } from "next/server";
 
-export async function POST() {
+export async function GET() {
   try {
-    const response = await fetch(`${process.env.EXTERNAL_API_URL}/${process.env.EXTERNAL_API_VERSION}/countries/all`, {
-      method: 'POST',
+    const response = await fetch(`${process.env.EXTERNAL_API_URL}/${process.env.EXTERNAL_API_VERSION}/`, {
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.EXTERNAL_API_AUTH_TOKEN}`,
       }
     }).then((res: any) => res.json());
     return NextResponse.json(response);
   } catch (error: any) {
-    console.error(`Get all countries error: ${error.message}.`);
+    console.error(`Health error: ${error.message}.`);
     return NextResponse.json(gbl.response_SERVER_ERROR);
   }
 }

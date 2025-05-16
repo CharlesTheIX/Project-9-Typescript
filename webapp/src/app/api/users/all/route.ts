@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function POST() {
   try {
-    const response = await fetch(`${process.env.EXTERNAL_API_URL}/${process.env.EXTERNAL_API_VERSION}/countries/all`, {
+    const response = await fetch(`${process.env.EXTERNAL_API_URL}/${process.env.EXTERNAL_API_VERSION}/users/all`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -12,7 +12,7 @@ export async function POST() {
     }).then((res: any) => res.json());
     return NextResponse.json(response);
   } catch (error: any) {
-    console.error(`Get all countries error: ${error.message}.`);
+    console.error(`Get all users error: ${error.message}.`);
     return NextResponse.json(gbl.response_SERVER_ERROR);
   }
 }

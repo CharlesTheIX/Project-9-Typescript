@@ -1,15 +1,15 @@
 import * as gbl from '../../globals';
 import Model from '../../models/country.model';
 
-export default async (): Promise<APIResponse> => {
+export default async (): Promise<ApiResponse> => {
   try {
-    const countries = await Model.find();
+    const docs = await Model.find();
 
-    if (!countries) return { ...gbl.response_BAD, message: 'No Countries found.' };
+    if (!docs) return { ...gbl.response_BAD, message: 'No Countries found.' };
 
-    if (countries.length === 0) return { ...gbl.response_NO_CONTENT, message: 'No Countries found.' };
+    if (docs.length === 0) return { ...gbl.response_NO_CONTENT, message: 'No Countries found.' };
 
-    const countriesArray: Country[] = countries.map((country: any) => {
+    const docsArray: Country[] = docs.map((country: any) => {
       return {
         names: country.names,
         _id: country._id.toString(),
@@ -22,7 +22,7 @@ export default async (): Promise<APIResponse> => {
       };
     });
 
-    return { ...gbl.response_OK, data: countriesArray };
+    return { ...gbl.response_OK, data: docsArray };
   } catch (error: any) {
     console.error(`Get all countries error: ${error.message}`);
     return { ...gbl.response_SERVER_ERROR, message: error.message };

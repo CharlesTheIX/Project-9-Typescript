@@ -12,51 +12,54 @@ export const status = {
   SERVER_ERROR: 500,
 };
 
-export const response_OK: APIResponse = {
+// 2**
+export const response_OK: ApiResponse = {
   data: null,
   error: false,
   status: status.OK,
   message: 'Success.',
 };
-export const response_DB_UPDATED: APIResponse = {
+export const response_DB_UPDATED: ApiResponse = {
   data: null,
   error: false,
   message: 'DB Updated.',
   status: status.DB_UPDATED,
 };
-export const response_NO_CONTENT: APIResponse = {
+export const response_NO_CONTENT: ApiResponse = {
   data: null,
   error: false,
   message: 'No Content.',
   status: status.NO_CONTENT,
 };
 
-export const response_BAD: APIResponse = {
+// 4**
+export const response_BAD: ApiResponse = {
   data: null,
   error: true,
   status: status.BAD,
   message: 'Bad Request.',
 };
-export const response_FORBIDDEN: APIResponse = {
+export const response_FORBIDDEN: ApiResponse = {
   data: null,
   error: true,
   message: 'Forbidden.',
   status: status.FORBIDDEN,
 };
-export const response_NOT_FOUND: APIResponse = {
+export const response_NOT_FOUND: ApiResponse = {
   data: null,
   error: true,
   message: 'Not Found.',
   status: status.NOT_FOUND,
 };
-export const response_CONFLICT: APIResponse = {
+export const response_CONFLICT: ApiResponse = {
   data: null,
   error: true,
   message: 'Conflict.',
   status: status.CONFLICT,
 };
 
-export const response_SERVER_ERROR: APIResponse = {
+// 5**
+export const response_SERVER_ERROR: ApiResponse = {
   data: null,
   error: true,
   message: 'Server Error.',

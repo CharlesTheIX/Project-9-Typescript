@@ -13,6 +13,7 @@ const schema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+
   displayName: {
     type: String,
     required: [true, 'Please provide a display name.'],
@@ -49,10 +50,20 @@ schema.pre('save', async function (next: any) {
   try {
     next();
   } catch (error: any) {
-    console.error(`Mongo user pre save error: ${error.message}`);
+    console.error(`Mongo country pre save error: ${error.message}`);
     next(error);
   }
 });
+
+// Example code snippet for custom mongo chema method
+// schema.statics.CUSTOM_FUNCTION = async function (props: any) {
+//   try {
+//     // CUSTOM CODE HERE
+//   } catch (error: any) {
+//     console.error(`CUSTOM FUCNTION error: ${error.message}`);
+//     throw Error(error.message);
+//   }
+// };
 
 const Country = mongoose.model('Country', schema);
 export default Country;

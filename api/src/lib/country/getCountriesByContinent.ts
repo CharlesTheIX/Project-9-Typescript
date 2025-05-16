@@ -1,17 +1,17 @@
 import * as gbl from '../../globals';
 import Model from '../../models/country.model';
 
-export default async (continent: string): Promise<APIResponse> => {
+export default async (continent: string): Promise<ApiResponse> => {
   try {
-    const countries = await Model.find({ continent: continent });
+    const docs = await Model.find({ continent: continent });
 
-    if (!countries) return { ...gbl.response_BAD, message: 'No countries found.' };
+    if (!docs) return { ...gbl.response_BAD, message: 'No countries found.' };
 
-    if (countries.length === 0) return { ...gbl.response_NO_CONTENT };
+    if (docs.length === 0) return { ...gbl.response_NO_CONTENT, message: 'No Countries found.' };
 
-    return { ...gbl.response_OK, data: countries };
+    return { ...gbl.response_OK, data: docs };
   } catch (error: any) {
-    console.error(`get country by continent error: ${error.message}`);
+    console.error(`Get country by continent error: ${error.message}`);
     return { ...gbl.response_SERVER_ERROR, message: error.message };
   }
 };

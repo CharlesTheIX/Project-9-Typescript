@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(request: NextRequest) {
   try {
     const { _id } = await request.json();
-    const response = await fetch(`${process.env.EXTERNAL_API_URL}/${process.env.EXTERNAL_API_VERSION}/countries/by-id`, {
+    const response = await fetch(`${process.env.EXTERNAL_API_URL}/${process.env.EXTERNAL_API_VERSION}/users/by-id`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
     }).then((res: any) => res.json());
     return NextResponse.json(response);
   } catch (error: any) {
-    console.error(`Get country by _id error: ${error.message}.`);
+    console.error(`Get user by _id error: ${error.message}.`);
     return NextResponse.json(gbl.response_SERVER_ERROR);
   }
 }
@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
 export async function PATCH(request: NextRequest) {
   try {
     const { _id, update } = await request.json();
-    const response = await fetch(`${process.env.EXTERNAL_API_URL}/${process.env.EXTERNAL_API_VERSION}/countries/by-id`, {
+    const response = await fetch(`${process.env.EXTERNAL_API_URL}/${process.env.EXTERNAL_API_VERSION}/users/by-id`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ export async function PATCH(request: NextRequest) {
     }).then((res: any) => res.json());
     return NextResponse.json(response);
   } catch (error: any) {
-    console.error(`Update country by _id error: ${error.message}.`);
+    console.error(`Update user by _id error: ${error.message}.`);
     return NextResponse.json(gbl.response_SERVER_ERROR);
   }
 }
@@ -41,7 +41,7 @@ export async function PATCH(request: NextRequest) {
 // export async function DELETE(request: NextRequest) {
 //   try {
 //     const { _id } = await request.json();
-//     const response = await fetch(`${process.env.EXTERNAL_API_URL}/${process.env.EXTERNAL_API_VERSION}/countries/by-id`, {
+//     const response = await fetch(`${process.env.EXTERNAL_API_URL}/${process.env.EXTERNAL_API_VERSION}/users/by-id`, {
 //       method: 'DELETE',
 //       headers: {
 //         'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ export async function PATCH(request: NextRequest) {
 //     }).then((res: any) => res.json());
 //     return NextResponse.json(response);
 //   } catch (error: any) {
-//     console.error(`Delete country by _id error: ${error.message}.`);
+//     console.error(`Delete user by _id error: ${error.message}.`);
 //     return NextResponse.json(gbl.response_SERVER_ERROR);
 //   }
 // }
