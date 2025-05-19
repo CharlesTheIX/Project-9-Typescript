@@ -1,15 +1,14 @@
-
 import * as gbl from '@/globals';
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
   try {
     const { _id } = await request.json();
-    const response = await fetch(`${process.env.EXTERNAL_API_URL}/${process.env.EXTERNAL_API_VERSION}/countries/by-id`, {
+    const response = await fetch(`${process.env.API_URL}/${process.env.API_VERSION}/countries/by-id`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.EXTERNAL_API_AUTH_TOKEN}`,
+        Authorization: `Bearer ${process.env.API_AUTH_TOKEN}`,
       },
       body: JSON.stringify({ _id }),
     }).then((res: any) => res.json());
@@ -23,11 +22,11 @@ export async function POST(request: NextRequest) {
 export async function PATCH(request: NextRequest) {
   try {
     const { _id, update } = await request.json();
-    const response = await fetch(`${process.env.EXTERNAL_API_URL}/${process.env.EXTERNAL_API_VERSION}/countries/by-id`, {
+    const response = await fetch(`${process.env.API_URL}/${process.env.API_VERSION}/countries/by-id`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.EXTERNAL_API_AUTH_TOKEN}`,
+        Authorization: `Bearer ${process.env.API_AUTH_TOKEN}`,
       },
       body: JSON.stringify({ _id, update }),
     }).then((res: any) => res.json());
@@ -41,11 +40,11 @@ export async function PATCH(request: NextRequest) {
 // export async function DELETE(request: NextRequest) {
 //   try {
 //     const { _id } = await request.json();
-//     const response = await fetch(`${process.env.EXTERNAL_API_URL}/${process.env.EXTERNAL_API_VERSION}/countries/by-id`, {
+//     const response = await fetch(`${process.env.API_URL}/${process.env.API_VERSION}/countries/by-id`, {
 //       method: 'DELETE',
 //       headers: {
 //         'Content-Type': 'application/json',
-//         Authorization: `Bearer ${process.env.EXTERNAL_API_AUTH_TOKEN}`,
+//         Authorization: `Bearer ${process.env.API_AUTH_TOKEN}`,
 //       },
 //       body: JSON.stringify({ _id }),
 //     }).then((res: any) => res.json());

@@ -7,10 +7,12 @@ type ApiResponse = {
   message: string;
 };
 
+type Continent = 'Europe' | 'Asia' | 'Africa' | 'Noth America' | 'South America' | 'Oceania';
+
 type Country = MongoDocDefaults & {
   names: string[];
-  continent: string;
   displayName: string;
+  continent: Continent;
   mapRectangle: Rectangle;
   flagRectangle: Rectangle;
 };

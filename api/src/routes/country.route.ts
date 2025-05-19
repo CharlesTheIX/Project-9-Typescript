@@ -40,7 +40,9 @@ router.route('/by-id').post(async (request: Request, response: Response): Promis
 router.route('/by-display-name').post(async (request: Request, response: Response): Promise<any> => {
   const { displayName } = request.body;
 
-  if (!displayName) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: 'Required inputs: displayName.' });
+  if (!displayName) {
+    return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: 'Required inputs: displayName.' });
+  }
 
   try {
     const res = await getCountryByDisplayName(displayName);
@@ -71,7 +73,10 @@ router.route('/create').post(async (request: Request, response: Response): Promi
   const { displayName, names, flagRectangle, mapRectangle, continent } = request.body;
 
   if (!displayName || !names || names.length === 0 || !flagRectangle || !mapRectangle || !continent) {
-    return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: 'Required inputs: displayName, names, continent, flagRectangle, mapRectangle.' });
+    return response.status(gbl.status.BAD).json({
+      ...gbl.response_BAD,
+      message: 'Required inputs: displayName, names, continent, flagRectangle, mapRectangle.',
+    });
   }
 
   try {

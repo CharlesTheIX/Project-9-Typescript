@@ -8,7 +8,9 @@ export default async (props: Country): Promise<ApiResponse> => {
   try {
     const existingDoc = await getCountryByDisplayName(displayName);
 
-    if (!existingDoc.error) return { ...gbl.response_CONFLICT, message: `Country with the display name ${displayName} already exists.` };
+    if (!existingDoc.error) {
+      return { ...gbl.response_CONFLICT, message: `Country with the display name ${displayName} already exists.` };
+    }
 
     const newDoc = new Model({
       names,

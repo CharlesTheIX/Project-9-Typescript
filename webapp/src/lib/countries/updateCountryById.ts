@@ -1,13 +1,21 @@
 import * as gbl from '@/globals';
 
-export default async (): Promise<ApiResponse> => {
+type Props = {
+  _id: string;
+  update: Partial<Country>;
+};
+
+export default async (props: Props): Promise<ApiResponse> => {
+  const { _id, update } = props;
+
   try {
-    const response: ApiResponse = await fetch(`/api/countries/all`, {
-      method: 'POST',
+    const response: ApiResponse = await fetch('/api/countries/by-id', {
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
         AUTHORIZATION: `Bearer ${process.env.API_INTERNAL_AUTH_TOKEN},`,
       },
+      body: JSON.stringify({ _id, update }),
     }).then((res: any) => res.json());
     return response;
   } catch (error: any) {
