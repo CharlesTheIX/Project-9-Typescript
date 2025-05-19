@@ -1,17 +1,17 @@
-import * as gbl from '../globals';
-import createUser from '../lib/user/createUser';
-import getAllUsers from '../lib/user/getAllUsers';
-import getUserById from '../lib/user/getUserById';
-import getUserByEmail from '../lib/user/getUserByEmail';
-import updateUserById from '../lib/user/updateUserById';
-import deleteUserById from '../lib/user/deleteUserById';
-import getUserByClerkId from '../lib/user/getUserByClerkId';
-import express, { Router, Request, Response } from 'express';
+import * as gbl from "../globals";
+import createUser from "../lib/user/createUser";
+import getAllUsers from "../lib/user/getAllUsers";
+import getUserById from "../lib/user/getUserById";
+import getUserByEmail from "../lib/user/getUserByEmail";
+import updateUserById from "../lib/user/updateUserById";
+import deleteUserById from "../lib/user/deleteUserById";
+import getUserByClerkId from "../lib/user/getUserByClerkId";
+import express, { Router, Request, Response } from "express";
 
 const router: Router = express.Router();
 
 // Get all users
-router.route('/all').post(async (_: Request, response: Response): Promise<any> => {
+router.route("/all").post(async (_: Request, response: Response): Promise<any> => {
   try {
     const res = await getAllUsers();
     return response.json(res);
@@ -22,10 +22,10 @@ router.route('/all').post(async (_: Request, response: Response): Promise<any> =
 });
 
 // Get user by _id
-router.route('/by-id').post(async (request: Request, response: Response): Promise<any> => {
+router.route("/by-id").post(async (request: Request, response: Response): Promise<any> => {
   const { _id } = request.body;
 
-  if (!_id) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: 'Required inputs: _id.' });
+  if (!_id) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: _id." });
 
   try {
     const res = await getUserById(_id);
@@ -37,10 +37,10 @@ router.route('/by-id').post(async (request: Request, response: Response): Promis
 });
 
 // Get user by email
-router.route('/by-email').post(async (request: Request, response: Response): Promise<any> => {
+router.route("/by-email").post(async (request: Request, response: Response): Promise<any> => {
   const { email } = request.body;
 
-  if (!email) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: 'Required inputs: email.' });
+  if (!email) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: email." });
 
   try {
     const res = await getUserByEmail(email);
@@ -52,10 +52,10 @@ router.route('/by-email').post(async (request: Request, response: Response): Pro
 });
 
 // Get user by clerkId
-router.route('/by-clerk-id').post(async (request: Request, response: Response): Promise<any> => {
+router.route("/by-clerk-id").post(async (request: Request, response: Response): Promise<any> => {
   const { clerkId } = request.body;
 
-  if (!clerkId) return { ...gbl.response_BAD, message: 'Required inputs: clerkId.' };
+  if (!clerkId) return { ...gbl.response_BAD, message: "Required inputs: clerkId." };
 
   try {
     const res = await getUserByClerkId(clerkId);
@@ -67,13 +67,13 @@ router.route('/by-clerk-id').post(async (request: Request, response: Response): 
 });
 
 // Create user
-router.route('/create').post(async (request: Request, response: Response): Promise<any> => {
+router.route("/create").post(async (request: Request, response: Response): Promise<any> => {
   const { email, role, clerkId, username, fullName, profileImageURL } = request.body;
 
   if (!email || !role || !clerkId || !username || !fullName) {
     return response.status(gbl.status.BAD).json({
       ...gbl.response_BAD,
-      message: 'Required Inputs: email, role, clerkId, username, fullName.',
+      message: "Required Inputs: email, role, clerkId, username, fullName."
     });
   }
 
@@ -87,10 +87,10 @@ router.route('/create').post(async (request: Request, response: Response): Promi
 });
 
 // Update user by _id
-router.route('/by-id').patch(async (request: Request, response: Response): Promise<any> => {
+router.route("/by-id").patch(async (request: Request, response: Response): Promise<any> => {
   const { _id, update } = request.body;
 
-  if (!_id) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: 'Required inputs: _id.' });
+  if (!_id) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: _id." });
 
   try {
     const res = await updateUserById({ _id, update });
@@ -102,10 +102,10 @@ router.route('/by-id').patch(async (request: Request, response: Response): Promi
 });
 
 // Delete user by _id
-router.route('/by-id').delete(async (request: Request, response: Response): Promise<any> => {
+router.route("/by-id").delete(async (request: Request, response: Response): Promise<any> => {
   const { _id } = request.body;
 
-  if (!_id) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: 'Required inputs: _id.' });
+  if (!_id) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: _id." });
 
   try {
     const res = await deleteUserById(_id);

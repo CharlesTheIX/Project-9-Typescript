@@ -1,13 +1,13 @@
-import mongoose from 'mongoose';
-import * as gbl from '../../globals';
-import Model from '../../models/country.model';
+import mongoose from "mongoose";
+import * as gbl from "../../globals";
+import Model from "../../models/country.model";
 
 export default async (_id: string): Promise<ApiResponse> => {
   try {
     const objectId = new mongoose.Types.ObjectId(_id);
     const deletedDoc = await Model.deleteOne({ _id: objectId });
 
-    if (!deletedDoc) return { ...gbl.response_BAD, message: 'Country not deleted.' };
+    if (!deletedDoc) return { ...gbl.response_BAD, message: "Country not deleted." };
 
     return { ...gbl.response_DB_UPDATED };
   } catch (error: any) {

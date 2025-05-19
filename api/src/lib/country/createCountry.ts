@@ -1,6 +1,6 @@
-import * as gbl from '../../globals';
-import Model from '../../models/country.model';
-import getCountryByDisplayName from './getCountryByDisplayName';
+import * as gbl from "../../globals";
+import Model from "../../models/country.model";
+import getCountryByDisplayName from "./getCountryByDisplayName";
 
 export default async (props: Country): Promise<ApiResponse> => {
   const { displayName, names, flagRectangle, mapRectangle, continent } = props;
@@ -17,14 +17,14 @@ export default async (props: Country): Promise<ApiResponse> => {
       continent,
       displayName,
       mapRectangle,
-      flagRectangle,
+      flagRectangle
     });
 
-    if (!newDoc) return { ...gbl.response_BAD, message: 'Country not created.' };
+    if (!newDoc) return { ...gbl.response_BAD, message: "Country not created." };
 
     const createdDoc = await newDoc.save();
 
-    if (!createdDoc) return { ...gbl.response_BAD, message: 'Country not created.' };
+    if (!createdDoc) return { ...gbl.response_BAD, message: "Country not created." };
 
     return { ...gbl.response_DB_UPDATED };
   } catch (error: any) {

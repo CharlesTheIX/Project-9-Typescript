@@ -1,8 +1,8 @@
-import app from './app';
-import dotenv from 'dotenv';
-import connectToMongoDB from './lib/connectToMongoDB';
+import app from "./app";
+import dotenv from "dotenv";
+import connectToMongoDB from "./lib/connectToMongoDB";
 
-dotenv.config({ path: './.env.local' });
+dotenv.config({ path: "./.env.local" });
 connectToMongoDB();
 
 const port: number = Number(process.env.PORT) as number;

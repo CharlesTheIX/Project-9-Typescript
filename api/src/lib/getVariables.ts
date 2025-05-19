@@ -1,6 +1,6 @@
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 
-dotenv.config({ path: './.env.local' });
+dotenv.config({ path: "./.env.local" });
 
 const environment: string = process.env.NODE_ENV || "development";
 
@@ -13,7 +13,7 @@ export const mongoDBVariables = (): MongoDBVariables => {
   const variables: MongoDBVariables = {
     uri: "",
     username: "",
-    password: "",
+    password: ""
   };
 
   switch (environment) {

@@ -1,15 +1,16 @@
-import * as gbl from '@/globals';
-import { NextResponse } from 'next/server';
+import * as gbl from "@/globals";
+import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
     const response = await fetch(`${process.env.API_URL}/${process.env.API_VERSION}/`, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        AUTHORIZATION: `Bearer ${process.env.API_INTERNAL_AUTH_TOKEN},`,
-      },
+        "Content-Type": "application/json",
+        AUTHORIZATION: `Bearer ${process.env.LOCAL_API_AUTH_TOKEN},`
+      }
     }).then((res: any) => res.json());
+
     return NextResponse.json(response);
   } catch (error: any) {
     console.error(`Health error: ${error.message}.`);

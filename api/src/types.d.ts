@@ -38,4 +38,4 @@ type User = MongoDocDefaults & {
   profileImageURL?: string;
 };
 
-type UserRole = 'admin' | 'editor' | 'user' | 'guest';
+type UserRole = "admin" | "editor" | "user" | "guest";

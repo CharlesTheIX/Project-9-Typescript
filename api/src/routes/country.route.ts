@@ -1,17 +1,17 @@
-import * as gbl from '../globals';
-import createCountry from '../lib/country/createCountry';
-import getCountryById from '../lib/country/getCountryById';
-import getAllCountries from '../lib/country/getAllCountries';
-import express, { Router, Request, Response } from 'express';
-import deleteCountryById from '../lib/country/deleteCountryById';
-import updateCountryById from '../lib/country/updateCountryById';
-import getCountryByDisplayName from '../lib/country/getCountryByDisplayName';
-import getCountriesByContinent from '../lib/country/getCountriesByContinent';
+import * as gbl from "../globals";
+import createCountry from "../lib/country/createCountry";
+import getCountryById from "../lib/country/getCountryById";
+import getAllCountries from "../lib/country/getAllCountries";
+import express, { Router, Request, Response } from "express";
+import deleteCountryById from "../lib/country/deleteCountryById";
+import updateCountryById from "../lib/country/updateCountryById";
+import getCountryByDisplayName from "../lib/country/getCountryByDisplayName";
+import getCountriesByContinent from "../lib/country/getCountriesByContinent";
 
 const router: Router = express.Router();
 
 // Get all countries
-router.route('/all').post(async (_: Request, response: Response): Promise<any> => {
+router.route("/all").post(async (_: Request, response: Response): Promise<any> => {
   try {
     const res = await getAllCountries();
     return response.json(res);
@@ -22,10 +22,10 @@ router.route('/all').post(async (_: Request, response: Response): Promise<any> =
 });
 
 // Get country by _id
-router.route('/by-id').post(async (request: Request, response: Response): Promise<any> => {
+router.route("/by-id").post(async (request: Request, response: Response): Promise<any> => {
   const { _id } = request.body;
 
-  if (!_id) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: 'Required inputs: _id.' });
+  if (!_id) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: _id." });
 
   try {
     const res = await getCountryById(_id);
@@ -37,11 +37,11 @@ router.route('/by-id').post(async (request: Request, response: Response): Promis
 });
 
 // Get country by displayName
-router.route('/by-display-name').post(async (request: Request, response: Response): Promise<any> => {
+router.route("/by-display-name").post(async (request: Request, response: Response): Promise<any> => {
   const { displayName } = request.body;
 
   if (!displayName) {
-    return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: 'Required inputs: displayName.' });
+    return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: displayName." });
   }
 
   try {
@@ -54,10 +54,10 @@ router.route('/by-display-name').post(async (request: Request, response: Respons
 });
 
 // Get country by continent
-router.route('/by-continent').post(async (request: Request, response: Response): Promise<any> => {
+router.route("/by-continent").post(async (request: Request, response: Response): Promise<any> => {
   const { continent } = request.body;
 
-  if (!continent) return { ...gbl.response_BAD, message: 'Required inputs: continent.' };
+  if (!continent) return { ...gbl.response_BAD, message: "Required inputs: continent." };
 
   try {
     const res = await getCountriesByContinent(continent);
@@ -69,13 +69,13 @@ router.route('/by-continent').post(async (request: Request, response: Response):
 });
 
 // Create country
-router.route('/create').post(async (request: Request, response: Response): Promise<any> => {
+router.route("/create").post(async (request: Request, response: Response): Promise<any> => {
   const { displayName, names, flagRectangle, mapRectangle, continent } = request.body;
 
   if (!displayName || !names || names.length === 0 || !flagRectangle || !mapRectangle || !continent) {
     return response.status(gbl.status.BAD).json({
       ...gbl.response_BAD,
-      message: 'Required inputs: displayName, names, continent, flagRectangle, mapRectangle.',
+      message: "Required inputs: displayName, names, continent, flagRectangle, mapRectangle."
     });
   }
 
@@ -89,10 +89,10 @@ router.route('/create').post(async (request: Request, response: Response): Promi
 });
 
 // Update country by _id
-router.route('/by-id').patch(async (request: Request, response: Response): Promise<any> => {
+router.route("/by-id").patch(async (request: Request, response: Response): Promise<any> => {
   const { _id, update } = request.body;
 
-  if (!_id) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: 'Required inputs: _id.' });
+  if (!_id) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: _id." });
 
   try {
     const res = await updateCountryById({ _id, update });
@@ -104,10 +104,10 @@ router.route('/by-id').patch(async (request: Request, response: Response): Promi
 });
 
 // Delete country by _id
-router.route('/by-id').delete(async (request: Request, response: Response): Promise<any> => {
+router.route("/by-id").delete(async (request: Request, response: Response): Promise<any> => {
   const { _id } = request.body;
 
-  if (!_id) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: 'Required inputs: _id.' });
+  if (!_id) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: _id." });
 
   try {
     const res = await deleteCountryById(_id);

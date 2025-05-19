@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import * as gbl from '@/globals';
-import { useState, useEffect } from 'react';
-import LoadingContainer from '../Misc/LoadingContainer';
-import getAllCountries from '@/lib/countries/getAllCountries';
+import { useState, useEffect } from "react";
+import LoadingContainer from "../Misc/LoadingContainer";
+import getAllCountries from "@/lib/countries/getAllCountries";
+import InternalLinkButton from "../Buttons/InternalLinkButton";
 
 const CountryFeed: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -28,7 +28,7 @@ const CountryFeed: React.FC = () => {
 
   return (
     <div>
-      <div>
+      <div className="flex flex-col gap-5">
         {isLoading ? (
           <LoadingContainer />
         ) : (
@@ -37,9 +37,9 @@ const CountryFeed: React.FC = () => {
               <p>No countries to display.</p>
             ) : (
               <>
-                {countries.map((country: Country) => {
-                  <p>{country.displayName}</p>;
-                })}
+                {countries.map((country: Country, key: number) => (
+                  <InternalLinkButton key={key} content={country.displayName} link={`/countries/${country._id}`} />
+                ))}
               </>
             )}
           </>

@@ -1,17 +1,18 @@
-import * as gbl from '@/globals';
-import { NextRequest, NextResponse } from 'next/server';
+import * as gbl from "@/globals";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
     const { continent } = await request.json();
     const response = await fetch(`${process.env.API_URL}/${process.env.API_VERSION}/countries/by-continent`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.API_AUTH_TOKEN}`,
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.API_AUTH_TOKEN}`
       },
-      body: JSON.stringify({ continent }),
+      body: JSON.stringify({ continent })
     }).then((res: any) => res.json());
+
     return NextResponse.json(response);
   } catch (error: any) {
     console.error(`Get countries by continent error: ${error.message}.`);

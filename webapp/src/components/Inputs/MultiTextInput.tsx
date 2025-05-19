@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import FunctionalButton from '../Buttons/FunctionalButton';
+import { useState } from "react";
+import FunctionalButton from "../Buttons/FunctionalButton";
 
 type Props = {
   name: string;
@@ -15,16 +15,26 @@ type Props = {
 };
 
 const MultiTextInput: React.FC<Props> = (props: Props) => {
-  const { name, label = '', className = '', onAdd = () => {}, defaultValue = [], onInput = () => {}, onRemove = () => {}, defaultCurrentValue = '' } = props;
+  const {
+    name,
+    label = "",
+    className = "",
+    onAdd = () => {},
+    defaultValue = [],
+    onInput = () => {},
+    onRemove = () => {},
+    defaultCurrentValue = ""
+  } = props;
   const [values, setValues] = useState<string[]>(defaultValue);
   const [currentValue, setCurrentValue] = useState<string>(defaultCurrentValue);
 
   return (
-    <div className={`${className}`}>
+    <div className={`${className} flex flex-col gap-2 text-left`}>
       <input type="hidden" value={JSON.stringify(values)} name={name} />
 
       {label && <label htmlFor={`${name}-current`}>{label}</label>}
-      <div>
+
+      <div className="flex flex-row gap-2 justify-between all-width-100">
         <input
           type="text"
           value={currentValue}
@@ -37,20 +47,27 @@ const MultiTextInput: React.FC<Props> = (props: Props) => {
         />
 
         <FunctionalButton
+          className="w-auto max-w-16"
           content="Add"
           callback={() => {
+            const valueExists = values.find((item: string) => item === currentValue);
+
+            if (!currentValue || valueExists) return;
+
             setValues((prevValue: string[]) => [...prevValue, currentValue]);
             onAdd(currentValue);
-            setCurrentValue('');
+            setCurrentValue("");
           }}
         />
       </div>
 
-      <div>
-        {values.map((value: string) => {
+      <div className="flex flex-row flex-wrap">
+        {values.map((value: string, key: number) => {
           return (
             <FunctionalButton
+              key={key}
               content={value}
+              className="w-auto"
               callback={() => {
                 onRemove(value);
                 setValues((prevValue: string[]) => {

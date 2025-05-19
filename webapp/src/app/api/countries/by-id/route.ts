@@ -1,17 +1,18 @@
-import * as gbl from '@/globals';
-import { NextRequest, NextResponse } from 'next/server';
+import * as gbl from "@/globals";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
     const { _id } = await request.json();
     const response = await fetch(`${process.env.API_URL}/${process.env.API_VERSION}/countries/by-id`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.API_AUTH_TOKEN}`,
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.API_AUTH_TOKEN}`
       },
-      body: JSON.stringify({ _id }),
+      body: JSON.stringify({ _id })
     }).then((res: any) => res.json());
+
     return NextResponse.json(response);
   } catch (error: any) {
     console.error(`Get country by _id error: ${error.message}.`);
@@ -23,13 +24,14 @@ export async function PATCH(request: NextRequest) {
   try {
     const { _id, update } = await request.json();
     const response = await fetch(`${process.env.API_URL}/${process.env.API_VERSION}/countries/by-id`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.API_AUTH_TOKEN}`,
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.API_AUTH_TOKEN}`
       },
-      body: JSON.stringify({ _id, update }),
+      body: JSON.stringify({ _id, update })
     }).then((res: any) => res.json());
+
     return NextResponse.json(response);
   } catch (error: any) {
     console.error(`Update country by _id error: ${error.message}.`);
@@ -48,6 +50,7 @@ export async function PATCH(request: NextRequest) {
 //       },
 //       body: JSON.stringify({ _id }),
 //     }).then((res: any) => res.json());
+//
 //     return NextResponse.json(response);
 //   } catch (error: any) {
 //     console.error(`Delete country by _id error: ${error.message}.`);

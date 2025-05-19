@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import FunctionalButton from '@/components/Buttons/FunctionalButton';
+import { useState } from "react";
+import FunctionalButton from "@/components/Buttons/FunctionalButton";
 
 type Props = {
   country: Country;

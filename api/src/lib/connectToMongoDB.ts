@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import { mongoDBVariables } from './getVariables';
+import mongoose from "mongoose";
+import { mongoDBVariables } from "./getVariables";
 
 export default async (): Promise<void> => {
   try {

@@ -1,84 +1,75 @@
-'use client';
+"use client";
 
-import TextInput from '../Inputs/TextInput';
-import MultiTextInput from '../Inputs/MultiTextInput';
-import FunctionalButton from '../Buttons/FunctionalButton';
+import * as gbl from "@/globals";
+import { useRef, useState } from "react";
+import TextInput from "../Inputs/TextInput";
+import SelectInput from "../Inputs/SelectInput";
+import MultiTextInput from "../Inputs/MultiTextInput";
+import RectangleInput from "../Inputs/RectangleInput";
+import LoadingContainer from "../Misc/LoadingContainer";
+import FunctionalButton from "../Buttons/FunctionalButton";
+import submitCountryCreationForm from "@/lib/forms/submitCountryCreationForm";
 
-const CountryCreationForm: React.FC = () => {
+type Props = {
+  className?: string;
+};
+
+const CountryCreationForm: React.FC<Props> = (props: Props) => {
+  const { className = "" } = props;
+  const formRef = useRef<HTMLFormElement>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const handleSubmit = async (): Promise<void> => {
+    setIsLoading(true);
+
+    try {
+      const form = formRef.current;
+
+      if (!form) throw new Error("Form does not exist.");
+
+      await submitCountryCreationForm({
+        form,
+        errorCallback: () => {},
+        successCallback: () => {}
+      });
+
+      setIsLoading(false);
+    } catch (error: any) {
+      console.error(error.message);
+      setIsLoading(false);
+    }
+  };
+
   return (
     <>
-      <form>
-        <div>
-          {/* Single text input */}
-          <TextInput name="display-name" />
+      {isLoading ? (
+        <LoadingContainer />
+      ) : (
+        <div className={`${className} flex flex-col gap-5`}>
+          <form ref={formRef} className={`max-w-5xl flex flex-col items-center justify-center mx-auto`}>
+            <div className="flex flex-col gap-5 all-width-100 items-center w-full">
+              <TextInput name="display-name" label="Display Name" />
 
-          {/* Multi text input */}
-          <MultiTextInput name="names" />
+              <MultiTextInput name="names" label="Names" />
 
-          {/* Select input */}
+              <SelectInput name="continent" options={gbl.continentOptions} label="Continent" />
+
+              <RectangleInput name="flag-rectangle" label="Flag Rectangle" />
+
+              <RectangleInput name="map-rectangle" label="Map Rectangle" />
+            </div>
+          </form>
+
           <div>
-            <select>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-            </select>
-          </div>
-
-          {/* Rectangle input */}
-          <div>
-            <input type="hidden" name="flag-rectangle" id="flag-rectangle" />
-
-            <div>
-              <label htmlFor="flag-rectangle-x">X</label>
-              <input type="number" step={1} name="flag-rectangle-x" id="flag-rectangle-x" />
-            </div>
-
-            <div>
-              <label htmlFor="flag-rectangle-y">Y</label>
-              <input type="number" step={1} name="flag-rectangle-y" id="flag-rectangle-y" />
-            </div>
-
-            <div>
-              <label htmlFor="flag-rectangle-width">Width</label>
-              <input type="number" step={1} name="flag-rectangle-width" id="flag-rectangle-width" />
-            </div>
-
-            <div>
-              <label htmlFor="flag-rectangle-height">Height</label>
-              <input type="number" step={1} name="flag-rectangle-height" id="flag-rectangle-height" />
-            </div>
-          </div>
-
-          {/* Rectangle input */}
-          <div>
-            <input type="hidden" name="world-rectangle" id="world-rectangle" />
-
-            <div>
-              <label htmlFor="world-rectangle-x">X</label>
-              <input type="number" step={1} name="world-rectangle-x" id="world-rectangle-x" />
-            </div>
-
-            <div>
-              <label htmlFor="world-rectangle-y">Y</label>
-              <input type="number" step={1} name="world-rectangle-y" id="world-rectangle-y" />
-            </div>
-
-            <div>
-              <label htmlFor="world-rectangle-width">Width</label>
-              <input type="number" step={1} name="world-rectangle-width" id="world-rectangle-width" />
-            </div>
-
-            <div>
-              <label htmlFor="world-rectangle-height">Height</label>
-              <input type="number" step={1} name="world-rectangle-height" id="world-rectangle-height" />
-            </div>
+            <FunctionalButton
+              content="Submit"
+              callback={async () => {
+                await handleSubmit();
+              }}
+            />
           </div>
         </div>
-      </form>
-
-      <div>
-        <FunctionalButton callback={() => {}} content="Submit" />
-      </div>
+      )}
     </>
   );
 };

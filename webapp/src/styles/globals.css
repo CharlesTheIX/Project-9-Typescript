@@ -13,13 +13,19 @@
 }
 
 body {
-  background: var(--background);
+  font-family: monospace;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--background);
 }
 
-input {
+input,
+select {
+  @apply px-2.5 py-1;
   border: 2px solid white;
   appearance: none;
   outline: none;
+}
+
+.all-width-100 > * {
+  width: 100%;
 }

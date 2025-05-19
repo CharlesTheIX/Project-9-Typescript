@@ -7,7 +7,7 @@ type ApiResponse = {
   message: string;
 };
 
-type Continent = 'Europe' | 'Asia' | 'Africa' | 'Noth America' | 'South America' | 'Oceania';
+type Continent = "Europe" | "Asia" | "Africa" | "Noth America" | "South America" | "Oceania";
 
 type Country = MongoDocDefaults & {
   names: string[];
@@ -22,6 +22,11 @@ type MongoDocDefaults = {
   _id?: string;
   createdAt?: Date;
   updatedAt?: Date;
+};
+
+type Option = {
+  label: string;
+  value: string | number;
 };
 
 type Rectangle = {
@@ -40,4 +45,4 @@ type User = MongoDocDefaults & {
   profileImageURL?: string;
 };
 
-type UserRole = 'admin' | 'editor' | 'user' | 'guest';
+type UserRole = "admin" | "editor" | "user" | "guest";

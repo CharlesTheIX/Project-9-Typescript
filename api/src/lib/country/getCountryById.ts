@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
-import * as gbl from '../../globals';
-import Model from '../../models/country.model';
+import mongoose from "mongoose";
+import * as gbl from "../../globals";
+import Model from "../../models/country.model";
 
 export default async (_id: string): Promise<ApiResponse> => {
   try {

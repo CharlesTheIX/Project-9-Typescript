@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 type Props = {
   link: string;
@@ -8,7 +8,7 @@ type Props = {
 };
 
 const ExternalLinkButton: React.FC<Props> = (props: Props) => {
-  const { className = '', link, content, target = '_self' } = props;
+  const { className = "", link, content, target = "_self" } = props;
 
   return (
     <a href={link} target={target} className={`${className}`}>

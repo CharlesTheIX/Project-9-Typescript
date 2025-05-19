@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 type Props = {
   content: string;
@@ -7,11 +7,12 @@ type Props = {
 };
 
 const FunctionalButton: React.FC<Props> = (props: Props) => {
-  const { className = '', callback, content } = props;
+  const { className = "", callback, content } = props;
 
   return (
     <button
-      className={`${className}`}
+      type="button"
+      className={`${className} cursor-pointer p-4`}
       onClick={() => {
         callback();
       }}

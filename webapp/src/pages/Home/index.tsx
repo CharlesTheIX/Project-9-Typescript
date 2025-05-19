@@ -1,5 +1,5 @@
-import CountryFeed from '@/components/Feeds/CountryFeed';
-import InternalLinkButton from '@/components/Buttons/InternalLinkButton';
+import CountryFeed from "@/components/Feeds/CountryFeed";
+import InternalLinkButton from "@/components/Buttons/InternalLinkButton";
 
 const HomePage: React.FC = () => {
   return (

@@ -1,5 +1,5 @@
-import * as gbl from '../../globals';
-import Model from '../../models/user.model';
+import * as gbl from "../../globals";
+import Model from "../../models/user.model";
 
 export default async (props: User): Promise<ApiResponse> => {
   const { email, role, clerkId, username, fullName, profileImageURL } = props;
@@ -11,14 +11,14 @@ export default async (props: User): Promise<ApiResponse> => {
       clerkId,
       username,
       fullName,
-      profileImageURL: profileImageURL || '',
+      profileImageURL: profileImageURL || ""
     });
 
-    if (!newDoc) return { ...gbl.response_BAD, message: 'User not created.' };
+    if (!newDoc) return { ...gbl.response_BAD, message: "User not created." };
 
     const createdDoc = await newDoc.save();
 
-    if (!createdDoc) return { ...gbl.response_BAD, message: 'User not created.' };
+    if (!createdDoc) return { ...gbl.response_BAD, message: "User not created." };
 
     return { ...gbl.response_DB_UPDATED };
   } catch (error: any) {

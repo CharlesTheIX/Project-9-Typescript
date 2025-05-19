@@ -1,13 +1,13 @@
-import * as gbl from '../../globals';
-import Model from '../../models/user.model';
+import * as gbl from "../../globals";
+import Model from "../../models/user.model";
 
 export default async (): Promise<ApiResponse> => {
   try {
     const docs = await Model.find();
 
-    if (!docs) return { ...gbl.response_BAD, message: 'No users found.' };
+    if (!docs) return { ...gbl.response_BAD, message: "No users found." };
 
-    if (docs.length === 0) return { ...gbl.response_NO_CONTENT, message: 'No users found.' };
+    if (docs.length === 0) return { ...gbl.response_NO_CONTENT, message: "No users found." };
 
     const docsArray: User[] = docs.map((doc: any) => {
       return {
@@ -19,7 +19,7 @@ export default async (): Promise<ApiResponse> => {
         _id: doc._id.toString(),
         createdAt: doc.createdAt,
         updatedAt: doc.updatedAt,
-        profileImageURL: doc.profileImageURL,
+        profileImageURL: doc.profileImageURL
       };
     });
 

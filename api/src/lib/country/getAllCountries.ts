@@ -1,13 +1,13 @@
-import * as gbl from '../../globals';
-import Model from '../../models/country.model';
+import * as gbl from "../../globals";
+import Model from "../../models/country.model";
 
 export default async (): Promise<ApiResponse> => {
   try {
     const docs = await Model.find();
 
-    if (!docs) return { ...gbl.response_BAD, message: 'No Countries found.' };
+    if (!docs) return { ...gbl.response_BAD, message: "No Countries found." };
 
-    if (docs.length === 0) return { ...gbl.response_NO_CONTENT, message: 'No Countries found.' };
+    if (docs.length === 0) return { ...gbl.response_NO_CONTENT, message: "No Countries found." };
 
     const docsArray: Country[] = docs.map((country: any) => {
       return {
@@ -18,7 +18,7 @@ export default async (): Promise<ApiResponse> => {
         continent: country.continent,
         displayName: country.displayName,
         mapRectangle: country.mapRectangle,
-        flagRectangle: country.flagRectangle,
+        flagRectangle: country.flagRectangle
       };
     });
 

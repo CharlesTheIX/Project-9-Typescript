@@ -7,7 +7,7 @@ const CountriesPage: React.FC = () => {
         </div>
       </section>
     </main>
-  )
+  );
 };
 
 export default CountriesPage;

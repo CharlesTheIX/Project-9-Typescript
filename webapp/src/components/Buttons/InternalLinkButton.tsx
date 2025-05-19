@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
+import Link from "next/link";
 
 type Props = {
   link: string;
@@ -10,7 +10,7 @@ type Props = {
 };
 
 const InternalLinkButton: React.FC<Props> = (props: Props) => {
-  const { className = '', link, content, target = '_self' } = props;
+  const { className = "", link, content, target = "_self" } = props;
 
   return (
     <Link href={link} target={target} className={`${className}`}>

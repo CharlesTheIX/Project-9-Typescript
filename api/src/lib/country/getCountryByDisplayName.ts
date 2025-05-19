@@ -1,5 +1,5 @@
-import * as gbl from '../../globals';
-import Model from '../../models/country.model';
+import * as gbl from "../../globals";
+import Model from "../../models/country.model";
 
 export default async (displayName: string): Promise<ApiResponse> => {
   try {
