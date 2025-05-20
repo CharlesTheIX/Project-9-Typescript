@@ -3,14 +3,14 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
-    const { continent } = await request.json();
+    const { continent, limit } = await request.json();
     const response = await fetch(`${process.env.API_URL}/${process.env.API_VERSION}/countries/by-continent`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${process.env.API_AUTH_TOKEN}`
       },
-      body: JSON.stringify({ continent })
+      body: JSON.stringify({ continent, limit })
     }).then((res: any) => res.json());
 
     return NextResponse.json(response);

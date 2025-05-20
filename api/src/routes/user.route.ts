@@ -11,9 +11,11 @@ import express, { Router, Request, Response } from "express";
 const router: Router = express.Router();
 
 // Get all users
-router.route("/all").post(async (_: Request, response: Response): Promise<any> => {
+router.route("/all").post(async (request: Request, response: Response): Promise<any> => {
+  const { limit } = request.body();
+
   try {
-    const res = await getAllUsers();
+    const res = await getAllUsers(limit);
     return response.json(res);
   } catch (error: any) {
     console.error(`Get all users error: ${error.message}`);

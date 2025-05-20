@@ -43,6 +43,9 @@ export default (requestData: Country): FormError => {
       case "mapRectangle":
         // There sould be no errors here and current if the Rectangle is a null rectangle that is fine
         break;
+      case "image-url":
+        // handle basic string validation here
+        break;
     }
   });
 

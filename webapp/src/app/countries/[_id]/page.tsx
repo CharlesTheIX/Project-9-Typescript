@@ -29,7 +29,7 @@ export const generateMetadata = async ({ params }: { params: Params }): Promise<
 
 export const generateStaticParams = async (): Promise<{ _id: string }[]> => {
   try {
-    const response = await getAllCountries();
+    const response = await getAllCountries(500);
 
     if (response.error) throw new Error();
 

@@ -1,14 +1,21 @@
 import * as gbl from "@/globals";
 
-export default async (continent: Continent): Promise<ApiResponse> => {
+type Props = {
+  limit?: number;
+  continent: Continent;
+};
+
+export default async (props: Props): Promise<ApiResponse> => {
+  const { continent, limit = 200 } = props;
+
   try {
-    const response: ApiResponse = await fetch(`${process.env.LOCAL_URI}/api/countries/by-continent`, {
+    const response: ApiResponse = await fetch(`/api/countries/by-continent`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         AUTHORIZATION: `Bearer ${process.env.LOCAL_API_AUTH_TOKEN},`
       },
-      body: JSON.stringify({ continent })
+      body: JSON.stringify({ continent, limit })
     }).then((res: any) => res.json());
 
     return response;

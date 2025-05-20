@@ -1,9 +1,16 @@
 import * as gbl from "../../globals";
 import Model from "../../models/country.model";
 
-export default async (continent: string): Promise<ApiResponse> => {
+type Props = {
+  continent: Continent;
+  limit?: number;
+};
+
+export default async (props: Props): Promise<ApiResponse> => {
+  const { continent, limit = 200 } = props;
+
   try {
-    const docs = await Model.find({ continent: continent });
+    const docs = await Model.find({ continent: continent }).limit(limit);
 
     if (!docs) return { ...gbl.response_BAD, message: "No countries found." };
 

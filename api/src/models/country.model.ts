@@ -24,7 +24,12 @@ const schema = new mongoose.Schema({
   },
   continent: {
     type: String,
+    enum: ["Europe", "Asia", "Africa", "Oceania", "North America", "South America"],
     required: [true, "Please provide a continent."]
+  },
+  imageUrl: {
+    type: String,
+    default: ""
   },
   flagRectangle: {
     type: {

@@ -23,6 +23,7 @@ export default async (props: Props): Promise<ApiResponse> => {
     const objectId = new mongoose.Types.ObjectId(_id);
     const docUpdate = {
       updatedAt: new Date(),
+      imageUrl: update.imageUrl || existingDoc.data.imageUrl,
       continent: update.continent || existingDoc.data.continent,
       displayName: update.displayName || existingDoc.data.displayName,
       mapRectangle: update.mapRectangle || existingDoc.data.mapRectangle,

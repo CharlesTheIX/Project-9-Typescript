@@ -13,6 +13,7 @@ export default async (props: Props): Promise<void> => {
 
   try {
     const formData = new FormData(form);
+    const imageUrl: string = formData.get("image-url")?.toString() || "";
     const displayName: string = formData.get("display-name")?.toString() || "";
     const names: string[] = JSON.parse(formData.get("names")?.toString() || "[]");
     const mapRectangle: Rectangle = JSON.parse(formData.get("map-rectangle")?.toString() || `${gbl.nullRectangle}`);
@@ -21,6 +22,7 @@ export default async (props: Props): Promise<void> => {
       .value as Continent;
     const requestData: Country = {
       names,
+      imageUrl,
       continent,
       displayName,
       mapRectangle,

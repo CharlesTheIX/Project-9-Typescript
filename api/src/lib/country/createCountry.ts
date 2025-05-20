@@ -3,7 +3,7 @@ import Model from "../../models/country.model";
 import getCountryByDisplayName from "./getCountryByDisplayName";
 
 export default async (props: Country): Promise<ApiResponse> => {
-  const { displayName, names, flagRectangle, mapRectangle, continent } = props;
+  const { displayName, names, flagRectangle, mapRectangle, continent, imageUrl } = props;
 
   try {
     const existingDoc = await getCountryByDisplayName(displayName);
@@ -17,7 +17,8 @@ export default async (props: Country): Promise<ApiResponse> => {
       continent,
       displayName,
       mapRectangle,
-      flagRectangle
+      flagRectangle, 
+      imageUrl: imageUrl || ""
     });
 
     if (!newDoc) return { ...gbl.response_BAD, message: "Country not created." };

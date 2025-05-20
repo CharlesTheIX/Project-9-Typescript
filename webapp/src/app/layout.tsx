@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 import type { Metadata } from "next";
+import Header from "@/components/Misc/Header";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,7 +16,10 @@ const RootLayout: React.FC<Readonly<Props>> = (props: Props) => {
 
   return (
     <html lang="en-gb">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <Header />
+        {children}
+      </body>
     </html>
   );
 };

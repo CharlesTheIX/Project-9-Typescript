@@ -7,9 +7,12 @@ type ApiResponse = {
   message: string;
 };
 
+type Continent = "Europe" | "Asia" | "Africa" | "North America" | "South America" | "Oceania";
+
 type Country = MongoDocDefaults & {
   names: string[];
   continent: string;
+  imageUrl?: string;
   displayName: string;
   mapRectangle: Rectangle;
   flagRectangle: Rectangle;

@@ -75,13 +75,17 @@ export const continentOptions: Option[] = [
   { value: "North America", label: "North America" },
   { value: "South America", label: "South America" }
 ];
+export const continents: Continent[] = ["Africa", "Asia", "Europe", "Noth America", "Oceania", "South America"];
 
+// Rectangles
 export const nullRectangle: Rectangle = {
   x: 0,
   y: 0,
   width: 0,
   height: 0
 };
+
+// Options
 export const nullOption: Option = {
   value: "",
   label: ""

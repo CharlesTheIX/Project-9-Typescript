@@ -1,9 +1,9 @@
 import * as gbl from "../../globals";
 import Model from "../../models/country.model";
 
-export default async (): Promise<ApiResponse> => {
+export default async (limit: number = 200): Promise<ApiResponse> => {
   try {
-    const docs = await Model.find();
+    const docs = await Model.find().limit(limit);
 
     if (!docs) return { ...gbl.response_BAD, message: "No Countries found." };
 
@@ -12,6 +12,7 @@ export default async (): Promise<ApiResponse> => {
     const docsArray: Country[] = docs.map((country: any) => {
       return {
         names: country.names,
+        imageUrl: country.imageUrl,
         _id: country._id.toString(),
         createdAt: country.createdAt,
         updatedAt: country.updatedAt,

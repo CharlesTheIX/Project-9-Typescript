@@ -11,6 +11,7 @@ type Continent = "Europe" | "Asia" | "Africa" | "Noth America" | "South America"
 
 type Country = MongoDocDefaults & {
   names: string[];
+  imageUrl?: string;
   displayName: string;
   continent: Continent;
   mapRectangle: Rectangle;
