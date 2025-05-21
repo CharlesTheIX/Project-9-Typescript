@@ -13,7 +13,7 @@ export const mongoDBVariables = (): MongoDBVariables => {
   const variables: MongoDBVariables = {
     uri: "",
     username: "",
-    password: ""
+    password: "",
   };
 
   switch (environment) {

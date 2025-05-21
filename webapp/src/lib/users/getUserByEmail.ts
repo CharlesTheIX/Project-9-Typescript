@@ -6,9 +6,9 @@ export default async (email: string): Promise<ApiResponse> => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        AUTHORIZATION: `Bearer ${process.env.LOCAL_API_AUTH_TOKEN},`
+        AUTHORIZATION: `Bearer ${process.env.LOCAL_API_AUTH_TOKEN},`,
       },
-      body: JSON.stringify({ email })
+      body: JSON.stringify({ email }),
     }).then((res: any) => res.json());
 
     return response;

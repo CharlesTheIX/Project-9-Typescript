@@ -8,9 +8,9 @@ export async function POST(request: NextRequest) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.API_AUTH_TOKEN}`
+        Authorization: `Bearer ${process.env.API_AUTH_TOKEN}`,
       },
-      body: JSON.stringify({ _id })
+      body: JSON.stringify({ _id }),
     }).then((res: any) => res.json());
 
     return NextResponse.json(response);
@@ -27,9 +27,9 @@ export async function PATCH(request: NextRequest) {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.API_AUTH_TOKEN}`
+        Authorization: `Bearer ${process.env.API_AUTH_TOKEN}`,
       },
-      body: JSON.stringify({ _id, update })
+      body: JSON.stringify({ _id, update }),
     }).then((res: any) => res.json());
 
     return NextResponse.json(response);

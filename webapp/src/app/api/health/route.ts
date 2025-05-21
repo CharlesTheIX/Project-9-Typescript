@@ -7,8 +7,8 @@ export async function GET() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        AUTHORIZATION: `Bearer ${process.env.LOCAL_API_AUTH_TOKEN},`
-      }
+        AUTHORIZATION: `Bearer ${process.env.LOCAL_API_AUTH_TOKEN},`,
+      },
     }).then((res: any) => res.json());
 
     return NextResponse.json(response);

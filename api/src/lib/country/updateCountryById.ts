@@ -28,7 +28,7 @@ export default async (props: Props): Promise<ApiResponse> => {
       displayName: update.displayName || existingDoc.data.displayName,
       mapRectangle: update.mapRectangle || existingDoc.data.mapRectangle,
       flagRectangle: update.flagRectangle || existingDoc.data.flagRectangle,
-      names: update.names && update.names.length > 0 ? update.names : existingDoc.data.names
+      names: update.names && update.names.length > 0 ? update.names : existingDoc.data.names,
     };
     const updatedDoc = await Model.updateOne({ _id: objectId }, docUpdate, { new: true });
 

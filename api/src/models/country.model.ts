@@ -7,48 +7,48 @@ const schema = new mongoose.Schema({
 
   createdAt: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   updatedAt: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
 
   displayName: {
     type: String,
-    required: [true, "Please provide a display name."]
+    required: [true, "Please provide a display name."],
   },
   names: {
     type: [String],
-    required: [true, "Please provide an array of names."]
+    required: [true, "Please provide an array of names."],
   },
   continent: {
     type: String,
     enum: ["Europe", "Asia", "Africa", "Oceania", "North America", "South America"],
-    required: [true, "Please provide a continent."]
+    required: [true, "Please provide a continent."],
   },
   imageUrl: {
     type: String,
-    default: ""
+    default: "",
   },
   flagRectangle: {
     type: {
       x: Number,
       y: Number,
       width: Number,
-      height: Number
+      height: Number,
     },
-    required: [true, "Please provide a flag rectangle object."]
+    required: [true, "Please provide a flag rectangle object."],
   },
   mapRectangle: {
     type: {
       x: Number,
       y: Number,
       width: Number,
-      height: Number
+      height: Number,
     },
-    required: [true, "Please provide a map rectangle object."]
-  }
+    required: [true, "Please provide a map rectangle object."],
+  },
 });
 
 schema.pre("save", async function (next: any) {

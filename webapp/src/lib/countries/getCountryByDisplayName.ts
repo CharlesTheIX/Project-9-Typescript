@@ -6,9 +6,9 @@ export default async (displayName: string): Promise<ApiResponse> => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        AUTHORIZATION: `Bearer ${process.env.LOCAL_API_AUTH_TOKEN},`
+        AUTHORIZATION: `Bearer ${process.env.LOCAL_API_AUTH_TOKEN},`,
       },
-      body: JSON.stringify({ displayName })
+      body: JSON.stringify({ displayName }),
     }).then((res: any) => res.json());
 
     return response;

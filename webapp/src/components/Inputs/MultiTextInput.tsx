@@ -15,16 +15,7 @@ type Props = {
 };
 
 const MultiTextInput: React.FC<Props> = (props: Props) => {
-  const {
-    name,
-    label = "",
-    className = "",
-    onAdd = () => {},
-    defaultValue = [],
-    onInput = () => {},
-    onRemove = () => {},
-    defaultCurrentValue = ""
-  } = props;
+  const { name, label = "", className = "", onAdd = () => {}, defaultValue = [], onInput = () => {}, onRemove = () => {}, defaultCurrentValue = "" } = props;
   const [values, setValues] = useState<string[]>(defaultValue);
   const [currentValue, setCurrentValue] = useState<string>(defaultCurrentValue);
 

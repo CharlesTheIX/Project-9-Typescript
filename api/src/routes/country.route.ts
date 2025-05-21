@@ -12,7 +12,7 @@ const router: Router = express.Router();
 
 // Get all countries
 router.route("/all").post(async (request: Request, response: Response): Promise<any> => {
-  const { limit } = request.body();
+  const { limit } = request.body;
 
   try {
     const res = await getAllCountries(limit);
@@ -77,7 +77,7 @@ router.route("/create").post(async (request: Request, response: Response): Promi
   if (!displayName || !names || names.length === 0 || !flagRectangle || !mapRectangle || !continent) {
     return response.status(gbl.status.BAD).json({
       ...gbl.response_BAD,
-      message: "Required inputs: displayName, names, continent, flagRectangle, mapRectangle."
+      message: "Required inputs: displayName, names, continent, flagRectangle, mapRectangle.",
     });
   }
 

@@ -18,15 +18,14 @@ export default async (props: Props): Promise<void> => {
     const names: string[] = JSON.parse(formData.get("names")?.toString() || "[]");
     const mapRectangle: Rectangle = JSON.parse(formData.get("map-rectangle")?.toString() || `${gbl.nullRectangle}`);
     const flagRectangle: Rectangle = JSON.parse(formData.get("flag-rectangle")?.toString() || `${gbl.nullRectangle}`);
-    const continent: Continent = JSON.parse(formData.get("continent")?.toString() || `${gbl.nullOption}`)
-      .value as Continent;
+    const continent: Continent = JSON.parse(formData.get("continent")?.toString() || `${gbl.nullOption}`).value as Continent;
     const requestData: Country = {
       names,
       imageUrl,
       continent,
       displayName,
       mapRectangle,
-      flagRectangle
+      flagRectangle,
     };
     const hasErrors = checkCountryCreationErrors(requestData);
 

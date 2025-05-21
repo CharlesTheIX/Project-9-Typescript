@@ -83,7 +83,9 @@ const CountryFeed: React.FC = () => {
                 ) : (
                   <>
                     {countries.map((country: Country, key: number) => (
-                      <Link key={key} href={`/countries/${country._id}`}>{country.displayName}</Link>
+                      <Link key={key} href={`/countries/${country._id}`}>
+                        {country.displayName}
+                      </Link>
                     ))}
                   </>
                 )}

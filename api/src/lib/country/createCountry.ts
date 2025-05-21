@@ -17,8 +17,8 @@ export default async (props: Country): Promise<ApiResponse> => {
       continent,
       displayName,
       mapRectangle,
-      flagRectangle, 
-      imageUrl: imageUrl || ""
+      flagRectangle,
+      imageUrl: imageUrl || "",
     });
 
     if (!newDoc) return { ...gbl.response_BAD, message: "Country not created." };

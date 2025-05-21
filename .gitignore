@@ -1,11 +1,8 @@
 # All repos
 **/**/dist
 **/**/.env*
+**/**/.next
+**/**/.vscode
 **/**/yarn.lock
 **/**/node_modules
 **/**/.prettierrc.yml
-
-# webapp
-webapp/.next
-
-# api

@@ -7,40 +7,40 @@ const schema = new mongoose.Schema({
 
   createdAt: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   updatedAt: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
 
   username: {
     type: String,
     unique: true,
-    required: [true, "Please provide a username."]
+    required: [true, "Please provide a username."],
   },
   email: {
     type: String,
     unique: true,
-    required: [true, "Please provide and email."]
+    required: [true, "Please provide and email."],
   },
   clerkId: {
     type: String,
-    required: [true, "Clerk ID not provided."]
+    required: [true, "Clerk ID not provided."],
   },
   fullName: {
     type: String,
-    required: [true, "Please provide a full name."]
+    required: [true, "Please provide a full name."],
   },
   profileImageURL: {
     type: String,
-    default: ""
+    default: "",
   },
   role: {
     type: String,
     enum: ["admin", "editor", "user", "guest"],
-    default: "user"
-  }
+    default: "user",
+  },
 });
 
 schema.pre("save", async function (next: any) {

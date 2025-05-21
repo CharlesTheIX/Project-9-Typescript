@@ -13,9 +13,9 @@ export default async (props: Props): Promise<ApiResponse> => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        AUTHORIZATION: `Bearer ${process.env.LOCAL_API_AUTH_TOKEN},`
+        AUTHORIZATION: `Bearer ${process.env.LOCAL_API_AUTH_TOKEN},`,
       },
-      body: JSON.stringify({ continent, limit })
+      body: JSON.stringify({ continent, limit }),
     }).then((res: any) => res.json());
 
     return response;

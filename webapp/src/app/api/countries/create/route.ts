@@ -8,9 +8,9 @@ export async function POST(request: NextRequest) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.API_AUTH_TOKEN}`
+        Authorization: `Bearer ${process.env.API_AUTH_TOKEN}`,
       },
-      body: JSON.stringify({ ...requestData })
+      body: JSON.stringify({ ...requestData }),
     }).then((res: any) => res.json());
 
     return NextResponse.json(response);

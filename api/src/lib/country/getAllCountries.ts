@@ -19,7 +19,7 @@ export default async (limit: number = 200): Promise<ApiResponse> => {
         continent: country.continent,
         displayName: country.displayName,
         mapRectangle: country.mapRectangle,
-        flagRectangle: country.flagRectangle
+        flagRectangle: country.flagRectangle,
       };
     });
 

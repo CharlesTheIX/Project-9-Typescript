@@ -32,7 +32,7 @@ const RectangleInput: React.FC<Props> = (props: Props) => {
               setValue((prevValue: Rectangle) => {
                 return {
                   ...prevValue,
-                  x: parseInt(target.value)
+                  x: parseInt(target.value),
                 };
               });
             }}
@@ -50,7 +50,7 @@ const RectangleInput: React.FC<Props> = (props: Props) => {
               setValue((prevValue: Rectangle) => {
                 return {
                   ...prevValue,
-                  y: parseInt(target.value)
+                  y: parseInt(target.value),
                 };
               });
             }}
@@ -68,7 +68,7 @@ const RectangleInput: React.FC<Props> = (props: Props) => {
               setValue((prevValue: Rectangle) => {
                 return {
                   ...prevValue,
-                  width: parseInt(target.value)
+                  width: parseInt(target.value),
                 };
               });
             }}
@@ -86,7 +86,7 @@ const RectangleInput: React.FC<Props> = (props: Props) => {
               setValue((prevValue: Rectangle) => {
                 return {
                   ...prevValue,
-                  height: parseInt(target.value)
+                  height: parseInt(target.value),
                 };
               });
             }}

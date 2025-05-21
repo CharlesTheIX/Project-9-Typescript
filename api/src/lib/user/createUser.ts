@@ -11,7 +11,7 @@ export default async (props: User): Promise<ApiResponse> => {
       clerkId,
       username,
       fullName,
-      profileImageURL: profileImageURL || ""
+      profileImageURL: profileImageURL || "",
     });
 
     if (!newDoc) return { ...gbl.response_BAD, message: "User not created." };

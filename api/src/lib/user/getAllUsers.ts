@@ -19,7 +19,7 @@ export default async (limit: number = 200): Promise<ApiResponse> => {
         _id: doc._id.toString(),
         createdAt: doc.createdAt,
         updatedAt: doc.updatedAt,
-        profileImageURL: doc.profileImageURL
+        profileImageURL: doc.profileImageURL,
       };
     });
 

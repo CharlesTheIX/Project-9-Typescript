@@ -43,7 +43,7 @@ const CountryCreationForm: React.FC<Props> = (props: Props) => {
       hidden: false,
       type: "error",
       title: "Country Creation Failed",
-      content: "An error occured..."
+      content: "An error occured...",
     });
   };
 
@@ -53,7 +53,7 @@ const CountryCreationForm: React.FC<Props> = (props: Props) => {
       hidden: false,
       type: "success",
       title: "Country Created",
-      content: "Country successfully added to the database."
+      content: "Country successfully added to the database.",
     });
   };
 

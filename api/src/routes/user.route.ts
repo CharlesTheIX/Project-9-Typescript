@@ -75,7 +75,7 @@ router.route("/create").post(async (request: Request, response: Response): Promi
   if (!email || !role || !clerkId || !username || !fullName) {
     return response.status(gbl.status.BAD).json({
       ...gbl.response_BAD,
-      message: "Required Inputs: email, role, clerkId, username, fullName."
+      message: "Required Inputs: email, role, clerkId, username, fullName.",
     });
   }
 

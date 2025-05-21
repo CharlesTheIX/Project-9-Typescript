@@ -16,13 +16,13 @@ export const generateMetadata = async ({ params }: { params: Params }): Promise<
 
     return {
       title: `${response.data.displayName}`,
-      description: `${response.data.displayName}`
+      description: `${response.data.displayName}`,
     };
   } catch (error: any) {
     return {
       title: "404 error | country not found",
       description: "Country not found",
-      robots: "noindex, nofollow"
+      robots: "noindex, nofollow",
     };
   }
 };

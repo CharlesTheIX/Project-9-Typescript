@@ -11,7 +11,7 @@ const updateMessage = (message: string, update: string): string => {
 export default (requestData: Country): FormError => {
   const formError: FormError = {
     error: false,
-    message: ""
+    message: "",
   };
 
   Object.keys(requestData).map((item: string) => {

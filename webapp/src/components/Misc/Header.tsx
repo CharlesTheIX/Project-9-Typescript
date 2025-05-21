@@ -9,20 +9,20 @@ type NavigationItem = {
 const navigationItems: NavigationItem[] = [
   {
     label: "Countries",
-    href: "/countries"
+    href: "/countries",
+  },
+  {
+    label: "Sign In",
+    href: "/sign-in",
+  },
+  {
+    label: "Sign Up",
+    href: "/sign-up",
   },
   {
     label: "Blank",
-    href: "/"
+    href: "/",
   },
-  {
-    label: "Blank",
-    href: "/"
-  },
-  {
-    label: "Blank",
-    href: "/"
-  }
 ];
 
 const Header: React.FC = () => {
@@ -31,7 +31,7 @@ const Header: React.FC = () => {
       <div className="flex flex-row gap-5 px-5 items-center justify-between max-w-7xl mx-auto">
         <div>
           <Link href="/">
-            <Image src="/assets/images/flag-oman.png" width={50} height={36} alt="Brand logo" />
+            <Image src="/assets/images/flags/oman.png" width={50} height={36} alt="Brand logo" />
           </Link>
         </div>
 
