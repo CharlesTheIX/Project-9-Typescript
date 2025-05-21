@@ -1,3 +1,13 @@
+/*
+  This philosophy behind this file is:
+  Contain miscialanious consts that are used within the site
+  so that if items need to be edited they can easily be found
+  and edited in one place.
+
+  ** Constants should be group together logically **
+*/
+
+// API Responses
 export const status = {
   // 2**
   OK: 200,
@@ -5,6 +15,7 @@ export const status = {
   NO_CONTENT: 204,
   // 4**
   BAD: 400,
+  UNAUTHORISED: 401,
   FORBIDDEN: 403,
   NOT_FOUND: 404,
   CONFLICT: 409,
@@ -12,56 +23,56 @@ export const status = {
   SERVER_ERROR: 500,
 };
 
-// 2**
+const defaultError = { data: null, error: true };
+const defaultSuccess = { data: null, error: false };
+
+// 2** Responses
 export const response_OK: ApiResponse = {
-  data: null,
-  error: false,
+  ...defaultSuccess,
   status: status.OK,
   message: "Success.",
 };
 export const response_DB_UPDATED: ApiResponse = {
-  data: null,
-  error: false,
+  ...defaultSuccess,
   message: "DB Updated.",
   status: status.DB_UPDATED,
 };
 export const response_NO_CONTENT: ApiResponse = {
-  data: null,
-  error: false,
+  ...defaultSuccess,
   message: "No Content.",
   status: status.NO_CONTENT,
 };
 
-// 4**
+// 4** Responses
 export const response_BAD: ApiResponse = {
-  data: null,
-  error: true,
+  ...defaultError,
   status: status.BAD,
   message: "Bad Request.",
 };
+export const response_UNAUTHORISED: ApiResponse = {
+  ...defaultError,
+  message: "Unauthorised.",
+  status: status.UNAUTHORISED,
+};
 export const response_FORBIDDEN: ApiResponse = {
-  data: null,
-  error: true,
+  ...defaultError,
   message: "Forbidden.",
   status: status.FORBIDDEN,
 };
 export const response_NOT_FOUND: ApiResponse = {
-  data: null,
-  error: true,
+  ...defaultError,
   message: "Not Found.",
   status: status.NOT_FOUND,
 };
 export const response_CONFLICT: ApiResponse = {
-  data: null,
-  error: true,
+  ...defaultError,
   message: "Conflict.",
   status: status.CONFLICT,
 };
 
-// 5**
+// 5** Responses
 export const response_SERVER_ERROR: ApiResponse = {
-  data: null,
-  error: true,
+  ...defaultError,
   message: "Server Error.",
   status: status.SERVER_ERROR,
 };
@@ -90,3 +101,6 @@ export const nullOption: Option = {
   value: "",
   label: "",
 };
+
+// Middleware
+export const publicRoutes: string[] = ["/", "/countries", "/sign-in(.*)", "/sign-up(.*)"];

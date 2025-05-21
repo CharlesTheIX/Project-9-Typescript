@@ -13,7 +13,7 @@ export default async (props: Props): Promise<ApiResponse> => {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        AUTHORIZATION: `Bearer ${process.env.LOCAL_API_AUTH_TOKEN},`,
+        AUTHORIZATION: `Bearer ${process.env.NEXT_PUBLIC_LOCAL_API_AUTH_TOKEN},`,
       },
       body: JSON.stringify({ _id, update }),
     }).then((res: any) => res.json());

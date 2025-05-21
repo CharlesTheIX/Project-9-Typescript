@@ -26,6 +26,7 @@ const schema = new mongoose.Schema({
   },
   clerkId: {
     type: String,
+    unique: true,
     required: [true, "Clerk ID not provided."],
   },
   fullName: {

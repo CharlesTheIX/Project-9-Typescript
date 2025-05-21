@@ -2,6 +2,7 @@ import cors from "cors";
 import express from "express";
 import userRouter from "./routes/user.route";
 import healthRouter from "./routes/health.route";
+import cryptoRouter from "./routes/crypto.route";
 import countryRouter from "./routes/country.route";
 import bearerAuthentication from "./lib/auth/bearerAuth";
 
@@ -16,6 +17,7 @@ app.use("/", healthRouter);
 app.use(bearerAuthentication);
 
 app.use(`/${version}/users`, userRouter);
+app.use(`/${version}/crypto`, cryptoRouter);
 app.use(`/${version}/countries`, countryRouter);
 
 export default app;

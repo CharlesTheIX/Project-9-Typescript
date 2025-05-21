@@ -6,7 +6,7 @@ export default async (limit: number = 200): Promise<ApiResponse> => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        AUTHORIZATION: `Bearer ${process.env.LOCAL_API_AUTH_TOKEN},`,
+        AUTHORIZATION: `Bearer ${process.env.NEXT_PUBLIC_LOCAL_API_AUTH_TOKEN},`,
       },
       body: JSON.stringify({ limit }),
     }).then((res: any) => res.json());
