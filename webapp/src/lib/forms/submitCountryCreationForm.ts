@@ -27,17 +27,15 @@ export default async (props: Props): Promise<void> => {
       mapRectangle,
       flagRectangle,
     };
-    const hasErrors = checkCountryCreationErrors(requestData);
 
+    const hasErrors = checkCountryCreationErrors(requestData);
     if (hasErrors.error) throw new Error(hasErrors.message);
 
     const response = await createCountry(requestData);
-
     if (response.error) throw new Error(response.message);
 
     successCallback();
   } catch (error: any) {
-    console.error(error.message);
     errorCallback();
   }
 };

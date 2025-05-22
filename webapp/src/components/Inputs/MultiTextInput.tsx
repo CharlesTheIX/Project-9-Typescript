@@ -7,6 +7,7 @@ type Props = {
   name: string;
   label?: string;
   className?: string;
+  required?: boolean;
   defaultValue?: string[];
   defaultCurrentValue?: string;
   onInput?: (event: any) => void;
@@ -15,13 +16,23 @@ type Props = {
 };
 
 const MultiTextInput: React.FC<Props> = (props: Props) => {
-  const { name, label = "", className = "", onAdd = () => {}, defaultValue = [], onInput = () => {}, onRemove = () => {}, defaultCurrentValue = "" } = props;
+  const {
+    name,
+    label = "",
+    className = "",
+    onAdd = () => {},
+    required = false,
+    defaultValue = [],
+    onInput = () => {},
+    onRemove = () => {},
+    defaultCurrentValue = ""
+  } = props;
   const [values, setValues] = useState<string[]>(defaultValue);
   const [currentValue, setCurrentValue] = useState<string>(defaultCurrentValue);
 
   return (
     <div className={`${className} flex flex-col gap-2 text-left`}>
-      <input type="hidden" value={JSON.stringify(values)} name={name} />
+      <input type="hidden" value={JSON.stringify(values)} name={name} required={required} />
 
       {label && <label htmlFor={`${name}-current`}>{label}</label>}
 

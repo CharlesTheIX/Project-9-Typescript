@@ -4,10 +4,7 @@ export default async (limit: number = 200): Promise<ApiResponse> => {
   try {
     const response: ApiResponse = await fetch(`${process.env.LOCAL_URI}/api/users/all`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        AUTHORIZATION: `Bearer ${process.env.NEXT_PUBLIC_LOCAL_API_AUTH_TOKEN},`,
-      },
+      headers: gbl.defaultInternalHeader,
       body: JSON.stringify({ limit }),
     }).then((res: any) => res.json());
 

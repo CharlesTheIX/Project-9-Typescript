@@ -26,8 +26,9 @@ export default async (props: Props): Promise<ApiResponse> => {
       role: update.role || existingDoc.data.role,
       email: update.email || existingDoc.data.email,
       clerkId: update.clerkId || existingDoc.data.clerkId,
+      surname: update.surname || existingDoc.data.surname,
       username: update.username || existingDoc.data.username,
-      fullName: update.fullName || existingDoc.data.fullName,
+      firstName: update.firstName || existingDoc.data.firstName,
       profileImageURL: update.profileImageURL || existingDoc.data.profileImageURL,
     };
     const updatedDoc = await Model.updateOne({ _id: objectId }, docUpdate, { new: true });

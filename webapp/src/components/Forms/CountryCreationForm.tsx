@@ -26,11 +26,8 @@ const CountryCreationForm: React.FC<Props> = (props: Props) => {
 
     try {
       const form = formRef.current;
-
       if (!form) throw new Error("Form does not exist.");
-
       await submitCountryCreationForm({ form, errorCallback, successCallback });
-
       setIsLoading(false);
     } catch (error: any) {
       console.error(error.message);
@@ -43,7 +40,7 @@ const CountryCreationForm: React.FC<Props> = (props: Props) => {
       hidden: false,
       type: "error",
       title: "Country Creation Failed",
-      content: "An error occured...",
+      content: "An error occured..."
     });
   };
 
@@ -53,7 +50,7 @@ const CountryCreationForm: React.FC<Props> = (props: Props) => {
       hidden: false,
       type: "success",
       title: "Country Created",
-      content: "Country successfully added to the database.",
+      content: "Country successfully added to the database."
     });
   };
 
@@ -65,11 +62,11 @@ const CountryCreationForm: React.FC<Props> = (props: Props) => {
         <div className={`${className} flex flex-col gap-5`}>
           <form ref={formRef} className={`max-w-5xl flex flex-col items-center justify-center mx-auto`}>
             <div className="flex flex-col gap-5 all-width-100 items-center w-full">
-              <TextInput name="display-name" label="Display Name" />
+              <TextInput name="display-name" label="Display Name" required={true} />
 
-              <MultiTextInput name="names" label="Names" />
+              <MultiTextInput name="names" label="Names" required={true} />
 
-              <SelectInput name="continent" label="Continent" options={gbl.continentOptions} />
+              <SelectInput name="continent" label="Continent" options={gbl.continentOptions} required={true} />
 
               <RectangleInput name="flag-rectangle" label="Flag Rectangle" />
 

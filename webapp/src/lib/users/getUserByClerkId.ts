@@ -4,10 +4,7 @@ export default async (clerkId: string): Promise<ApiResponse> => {
   try {
     const response: ApiResponse = await fetch(`${process.env.LOCAL_URI}/api/users/by-clerk-id`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        AUTHORIZATION: `Bearer ${process.env.NEXT_PUBLIC_LOCAL_API_AUTH_TOKEN},`,
-      },
+      headers: gbl.defaultInternalHeader,
       body: JSON.stringify({ clerkId }),
     }).then((res: any) => res.json());
 

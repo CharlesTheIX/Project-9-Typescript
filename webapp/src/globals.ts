@@ -77,6 +77,12 @@ export const response_SERVER_ERROR: ApiResponse = {
   status: status.SERVER_ERROR,
 };
 
+// API
+export const defaultInternalHeader = {
+  "Content-Type": "application/json",
+  // AUTHORIZATION: `Bearer ${process.env.NEXT_PUBLIC_LOCAL_API_AUTH_TOKEN},`,
+};
+
 // Continents
 export const continentOptions: Option[] = [
   { value: "Asia", label: "Asia" },
@@ -103,4 +109,5 @@ export const nullOption: Option = {
 };
 
 // Middleware
-export const publicRoutes: string[] = ["/", "/countries", "/sign-in(.*)", "/sign-up(.*)"];
+export const publicRoutes: string[] = ["/", "/sign-in(.*)", "/sign-up(.*)", "/api/:path*"];
+export const signedInRoutes: string[] = ["/sign-in(.*)", "/sign-up(.*)"];

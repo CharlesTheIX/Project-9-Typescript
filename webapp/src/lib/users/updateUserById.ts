@@ -11,10 +11,7 @@ export default async (props: Props): Promise<ApiResponse> => {
   try {
     const response: ApiResponse = await fetch(`${process.env.LOCAL_URI}/api/users/by-id`, {
       method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        AUTHORIZATION: `Bearer ${process.env.NEXT_PUBLIC_LOCAL_API_AUTH_TOKEN},`,
-      },
+      headers: gbl.defaultInternalHeader,
       body: JSON.stringify({ _id, update }),
     }).then((res: any) => res.json());
 

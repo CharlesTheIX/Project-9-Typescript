@@ -2,15 +2,16 @@ import * as gbl from "../../globals";
 import Model from "../../models/user.model";
 
 export default async (props: User): Promise<ApiResponse> => {
-  const { email, role, clerkId, username, fullName, profileImageURL } = props;
+  const { email, role, clerkId, username, firstName, surname, profileImageURL } = props;
 
   try {
     const newDoc = new Model({
       role,
       email,
       clerkId,
+      surname,
       username,
-      fullName,
+      firstName,
       profileImageURL: profileImageURL || "",
     });
 

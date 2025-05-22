@@ -36,8 +36,9 @@ type User = MongoDocDefaults & {
   email: string;
   role: UserRole;
   clerkId: string;
+  surname: string;
   username: string;
-  fullName: string;
+  firstName: string;
   profileImageURL?: string;
 };
 

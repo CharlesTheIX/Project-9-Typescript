@@ -4,10 +4,7 @@ export default async (displayName: string): Promise<ApiResponse> => {
   try {
     const response: ApiResponse = await fetch(`/api/countries/by-display-name`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        AUTHORIZATION: `Bearer ${process.env.NEXT_PUBLIC_LOCAL_API_AUTH_TOKEN},`,
-      },
+      headers: gbl.defaultInternalHeader,
       body: JSON.stringify({ displayName }),
     }).then((res: any) => res.json());
 

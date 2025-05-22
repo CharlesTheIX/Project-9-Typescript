@@ -11,7 +11,7 @@ type Props = {
   onInput?: (event: any) => void;
 };
 
-const TextInput: React.FC<Props> = (props: Props) => {
+const EmailInput: React.FC<Props> = (props: Props) => {
   const { required = false, name, label, className = "", defaultValue = "", onInput = () => {} } = props;
   const [value, setValue] = useState<string>(defaultValue);
 
@@ -20,7 +20,7 @@ const TextInput: React.FC<Props> = (props: Props) => {
       {label && <label htmlFor={name}>{label}</label>}
 
       <input
-        type="text"
+        type="email"
         name={name}
         value={value}
         required={required}
@@ -34,4 +34,4 @@ const TextInput: React.FC<Props> = (props: Props) => {
   );
 };
 
-export default TextInput;
+export default EmailInput;

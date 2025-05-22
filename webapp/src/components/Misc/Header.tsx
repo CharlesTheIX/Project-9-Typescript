@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
+import { currentUser } from "@clerk/nextjs/server";
+import SignOutButton from "../Buttons/SingOutButton";
 
 type NavigationItem = {
   href: string;
@@ -25,7 +27,9 @@ const navigationItems: NavigationItem[] = [
   },
 ];
 
-const Header: React.FC = () => {
+const Header: React.FC = async () => {
+  const user = await currentUser();
+
   return (
     <header className="py-5 bg-white sticky top-0">
       <div className="flex flex-row gap-5 px-5 items-center justify-between max-w-7xl mx-auto">
@@ -35,7 +39,7 @@ const Header: React.FC = () => {
           </Link>
         </div>
 
-        <nav>
+        <nav className="flex flex-row gap-5 items-center">
           <ul className="flex flex-row gap-5 items-center text-black">
             {navigationItems.map((item: NavigationItem, key: number) => {
               return (
@@ -45,6 +49,8 @@ const Header: React.FC = () => {
               );
             })}
           </ul>
+
+          { user && <SignOutButton /> }
         </nav>
       </div>
     </header>

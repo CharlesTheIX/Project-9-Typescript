@@ -1,15 +1,34 @@
 #!/usr/bin/env node
 
-import { Command } from "commander";
 import dotenv from "dotenv";
+import inquirer from "inquirer";
+import exitCli from "./lib/exitCli";
+import showHelp from "./lib/showHelp";
 
 dotenv.config({ path: "./.env.local" });
 
-const cli = new Command();
+type CommandHandler = () => Promise<void>;
 
-cli
-.name("name")
-.version("0.0.1")
-.description("description");
+const commands: Record<string, CommandHandler> = {
+  help: showHelp,
+  exit: exitCli,
+};
 
-cli.parse(process.argv);
+const startCli = async (): Promise<void> => {
+  console.log(`Greeting...\n`);
+
+  while (true) {
+    const { command } = await inquirer.prompt([
+      {
+        type: 'list',
+        name: 'command',
+        message: 'Choose a command',
+        choices: Object.keys(commands)
+      }
+    ]);
+
+    await commands[command]();
+  }
+};
+
+startCli();
