@@ -1,0 +1,25 @@
+{
+  "name": "cli",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "bin": {
+    "countries-cli": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node src/index.ts",
+    "clean": "rm -rf node_modules yarn.lock dist"
+  },
+  "dependencies": {
+    "commander": "^14.0.0",
+    "dotenv": "^16.5.0"
+  },
+  "devDependencies": {
+    "@types/commander": "^2.12.5",
+    "@types/node": "^22.15.21",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
