@@ -12,7 +12,6 @@ export async function POST(request: NextRequest) {
       },
       body: JSON.stringify({ _id }),
     }).then((res: any) => res.json());
-
     return NextResponse.json(response);
   } catch (error: any) {
     console.error(`Get user by _id error: ${error.message}.`);
@@ -31,7 +30,6 @@ export async function PATCH(request: NextRequest) {
       },
       body: JSON.stringify({ _id, update }),
     }).then((res: any) => res.json());
-
     return NextResponse.json(response);
   } catch (error: any) {
     console.error(`Update user by _id error: ${error.message}.`);
@@ -50,7 +48,6 @@ export async function PATCH(request: NextRequest) {
 //       },
 //       body: JSON.stringify({ _id }),
 //     }).then((res: any) => res.json());
-//
 //     return NextResponse.json(response);
 //   } catch (error: any) {
 //     console.error(`Delete user by _id error: ${error.message}.`);

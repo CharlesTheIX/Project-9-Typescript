@@ -1,9 +1,11 @@
-import * as gbl from "@/globals";
 import { NextRequest, NextResponse } from "next/server";
 import { ClerkMiddlewareAuth, clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-const isPublicRoute = createRouteMatcher(gbl.publicRoutes);
-const isSignedInRoute = createRouteMatcher(gbl.signedInRoutes);
+const signedInRoutes: string[] = ["/sign-in(.*)", "/sign-up(.*)"];
+const publicRoutes: string[] = ["/", "/sign-in(.*)", "/sign-up(.*)", "/api/:path*"];
+
+const isPublicRoute = createRouteMatcher(publicRoutes);
+const isSignedInRoute = createRouteMatcher(signedInRoutes);
 
 export default clerkMiddleware(async (auth: ClerkMiddlewareAuth, request: NextRequest) => {
   const { userId } = await auth();
@@ -20,7 +22,6 @@ export default clerkMiddleware(async (auth: ClerkMiddlewareAuth, request: NextRe
 
 export const config = {
   matcher: [
-    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-    "/(api|trpc)(.*)"
+    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)"
   ]
 };

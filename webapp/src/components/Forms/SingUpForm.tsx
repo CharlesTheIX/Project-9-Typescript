@@ -4,26 +4,24 @@ import { useRef, useState } from "react";
 import { useSignUp } from "@clerk/nextjs";
 import TextInput from "../Inputs/TextInput";
 import EmailInput from "../Inputs/EmailInput";
-import Toast, { ToastProps } from "../Misc/Toast";
+import createUser from "@/lib/users/createUser";
+import isNumber from "@/lib/validation/isNumber";
 import PasswordInput from "../Inputs/PasswordInput";
 import LoadingContainer from "../Misc/LoadingContainer";
+import validateSignUp from "@/lib/forms/validateSignUp";
+import { useToastContext } from "@/contexts/ToastContext";
 import { useRouter, useSearchParams } from "next/navigation";
 
-type Props = {
-  className?: string;
-};
-
-const SignUpForm: React.FC<Props> = (props: Props) => {
-  const { className } = props;
+const SignUpForm: React.FC = () => {
   const router = useRouter();
+  const toast = useToastContext();
   const searchParams = useSearchParams();
   const formRef = useRef<HTMLFormElement>(null);
   const { isLoaded, signUp, setActive } = useSignUp();
   const verificationFormRef = useRef<HTMLFormElement>(null);
   const [verifying, setVerifying] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [signUpData, setSignUpData] = useState<Partial<User> | null>(null);
-  const [toastData, setToastData] = useState<ToastProps>({ content: "", type: "error" });
+  const [signUpData, setSignUpData] = useState<User | null>(null);
 
   const handleSubmit = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault();
@@ -41,37 +39,33 @@ const SignUpForm: React.FC<Props> = (props: Props) => {
       const password: string = formData.get("password")?.toString() || "";
       const firstName: string = formData.get("first-name")?.toString() || "";
       const confirmedPassword: string = formData.get("password-confirmation")?.toString() || "";
-      // add validation here
+      const requestData: Partial<User> & { password: string } = { email, surname, password, username, firstName };
 
-      const signedUp = await signUp.create({ emailAddress: email, password });
-      if (signedUp.status !== "complete") throw new Error();
-
-      const codeSent = await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
-      if (codeSent.status !== "complete") throw new Error();
-
-      setVerifying(true);
+      const hasError = validateSignUp(requestData);
+      if (hasError.error) throw new Error(hasError.message);
+      if (password !== confirmedPassword) throw new Error("Passwords do not match.");
+      console.log(requestData);
       setIsLoading(false);
-      setToastData({
-        hidden: false,
-        type: "success",
-        title: "Sign Up Successful",
-        content: "Signed up successfully."
-      });
-      setSignUpData({
-        email,
-        surname,
-        username,
-        firstName,
-        role: "user"
-      });
+      return;
+
+      // const signedUp = await signUp.create({ emailAddress: email, password });
+      // if (signedUp.status !== "complete") throw new Error("");
+
+      // const codeSent = await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
+      // if (codeSent.status !== "complete") throw new Error("");
+
+      // setVerifying(true);
+      // setIsLoading(false);
+      // toast.setHidden(false);
+      // toast.setType("success");
+      // toast.setTitle("Sign Up Successful");
+      // setSignUpData({ email, surname, username, firstName, clerkId: "", role: "user" });
     } catch (error: any) {
       setIsLoading(false);
-      setToastData({
-        hidden: false,
-        type: "error",
-        title: "Sign Up Failed",
-        content: "An error occured..."
-      });
+      toast.setHidden(false);
+      toast.setType("error");
+      toast.setContent(error.message);
+      toast.setTitle("Sign Up Failed");
     }
   };
 
@@ -86,37 +80,39 @@ const SignUpForm: React.FC<Props> = (props: Props) => {
 
       const formData = new FormData(form);
       const code: string = formData.get("code")?.toString() || "";
-      // add validation here
+      if (!isNumber(code)) throw new Error("Code is not a valid number.");
 
       const completeSignUp = await signUp.attemptEmailAddressVerification({ code });
-      if (completeSignUp.status !== "complete") throw new Error();
+      if (completeSignUp.status !== "complete") throw new Error("");
 
-      setSignUpData((prevValue: Partial<User> | null) => {
+      setSignUpData((prevValue: User | null) => {
         if (!prevValue) return null;
         return { ...prevValue, clerkId: completeSignUp.createdUserId as string };
       });
 
-      // create user in DB here
+      if (!signUpData) throw new Error("");
+      const response = await createUser(signUpData);
+      if (response.error) throw new Error(response.message);
 
-      await setActive({ session: completeSignUp.createdSessionId });
-
+      toast.setHidden(false);
+      toast.setType("success");
+      toast.setTitle("Sign Up Complete.");
       const redirectionURL = searchParams?.get("redirect_url");
+      await setActive({ session: completeSignUp.createdSessionId });
       router.push(redirectionURL ? decodeURIComponent(redirectionURL) : "/dashboard");
-    } catch (error) {
+    } catch (error: any) {
       setIsLoading(false);
-      setToastData({
-        hidden: false,
-        type: "error",
-        title: "Sign Up Failed",
-        content: "An error occured..."
-      });
+      toast.setHidden(false);
+      toast.setType("error");
+      toast.setContent(error.message);
+      toast.setTitle("Sign Up Failed");
     }
   };
 
   return (
     <>
       {verifying ? (
-        <div className={`${className} flex flex-col gap-5`}>
+        <div className={`flex flex-col gap-5`}>
           <form
             ref={verificationFormRef}
             onSubmit={handleVerification}
@@ -133,7 +129,7 @@ const SignUpForm: React.FC<Props> = (props: Props) => {
           </form>
         </div>
       ) : (
-        <div className={`${className} flex flex-col gap-5`}>
+        <div className={`flex flex-col gap-5`}>
           <form
             ref={formRef}
             onSubmit={handleSubmit}
@@ -162,8 +158,6 @@ const SignUpForm: React.FC<Props> = (props: Props) => {
           </form>
         </div>
       )}
-
-      <Toast {...toastData} />
     </>
   );
 };

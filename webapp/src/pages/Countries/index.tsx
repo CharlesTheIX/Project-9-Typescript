@@ -1,6 +1,5 @@
 import Link from "next/link";
 import CountryFeed from "@/components/Feeds/CountryFeed";
-
 const CountriesPage: React.FC = () => {
   return (
     <main className="flex flex-col gap-5 p-5">
@@ -17,5 +16,4 @@ const CountriesPage: React.FC = () => {
     </main>
   );
 };
-
 export default CountriesPage;

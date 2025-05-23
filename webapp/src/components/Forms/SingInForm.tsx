@@ -3,23 +3,19 @@
 import { useRef, useState } from "react";
 import { useSignIn } from "@clerk/nextjs";
 import EmailInput from "../Inputs/EmailInput";
-import Toast, { ToastProps } from "../Misc/Toast";
 import PasswordInput from "../Inputs/PasswordInput";
 import LoadingContainer from "../Misc/LoadingContainer";
+import { useToastContext } from "@/contexts/ToastContext";
 import { useRouter, useSearchParams } from "next/navigation";
+import validateSignIn, { SignInRequestData } from "@/lib/forms/validateSignIn";
 
-type Props = {
-  className?: string;
-};
-
-const SignInForm: React.FC<Props> = (props: Props) => {
-  const { className } = props;
+const SignInForm: React.FC = () => {
   const router = useRouter();
+  const toast = useToastContext();
   const searchParams = useSearchParams();
   const formRef = useRef<HTMLFormElement>(null);
   const { isLoaded, signIn, setActive } = useSignIn();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [toastData, setToastData] = useState<ToastProps>({ content: "", type: "error" });
 
   const handleSubmit = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault();
@@ -33,24 +29,27 @@ const SignInForm: React.FC<Props> = (props: Props) => {
       const formData = new FormData(form);
       const email: string = formData.get("email")?.toString() || "";
       const password: string = formData.get("password")?.toString() || "";
+      const requestData: SignInRequestData = { email, password };
 
-      //add validation here
+      const hasErrors = validateSignIn(requestData);
+      if (hasErrors.error) throw new Error(hasErrors.message);
 
       const result = await signIn.create({ identifier: email, password });
       if (result.status !== "complete") throw new Error();
 
       await setActive({ session: result.createdSessionId });
 
+      toast.setHidden(false);
+      toast.setType("success");
+      toast.setTitle("Sign Up Complete");
       const redirectionURL = searchParams?.get("redirect_url");
       router.push(redirectionURL ? decodeURIComponent(redirectionURL) : "/dashboard");
     } catch (error: any) {
       setIsLoading(false);
-      setToastData({
-        hidden: false,
-        type: "error",
-        title: "Sign In Failed",
-        content: "An error occured..."
-      });
+      toast.setHidden(false);
+      toast.setType("error");
+      toast.setContent(error.message);
+      toast.setTitle("Sign Up Failed");
     }
   };
 
@@ -59,7 +58,7 @@ const SignInForm: React.FC<Props> = (props: Props) => {
       {isLoading ? (
         <LoadingContainer />
       ) : (
-        <div className={`${className} flex flex-col gap-5`}>
+        <div className={`flex flex-col gap-5`}>
           <form
             ref={formRef}
             onSubmit={handleSubmit}
@@ -73,8 +72,6 @@ const SignInForm: React.FC<Props> = (props: Props) => {
           </form>
         </div>
       )}
-
-      <Toast {...toastData} />
     </>
   );
 };

@@ -14,7 +14,6 @@ export default async (props: Props): Promise<ApiResponse> => {
       headers: gbl.defaultInternalHeader,
       body: JSON.stringify({ continent, limit }),
     }).then((res: any) => res.json());
-
     return response;
   } catch (error: any) {
     return gbl.response_SERVER_ERROR;

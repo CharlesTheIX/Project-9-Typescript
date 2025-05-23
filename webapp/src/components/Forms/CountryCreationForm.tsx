@@ -4,54 +4,54 @@ import * as gbl from "@/globals";
 import { useRef, useState } from "react";
 import TextInput from "../Inputs/TextInput";
 import SelectInput from "../Inputs/SelectInput";
-import Toast, { ToastProps } from "../Misc/Toast";
 import MultiTextInput from "../Inputs/MultiTextInput";
 import RectangleInput from "../Inputs/RectangleInput";
 import LoadingContainer from "../Misc/LoadingContainer";
-import FunctionalButton from "../Buttons/FunctionalButton";
-import submitCountryCreationForm from "@/lib/forms/submitCountryCreationForm";
+import { useToastContext } from "@/contexts/ToastContext";
+import createCountry from "@/lib/countries/createCountry";
+import validateCountryCreation from "@/lib/forms/validateCountryCreation";
 
-type Props = {
-  className?: string;
-};
-
-const CountryCreationForm: React.FC<Props> = (props: Props) => {
-  const { className = "" } = props;
+const CountryCreationForm: React.FC = () => {
+  const toast = useToastContext();
   const formRef = useRef<HTMLFormElement>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [toastData, setToastData] = useState<ToastProps>({ content: "", type: "error" });
 
-  const handleSubmit = async (): Promise<void> => {
+  const handleSubmit = async (event: React.FormEvent): Promise<void> => {
+    event?.preventDefault();
     setIsLoading(true);
 
     try {
       const form = formRef.current;
       if (!form) throw new Error("Form does not exist.");
-      await submitCountryCreationForm({ form, errorCallback, successCallback });
+
+      const formData = new FormData(form);
+      const imageUrl: string = formData.get("image-url")?.toString() || "";
+      const displayName: string = formData.get("display-name")?.toString() || "";
+      const names: string[] = JSON.parse(formData.get("names")?.toString() || "[]");
+      const continent = JSON.parse(formData.get("continent")?.toString() || `${gbl.nullOption}`).value as Continent;
+      const mapRectangle: Rectangle = JSON.parse(formData.get("map-rectangle")?.toString() || `${gbl.nullRectangle}`);
+      const flagRectangle: Rectangle = JSON.parse(formData.get("flag-rectangle")?.toString() || `${gbl.nullRectangle}`);
+      const requestData: Country = { names, imageUrl, continent, displayName, mapRectangle, flagRectangle };
+
+      const hasErrors = validateCountryCreation(requestData);
+      if (hasErrors.error) throw new Error(hasErrors.message);
+
+      const response = await createCountry(requestData);
+      if (response.error) throw new Error(response.message);
+
+      formRef.current?.reset();
+
       setIsLoading(false);
+      toast.setHidden(false);
+      toast.setType("success");
+      toast.setTitle("Country Created");
     } catch (error: any) {
-      console.error(error.message);
       setIsLoading(false);
+      toast.setHidden(false);
+      toast.setType("error");
+      toast.setContent(error.message);
+      toast.setTitle("Country Creation Failed");
     }
-  };
-
-  const errorCallback = (): void => {
-    setToastData({
-      hidden: false,
-      type: "error",
-      title: "Country Creation Failed",
-      content: "An error occured..."
-    });
-  };
-
-  const successCallback = (): void => {
-    formRef.current?.reset();
-    setToastData({
-      hidden: false,
-      type: "success",
-      title: "Country Created",
-      content: "Country successfully added to the database."
-    });
   };
 
   return (
@@ -59,35 +59,24 @@ const CountryCreationForm: React.FC<Props> = (props: Props) => {
       {isLoading ? (
         <LoadingContainer />
       ) : (
-        <div className={`${className} flex flex-col gap-5`}>
-          <form ref={formRef} className={`max-w-5xl flex flex-col items-center justify-center mx-auto`}>
+        <div className={`flex flex-col gap-5`}>
+          <form
+            ref={formRef}
+            onSubmit={handleSubmit}
+            className={`max-w-5xl flex flex-col items-center justify-center mx-auto`}
+          >
             <div className="flex flex-col gap-5 all-width-100 items-center w-full">
               <TextInput name="display-name" label="Display Name" required={true} />
-
               <MultiTextInput name="names" label="Names" required={true} />
-
               <SelectInput name="continent" label="Continent" options={gbl.continentOptions} required={true} />
-
               <RectangleInput name="flag-rectangle" label="Flag Rectangle" />
-
               <RectangleInput name="map-rectangle" label="Map Rectangle" />
-
               <TextInput name="image-url" label="Image Url" />
+              <input type="submit" content="Submit" />
             </div>
           </form>
-
-          <div>
-            <FunctionalButton
-              content="Submit"
-              callback={async () => {
-                await handleSubmit();
-              }}
-            />
-          </div>
         </div>
       )}
-
-      <Toast {...toastData} />
     </>
   );
 };

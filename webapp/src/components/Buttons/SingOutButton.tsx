@@ -5,13 +5,14 @@ import { useClerk } from "@clerk/nextjs";
 export default function SignOutButton() {
   const { signOut } = useClerk();
 
-  const handleSignOut = async () => {
-    await signOut();
-  };
-
   return (
-    <button onClick={handleSignOut}>
+    <button
+      className=""
+      onClick={async () => {
+        await signOut();
+      }}
+    >
       Sign Out
     </button>
   );
-}
+};

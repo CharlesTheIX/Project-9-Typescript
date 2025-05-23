@@ -18,11 +18,12 @@ const CountryPage: React.FC<Props> = (props: Props) => {
           <h1>{country.displayName}</h1>
 
           <FunctionalButton
-            content="Edit"
             callback={() => {
               setIsEditing(true);
             }}
-          />
+          >
+            Edit
+          </FunctionalButton>
         </div>
       </section>
 

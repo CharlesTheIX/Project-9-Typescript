@@ -10,7 +10,6 @@ export async function GET() {
         AUTHORIZATION: `Bearer ${process.env.API_AUTH_TOKEN},`,
       },
     }).then((res: any) => res.json());
-
     return NextResponse.json(response);
   } catch (error: any) {
     console.error(`Health error: ${error.message}.`);

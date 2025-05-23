@@ -7,7 +7,6 @@ export default async (displayName: string): Promise<ApiResponse> => {
       headers: gbl.defaultInternalHeader,
       body: JSON.stringify({ displayName }),
     }).then((res: any) => res.json());
-
     return response;
   } catch (error: any) {
     return gbl.response_SERVER_ERROR;

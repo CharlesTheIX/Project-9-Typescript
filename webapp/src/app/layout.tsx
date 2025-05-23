@@ -1,7 +1,8 @@
-import "@/styles/globals.css";
+import "@/styles/globals.scss";
 import type { Metadata } from "next";
 import Header from "@/components/Misc/Header";
-import { ClerkProvider } from "@clerk/nextjs";
+import { ToastContextProvider } from "@/contexts/ToastContext";
+import GlobalContextProvider from "@/components/Misc/GlobalContextProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,14 +17,15 @@ const RootLayout: React.FC<Readonly<Props>> = (props: Props) => {
   const { children } = props;
 
   return (
-    <ClerkProvider>
+    <GlobalContextProvider>
       <html lang="en-gb">
         <body className="antialiased">
           <Header />
-          {children}
+
+          <ToastContextProvider>{children}</ToastContextProvider>
         </body>
       </html>
-    </ClerkProvider>
+    </GlobalContextProvider>
   );
 };
 

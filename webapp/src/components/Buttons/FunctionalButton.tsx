@@ -1,13 +1,13 @@
 "use client";
 
 type Props = {
-  content: string;
   className?: string;
   callback: () => void;
+  children: React.ReactNode;
 };
 
 const FunctionalButton: React.FC<Props> = (props: Props) => {
-  const { className = "", callback, content } = props;
+  const { className = "", callback, children } = props;
 
   return (
     <button
@@ -17,7 +17,7 @@ const FunctionalButton: React.FC<Props> = (props: Props) => {
         callback();
       }}
     >
-      {content}
+      {children}
     </button>
   );
 };

@@ -11,9 +11,7 @@ export const generateMetadata = async ({ params }: { params: Params }): Promise<
 
   try {
     const response = await getCountryById(_id);
-
     if (response.error) throw new Error();
-
     return {
       title: `${response.data.displayName}`,
       description: `${response.data.displayName}`,
@@ -30,9 +28,7 @@ export const generateMetadata = async ({ params }: { params: Params }): Promise<
 export const generateStaticParams = async (): Promise<{ _id: string }[]> => {
   try {
     const response = await getAllCountries(500);
-
     if (response.error) throw new Error();
-
     return response.data.map((country: Country) => {
       return { _id: country._id };
     });
@@ -45,9 +41,7 @@ const Page = async ({ params }: { params: Params }): Promise<React.JSX.Element> 
   try {
     const { _id } = await params;
     const response = await getCountryById(_id);
-
     if (response.error) throw new Error(response.message);
-
     return <CountryPage country={response.data} />;
   } catch (error: any) {
     notFound();

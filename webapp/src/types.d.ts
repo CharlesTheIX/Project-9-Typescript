@@ -1,4 +1,6 @@
-// KEEP THE TYPE IN THIS FILE IN ALPHABETICAL ORDER!
+/*
+  KEEP THE TYPE IN THIS FILE IN ALPHABETICAL ORDER!
+*/
 
 type ApiResponse = {
   data: any;
@@ -16,6 +18,11 @@ type Country = MongoDocDefaults & {
   continent: Continent;
   mapRectangle: Rectangle;
   flagRectangle: Rectangle;
+};
+
+type FormError = {
+  error: boolean;
+  message: string;
 };
 
 type MongoDocDefaults = {

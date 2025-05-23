@@ -50,7 +50,6 @@ const MultiTextInput: React.FC<Props> = (props: Props) => {
 
         <FunctionalButton
           className="w-auto max-w-16"
-          content="Add"
           callback={() => {
             const valueExists = values.find((item: string) => item === currentValue);
 
@@ -60,7 +59,9 @@ const MultiTextInput: React.FC<Props> = (props: Props) => {
             onAdd(currentValue);
             setCurrentValue("");
           }}
-        />
+        >
+          Add
+        </FunctionalButton>
       </div>
 
       <div className="flex flex-row flex-wrap">
@@ -68,7 +69,6 @@ const MultiTextInput: React.FC<Props> = (props: Props) => {
           return (
             <FunctionalButton
               key={key}
-              content={value}
               className="w-auto"
               callback={() => {
                 onRemove(value);
@@ -76,7 +76,9 @@ const MultiTextInput: React.FC<Props> = (props: Props) => {
                   return prevValue.filter((item: string) => item !== value);
                 });
               }}
-            />
+            >
+              {value}
+            </FunctionalButton>
           );
         })}
       </div>

@@ -20,8 +20,8 @@ const EmailInput: React.FC<Props> = (props: Props) => {
       {label && <label htmlFor={name}>{label}</label>}
 
       <input
-        type="email"
         name={name}
+        type="email"
         value={value}
         required={required}
         onInput={(event: any) => {

@@ -12,7 +12,6 @@ export async function POST(request: NextRequest) {
       },
       body: JSON.stringify({ ...requestData }),
     }).then((res: any) => res.json());
-
     return NextResponse.json(response);
   } catch (error: any) {
     console.error(`Create country error: ${error.message}.`);

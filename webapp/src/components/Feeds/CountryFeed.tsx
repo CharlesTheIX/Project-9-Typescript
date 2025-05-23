@@ -15,20 +15,11 @@ const CountryFeed: React.FC = () => {
 
   const fetchCountries = async (item: Continent | "all"): Promise<void> => {
     if (item === continent) return;
-
     setIsLoading(true);
 
     try {
-      var response: ApiResponse;
-
-      if (item === "all") {
-        response = await getAllCountries(200);
-      } else {
-        response = await getCountriesByContinent({ continent: item, limit: 200 });
-      }
-
+      var response: ApiResponse = item === "all" ? await getAllCountries(200) : await getCountriesByContinent({ continent: item, limit: 200 });
       if (response.error) throw new Error(response.message);
-
       setCountries(response.data || []);
       setContinent(item);
       setIsLoading(false);
@@ -40,7 +31,6 @@ const CountryFeed: React.FC = () => {
 
   useEffect(() => {
     if (continent) return;
-
     (async () => {
       await fetchCountries("all");
     })();
@@ -52,23 +42,25 @@ const CountryFeed: React.FC = () => {
         <div className="flex flex-col gap-5 items-center">
           <ul className="flex flex-row gap-5 items-center">
             <FunctionalButton
-              content="All"
               className={continent === "all" ? "active" : ""}
               callback={async () => {
                 await fetchCountries("all");
               }}
-            />
+            >
+              All
+            </FunctionalButton>
 
             {gbl.continents.map((item: Continent, key: number) => {
               return (
                 <FunctionalButton
                   key={key}
-                  content={item}
                   className={continent === item ? "active" : ""}
                   callback={async () => {
                     await fetchCountries(item);
                   }}
-                />
+                >
+                  {item}
+                </FunctionalButton>
               );
             })}
           </ul>

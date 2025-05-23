@@ -1,11 +1,11 @@
 import * as gbl from "@/globals";
 
-export default async (limit: number = 200): Promise<ApiResponse> => {
+export default async (requestData: User): Promise<ApiResponse> => {
   try {
-    const response: ApiResponse = await fetch(`/api/users/all`, {
+    const response: ApiResponse = await fetch(`/api/users/create`, {
       method: "POST",
       headers: gbl.defaultInternalHeader,
-      body: JSON.stringify({ limit }),
+      body: JSON.stringify({ requestData })
     }).then((res: any) => res.json());
     return response;
   } catch (error: any) {
