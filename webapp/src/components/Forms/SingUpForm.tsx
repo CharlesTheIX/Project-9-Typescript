@@ -44,23 +44,24 @@ const SignUpForm: React.FC = () => {
       const hasError = validateSignUp(requestData);
       if (hasError.error) throw new Error(hasError.message);
       if (password !== confirmedPassword) throw new Error("Passwords do not match.");
-      console.log(requestData);
+     
+      console.log("testing");
+      const signedUp = await signUp.update({ emailAddress: email, password });
+      console.log("signedUp", signedUp);
+      if (signedUp.status !== "complete") throw new Error("");
+
+    // Trigger email verification
+    const codeSent = await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
+    console.log("codeSent:", codeSent);
+
+      setVerifying(true);
       setIsLoading(false);
-      return;
-
-      // const signedUp = await signUp.create({ emailAddress: email, password });
-      // if (signedUp.status !== "complete") throw new Error("");
-
-      // const codeSent = await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
-      // if (codeSent.status !== "complete") throw new Error("");
-
-      // setVerifying(true);
-      // setIsLoading(false);
-      // toast.setHidden(false);
-      // toast.setType("success");
-      // toast.setTitle("Sign Up Successful");
-      // setSignUpData({ email, surname, username, firstName, clerkId: "", role: "user" });
+      toast.setHidden(false);
+      toast.setType("success");
+      toast.setTitle("Sign Up Successful");
+      setSignUpData({ email, surname, username, firstName, clerkId: "", role: "user" });
     } catch (error: any) {
+      console.error(error)
       setIsLoading(false);
       toast.setHidden(false);
       toast.setType("error");
@@ -80,7 +81,7 @@ const SignUpForm: React.FC = () => {
 
       const formData = new FormData(form);
       const code: string = formData.get("code")?.toString() || "";
-      if (!isNumber(code)) throw new Error("Code is not a valid number.");
+      // if (!isNumber(code)) throw new Error("Code is not a valid number.");
 
       const completeSignUp = await signUp.attemptEmailAddressVerification({ code });
       if (completeSignUp.status !== "complete") throw new Error("");
@@ -135,7 +136,7 @@ const SignUpForm: React.FC = () => {
             onSubmit={handleSubmit}
             className={`max-w-5xl flex flex-col items-center justify-center mx-auto`}
           >
-            <div id="clerk-captcha" data-cl-theme="dark" data-cl-size="flexible" data-cl-language="en-GB" />
+            <div id="clerk-captcha" />
 
             {isLoading ? (
               <LoadingContainer />
