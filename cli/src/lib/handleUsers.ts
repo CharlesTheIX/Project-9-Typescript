@@ -1,8 +1,11 @@
+import dotenv from "dotenv";
 import config from "../config.js";
 import { Command } from "commander";
 import * as utils from "./utils.js";
 import { createSpinner } from "nanospinner";
 import * as handleCli from "./handleCli.js";
+
+dotenv.config({ path: "./.env.local" });
 
 type Tool = "create" | "delete" | "get" | "update";
 
@@ -22,7 +25,7 @@ export const add = (cli: Command): void => {
 export const create = async (option: string): Promise<string> => {
   var body: User;
   var username: string = "";
-  var endpoint: string = `http://localhost:4022/v1/users/create`;
+  var endpoint: string = `${process.env.API_URL}${process.env.API_VERSION}/users/create`;
   const spinner = createSpinner(`Handling create users: ${option}...\n`);
 
   switch (option) {
@@ -58,7 +61,7 @@ export const create = async (option: string): Promise<string> => {
     method: "POSt",
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Bearer 2sOm7HFC5Yg6VaNb",
+      Authorization: `Bearer ${process.env.API_AUTH_TOKEN}`,
     },
     body: JSON.stringify(body),
   }).then((res: any) => res.json());
@@ -70,7 +73,7 @@ export const create = async (option: string): Promise<string> => {
 
 export const get = async (option: string): Promise<string> => {
   var body: any = {};
-  var endpoint: string = `http://localhost:4022/v1/users/`;
+  var endpoint: string = `${process.env.API_URL}${process.env.API_VERSION}/users`;
   const spinner = createSpinner(`Handling get users: ${option}...\n`);
 
   switch (option) {
@@ -115,7 +118,7 @@ export const get = async (option: string): Promise<string> => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Bearer 2sOm7HFC5Yg6VaNb",
+      Authorization: `Bearer ${process.env.API_AUTH_TOKEN}`,
     },
     body: JSON.stringify(body),
   }).then((res: any) => res.json());
