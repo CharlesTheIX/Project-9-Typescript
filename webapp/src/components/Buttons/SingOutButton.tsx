@@ -1,18 +1,23 @@
 "use client";
-
 import { useClerk } from "@clerk/nextjs";
+import { useUserContext } from "@/contexts/userContext";
 
-export default function SignOutButton() {
+const SignOutButton: React.FC = () => {
   const { signOut } = useClerk();
+  const { setToggle } = useUserContext();
 
   return (
     <button
-      className=""
+      className={`cursor-pointer p-4`}
       onClick={async () => {
-        await signOut();
+        await signOut().then(() => {
+          setToggle("sign-out");
+        });
       }}
     >
       Sign Out
     </button>
   );
 };
+
+export default SignOutButton;

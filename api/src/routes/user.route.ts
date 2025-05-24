@@ -12,7 +12,7 @@ const router: Router = express.Router();
 
 // Get all users
 router.route("/all").post(async (request: Request, response: Response): Promise<any> => {
-  const { limit } = request.body();
+  const { limit } = request.body;
 
   try {
     const res = await getAllUsers(limit);

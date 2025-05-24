@@ -1,5 +1,4 @@
 "use client";
-
 import { createContext, useContext, useState, useEffect, useRef } from "react";
 
 type ToastType = "success" | "error" | "none";
@@ -17,19 +16,19 @@ type ToastContextData = {
 };
 
 const defaultValue: ToastContextData = {
-  title: "TESTING",
+  title: "",
   content: "",
-  type: "success",
-  hidden: false,
+  type: "none",
+  hidden: true,
   timeout_ms: 5000,
   setType: () => {},
   setTitle: () => {},
   setHidden: () => {},
   setContent: () => {},
-  setTimeout_ms: () => {}
+  setTimeout_ms: () => {},
 };
-
 const ToastContext = createContext<ToastContextData>(defaultValue);
+
 export const ToastContextProvider = (props: { children: React.ReactNode }) => {
   const { children } = props;
   const toastRef = useRef<HTMLDivElement>(null);
@@ -49,7 +48,7 @@ export const ToastContextProvider = (props: { children: React.ReactNode }) => {
     setHidden,
     timeout_ms,
     setContent,
-    setTimeout_ms
+    setTimeout_ms,
   };
 
   useEffect(() => {
@@ -57,7 +56,7 @@ export const ToastContextProvider = (props: { children: React.ReactNode }) => {
 
     setTimeout(() => {
       if (!toastRef.current) return;
-      toastRef.current.classList.add('fade-out');
+      toastRef.current.classList.add("fade-out");
     }, timeout_ms - 500);
 
     setTimeout(() => {

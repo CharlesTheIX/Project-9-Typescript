@@ -21,7 +21,7 @@ export default async (props: User): Promise<ApiResponse> => {
 
     if (!createdDoc) return { ...gbl.response_BAD, message: "User not created." };
 
-    return { ...gbl.response_DB_UPDATED };
+    return { ...gbl.response_DB_UPDATED, data: createdDoc };
   } catch (error: any) {
     console.error(`Create user error: ${error.message}`);
     return { ...gbl.response_SERVER_ERROR, message: error.message };

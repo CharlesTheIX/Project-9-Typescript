@@ -9,4 +9,5 @@ const DashboardPage: React.FC = () => {
     </main>
   );
 };
+
 export default DashboardPage;

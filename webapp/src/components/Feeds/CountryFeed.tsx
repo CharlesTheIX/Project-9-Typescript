@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 import * as gbl from "@/globals";
 import { useState, useEffect } from "react";

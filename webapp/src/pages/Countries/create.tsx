@@ -1,4 +1,5 @@
 import CountryCreationForm from "@/components/Forms/CountryCreationForm";
+
 const CountryCreationPage: React.FC = () => {
   return (
     <main className="flex flex-col gap-10 px-50 py-10 justify-center items-center all-width-100 text-center">
@@ -16,4 +17,5 @@ const CountryCreationPage: React.FC = () => {
     </main>
   );
 };
+
 export default CountryCreationPage;

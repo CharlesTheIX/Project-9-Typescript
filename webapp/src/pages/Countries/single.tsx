@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import FunctionalButton from "@/components/Buttons/FunctionalButton";
 
@@ -15,7 +14,7 @@ const CountryPage: React.FC<Props> = (props: Props) => {
     <main>
       <section>
         <div>
-          <h1>{country.displayName}</h1>
+          <h1>{country?.displayName}</h1>
 
           <FunctionalButton
             callback={() => {

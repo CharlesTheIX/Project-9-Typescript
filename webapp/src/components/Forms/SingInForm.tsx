@@ -1,17 +1,18 @@
 "use client";
-
 import { useRef, useState } from "react";
 import { useSignIn } from "@clerk/nextjs";
 import EmailInput from "../Inputs/EmailInput";
 import PasswordInput from "../Inputs/PasswordInput";
 import LoadingContainer from "../Misc/LoadingContainer";
-import { useToastContext } from "@/contexts/ToastContext";
+import { useUserContext } from "@/contexts/userContext";
+import { useToastContext } from "@/contexts/toastContext";
 import { useRouter, useSearchParams } from "next/navigation";
 import validateSignIn, { SignInRequestData } from "@/lib/forms/validateSignIn";
 
 const SignInForm: React.FC = () => {
   const router = useRouter();
   const toast = useToastContext();
+  const { setToggle } = useUserContext();
   const searchParams = useSearchParams();
   const formRef = useRef<HTMLFormElement>(null);
   const { isLoaded, signIn, setActive } = useSignIn();
@@ -37,11 +38,10 @@ const SignInForm: React.FC = () => {
       const result = await signIn.create({ identifier: email, password });
       if (result.status !== "complete") throw new Error();
 
-      await setActive({ session: result.createdSessionId });
+      await setActive({ session: result.createdSessionId }).then(() => {
+        setToggle("sign-in");
+      });
 
-      toast.setHidden(false);
-      toast.setType("success");
-      toast.setTitle("Sign Up Complete");
       const redirectionURL = searchParams?.get("redirect_url");
       router.push(redirectionURL ? decodeURIComponent(redirectionURL) : "/dashboard");
     } catch (error: any) {
@@ -59,11 +59,7 @@ const SignInForm: React.FC = () => {
         <LoadingContainer />
       ) : (
         <div className={`flex flex-col gap-5`}>
-          <form
-            ref={formRef}
-            onSubmit={handleSubmit}
-            className={`max-w-5xl flex flex-col items-center justify-center mx-auto`}
-          >
+          <form ref={formRef} onSubmit={handleSubmit} className={`max-w-5xl flex flex-col items-center justify-center mx-auto`}>
             <div className="flex flex-col gap-5 all-width-100 items-center w-full">
               <EmailInput name="email" label="Email" required={true} />
               <PasswordInput name="password" label="Password" required={true} />

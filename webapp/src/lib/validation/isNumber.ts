@@ -1,6 +1,6 @@
-type NumberType = "int" | "float" | "any";
+type NumberType = "int" | "float";
 
-export default (value: any, type: NumberType = "any"): boolean => {
+export default (value: any, type: NumberType): boolean => {
   var response: boolean = true;
   const intRegex = new RegExp(/^-?\d+$/);
   const floatRegex = new RegExp(/^-?\d+(\.\d+)?$/);
@@ -14,9 +14,6 @@ export default (value: any, type: NumberType = "any"): boolean => {
         break;
       case "float":
         if (!floatRegex.test(stringValue)) response = false;
-        break;
-      case "any":
-        if (!isNaN(Number(stringValue))) response = false;
         break;
     }
     return response;

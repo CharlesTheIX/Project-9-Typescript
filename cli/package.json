@@ -5,16 +5,20 @@
   "license": "MIT",
   "private": true,
   "bin": {
-    "countries-cli": "./dist/index.js"
+    "countries": "./dist/index.js"
   },
   "scripts": {
     "build": "tsc",
-    "start": "ts-node src/index.ts",
+    "go": " tsc && ./dist/index.js",
+    "start": "tsc && node dist/index.js",
     "clean": "rm -rf node_modules yarn.lock dist"
   },
   "dependencies": {
-    "dotenv": "^16.5.0",
-    "inquirer": "^12.6.1"
+    "axios": "^1.9.0",
+    "chalk": "^5.4.1",
+    "commander": "^14.0.0",
+    "inquirer": "^12.6.2",
+    "nanospinner": "^1.2.2"
   },
   "devDependencies": {
     "@types/inquirer": "^9.0.8",

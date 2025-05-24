@@ -5,5 +5,4 @@ const LoadingContainer: React.FC = () => {
     </div>
   );
 };
-
 export default LoadingContainer;

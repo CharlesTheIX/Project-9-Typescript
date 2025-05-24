@@ -1,5 +1,4 @@
 "use client";
-
 import * as gbl from "@/globals";
 import { useRef, useState } from "react";
 import TextInput from "../Inputs/TextInput";
@@ -7,7 +6,7 @@ import SelectInput from "../Inputs/SelectInput";
 import MultiTextInput from "../Inputs/MultiTextInput";
 import RectangleInput from "../Inputs/RectangleInput";
 import LoadingContainer from "../Misc/LoadingContainer";
-import { useToastContext } from "@/contexts/ToastContext";
+import { useToastContext } from "@/contexts/toastContext";
 import createCountry from "@/lib/countries/createCountry";
 import validateCountryCreation from "@/lib/forms/validateCountryCreation";
 
@@ -60,11 +59,7 @@ const CountryCreationForm: React.FC = () => {
         <LoadingContainer />
       ) : (
         <div className={`flex flex-col gap-5`}>
-          <form
-            ref={formRef}
-            onSubmit={handleSubmit}
-            className={`max-w-5xl flex flex-col items-center justify-center mx-auto`}
-          >
+          <form ref={formRef} onSubmit={handleSubmit} className={`max-w-5xl flex flex-col items-center justify-center mx-auto`}>
             <div className="flex flex-col gap-5 all-width-100 items-center w-full">
               <TextInput name="display-name" label="Display Name" required={true} />
               <MultiTextInput name="names" label="Names" required={true} />

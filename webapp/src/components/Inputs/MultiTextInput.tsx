@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import FunctionalButton from "../Buttons/FunctionalButton";
 
@@ -16,17 +15,7 @@ type Props = {
 };
 
 const MultiTextInput: React.FC<Props> = (props: Props) => {
-  const {
-    name,
-    label = "",
-    className = "",
-    onAdd = () => {},
-    required = false,
-    defaultValue = [],
-    onInput = () => {},
-    onRemove = () => {},
-    defaultCurrentValue = ""
-  } = props;
+  const { name, label = "", className = "", onAdd = () => {}, required = false, defaultValue = [], onInput = () => {}, onRemove = () => {}, defaultCurrentValue = "" } = props;
   const [values, setValues] = useState<string[]>(defaultValue);
   const [currentValue, setCurrentValue] = useState<string>(defaultCurrentValue);
 

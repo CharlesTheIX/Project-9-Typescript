@@ -1,4 +1,5 @@
 import SignUpForm from "@/components/Forms/SingUpForm";
+
 const SignUpPage: React.FC = async () => {
   return (
     <main className="flex flex-col gap-5 p-5">
@@ -16,4 +17,5 @@ const SignUpPage: React.FC = async () => {
     </main>
   );
 };
+
 export default SignUpPage;

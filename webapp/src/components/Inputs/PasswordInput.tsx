@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 
 type Props = {
@@ -13,15 +12,7 @@ type Props = {
 };
 
 const PasswordInput: React.FC<Props> = (props: Props) => {
-  const {
-    name,
-    label,
-    className = "",
-    required = false,
-    defaultValue = "",
-    onInput = () => {},
-    includeConfirmation = false
-  } = props;
+  const { name, label, className = "", required = false, defaultValue = "", onInput = () => {}, includeConfirmation = false } = props;
   const [value, setValue] = useState<string>(defaultValue);
   const [type, setType] = useState<"password" | "text">("password");
   const [confirmationValue, setConfirmationValue] = useState<string>(defaultValue);

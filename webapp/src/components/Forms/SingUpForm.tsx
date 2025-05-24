@@ -1,5 +1,4 @@
 "use client";
-
 import { useRef, useState } from "react";
 import { useSignUp } from "@clerk/nextjs";
 import TextInput from "../Inputs/TextInput";
@@ -9,7 +8,7 @@ import isNumber from "@/lib/validation/isNumber";
 import PasswordInput from "../Inputs/PasswordInput";
 import LoadingContainer from "../Misc/LoadingContainer";
 import validateSignUp from "@/lib/forms/validateSignUp";
-import { useToastContext } from "@/contexts/ToastContext";
+import { useToastContext } from "@/contexts/toastContext";
 import { useRouter, useSearchParams } from "next/navigation";
 
 const SignUpForm: React.FC = () => {
@@ -44,24 +43,20 @@ const SignUpForm: React.FC = () => {
       const hasError = validateSignUp(requestData);
       if (hasError.error) throw new Error(hasError.message);
       if (password !== confirmedPassword) throw new Error("Passwords do not match.");
-     
-      console.log("testing");
-      const signedUp = await signUp.update({ emailAddress: email, password });
-      console.log("signedUp", signedUp);
-      if (signedUp.status !== "complete") throw new Error("");
 
-    // Trigger email verification
-    const codeSent = await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
-    console.log("codeSent:", codeSent);
+      await signUp.create({ emailAddress: email, password });
+      await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
 
+      console.log(signUp);
       setVerifying(true);
       setIsLoading(false);
       toast.setHidden(false);
       toast.setType("success");
-      toast.setTitle("Sign Up Successful");
+      toast.setTitle(`A verification code has been sent to ${email}.`);
+      console.log(signUp);
       setSignUpData({ email, surname, username, firstName, clerkId: "", role: "user" });
     } catch (error: any) {
-      console.error(error)
+      console.error(error);
       setIsLoading(false);
       toast.setHidden(false);
       toast.setType("error");
@@ -81,25 +76,27 @@ const SignUpForm: React.FC = () => {
 
       const formData = new FormData(form);
       const code: string = formData.get("code")?.toString() || "";
-      // if (!isNumber(code)) throw new Error("Code is not a valid number.");
+      if (!isNumber(code, "int")) throw new Error("Code is not a valid number.");
 
-      const completeSignUp = await signUp.attemptEmailAddressVerification({ code });
-      if (completeSignUp.status !== "complete") throw new Error("");
-
-      setSignUpData((prevValue: User | null) => {
-        if (!prevValue) return null;
-        return { ...prevValue, clerkId: completeSignUp.createdUserId as string };
-      });
+      await signUp.attemptEmailAddressVerification({ code });
 
       if (!signUpData) throw new Error("");
-      const response = await createUser(signUpData);
+      const response = await createUser({
+        role: "user",
+        email: signUpData.email,
+        surname: signUpData.surname,
+        username: signUpData.username,
+        firstName: signUpData.firstName,
+        clerkId: signUp.createdUserId as string,
+      });
       if (response.error) throw new Error(response.message);
+
+      await setActive({ session: signUp.createdSessionId });
 
       toast.setHidden(false);
       toast.setType("success");
       toast.setTitle("Sign Up Complete.");
       const redirectionURL = searchParams?.get("redirect_url");
-      await setActive({ session: completeSignUp.createdSessionId });
       router.push(redirectionURL ? decodeURIComponent(redirectionURL) : "/dashboard");
     } catch (error: any) {
       setIsLoading(false);
@@ -114,11 +111,7 @@ const SignUpForm: React.FC = () => {
     <>
       {verifying ? (
         <div className={`flex flex-col gap-5`}>
-          <form
-            ref={verificationFormRef}
-            onSubmit={handleVerification}
-            className={`max-w-5xl flex flex-col items-center justify-center mx-auto`}
-          >
+          <form ref={verificationFormRef} onSubmit={handleVerification} className={`max-w-5xl flex flex-col items-center justify-center mx-auto`}>
             {isLoading ? (
               <LoadingContainer />
             ) : (
@@ -131,11 +124,7 @@ const SignUpForm: React.FC = () => {
         </div>
       ) : (
         <div className={`flex flex-col gap-5`}>
-          <form
-            ref={formRef}
-            onSubmit={handleSubmit}
-            className={`max-w-5xl flex flex-col items-center justify-center mx-auto`}
-          >
+          <form ref={formRef} onSubmit={handleSubmit} className={`max-w-5xl flex flex-col items-center justify-center mx-auto`}>
             <div id="clerk-captcha" />
 
             {isLoading ? (
@@ -145,7 +134,7 @@ const SignUpForm: React.FC = () => {
                 <div className="flex flex-col gap-5 all-width-100 items-center w-full">
                   <TextInput name="username" label="Username" required={true} />
 
-                  <div>
+                  <div className="flex flex-row justify-between gap-5 items-center">
                     <TextInput name="first-name" label="First Name" required={true} />
                     <TextInput name="surname" label="Surname" required={true} />
                   </div>

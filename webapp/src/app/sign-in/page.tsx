@@ -3,8 +3,11 @@ import SignInPage from "@/pages/SignIn";
 
 export const metadata: Metadata = {
   title: "Sign In Page",
-  description: ""
+  description: "",
 };
 
-const Page: React.FC = () => <SignInPage />;
+const Page: React.FC = () => {
+  return <SignInPage />;
+};
+
 export default Page;
