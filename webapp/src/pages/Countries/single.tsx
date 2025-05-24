@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import CountryEditForm from "@/components/Forms/CountryEditForm";
 import FunctionalButton from "@/components/Buttons/FunctionalButton";
 
 type Props = {
@@ -9,12 +10,13 @@ type Props = {
 const CountryPage: React.FC<Props> = (props: Props) => {
   const { country } = props;
   const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [currentCountry, setCurrentCountry] = useState<Country>(country);
 
   return (
     <main>
       <section>
         <div>
-          <h1>{country?.displayName}</h1>
+          <h1>{currentCountry.displayName}</h1>
 
           <FunctionalButton
             callback={() => {
@@ -26,7 +28,17 @@ const CountryPage: React.FC<Props> = (props: Props) => {
         </div>
       </section>
 
-      {isEditing ? <p>Editing</p> : <p>Not editing</p>}
+      {isEditing ? (
+        <CountryEditForm
+          country={currentCountry}
+          callback={(country: Country) => {
+            setCurrentCountry(country);
+            setIsEditing(false);
+          }}
+        />
+      ) : (
+        <p>Not editing</p>
+      )}
     </main>
   );
 };

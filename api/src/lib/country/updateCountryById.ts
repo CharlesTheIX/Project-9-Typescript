@@ -17,7 +17,6 @@ export default async (props: Props): Promise<ApiResponse> => {
     if (!update) return { ...gbl.response_NO_CONTENT, message: "No update provided." };
 
     const existingDoc = await getCountryById(_id);
-
     if (existingDoc.error) return { ...gbl.response_BAD, message: "Country not found." };
 
     const objectId = new mongoose.Types.ObjectId(_id);
@@ -30,11 +29,13 @@ export default async (props: Props): Promise<ApiResponse> => {
       flagRectangle: update.flagRectangle || existingDoc.data.flagRectangle,
       names: update.names && update.names.length > 0 ? update.names : existingDoc.data.names,
     };
-    const updatedDoc = await Model.updateOne({ _id: objectId }, docUpdate, { new: true });
 
+    const updatedDoc = await Model.updateOne({ _id: objectId }, docUpdate, { new: true });
     if (!updatedDoc || updatedDoc?.modifiedCount === 0) return { ...gbl.response_BAD, message: "Country not updated." };
 
-    return { ...gbl.response_DB_UPDATED };
+    const response = await getCountryById(_id);
+
+    return { ...gbl.response_DB_UPDATED, data: response.data };
   } catch (error: any) {
     console.error(`Update country error: ${error.message}`);
     return { ...gbl.response_SERVER_ERROR, message: error.message };

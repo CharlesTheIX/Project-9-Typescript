@@ -8,7 +8,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node ./dist/server.js",
-    "dev": "tsc && nodemon ./dist/server.js",
+    "dev": "yarn build && yarn start",
     "clean": "rm -rf dist node_modules yarn.lock"
   },
   "dependencies": {
