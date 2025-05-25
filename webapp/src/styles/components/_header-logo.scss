@@ -1,0 +1,22 @@
+@use "../palettes/dark-1" as dark;
+@use "../palettes/light-1" as light;
+
+#header-logo {
+  svg {
+    transition: fill 200ms ease-in-out;
+
+    path {
+      transition: stroke 200ms ease-in-out;
+    }
+  }
+
+  &.dark {
+    fill: dark.$color_4;
+    stroke: dark.$color_4;
+  }
+
+  &.light {
+    fill: light.$color_3;
+    stroke: light.$color_3;
+  }
+}

@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
+import getUserByClerkId from "./functions/users/getUserByClerkId";
 import { ClerkMiddlewareAuth, clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
-import getUserByClerkId from "./lib/users/getUserByClerkId";
 
-const adminRoutes: string[] = ["/countries/:path*"];
 const signedInRoutes: string[] = ["/sign-in(.*)", "/sign-up(.*)"];
-const publicRoutes: string[] = ["/", "/sign-in(.*)", "/sign-up(.*)", "/api/:path*"];
+const adminRoutes: string[] = ["/admin/:path*", "/users/:path*", "/countries/create"];
+const publicRoutes: string[] = ["/", "/sign-in(.*)", "/sign-up(.*)", "/cookies", "/api/:path*"];
 
 const isAdminRoute = createRouteMatcher(adminRoutes);
 const isPublicRoute = createRouteMatcher(publicRoutes);
@@ -15,15 +15,16 @@ export default clerkMiddleware(async (auth: ClerkMiddlewareAuth, request: NextRe
 
   if (userId && isSignedInRoute(request)) return NextResponse.redirect(new URL("/dashboard", process.env.BASE_URL));
 
+  if (isPublicRoute(request)) return NextResponse.next();
+
   if (userId && isAdminRoute(request)) {
     const userResponse = await getUserByClerkId(userId);
     if (userResponse.error || userResponse.data.role !== "admin") {
       return NextResponse.redirect(new URL("/dashboard", process.env.BASE_URL));
     }
+
     return NextResponse.next();
   }
-
-  if (isPublicRoute(request)) return NextResponse.next();
 
   await auth.protect();
 });

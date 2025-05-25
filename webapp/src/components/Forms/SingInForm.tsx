@@ -7,7 +7,7 @@ import LoadingContainer from "../Misc/LoadingContainer";
 import { useUserContext } from "@/contexts/userContext";
 import { useToastContext } from "@/contexts/toastContext";
 import { useRouter, useSearchParams } from "next/navigation";
-import validateSignIn, { SignInRequestData } from "@/lib/forms/validateSignIn";
+import validateSignIn, { SignInRequestData } from "@/functions/forms/validateSignIn";
 
 const SignInForm: React.FC = () => {
   const router = useRouter();
@@ -59,11 +59,13 @@ const SignInForm: React.FC = () => {
         <LoadingContainer />
       ) : (
         <div className={`flex flex-col gap-5`}>
-          <form ref={formRef} onSubmit={handleSubmit} className={`max-w-5xl flex flex-col items-center justify-center mx-auto`}>
+          <form ref={formRef} onSubmit={handleSubmit} className={`max-w-xl w-full flex flex-col items-center justify-center`}>
             <div className="flex flex-col gap-5 all-width-100 items-center w-full">
               <EmailInput name="email" label="Email" required={true} />
               <PasswordInput name="password" label="Password" required={true} />
-              <input type="submit" content="Submit" />
+              <div>
+                <input className="button w-auto" type="submit" content="Submit" />
+              </div>
             </div>
           </form>
         </div>

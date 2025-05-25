@@ -1,5 +1,5 @@
 "use client";
-import * as LS from "../lib/storage/localStorage";
+import * as LS from "../functions/storage/localStorage";
 import { createContext, useContext, useState, useEffect, useRef } from "react";
 
 export type ThemeType = "light" | "dark";

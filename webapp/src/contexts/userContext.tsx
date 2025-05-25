@@ -1,13 +1,14 @@
 "use client";
 import { useUser } from "@clerk/nextjs";
 import { useToastContext } from "./toastContext";
-import getUserByClerkId from "@/lib/users/getUserByClerkId";
+import getUserByClerkId from "@/functions/users/getUserByClerkId";
 import { createContext, useContext, useState, useEffect } from "react";
 
 type ToggleType = "sign-in" | "sign-out" | "none";
 type UserContextData = {
   user: User | null;
   toggle: ToggleType;
+  userRole: UserRole;
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
   setToggle: React.Dispatch<React.SetStateAction<ToggleType>>;
 };
@@ -15,6 +16,7 @@ type UserContextData = {
 const defaultValue: UserContextData = {
   user: null,
   toggle: "none",
+  userRole: "guest",
   setUser: () => {},
   setToggle: () => {},
 };
@@ -24,12 +26,13 @@ export const UserContextProvider = (props: { children: React.ReactNode }) => {
   const { children } = props;
   const { user } = useUser();
   const toast = useToastContext();
-  const [username, setUsername] = useState<string>("");
-  const [toggle, setToggle] = useState<ToggleType>(defaultValue.toggle);
   const [dbUser, setDbUser] = useState<User | null>(defaultValue.user);
+  const [toggle, setToggle] = useState<ToggleType>(defaultValue.toggle);
+  const [userRole, setUserRole] = useState<UserRole>(defaultValue.userRole);
 
   const value: UserContextData = {
     toggle,
+    userRole,
     setToggle,
     user: dbUser,
     setUser: setDbUser,
@@ -37,13 +40,13 @@ export const UserContextProvider = (props: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (!user) {
-      if (toggle === "sign-out" || username) {
+      if (toggle === "sign-out") {
         toast.setHidden(false);
         toast.setType("success");
-        toast.setTitle(`Goodbye ${username}`);
+        toast.setTitle(`Goodbye.`);
       }
-      setDbUser(null);
-      setUsername("");
+      setDbUser(defaultValue.user);
+      setUserRole(defaultValue.userRole);
       return;
     }
 
@@ -57,7 +60,7 @@ export const UserContextProvider = (props: { children: React.ReactNode }) => {
           toast.setTitle(`Welcome back ${response.data.username}`);
         }
         setDbUser(response.data);
-        setUsername(response.data.username);
+        setUserRole(response.data.role);
       } catch (error: any) {
         setDbUser(null);
       }

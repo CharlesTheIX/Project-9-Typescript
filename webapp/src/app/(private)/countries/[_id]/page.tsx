@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import CountryPage from "@/pages/Countries/single";
-import getCountryById from "@/lib/countries/getCountryById";
-import getAllCountries from "@/lib/countries/getAllCountries";
+import getCountryById from "@/functions/countries/getCountryById";
+import getAllCountries from "@/functions/countries/getAllCountries";
 
 type Params = Promise<{ _id: string }>;
 

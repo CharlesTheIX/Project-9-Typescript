@@ -3,11 +3,11 @@ import { useRef, useState } from "react";
 import { useSignUp } from "@clerk/nextjs";
 import TextInput from "../Inputs/TextInput";
 import EmailInput from "../Inputs/EmailInput";
-import createUser from "@/lib/users/createUser";
-import isNumber from "@/lib/validation/isNumber";
+import createUser from "@/functions/users/createUser";
+import isNumber from "@/functions/validation/isNumber";
 import PasswordInput from "../Inputs/PasswordInput";
 import LoadingContainer from "../Misc/LoadingContainer";
-import validateSignUp from "@/lib/forms/validateSignUp";
+import validateSignUp from "@/functions/forms/validateSignUp";
 import { useToastContext } from "@/contexts/toastContext";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -47,13 +47,11 @@ const SignUpForm: React.FC = () => {
       await signUp.create({ emailAddress: email, password });
       await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
 
-      console.log(signUp);
       setVerifying(true);
       setIsLoading(false);
       toast.setHidden(false);
       toast.setType("success");
       toast.setTitle(`A verification code has been sent to ${email}.`);
-      console.log(signUp);
       setSignUpData({ email, surname, username, firstName, clerkId: "", role: "user" });
     } catch (error: any) {
       console.error(error);
@@ -117,7 +115,7 @@ const SignUpForm: React.FC = () => {
             ) : (
               <div className="flex flex-col gap-5 all-width-100 items-center w-full">
                 <TextInput name="code" label="Code" required={true} />
-                <input type="submit" content="Submit" />
+                <input className="button" type="submit" content="Submit" />
               </div>
             )}
           </form>
@@ -141,7 +139,7 @@ const SignUpForm: React.FC = () => {
 
                   <EmailInput name="email" label="Email" required={true} />
                   <PasswordInput name="password" label="Password" required={true} includeConfirmation={true} />
-                  <input type="submit" content="Submit" />
+                  <input className="button" type="submit" content="Submit" />
                 </div>
               </>
             )}

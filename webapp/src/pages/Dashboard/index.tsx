@@ -1,12 +1,14 @@
+import DashboardLayout from "@/components/Layouts/DashboardLayout";
+
 const DashboardPage: React.FC = () => {
   return (
-    <main>
+    <DashboardLayout>
       <section>
         <div>
           <h1>Dashboard</h1>
         </div>
       </section>
-    </main>
+    </DashboardLayout>
   );
 };
 

@@ -1,32 +1,31 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
 import * as NI from "./navigationItems";
 import { useUserContext } from "@/contexts/userContext";
 import { useThemeContext } from "@/contexts/themeContext";
+import Terminal_SVG from "@/components/SVGs/Terminal_SVG";
 import SignOutButton from "@/components/Buttons/SingOutButton";
 import ThemeToggleButton from "@/components/Buttons/ThemeToggleButton";
 
 const Header: React.FC = () => {
-  const { user } = useUserContext();
   const { theme } = useThemeContext();
+  const { user, userRole } = useUserContext();
 
   return (
-    <header className={`py-5 bg-white sticky top-0 theme-${theme}`}>
-      <div className="flex flex-row gap-5 px-5 items-center justify-between max-w-7xl mx-auto">
-        <div>
-          <Link href="/">
-            <Image src="/assets/images/flags/oman.png" width={50} height={36} alt="Brand logo" />
-          </Link>
-        </div>
+    <header className={`px-10 py-5 sticky top-0 theme-${theme}`}>
+      <div className="flex flex-row gap-5 items-center justify-between max-w-7xl mx-auto">
+        <Link id="header-logo" href="/" className={`flex flex-row gap-1 items-center ${theme}`}>
+          <Terminal_SVG width={50} height={50} />
+          <p className="text-5xl font-bold">P9</p>
+        </Link>
 
         <nav className="flex flex-row gap-5 items-center">
-          <ul className="flex flex-row gap-5 items-center text-black">
+          <ul className="flex flex-row gap-5 items-center">
             {!user ? (
               <>
-                {NI.signedOutNavigationItems.map((item: NI.NavigationItem, key: number) => {
+                {NI.signedOutItems.map((item: NI.NavigationItem, key: number) => {
                   return (
-                    <li key={key}>
+                    <li key={key} className="button">
                       <Link href={item.href}>{item.label}</Link>
                     </li>
                   );
@@ -34,9 +33,9 @@ const Header: React.FC = () => {
               </>
             ) : (
               <>
-                {user.role === "admin" ? (
+                {userRole === "admin" ? (
                   <>
-                    {NI.adminNavigationItems.map((item: NI.NavigationItem, key: number) => {
+                    {NI.adminItems.map((item: NI.NavigationItem, key: number) => {
                       return (
                         <li key={key}>
                           <Link href={item.href}>{item.label}</Link>
@@ -46,7 +45,7 @@ const Header: React.FC = () => {
                   </>
                 ) : (
                   <>
-                    {NI.signedInNavigationItems.map((item: NI.NavigationItem, key: number) => {
+                    {NI.signedInItems.map((item: NI.NavigationItem, key: number) => {
                       return (
                         <li key={key}>
                           <Link href={item.href}>{item.label}</Link>

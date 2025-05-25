@@ -1,4 +1,6 @@
 "use client";
+import Sun_SVG from "../SVGs/Sun_SVG";
+import Moon_SVG from "../SVGs/Moon_SVG";
 import { useThemeContext, ThemeType } from "@/contexts/themeContext";
 
 const ThemeToggleButton: React.FC = () => {
@@ -6,8 +8,8 @@ const ThemeToggleButton: React.FC = () => {
 
   return (
     <button
-      type="button"
-      className={`cursor-pointer p-4`}
+      id="theme-toggle"
+      className={`${theme}`}
       onClick={() => {
         setTheme((prevValue: ThemeType) => {
           switch (prevValue) {
@@ -19,7 +21,7 @@ const ThemeToggleButton: React.FC = () => {
         });
       }}
     >
-      Theme {theme}
+      {theme === "dark" ? <Moon_SVG primaryColor="inherit" /> : <Sun_SVG primaryColor="inherit" />}
     </button>
   );
 };

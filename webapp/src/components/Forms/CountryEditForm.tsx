@@ -7,8 +7,8 @@ import MultiTextInput from "../Inputs/MultiTextInput";
 import RectangleInput from "../Inputs/RectangleInput";
 import LoadingContainer from "../Misc/LoadingContainer";
 import { useToastContext } from "@/contexts/toastContext";
-import updateCountryById from "@/lib/countries/updateCountryById";
-import validateCountryCreation from "@/lib/forms/validateCountryCreation";
+import updateCountryById from "@/functions/countries/updateCountryById";
+import validateCountryCreation from "@/functions/forms/validateCountryCreation";
 
 type Props = {
   country: Country;

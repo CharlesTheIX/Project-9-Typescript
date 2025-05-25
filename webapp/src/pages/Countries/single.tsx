@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import CountryEditForm from "@/components/Forms/CountryEditForm";
 import FunctionalButton from "@/components/Buttons/FunctionalButton";
 
@@ -13,7 +14,7 @@ const CountryPage: React.FC<Props> = (props: Props) => {
   const [currentCountry, setCurrentCountry] = useState<Country>(country);
 
   return (
-    <main>
+    <DefaultLayout>
       <section>
         <div>
           <h1>{currentCountry.displayName}</h1>
@@ -39,7 +40,7 @@ const CountryPage: React.FC<Props> = (props: Props) => {
       ) : (
         <p>Not editing</p>
       )}
-    </main>
+    </DefaultLayout>
   );
 };
 

@@ -1,85 +1,109 @@
 @use "tailwindcss";
+@use "./components";
+@use "./palettes/dark-1" as dark;
+@use "./palettes/light-1" as light;
 
-:root {
-  --white: #ffffff;
-  --black: #0a0a0a;
-  --background: #ffffff;
-  --foreground: #0a0a0a;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
-  position: relative;
+  @apply relative text-base;
   font-family: monospace;
-  color: var(--foreground);
-  background: var(--background);
+}
+
+header {
+  &.theme-dark {
+    color: dark.$color-4;
+    background: dark.$color-1;
+    border-color: dark.$color-4;
+  }
+
+  &.theme-light {
+    color: light.$color-3;
+    background: light.$color-1;
+    border-color: light.$color-3;
+  }
+
+  border-bottom: 2px solid;
 }
 
 main {
-  @apply max-w-7xl mx-auto;
+  @apply min-h-screen;
+
+  &.theme-dark {
+    color: dark.$color-4;
+    background: dark.$color-1;
+  }
+
+  &.theme-light {
+    color: light.$color-3;
+    background: light.$color-1;
+  }
 }
 
-input,
-select {
-  @apply px-2.5 py-1;
-  border: 2px solid var(--white);
-  appearance: none;
-  outline: none;
+footer {
+  &.theme-dark {
+    color: dark.$color-4;
+    background: dark.$color-1;
+    border-color: dark.$color-4;
+  }
+
+  &.theme-light {
+    color: light.$color-3;
+    background: light.$color-1;
+    border-color: light.$color-3;
+  }
+
+  border-top: 2px solid;
 }
 
-input[type="submit"] {
-  @apply cursor-pointer;
+section {
+  @apply max-w-7xl mx-auto w-full;
+}
+
+h1 {
+  @apply text-7xl font-bold;
+}
+
+.theme-dark,
+.theme-light {
+  transition: color 300ms ease-in-out, background-color 300ms ease-in-out, border-color 300ms ease-in-out;
 }
 
 .all-width-100 > * {
   width: 100%;
 }
 
-#toast-notification {
-  @apply fixed top-5 right-5 z-50 w-2xs;
-  animation: slide_in 500ms ease-in-out forwards;
+.animate-blink {
+  animation: blink 1000ms liner infinite;
+}
 
-  > div {
-    @apply p-5 flex flex-col gap-5 items-start;
-
-    h5 {
-    }
-
-    p {
-    }
+@keyframes blink {
+  0% {
+    opacity: 0;
   }
-
-  &.success {
-    > div {
-      @apply bg-green-600;
-    }
-  }
-
-  &.error {
-    > div {
-      @apply bg-red-600;
-    }
-  }
-
-  &.none {
-    display: none;
-  }
-
-  &.fade-out {
-    animation: fade_out 500ms ease-in-out forwards;
+  50% {
+    opacity: 1;
   }
 }
 
-@keyframes slide_in {
+@keyframes slide_down {
   0% {
     opacity: 0;
     transform: translateY(-50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes slide_up {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
   }
 
   100% {

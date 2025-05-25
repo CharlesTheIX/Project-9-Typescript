@@ -7,8 +7,8 @@ import MultiTextInput from "../Inputs/MultiTextInput";
 import RectangleInput from "../Inputs/RectangleInput";
 import LoadingContainer from "../Misc/LoadingContainer";
 import { useToastContext } from "@/contexts/toastContext";
-import createCountry from "@/lib/countries/createCountry";
-import validateCountryCreation from "@/lib/forms/validateCountryCreation";
+import createCountry from "@/functions/countries/createCountry";
+import validateCountryCreation from "@/functions/forms/validateCountryCreation";
 
 const CountryCreationForm: React.FC = () => {
   const toast = useToastContext();

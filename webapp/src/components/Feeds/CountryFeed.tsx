@@ -4,8 +4,8 @@ import * as gbl from "@/globals";
 import { useState, useEffect } from "react";
 import LoadingContainer from "../Misc/LoadingContainer";
 import FunctionalButton from "../Buttons/FunctionalButton";
-import getAllCountries from "@/lib/countries/getAllCountries";
-import getCountriesByContinent from "@/lib/countries/getCountriesByContinent";
+import getAllCountries from "@/functions/countries/getAllCountries";
+import getCountriesByContinent from "@/functions/countries/getCountriesByContinent";
 
 const CountryFeed: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);

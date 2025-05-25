@@ -1,0 +1,43 @@
+@use "../palettes/dark-1" as dark;
+@use "../palettes/light-1" as light;
+
+.button {
+  @apply px-5 py-2 w-auto font-bold cursor-pointer;
+  border: 2px solid;
+  border-top-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  transition: color 300ms ease-in-out, background-color 300ms ease-in-out, border-radius 300ms ease-in-out, border-color 300ms ease-in-out;
+
+  &:hover {
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+  }
+}
+
+.theme-dark {
+  .button {
+    color: dark.$color-1;
+    border-color: dark.$color-4;
+    background-color: dark.$color-4;
+
+    &:hover {
+      color: dark.$color-4;
+      background-color: dark.$color-1;
+    }
+  }
+}
+
+.theme-light {
+  .button {
+    color: light.$color-1;
+    border-color: light.$color-3;
+    background-color: light.$color-3;
+
+    &:hover {
+      color: light.$color-3;
+      background-color: light.$color-1;
+    }
+  }
+}

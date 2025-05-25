@@ -1,0 +1,93 @@
+@use "../palettes/dark-1" as dark;
+@use "../palettes/light-1" as light;
+
+.input {
+  @apply flex flex-col gap-2 text-left;
+
+  input,
+  select {
+    @apply px-5 py-2;
+    outline: none;
+    appearance: none;
+    border: 2px solid;
+    border-top-right-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    transition: border-radius 300ms ease-in-out, background-color 300ms ease-in-out, color 300ms ease-in-out, border-color 300ms ease-in-out;
+
+    &:focus,
+    &:active,
+    &:focus-within {
+      border-top-right-radius: 0;
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0.5rem;
+      border-bottom-right-radius: 0.5rem;
+    }
+
+    & + div {
+      svg {
+        transition: fill 300ms ease-in-out;
+
+        path {
+          transition: stroke 300ms ease-in-out;
+        }
+      }
+    }
+  }
+
+  input[type="submit"] {
+    @apply cursor-pointer;
+  }
+}
+.theme-dark {
+  .input {
+    input,
+    select {
+      border-color: dark.$color-4;
+      background-color: dark.$color-1;
+
+      &:focus,
+      &:active,
+      &:focus-within {
+        color: dark.$color-1;
+        background-color: dark.$color-4;
+
+        & + div {
+          fill: dark.$color-1;
+          stroke: dark.$color-1;
+        }
+      }
+
+      & + div {
+        fill: dark.$color-4;
+        stroke: dark.$color-4;
+      }
+    }
+  }
+}
+
+.theme-light {
+  .input {
+    input,
+    select {
+      border-color: light.$color-3;
+      background-color: light.$color-1;
+
+      &:focus,
+      &:active,
+      &:focus-within {
+        color: light.$color-1;
+        background-color: light.$color-3;
+
+        & + div {
+          fill: light.$color-1;
+          stroke: light.$color-1;
+        }
+      }
+
+      & + div {
+        fill: light.$color-3;
+        stroke: light.$color-3;
+      }
+    }
+  }
+}

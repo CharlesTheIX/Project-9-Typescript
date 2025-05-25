@@ -15,7 +15,7 @@ const EmailInput: React.FC<Props> = (props: Props) => {
   const [value, setValue] = useState<string>(defaultValue);
 
   return (
-    <div className={`${className} flex flex-col gap-2 text-left`}>
+    <div className={`input ${className}`}>
       {label && <label htmlFor={name}>{label}</label>}
 
       <input

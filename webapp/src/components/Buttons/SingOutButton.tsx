@@ -8,7 +8,8 @@ const SignOutButton: React.FC = () => {
 
   return (
     <button
-      className={`cursor-pointer p-4`}
+      id="sign-out-button"
+      className={`button`}
       onClick={async () => {
         await signOut().then(() => {
           setToggle("sign-out");

@@ -14,7 +14,7 @@ const RectangleInput: React.FC<Props> = (props: Props) => {
   const [value, setValue] = useState<Rectangle>(defaultValue);
 
   return (
-    <div className={`${className} flex flex-col gap-2 text-left`}>
+    <div className={`input ${className}`}>
       <input type="hidden" value={JSON.stringify(value)} name={name} />
 
       {label && <label htmlFor={`${name}-input-x`}>{label}</label>}

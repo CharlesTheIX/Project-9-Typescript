@@ -20,7 +20,7 @@ const MultiTextInput: React.FC<Props> = (props: Props) => {
   const [currentValue, setCurrentValue] = useState<string>(defaultCurrentValue);
 
   return (
-    <div className={`${className} flex flex-col gap-2 text-left`}>
+    <div className={`input ${className}`}>
       <input type="hidden" value={JSON.stringify(values)} name={name} required={required} />
 
       {label && <label htmlFor={`${name}-current`}>{label}</label>}

@@ -1,0 +1,35 @@
+@use "../palettes/dark-1" as dark;
+@use "../palettes/light-1" as light;
+
+#cookie-banner {
+  @apply hidden fixed top-0 left-0 h-0 h-screen w-screen flex-col justify-end;
+  z-index: 100;
+  max-height: 0;
+  transition: background-color 300ms ease-in-out;
+
+  &.show {
+    @apply max-h-screen flex;
+    background-color: rgba(0, 0, 0, 0.8);
+
+    > div {
+      border-top: 2px solid;
+      animation: slide_up 500ms ease-in-out forwards;
+    }
+  }
+
+  &.theme-dark {
+    > div {
+      color: dark.$color_4;
+      border-color: dark.$color_4;
+      background-color: dark.$color_1;
+    }
+  }
+
+  &.theme-light {
+    > div {
+      color: light.$color_3;
+      border-color: light.$color_3;
+      background-color: light.$color_1;
+    }
+  }
+}

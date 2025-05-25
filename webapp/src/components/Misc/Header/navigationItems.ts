@@ -3,7 +3,7 @@ export type NavigationItem = {
   label: string;
 };
 
-export const signedOutNavigationItems: NavigationItem[] = [
+export const signedOutItems: NavigationItem[] = [
   {
     label: "Sign In",
     href: "/sign-in",
@@ -14,11 +14,11 @@ export const signedOutNavigationItems: NavigationItem[] = [
   },
 ];
 
-export const signedInNavigationItems: NavigationItem[] = [
+export const signedInItems: NavigationItem[] = [
   {
     label: "Countries",
     href: "/countries",
   },
 ];
 
-export const adminNavigationItems: NavigationItem[] = [...signedInNavigationItems];
+export const adminItems: NavigationItem[] = [...signedInItems, { label: "admin", href: "/admin" }];

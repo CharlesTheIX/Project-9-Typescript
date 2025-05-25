@@ -12,7 +12,7 @@ const FunctionalButton: React.FC<Props> = (props: Props) => {
   return (
     <button
       type="button"
-      className={`${className} cursor-pointer p-4`}
+      className={`button ${className}`}
       onClick={() => {
         callback();
       }}

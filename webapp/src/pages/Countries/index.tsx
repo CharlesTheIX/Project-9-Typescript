@@ -1,20 +1,25 @@
+"use client";
 import Link from "next/link";
+import { useUserContext } from "@/contexts/userContext";
 import CountryFeed from "@/components/Feeds/CountryFeed";
+import DefaultLayout from "@/components/Layouts/DefaultLayout";
 
 const CountriesPage: React.FC = () => {
+  const { userRole } = useUserContext();
+
   return (
-    <main className="flex flex-col gap-5 p-5">
+    <DefaultLayout>
       <section>
         <div>
           <h1>Countries</h1>
-          <Link href="/countries/create">Create</Link>
+          {userRole === "admin" && <Link href="/countries/create">Create</Link>}
         </div>
       </section>
 
       <section>
         <CountryFeed />
       </section>
-    </main>
+    </DefaultLayout>
   );
 };
 

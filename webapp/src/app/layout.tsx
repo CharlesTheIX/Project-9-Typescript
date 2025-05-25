@@ -1,10 +1,13 @@
 import "@/styles/globals.scss";
 import type { Metadata } from "next";
 import Header from "@/components/Misc/Header";
+import Footer from "@/components/Misc/Footer";
 import { ClerkProvider } from "@clerk/nextjs";
+import CookieBanner from "@/components/Banners/CookieBanner";
 import { UserContextProvider } from "@/contexts/userContext";
 import { ToastContextProvider } from "@/contexts/toastContext";
 import { ThemeContextProvider } from "@/contexts/themeContext";
+import { CookieContextProvider } from "@/contexts/cookieContext";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,17 +23,23 @@ const RootLayout: React.FC<Readonly<Props>> = (props: Props) => {
 
   return (
     <html lang="en-gb">
-      <body className={`antialiased`}>
+      <body className={`antialiased min-h-screen flex flex-col gap-0 justify-between items-stretch`}>
         <ClerkProvider>
-          <ThemeContextProvider>
-            <ToastContextProvider>
-              <UserContextProvider>
-                <Header />
+          <CookieContextProvider>
+            <ThemeContextProvider>
+              <ToastContextProvider>
+                <UserContextProvider>
+                  <Header />
 
-                {children}
-              </UserContextProvider>
-            </ToastContextProvider>
-          </ThemeContextProvider>
+                  {children}
+
+                  <Footer />
+
+                  <CookieBanner />
+                </UserContextProvider>
+              </ToastContextProvider>
+            </ThemeContextProvider>
+          </CookieContextProvider>
         </ClerkProvider>
       </body>
     </html>
