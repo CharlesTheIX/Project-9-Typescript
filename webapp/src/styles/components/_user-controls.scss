@@ -1,0 +1,97 @@
+@use "../palettes/dark" as dark;
+@use "../palettes/light" as light;
+
+#user-controls {
+  @apply fixed bottom-5 left-5;
+  z-index: 50;
+  border: 3px solid;
+  border-top-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
+
+  &:hover {
+    ul {
+      max-height: 1000px;
+    }
+
+    > div {
+      rotate: 90deg;
+    }
+  }
+
+  &.dark {
+    border-color: dark.$color-secondary;
+    background-color: dark.$color-secondary;
+
+    > ul {
+      color: dark.$color-secondary;
+
+      > li {
+        fill: dark.$color-primary;
+        stroke: dark.$color-primary;
+
+        &:hover {
+          fill: dark.$color-secondary;
+          stroke: dark.$color-secondary;
+          background-color: dark.$color-primary;
+        }
+      }
+    }
+
+    > div {
+      fill: dark.$color-primary;
+      stroke: dark.$color-primary;
+    }
+  }
+
+  &.light {
+    border-color: litgh.$color-secondary;
+    background-color: litgh.$color-secondary;
+
+    > ul {
+      color: litgh.$color-secondary;
+
+      > li {
+        fill: light.$color-primary;
+        stroke: light.$color-primary;
+
+        &:hover {
+          fill: litgh.$color-secondary;
+          stroke: litgh.$color-secondary;
+          background-color: light.$color-primary;
+        }
+      }
+    }
+
+    > div {
+      fill: light.$color-primary;
+      stroke: light.$color-primary;
+    }
+  }
+
+  > div {
+    @apply cursor-pointer p-2;
+    transition: rotate 300ms ease-out;
+  }
+
+  ul {
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 300ms ease-in-out;
+
+    > li {
+      border-top-right-radius: 0.5rem;
+      border-bottom-left-radius: 0.5rem;
+      transition: background-color 300ms ease-in-out;
+
+      > * {
+        @apply p-2;
+      }
+
+      > a {
+        @apply pb-0;
+        display: inline-block;
+      }
+    }
+  }
+}

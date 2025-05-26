@@ -1,5 +1,5 @@
-@use "../palettes/dark-1" as dark;
-@use "../palettes/light-1" as light;
+@use "../palettes/dark" as dark;
+@use "../palettes/light" as light;
 
 #header-logo {
   svg {
@@ -11,12 +11,12 @@
   }
 
   &.dark {
-    fill: dark.$color_4;
-    stroke: dark.$color_4;
+    fill: dark.$color-secondary;
+    stroke: dark.$color-secondary;
   }
 
   &.light {
-    fill: light.$color_3;
-    stroke: light.$color_3;
+    fill: litgh.$color-secondary;
+    stroke: litgh.$color-secondary;
   }
 }

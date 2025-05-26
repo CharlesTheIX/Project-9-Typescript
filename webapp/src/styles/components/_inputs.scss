@@ -1,5 +1,5 @@
-@use "../palettes/dark-1" as dark;
-@use "../palettes/light-1" as light;
+@use "../palettes/dark" as dark;
+@use "../palettes/light" as light;
 
 .input {
   @apply flex flex-col gap-2 text-left;
@@ -9,7 +9,7 @@
     @apply px-5 py-2;
     outline: none;
     appearance: none;
-    border: 2px solid;
+    border: 3px solid;
     border-top-right-radius: 0.5rem;
     border-bottom-left-radius: 0.5rem;
     transition: border-radius 300ms ease-in-out, background-color 300ms ease-in-out, color 300ms ease-in-out, border-color 300ms ease-in-out;
@@ -21,6 +21,12 @@
       border-bottom-left-radius: 0;
       border-top-left-radius: 0.5rem;
       border-bottom-right-radius: 0.5rem;
+    }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
     }
 
     & + div {
@@ -37,56 +43,60 @@
   input[type="submit"] {
     @apply cursor-pointer;
   }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
 }
-.theme-dark {
+.dark {
   .input {
     input,
     select {
-      border-color: dark.$color-4;
-      background-color: dark.$color-1;
+      border-color: dark.$color-secondary;
+      background-color: dark.$color-primary;
 
       &:focus,
       &:active,
       &:focus-within {
-        color: dark.$color-1;
-        background-color: dark.$color-4;
+        color: dark.$color-primary;
+        background-color: dark.$color-secondary;
 
         & + div {
-          fill: dark.$color-1;
-          stroke: dark.$color-1;
+          fill: dark.$color-primary;
+          stroke: dark.$color-primary;
         }
       }
 
       & + div {
-        fill: dark.$color-4;
-        stroke: dark.$color-4;
+        fill: dark.$color-secondary;
+        stroke: dark.$color-secondary;
       }
     }
   }
 }
 
-.theme-light {
+.light {
   .input {
     input,
     select {
-      border-color: light.$color-3;
-      background-color: light.$color-1;
+      border-color: litgh.$color-secondary;
+      background-color: light.$color-primary;
 
       &:focus,
       &:active,
       &:focus-within {
-        color: light.$color-1;
-        background-color: light.$color-3;
+        color: light.$color-primary;
+        background-color: litgh.$color-secondary;
 
         & + div {
-          fill: light.$color-1;
-          stroke: light.$color-1;
+          fill: light.$color-primary;
+          stroke: light.$color-primary;
         }
       }
 
       & + div {
-        fill: light.$color-3;
-        stroke: light.$color-3;
+        fill: litgh.$color-secondary;
+        stroke: litgh.$color-secondary;
       }
     }
   }

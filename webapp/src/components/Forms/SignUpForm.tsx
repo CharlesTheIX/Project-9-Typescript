@@ -3,13 +3,14 @@ import { useRef, useState } from "react";
 import { useSignUp } from "@clerk/nextjs";
 import TextInput from "../Inputs/TextInput";
 import EmailInput from "../Inputs/EmailInput";
+import PasswordInput from "../Inputs/PasswordInput";
 import createUser from "@/functions/users/createUser";
 import isNumber from "@/functions/validation/isNumber";
-import PasswordInput from "../Inputs/PasswordInput";
 import LoadingContainer from "../Misc/LoadingContainer";
-import validateSignUp from "@/functions/forms/validateSignUp";
 import { useToastContext } from "@/contexts/toastContext";
 import { useRouter, useSearchParams } from "next/navigation";
+import validateSignUp from "@/functions/forms/validateSignUp";
+import NumberInput from "../Inputs/NumberInput";
 
 const SignUpForm: React.FC = () => {
   const router = useRouter();
@@ -108,43 +109,43 @@ const SignUpForm: React.FC = () => {
   return (
     <>
       {verifying ? (
-        <div className={`flex flex-col gap-5`}>
-          <form ref={verificationFormRef} onSubmit={handleVerification} className={`max-w-5xl flex flex-col items-center justify-center mx-auto`}>
-            {isLoading ? (
-              <LoadingContainer />
-            ) : (
-              <div className="flex flex-col gap-5 all-width-100 items-center w-full">
-                <TextInput name="code" label="Code" required={true} />
+        <form ref={verificationFormRef} onSubmit={handleVerification} className={`max-w-xl flex flex-col items-left justify-center`}>
+          {isLoading ? (
+            <LoadingContainer />
+          ) : (
+            <div className="flex flex-col gap-5 all-width-100 items-center w-full">
+              <NumberInput name="code" label="Code" required={true} min={0} max={999999} step={1} />
+              <div>
                 <input className="button" type="submit" content="Submit" />
               </div>
-            )}
-          </form>
-        </div>
+            </div>
+          )}
+        </form>
       ) : (
-        <div className={`flex flex-col gap-5`}>
-          <form ref={formRef} onSubmit={handleSubmit} className={`max-w-5xl flex flex-col items-center justify-center mx-auto`}>
-            <div id="clerk-captcha" />
+        <form ref={formRef} onSubmit={handleSubmit} className={`max-w-xl flex flex-col items-center justify-center`}>
+          <div id="clerk-captcha" />
 
-            {isLoading ? (
-              <LoadingContainer />
-            ) : (
-              <>
-                <div className="flex flex-col gap-5 all-width-100 items-center w-full">
-                  <TextInput name="username" label="Username" required={true} />
+          {isLoading ? (
+            <LoadingContainer />
+          ) : (
+            <>
+              <div className="flex flex-col gap-5 all-width-100 items-center w-full">
+                <TextInput name="username" label="Username" required={true} />
 
-                  <div className="flex flex-row justify-between gap-5 items-center">
-                    <TextInput name="first-name" label="First Name" required={true} />
-                    <TextInput name="surname" label="Surname" required={true} />
-                  </div>
-
-                  <EmailInput name="email" label="Email" required={true} />
-                  <PasswordInput name="password" label="Password" required={true} includeConfirmation={true} />
-                  <input className="button" type="submit" content="Submit" />
+                <div className="flex flex-row justify-between gap-5 items-center all-width-100">
+                  <TextInput name="first-name" label="First Name" required={true} />
+                  <TextInput name="surname" label="Surname" required={true} />
                 </div>
-              </>
-            )}
-          </form>
-        </div>
+
+                <EmailInput name="email" label="Email" required={true} />
+                <PasswordInput name="password" label="Password" required={true} includeConfirmation={true} />
+                <div>
+                  <input className="button w-auto" type="submit" content="Submit" />
+                </div>
+              </div>
+            </>
+          )}
+        </form>
       )}
     </>
   );

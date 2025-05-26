@@ -2,5 +2,8 @@
 @use "./components/buttons";
 @use "./components/header-logo";
 @use "./components/theme-toggle";
+@use "./components/user-controls";
 @use "./components/cookie-banner";
+@use "./components/dashboard-aside";
+@use "./components/sign-out-button";
 @use "./components/toast-notification";

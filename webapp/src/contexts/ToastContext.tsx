@@ -1,5 +1,6 @@
 "use client";
 import { createContext, useContext, useState, useEffect, useRef } from "react";
+import { useThemeContext } from "./themeContext";
 
 type ToastType = "success" | "error" | "none";
 type ToastContextData = {
@@ -31,7 +32,9 @@ const ToastContext = createContext<ToastContextData>(defaultValue);
 
 export const ToastContextProvider = (props: { children: React.ReactNode }) => {
   const { children } = props;
+  const { theme } = useThemeContext();
   const toastRef = useRef<HTMLDivElement>(null);
+  const [hide, setHide] = useState<boolean>(false);
   const [type, setType] = useState<ToastType>(defaultValue.type);
   const [title, setTitle] = useState<string>(defaultValue.title);
   const [hidden, setHidden] = useState<boolean>(defaultValue.hidden);
@@ -54,10 +57,12 @@ export const ToastContextProvider = (props: { children: React.ReactNode }) => {
   useEffect(() => {
     if (hidden) return;
 
+    setHide(false);
+
     setTimeout(() => {
       if (!toastRef.current) return;
-      toastRef.current.classList.add("fade-out");
-    }, timeout_ms - 500);
+      setHide(true);
+    }, timeout_ms - 100);
 
     setTimeout(() => {
       setHidden(true);
@@ -70,11 +75,9 @@ export const ToastContextProvider = (props: { children: React.ReactNode }) => {
 
       <>
         {!hidden && (
-          <div ref={toastRef} id="toast-notification" className={`${type}`}>
-            <div>
-              {title && <h5>{title}</h5>}
-              {content && <p dangerouslySetInnerHTML={{ __html: content }} />}
-            </div>
+          <div ref={toastRef} id="toast-notification" className={`${hide ? "hide" : "show"} ${type} ${theme}`}>
+            {title && <p className="font-bold">{title}</p>}
+            {content && <p className="text-xs" dangerouslySetInnerHTML={{ __html: content }} />}
           </div>
         )}
       </>

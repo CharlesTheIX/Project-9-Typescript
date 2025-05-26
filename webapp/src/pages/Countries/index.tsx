@@ -10,9 +10,21 @@ const CountriesPage: React.FC = () => {
   return (
     <DefaultLayout>
       <section>
-        <div>
+        <div className="py-20 flex flex-col gap-5">
           <h1>Countries</h1>
-          {userRole === "admin" && <Link href="/countries/create">Create</Link>}
+
+          <p className="max-w-3xl">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt auctor sem nec semper. Ut ornare leo id risus blandit, fringilla fringilla lorem sollicitudin.
+            Donec gravida semper lectus, eu aliquet erat ornare sit amet.
+          </p>
+
+          {userRole === "admin" && (
+            <div>
+              <Link className="button" href="/countries/create">
+                Create
+              </Link>
+            </div>
+          )}
         </div>
       </section>
 

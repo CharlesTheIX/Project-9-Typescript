@@ -1,4 +1,4 @@
-import SignInForm from "@/components/Forms/SingInForm";
+import SignInForm from "@/components/Forms/SignInForm";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 
 const SignInPage: React.FC = () => {

@@ -1,6 +1,7 @@
 import * as gbl from "@/globals";
 
 export default async (clerkId: string): Promise<ApiResponse> => {
+  console.log(clerkId);
   try {
     const response: ApiResponse = await fetch(`/api/users/by-clerk-id`, {
       method: "POST",

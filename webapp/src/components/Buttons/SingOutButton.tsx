@@ -1,6 +1,7 @@
 "use client";
 import { useClerk } from "@clerk/nextjs";
 import { useUserContext } from "@/contexts/userContext";
+import SignOut_SVG from "../SVGs/SignOut_SVG";
 
 const SignOutButton: React.FC = () => {
   const { signOut } = useClerk();
@@ -9,14 +10,13 @@ const SignOutButton: React.FC = () => {
   return (
     <button
       id="sign-out-button"
-      className={`button`}
       onClick={async () => {
         await signOut().then(() => {
           setToggle("sign-out");
         });
       }}
     >
-      Sign Out
+      <SignOut_SVG />
     </button>
   );
 };

@@ -5,7 +5,7 @@ const Footer: React.FC = () => {
   const { theme } = useThemeContext();
 
   return (
-    <footer className={`theme-${theme} px-10 py-5`}>
+    <footer className={`${theme} px-10 py-5`}>
       <section>
         <div>
           <div className="flex flex-col text-[10px] text-center">

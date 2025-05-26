@@ -54,23 +54,19 @@ const SignInForm: React.FC = () => {
   };
 
   return (
-    <>
+    <form ref={formRef} onSubmit={handleSubmit} className={`max-w-xl w-full flex flex-col items-center justify-center`}>
       {isLoading ? (
         <LoadingContainer />
       ) : (
-        <div className={`flex flex-col gap-5`}>
-          <form ref={formRef} onSubmit={handleSubmit} className={`max-w-xl w-full flex flex-col items-center justify-center`}>
-            <div className="flex flex-col gap-5 all-width-100 items-center w-full">
-              <EmailInput name="email" label="Email" required={true} />
-              <PasswordInput name="password" label="Password" required={true} />
-              <div>
-                <input className="button w-auto" type="submit" content="Submit" />
-              </div>
-            </div>
-          </form>
+        <div className="flex flex-col gap-5 all-width-100 items-center w-full">
+          <EmailInput name="email" label="Email" required={true} />
+          <PasswordInput name="password" label="Password" required={true} />
+          <div>
+            <input className="button w-auto" type="submit" content="Submit" />
+          </div>
         </div>
       )}
-    </>
+    </form>
   );
 };
 

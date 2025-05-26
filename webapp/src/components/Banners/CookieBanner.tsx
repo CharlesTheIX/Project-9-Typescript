@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { useThemeContext } from "@/contexts/themeContext";
@@ -21,15 +22,18 @@ const CookieBanner: React.FC = () => {
   if (cookie || noShowPathnames.includes(pathname || "")) return;
 
   return (
-    <div id="cookie-banner" className={`theme-${theme} ${show && "show"}`}>
+    <div id="cookie-banner" className={`${theme} ${show && "show"}`}>
       <div className="w-full py-5 px-50">
-        <div className="flex flex-row gap-50 items-center justify-between max-w-7xl w-full">
+        <div className="flex flex-row gap-20 items-center justify-between max-w-7xl w-full mx-auto">
           <div className="flex flex-col gap-1 items-left">
             <h5 className="font-bold">Cookie Banner</h5>
 
             <p className="text-xs">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent blandit quis sapien ac porta. Sed quis eros turpis. Proin suscipit augue sed nisi imperdiet,
-              pharetra dignissim leo sagittis. Nulla eget egestas neque. In hac habitasse platea dictumst. Nullam et lacus leo. facilisis.
+              pharetra dignissim leo sagittis. Nulla eget egestas neque. In hac habitasse platea dictumst. Nullam et lacus leo. facilisis.{" "}
+              <Link href={"/cookies"} className="link-text">
+                Cookies policy.
+              </Link>
             </p>
           </div>
 

@@ -8,6 +8,7 @@ import { UserContextProvider } from "@/contexts/userContext";
 import { ToastContextProvider } from "@/contexts/toastContext";
 import { ThemeContextProvider } from "@/contexts/themeContext";
 import { CookieContextProvider } from "@/contexts/cookieContext";
+import UserControls from "@/components/Misc/UserControls";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -35,6 +36,7 @@ const RootLayout: React.FC<Readonly<Props>> = (props: Props) => {
 
                   <Footer />
 
+                  <UserControls />
                   <CookieBanner />
                 </UserContextProvider>
               </ToastContextProvider>

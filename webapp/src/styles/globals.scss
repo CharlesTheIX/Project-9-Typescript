@@ -1,7 +1,7 @@
 @use "tailwindcss";
 @use "./components";
-@use "./palettes/dark-1" as dark;
-@use "./palettes/light-1" as light;
+@use "./palettes/dark" as dark;
+@use "./palettes/light" as light;
 
 * {
   box-sizing: border-box;
@@ -10,52 +10,71 @@
 body {
   @apply relative text-base;
   font-family: monospace;
+  background-color: dark.$color-primary;
 }
 
 header {
-  &.theme-dark {
-    color: dark.$color-4;
-    background: dark.$color-1;
-    border-color: dark.$color-4;
+  width: 100%;
+  z-index: 50;
+
+  > div {
+    border: 3px solid;
+    max-width: 1500px;
+    width: calc(100% - 50px);
+    border-top-right-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
   }
 
-  &.theme-light {
-    color: light.$color-3;
-    background: light.$color-1;
-    border-color: light.$color-3;
+  &.dark {
+    background: dark.$color-primary;
+
+    > div {
+      color: dark.$color-secondary;
+      background: dark.$color-primary;
+      border-color: dark.$color-secondary;
+    }
   }
 
-  border-bottom: 2px solid;
+  &.light {
+    background: light.$color-primary;
+
+    > div {
+      color: litgh.$color-secondary;
+      background: light.$color-primary;
+      border-color: litgh.$color-secondary;
+    }
+  }
 }
 
 main {
   @apply min-h-screen;
 
-  &.theme-dark {
-    color: dark.$color-4;
-    background: dark.$color-1;
+  &.dark {
+    color: dark.$color-secondary;
+    background: dark.$color-primary;
   }
 
-  &.theme-light {
-    color: light.$color-3;
-    background: light.$color-1;
+  &.light {
+    color: litgh.$color-secondary;
+    background: light.$color-primary;
   }
 }
 
 footer {
-  &.theme-dark {
-    color: dark.$color-4;
-    background: dark.$color-1;
-    border-color: dark.$color-4;
+  &.dark {
+    color: dark.$color-secondary;
+    background: dark.$color-primary;
+    border-color: dark.$color-secondary;
   }
 
-  &.theme-light {
-    color: light.$color-3;
-    background: light.$color-1;
-    border-color: light.$color-3;
+  &.light {
+    color: litgh.$color-secondary;
+    background: light.$color-primary;
+    border-color: litgh.$color-secondary;
   }
 
-  border-top: 2px solid;
+  border-top: 3px solid;
 }
 
 section {
@@ -66,17 +85,41 @@ h1 {
   @apply text-7xl font-bold;
 }
 
-.theme-dark,
-.theme-light {
-  transition: color 300ms ease-in-out, background-color 300ms ease-in-out, border-color 300ms ease-in-out;
+.link-text {
+  text-decoration: underline;
+  text-underline-offset: 0.1rem;
+  transition: text-underline-offset 100ms ease-in-out;
+
+  &:hover {
+    text-underline-offset: 0.2rem;
+  }
+}
+
+.animate-blink {
+  animation: blink 1000ms liner infinite;
 }
 
 .all-width-100 > * {
   width: 100%;
 }
 
-.animate-blink {
-  animation: blink 1000ms liner infinite;
+.dark,
+.light {
+  transition: color 300ms ease-in-out, background-color 300ms ease-in-out, border-color 300ms ease-in-out;
+}
+
+.dark {
+  .loading-spinner {
+    fill: dark.$color-secondary;
+    stroke: dark.$color-secondary;
+  }
+}
+
+.light {
+  .loading-spinner {
+    fill: litgh.$color-secondary;
+    stroke: litgh.$color-secondary;
+  }
 }
 
 @keyframes blink {
@@ -88,7 +131,7 @@ h1 {
   }
 }
 
-@keyframes slide_down {
+@keyframes slide-down {
   0% {
     opacity: 0;
     transform: translateY(-50px);
@@ -100,7 +143,7 @@ h1 {
   }
 }
 
-@keyframes slide_up {
+@keyframes slide-up {
   0% {
     opacity: 0;
     transform: translateY(50px);
@@ -112,7 +155,37 @@ h1 {
   }
 }
 
-@keyframes fade_out {
+@keyframes slide-left {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes slide-left-reverse {
+  0% {
+    transform: translateX(0px);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes slide-right {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes fade-out {
   0% {
     opacity: 1;
   }

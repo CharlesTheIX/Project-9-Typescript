@@ -1,9 +1,9 @@
-@use "../palettes/dark-1" as dark;
-@use "../palettes/light-1" as light;
+@use "../palettes/dark" as dark;
+@use "../palettes/light" as light;
 
 .button {
   @apply px-5 py-2 w-auto font-bold cursor-pointer;
-  border: 2px solid;
+  border: 3px solid;
   border-top-right-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
   transition: color 300ms ease-in-out, background-color 300ms ease-in-out, border-radius 300ms ease-in-out, border-color 300ms ease-in-out;
@@ -16,28 +16,28 @@
   }
 }
 
-.theme-dark {
+.dark {
   .button {
-    color: dark.$color-1;
-    border-color: dark.$color-4;
-    background-color: dark.$color-4;
+    color: dark.$color-primary;
+    border-color: dark.$color-secondary;
+    background-color: dark.$color-secondary;
 
     &:hover {
-      color: dark.$color-4;
-      background-color: dark.$color-1;
+      color: dark.$color-secondary;
+      background-color: dark.$color-primary;
     }
   }
 }
 
-.theme-light {
+.light {
   .button {
-    color: light.$color-1;
-    border-color: light.$color-3;
-    background-color: light.$color-3;
+    color: light.$color-primary;
+    border-color: litgh.$color-secondary;
+    background-color: litgh.$color-secondary;
 
     &:hover {
-      color: light.$color-3;
-      background-color: light.$color-1;
+      color: litgh.$color-secondary;
+      background-color: light.$color-primary;
     }
   }
 }

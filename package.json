@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "license": "MIT",
+  "version": "1.0.0",
+  "name": "countries",
+  "author": "CharlesTheIX <davidcharles23612@gmail.com>",
+  "repository": "git@github.com:CharlesTheIX/countries-mono.git",
+  "scripts": {
+    "create-color-theme": "./.scripts/create_color_theme.sh"
+  }
+}

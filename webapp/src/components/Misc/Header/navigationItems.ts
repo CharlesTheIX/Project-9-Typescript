@@ -1,7 +1,4 @@
-export type NavigationItem = {
-  href: string;
-  label: string;
-};
+import { NavigationItem } from "@/locals";
 
 export const signedOutItems: NavigationItem[] = [
   {
@@ -21,4 +18,4 @@ export const signedInItems: NavigationItem[] = [
   },
 ];
 
-export const adminItems: NavigationItem[] = [...signedInItems, { label: "admin", href: "/admin" }];
+export const adminItems: NavigationItem[] = [...signedInItems];

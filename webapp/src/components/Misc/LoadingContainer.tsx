@@ -1,7 +1,12 @@
+"use client";
+import SpinnerSVG from "../SVGs/Spinner_SVG";
+
 const LoadingContainer: React.FC = () => {
   return (
-    <div className="flex items-center justify-center h-full">
-      <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-white" />
+    <div className="loading-spinner flex items-center h-full w-full">
+      <div className="animate-spin">
+        <SpinnerSVG width={100} height={100} />
+      </div>
     </div>
   );
 };
