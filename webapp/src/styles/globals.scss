@@ -1,24 +1,9 @@
+@use "./fonts";
 @use "tailwindcss";
 @use "./components";
 @use "./palettes/dark" as dark;
 @use "./palettes/light" as light;
 @use "./palettes/custom" as custom;
-
-// $themes: dark, light, custom;
-$themes: (
-  dark: (
-    color-primary: dark.$color-primary,
-    color-secondary: dark.$color-secondary,
-  ),
-  light: (
-    color-primary: light.$color-primary,
-    color-secondary: light.$color-secondary,
-  ),
-  custom: (
-    color-primary: custom.$color-primary,
-    color-secondary: custom.$color-secondary,
-  ),
-);
 
 * {
   box-sizing: border-box;
@@ -26,7 +11,7 @@ $themes: (
 
 body {
   @apply relative text-base;
-  font-family: monospace;
+  font-family: "Jet_Brains", monospace;
   background-color: dark.$color-primary;
 }
 
