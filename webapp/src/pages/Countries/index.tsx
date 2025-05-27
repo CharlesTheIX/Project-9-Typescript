@@ -10,7 +10,7 @@ const CountriesPage: React.FC = () => {
   return (
     <DefaultLayout>
       <section>
-        <div className="py-20 flex flex-col gap-5">
+        <div className="py-10 flex flex-col gap-5">
           <h1>Countries</h1>
 
           <p className="max-w-3xl">

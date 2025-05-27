@@ -7,11 +7,13 @@ import MultiTextInput from "../Inputs/MultiTextInput";
 import RectangleInput from "../Inputs/RectangleInput";
 import LoadingContainer from "../Misc/LoadingContainer";
 import { useToastContext } from "@/contexts/toastContext";
+import { useThemeContext } from "@/contexts/themeContext";
 import createCountry from "@/functions/countries/createCountry";
 import validateCountryCreation from "@/functions/forms/validateCountryCreation";
 
 const CountryCreationForm: React.FC = () => {
   const toast = useToastContext();
+  const { theme } = useThemeContext();
   const formRef = useRef<HTMLFormElement>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -33,7 +35,7 @@ const CountryCreationForm: React.FC = () => {
       const requestData: Country = { names, imageUrl, continent, displayName, mapRectangle, flagRectangle };
 
       const hasErrors = validateCountryCreation(requestData);
-      if (hasErrors.error) throw new Error(hasErrors.message);
+      if (hasErrors.error) throw new Error(`Invalid ${hasErrors.message}`);
 
       const response = await createCountry(requestData);
       if (response.error) throw new Error(response.message);
@@ -41,6 +43,7 @@ const CountryCreationForm: React.FC = () => {
       formRef.current?.reset();
 
       setIsLoading(false);
+      toast.setContent("");
       toast.setHidden(false);
       toast.setType("success");
       toast.setTitle("Country Created");
@@ -54,25 +57,30 @@ const CountryCreationForm: React.FC = () => {
   };
 
   return (
-    <>
-      {isLoading ? (
-        <LoadingContainer />
-      ) : (
-        <div className={`flex flex-col gap-5`}>
-          <form ref={formRef} onSubmit={handleSubmit} className={`max-w-5xl flex flex-col items-center justify-center mx-auto`}>
-            <div className="flex flex-col gap-5 all-width-100 items-center w-full">
-              <TextInput name="display-name" label="Display Name" required={true} />
-              <MultiTextInput name="names" label="Names" required={true} />
-              <SelectInput name="continent" label="Continent" options={gbl.continentOptions} required={true} />
-              <RectangleInput name="flag-rectangle" label="Flag Rectangle" />
-              <RectangleInput name="map-rectangle" label="Map Rectangle" />
-              <TextInput name="image-url" label="Image Url" />
-              <input type="submit" content="Submit" />
-            </div>
-          </form>
+    <div className={`form ${theme}`}>
+      <form ref={formRef} onSubmit={handleSubmit} className={`max-w-xl`}>
+        <div>
+          <div>
+            {isLoading && (
+              <div className={`form-loading-container`}>
+                <LoadingContainer />
+              </div>
+            )}
+
+            <TextInput name="display-name" label="Display Name" required={true} />
+            <MultiTextInput name="names" label="Names" required={true} />
+            <SelectInput name="continent" label="Continent" options={gbl.continentOptions} required={true} />
+            <RectangleInput name="flag-rectangle" label="Flag Rectangle" />
+            <RectangleInput name="map-rectangle" label="Map Rectangle" />
+            <TextInput name="image-url" label="Image Url" />
+          </div>
+
+          <div>
+            <input className={`button w-auto ${isLoading ? "disabled" : ""}`} type="submit" content="Submit" disabled={isLoading} />
+          </div>
         </div>
-      )}
-    </>
+      </form>
+    </div>
   );
 };
 

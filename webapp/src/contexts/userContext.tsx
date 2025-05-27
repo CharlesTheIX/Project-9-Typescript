@@ -41,8 +41,9 @@ export const UserContextProvider = (props: { children: React.ReactNode }) => {
   useEffect(() => {
     if (!user) {
       if (toggle === "sign-out") {
+        toast.setType("bye");
+        toast.setContent("");
         toast.setHidden(false);
-        toast.setType("success");
         toast.setTitle(`Goodbye.`);
       }
       setDbUser(defaultValue.user);
@@ -55,8 +56,9 @@ export const UserContextProvider = (props: { children: React.ReactNode }) => {
         const response = await getUserByClerkId(user.id);
         if (response.error) throw new Error(response.message);
         if (toggle === "sign-in") {
+          toast.setType("hi");
+          toast.setContent("");
           toast.setHidden(false);
-          toast.setType("success");
           toast.setTitle(`Welcome back ${response.data.username}`);
         }
         setDbUser(response.data);

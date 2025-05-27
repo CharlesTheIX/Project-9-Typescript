@@ -2,7 +2,7 @@
 import * as LS from "../functions/storage/localStorage";
 import { createContext, useContext, useState, useEffect, useRef } from "react";
 
-export type ThemeType = "light" | "dark";
+export type ThemeType = "light" | "dark" | "custom";
 type ThemeContextData = {
   theme: ThemeType;
   setTheme: React.Dispatch<React.SetStateAction<ThemeType>>;
@@ -19,6 +19,7 @@ export const ThemeContextProvider = (props: { children: React.ReactNode }) => {
   const hasInit = useRef<boolean>(false);
   const [theme, setTheme] = useState<ThemeType>(defaultValue.theme);
   const value: ThemeContextData = { theme, setTheme };
+
   useEffect(() => {
     if (!hasInit.current) {
       const storedTheme = LS.getLocalStorageItem(`${process.env.NEXT_PUBLIC_STORAGE_PREFIX}-theme`);
@@ -27,6 +28,7 @@ export const ThemeContextProvider = (props: { children: React.ReactNode }) => {
     hasInit.current = true;
     LS.setLocalStorageItem(`${process.env.NEXT_PUBLIC_STORAGE_PREFIX}-theme`, { value: theme });
   }, [theme]);
+
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 };
 

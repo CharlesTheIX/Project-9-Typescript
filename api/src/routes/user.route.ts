@@ -70,17 +70,21 @@ router.route("/by-clerk-id").post(async (request: Request, response: Response): 
 
 // Create user
 router.route("/create").post(async (request: Request, response: Response): Promise<any> => {
-  const { email, role, clerkId, username, firstName, surname, profileImageURL } = request.body;
+  // const { email, role, clerkId, username, firstName, surname, profileImageURL } = request.body;
+  const { email, role, clerkId, username, profileImageURL } = request.body;
 
-  if (!email || !role || !clerkId || !username || !firstName || !surname) {
+  // if (!email || !role || !clerkId || !username || !firstName || !surname) {
+  if (!email || !role || !clerkId || !username) {
     return response.status(gbl.status.BAD).json({
       ...gbl.response_BAD,
-      message: "Required Inputs: email, role, clerkId, username, firstName, surname.",
+      // message: "Required Inputs: email, role, clerkId, username, firstName, surname.",
+      message: "Required Inputs: email, role, clerkId, username.",
     });
   }
 
   try {
-    const res = await createUser({ email, role, clerkId, username, firstName, surname, profileImageURL });
+    // const res = await createUser({ email, role, clerkId, username, firstName, surname, profileImageURL });
+    const res = await createUser({ email, role, clerkId, username, profileImageURL });
     return response.json(res);
   } catch (error: any) {
     console.error(`Create user error: ${error.message}`);

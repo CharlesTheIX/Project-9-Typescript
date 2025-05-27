@@ -1,6 +1,7 @@
 "use client";
 import * as gbl from "@/globals";
 import { useState } from "react";
+import Chevron_SVG from "../SVGs/Chevron_SVG";
 
 type Props = {
   name: string;
@@ -9,7 +10,7 @@ type Props = {
   required?: boolean;
   className?: string;
   defaultValue?: Option;
-  onChange?: (event: any) => void;
+  onChange?: (value: any) => void;
 };
 
 const SelectInput: React.FC<Props> = (props: Props) => {
@@ -22,29 +23,30 @@ const SelectInput: React.FC<Props> = (props: Props) => {
 
       {label && <label htmlFor={`${name}-select`}>{label}</label>}
 
-      <select
-        value={value.value}
-        name={`${name}-select`}
-        onChange={(event: any) => {
-          const target = event.currentTarget || event.target;
-          const value = parseInt(target.value);
-          const targetOption = options[value];
-          setValue(targetOption);
-          onChange(event);
-        }}
-      >
-        <option value="" disabled>
-          Select an option
-        </option>
+      <div className={`select-input relative`}>
+        <button type="button">
+          {value.label || "Select an option"}
 
-        {options.map((option: Option, key: number) => {
-          return (
-            <option value={key} key={key}>
-              {option.label}
-            </option>
-          );
-        })}
-      </select>
+          <Chevron_SVG direction="down" width={12} height={12} />
+        </button>
+
+        <ul className="scrollbar-y">
+          {options.map((option: Option, key: number) => {
+            return (
+              <li
+                key={key}
+                onClick={() => {
+                  const targetOption = options[key];
+                  setValue(targetOption);
+                  onChange(targetOption.value);
+                }}
+              >
+                <span>{option.label}</span>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </div>
   );
 };

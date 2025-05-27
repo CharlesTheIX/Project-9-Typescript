@@ -6,12 +6,14 @@ import PasswordInput from "../Inputs/PasswordInput";
 import LoadingContainer from "../Misc/LoadingContainer";
 import { useUserContext } from "@/contexts/userContext";
 import { useToastContext } from "@/contexts/toastContext";
+import { useThemeContext } from "@/contexts/themeContext";
 import { useRouter, useSearchParams } from "next/navigation";
 import validateSignIn, { SignInRequestData } from "@/functions/forms/validateSignIn";
 
 const SignInForm: React.FC = () => {
   const router = useRouter();
   const toast = useToastContext();
+  const { theme } = useThemeContext();
   const { setToggle } = useUserContext();
   const searchParams = useSearchParams();
   const formRef = useRef<HTMLFormElement>(null);
@@ -33,10 +35,10 @@ const SignInForm: React.FC = () => {
       const requestData: SignInRequestData = { email, password };
 
       const hasErrors = validateSignIn(requestData);
-      if (hasErrors.error) throw new Error(hasErrors.message);
+      if (hasErrors.error) throw new Error(`Invalid ${hasErrors.message}`);
 
       const result = await signIn.create({ identifier: email, password });
-      if (result.status !== "complete") throw new Error();
+      if (result.status !== "complete") throw new Error(`Error Signing in.`);
 
       await setActive({ session: result.createdSessionId }).then(() => {
         setToggle("sign-in");
@@ -46,27 +48,35 @@ const SignInForm: React.FC = () => {
       router.push(redirectionURL ? decodeURIComponent(redirectionURL) : "/dashboard");
     } catch (error: any) {
       setIsLoading(false);
-      toast.setHidden(false);
+      toast.setContent("");
       toast.setType("error");
+      toast.setHidden(false);
       toast.setContent(error.message);
       toast.setTitle("Sign Up Failed");
     }
   };
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} className={`max-w-xl w-full flex flex-col items-center justify-center`}>
-      {isLoading ? (
-        <LoadingContainer />
-      ) : (
-        <div className="flex flex-col gap-5 all-width-100 items-center w-full">
-          <EmailInput name="email" label="Email" required={true} />
-          <PasswordInput name="password" label="Password" required={true} />
+    <div className={`form ${theme}`}>
+      <form ref={formRef} onSubmit={handleSubmit} className={`max-w-xl`}>
+        <div>
           <div>
-            <input className="button w-auto" type="submit" content="Submit" />
+            {isLoading && (
+              <div className={`form-loading-container`}>
+                <LoadingContainer />
+              </div>
+            )}
+
+            <EmailInput name="email" label="Email" required={true} />
+            <PasswordInput name="password" label="Password" required={true} />
+          </div>
+
+          <div>
+            <input className={`button w-auto ${isLoading ? "disabled" : ""}`} type="submit" content="Submit" disabled={isLoading} />
           </div>
         </div>
-      )}
-    </form>
+      </form>
+    </div>
   );
 };
 

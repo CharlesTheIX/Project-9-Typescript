@@ -2,7 +2,7 @@ import * as gbl from "@/globals";
 
 export default async (displayName: string): Promise<ApiResponse> => {
   try {
-    const response: ApiResponse = await fetch(`/api/countries/by-display-name`, {
+    const response: ApiResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/countries/by-display-name`, {
       method: "POST",
       headers: gbl.defaultInternalHeader,
       body: JSON.stringify({ displayName }),

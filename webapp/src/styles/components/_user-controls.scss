@@ -1,13 +1,40 @@
 @use "../palettes/dark" as dark;
 @use "../palettes/light" as light;
+@use "../palettes/custom" as custom;
 
 #user-controls {
-  @apply fixed bottom-5 left-5;
+  @apply fixed bottom-5 left-10;
   z-index: 50;
   border: 3px solid;
   border-top-right-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
   box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
+
+  > div {
+    @apply cursor-pointer p-2;
+    transition: rotate 300ms ease-out;
+  }
+
+  ul {
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 300ms ease-in-out;
+
+    > li {
+      border-top-right-radius: 0.5rem;
+      border-bottom-left-radius: 0.5rem;
+      transition: background-color 300ms ease-in-out;
+
+      > * {
+        @apply p-2;
+      }
+
+      > a {
+        @apply pb-0;
+        display: inline-block;
+      }
+    }
+  }
 
   &:hover {
     ul {
@@ -45,19 +72,19 @@
   }
 
   &.light {
-    border-color: litgh.$color-secondary;
-    background-color: litgh.$color-secondary;
+    border-color: light.$color-secondary;
+    background-color: light.$color-secondary;
 
     > ul {
-      color: litgh.$color-secondary;
+      color: light.$color-secondary;
 
       > li {
         fill: light.$color-primary;
         stroke: light.$color-primary;
 
         &:hover {
-          fill: litgh.$color-secondary;
-          stroke: litgh.$color-secondary;
+          fill: light.$color-secondary;
+          stroke: light.$color-secondary;
           background-color: light.$color-primary;
         }
       }
@@ -69,29 +96,28 @@
     }
   }
 
-  > div {
-    @apply cursor-pointer p-2;
-    transition: rotate 300ms ease-out;
-  }
+  &.custom {
+    border-color: custom.$color-secondary;
+    background-color: custom.$color-secondary;
 
-  ul {
-    max-height: 0px;
-    overflow: hidden;
-    transition: max-height 300ms ease-in-out;
+    > ul {
+      color: custom.$color-secondary;
 
-    > li {
-      border-top-right-radius: 0.5rem;
-      border-bottom-left-radius: 0.5rem;
-      transition: background-color 300ms ease-in-out;
+      > li {
+        fill: custom.$color-primary;
+        stroke: custom.$color-primary;
 
-      > * {
-        @apply p-2;
+        &:hover {
+          fill: custom.$color-secondary;
+          stroke: custom.$color-secondary;
+          background-color: custom.$color-primary;
+        }
       }
+    }
 
-      > a {
-        @apply pb-0;
-        display: inline-block;
-      }
+    > div {
+      fill: custom.$color-primary;
+      stroke: custom.$color-primary;
     }
   }
 }

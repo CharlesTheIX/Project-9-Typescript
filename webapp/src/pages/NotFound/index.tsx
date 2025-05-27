@@ -5,7 +5,7 @@ const NotFoundPage: React.FC = () => {
   return (
     <DefaultLayout>
       <section>
-        <div className="py-20 flex flex-col gap-5">
+        <div className="py-10 flex flex-col gap-5">
           <h1>404</h1>
 
           <p className="max-w-3xl">The page you are looking for does not exist.</p>

@@ -6,7 +6,7 @@ import { useThemeContext } from "@/contexts/themeContext";
 import FunctionalButton from "../Buttons/FunctionalButton";
 import { useCookieContext } from "@/contexts/cookieContext";
 
-const noShowPathnames = ["/cookies", "/404"];
+const noShowPathnames = ["/cookies"];
 
 const CookieBanner: React.FC = () => {
   const pathname = usePathname();
@@ -15,7 +15,6 @@ const CookieBanner: React.FC = () => {
   const { cookie, setCookie, updateCookie } = useCookieContext();
 
   useEffect(() => {
-    console.log(pathname);
     setShow(true);
   }, [cookie]);
 
@@ -40,7 +39,6 @@ const CookieBanner: React.FC = () => {
           <div className="flex flex-row gap-5">
             <FunctionalButton
               callback={() => {
-                console.log("testing");
                 updateCookie(true);
               }}
             >

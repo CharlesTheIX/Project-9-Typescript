@@ -9,7 +9,7 @@ export default async (props: Props): Promise<ApiResponse> => {
   const { continent, limit = 200 } = props;
 
   try {
-    const response: ApiResponse = await fetch(`/api/countries/by-continent`, {
+    const response: ApiResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/countries/by-continent`, {
       method: "POST",
       headers: gbl.defaultInternalHeader,
       body: JSON.stringify({ continent, limit }),

@@ -1,9 +1,29 @@
+@use "./components/forms";
 @use "./components/inputs";
 @use "./components/buttons";
-@use "./components/header-logo";
-@use "./components/theme-toggle";
+@use "./components/admin-layout";
 @use "./components/user-controls";
 @use "./components/cookie-banner";
-@use "./components/dashboard-aside";
-@use "./components/sign-out-button";
+@use "./components/dashboard-layout";
 @use "./components/toast-notification";
+
+@use "./palettes/dark" as dark;
+@use "./palettes/light" as light;
+@use "./palettes/custom" as custom;
+
+#header-logo {
+  &.dark {
+    fill: dark.$color-secondary;
+    stroke: dark.$color-secondary;
+  }
+
+  &.light {
+    fill: light.$color-secondary;
+    stroke: light.$color-secondary;
+  }
+
+  &.custom {
+    fill: custom.$color-secondary;
+    stroke: custom.$color-secondary;
+  }
+}

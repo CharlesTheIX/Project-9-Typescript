@@ -1,8 +1,9 @@
 @use "../palettes/dark" as dark;
 @use "../palettes/light" as light;
+@use "../palettes/custom" as custom;
 
 #toast-notification {
-  @apply fixed bottom-10 right-0 z-50 w-auto py-2 px-5 flex flex-col gap-2 items-start max-w-lg;
+  @apply fixed bottom-10 right-0 z-50 w-auto py-2 px-5 flex flex-col gap-5 items-start max-w-lg;
   overflow: hidden;
   border: 3px solid;
   border-right: none;
@@ -11,43 +12,93 @@
   box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
 
   p {
-    &:nth-child(1) {
-      -webkit-line-clamp: 1;
-    }
-
     overflow: hidden;
     display: -webkit-box;
     word-wrap: break-word;
     -webkit-line-clamp: 3;
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
+
+    &:nth-child(1) {
+      -webkit-line-clamp: 2;
+    }
   }
 
   &.dark {
-    &.success {
+    &.success,
+    &.bye,
+    &.hi {
       color: dark.$color-secondary;
       border-color: dark.$color-secondary;
       background-color: dark.$color-primary;
+
+      > div {
+        fill: dark.$color-secondary;
+        stroke: dark.$color-secondary;
+      }
     }
 
     &.error {
       color: dark.$color-primary;
       border-color: dark.$color-secondary;
       background-color: dark.$color-secondary;
+
+      > div {
+        fill: dark.$color-primary;
+        stroke: dark.$color-primary;
+      }
     }
   }
 
   &.light {
-    &.success {
-      color: litgh.$color-secondary;
-      border-color: litgh.$color-secondary;
+    &.success,
+    &.bye,
+    &.hi {
+      color: light.$color-secondary;
+      border-color: light.$color-secondary;
       background-color: light.$color-primary;
+
+      > div {
+        fill: light.$color-secondary;
+        stroke: light.$color-secondary;
+      }
     }
 
     &.error {
       color: light.$color-primary;
-      border-color: litgh.$color-secondary;
-      background-color: litgh.$color-secondary;
+      border-color: light.$color-secondary;
+      background-color: light.$color-secondary;
+
+      > div {
+        fill: light.$color-primary;
+        stroke: light.$color-primary;
+      }
+    }
+  }
+
+  &.custom {
+    &.success,
+    &.bye,
+    &.hi {
+      color: custom.$color-secondary;
+      border-color: custom.$color-secondary;
+      background-color: custom.$color-primary;
+
+      > div {
+        fill: custom.$color-secondary;
+        stroke: custom.$color-secondary;
+      }
+    }
+
+    &.error {
+      color: custom.$color-primary;
+      border-color: custom.$color-secondary;
+      background-color: custom.$color-secondary;
+
+      > div {
+        fill: custom.$color-primary;
+        stroke: custom.$color-primary;
+      }
     }
   }
 

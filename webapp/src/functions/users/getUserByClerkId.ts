@@ -1,9 +1,8 @@
 import * as gbl from "@/globals";
 
 export default async (clerkId: string): Promise<ApiResponse> => {
-  console.log(clerkId);
   try {
-    const response: ApiResponse = await fetch(`/api/users/by-clerk-id`, {
+    const response: ApiResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users/by-clerk-id`, {
       method: "POST",
       headers: gbl.defaultInternalHeader,
       body: JSON.stringify({ clerkId }),

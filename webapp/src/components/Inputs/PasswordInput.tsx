@@ -40,7 +40,7 @@ const PasswordInput: React.FC<Props> = (props: Props) => {
             />
 
             <div
-              className="absolute top-2 right-5 cursor-pointer"
+              className="absolute top-3 right-5 cursor-pointer"
               onClick={() => {
                 setType((prevValue: "password" | "text") => {
                   return prevValue === "password" ? "text" : "password";
@@ -72,7 +72,7 @@ const PasswordInput: React.FC<Props> = (props: Props) => {
               />
 
               <div
-                className="absolute top-2 right-5 cursor-pointer"
+                className="absolute top-3 right-5 cursor-pointer"
                 onClick={() => {
                   setType((prevValue: "password" | "text") => {
                     return prevValue === "password" ? "text" : "password";

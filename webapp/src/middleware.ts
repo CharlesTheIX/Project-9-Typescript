@@ -3,8 +3,8 @@ import getUserByClerkId from "./functions/users/getUserByClerkId";
 import { ClerkMiddlewareAuth, clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
 const signedInRoutes: string[] = ["/", "/sign-in(.*)", "/sign-up(.*)"];
-const adminRoutes: string[] = ["/admin/:path*", "/users/:path*", "/countries/create"];
 const publicRoutes: string[] = ["/", "/sign-in(.*)", "/sign-up(.*)", "/cookies", "/not-found", "/api/:path*"];
+const adminRoutes: string[] = ["/admin/:path*", "/users/:path*", "/countries/create", "/countries/edit/:path*"];
 
 const isAdminRoute = createRouteMatcher(adminRoutes);
 const isPublicRoute = createRouteMatcher(publicRoutes);
@@ -20,7 +20,7 @@ export default clerkMiddleware(async (auth: ClerkMiddlewareAuth, request: NextRe
   if (userId && isAdminRoute(request)) {
     const userResponse = await getUserByClerkId(userId);
     if (userResponse.error || userResponse.data.role !== "admin") {
-      return NextResponse.redirect(new URL("/dashboard", process.env.BASE_URL));
+      return NextResponse.redirect(new URL("/403", process.env.BASE_URL));
     }
 
     return NextResponse.next();

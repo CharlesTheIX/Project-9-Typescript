@@ -5,7 +5,7 @@ const HomePage: React.FC = () => {
   return (
     <DefaultLayout>
       <section>
-        <div className="py-20 flex flex-col gap-5">
+        <div className="py-10 flex flex-col gap-5">
           <h1>
             Project<span className="animate-blink">_</span>9
           </h1>

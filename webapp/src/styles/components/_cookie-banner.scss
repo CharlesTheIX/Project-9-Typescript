@@ -1,5 +1,6 @@
 @use "../palettes/dark" as dark;
 @use "../palettes/light" as light;
+@use "../palettes/custom" as custom;
 
 #cookie-banner {
   @apply hidden fixed top-0 left-0 h-0 h-screen w-screen flex-col justify-end;
@@ -27,9 +28,17 @@
 
   &.light {
     > div {
-      color: litgh.$color-secondary;
-      border-color: litgh.$color-secondary;
+      color: light.$color-secondary;
+      border-color: light.$color-secondary;
       background-color: light.$color-primary;
+    }
+  }
+
+  &.custom {
+    > div {
+      color: custom.$color-secondary;
+      border-color: custom.$color-secondary;
+      background-color: custom.$color-primary;
     }
   }
 }

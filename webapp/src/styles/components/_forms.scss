@@ -1,0 +1,52 @@
+@use "../palettes/dark" as dark;
+@use "../palettes/light" as light;
+@use "../palettes/custom" as custom;
+
+.form {
+  @apply flex flex-col gap-5 w-full;
+
+  > form {
+    @apply flex flex-col items-center justify-start w-full;
+
+    > div {
+      @apply flex flex-col gap-5 items-center w-full;
+
+      > * {
+        @apply w-full;
+      }
+
+      > div {
+        &:nth-child(1) {
+          @apply relative flex flex-col gap-5 items-center;
+
+          > * {
+            @apply w-full;
+          }
+        }
+      }
+    }
+
+    .form-loading-container {
+      @apply absolute w-full h-full z-1;
+      transition: background-color 300ms ease-in-out;
+    }
+  }
+
+  &.dark {
+    .form-loading-container {
+      background-color: dark.$color-primary;
+    }
+  }
+
+  &.light {
+    .form-loading-container {
+      background-color: light.$color-primary;
+    }
+  }
+
+  &.custom {
+    .form-loading-container {
+      background-color: custom.$color-primary;
+    }
+  }
+}

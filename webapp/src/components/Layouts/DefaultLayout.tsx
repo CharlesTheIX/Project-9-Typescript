@@ -9,7 +9,7 @@ const DefaultLayout: React.FC<Props> = (props: Props) => {
   const { children } = props;
   const { theme } = useThemeContext();
 
-  return <main className={`${theme} flex flex-col gap-5 px-10 min-h-screen`}>{children}</main>;
+  return <main className={`${theme} flex flex-col gap-5 px-10 min-h-screen pb-10`}>{children}</main>;
 };
 
 export default DefaultLayout;

@@ -4,7 +4,7 @@ const DashboardPage: React.FC = () => {
   return (
     <DashboardLayout>
       <section>
-        <div className="py-20 flex flex-col gap-5">
+        <div className="py-10 flex flex-col gap-5">
           <h1>Dashboard</h1>
 
           <p className="max-w-3xl">

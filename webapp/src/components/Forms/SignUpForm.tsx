@@ -3,18 +3,20 @@ import { useRef, useState } from "react";
 import { useSignUp } from "@clerk/nextjs";
 import TextInput from "../Inputs/TextInput";
 import EmailInput from "../Inputs/EmailInput";
+import NumberInput from "../Inputs/NumberInput";
 import PasswordInput from "../Inputs/PasswordInput";
 import createUser from "@/functions/users/createUser";
 import isNumber from "@/functions/validation/isNumber";
 import LoadingContainer from "../Misc/LoadingContainer";
 import { useToastContext } from "@/contexts/toastContext";
+import { useThemeContext } from "@/contexts/themeContext";
 import { useRouter, useSearchParams } from "next/navigation";
 import validateSignUp from "@/functions/forms/validateSignUp";
-import NumberInput from "../Inputs/NumberInput";
 
 const SignUpForm: React.FC = () => {
   const router = useRouter();
   const toast = useToastContext();
+  const { theme } = useThemeContext();
   const searchParams = useSearchParams();
   const formRef = useRef<HTMLFormElement>(null);
   const { isLoaded, signUp, setActive } = useSignUp();
@@ -39,7 +41,8 @@ const SignUpForm: React.FC = () => {
       const password: string = formData.get("password")?.toString() || "";
       const firstName: string = formData.get("first-name")?.toString() || "";
       const confirmedPassword: string = formData.get("password-confirmation")?.toString() || "";
-      const requestData: Partial<User> & { password: string } = { email, surname, password, username, firstName };
+      // const requestData: Partial<User> & { password: string } = { email, surname, password, username, firstName };
+      const requestData: Partial<User> & { password: string } = { email, password, username };
 
       const hasError = validateSignUp(requestData);
       if (hasError.error) throw new Error(hasError.message);
@@ -50,12 +53,13 @@ const SignUpForm: React.FC = () => {
 
       setVerifying(true);
       setIsLoading(false);
+      toast.setContent("");
       toast.setHidden(false);
       toast.setType("success");
       toast.setTitle(`A verification code has been sent to ${email}.`);
-      setSignUpData({ email, surname, username, firstName, clerkId: "", role: "user" });
+      // setSignUpData({ email, surname, username, firstName, clerkId: "", role: "user" });
+      setSignUpData({ email, username, clerkId: "", role: "user" });
     } catch (error: any) {
-      console.error(error);
       setIsLoading(false);
       toast.setHidden(false);
       toast.setType("error");
@@ -83,15 +87,16 @@ const SignUpForm: React.FC = () => {
       const response = await createUser({
         role: "user",
         email: signUpData.email,
-        surname: signUpData.surname,
+        // surname: signUpData.surname,
         username: signUpData.username,
-        firstName: signUpData.firstName,
+        // firstName: signUpData.firstName,
         clerkId: signUp.createdUserId as string,
       });
       if (response.error) throw new Error(response.message);
 
       await setActive({ session: signUp.createdSessionId });
 
+      toast.setContent("");
       toast.setHidden(false);
       toast.setType("success");
       toast.setTitle("Sign Up Complete.");
@@ -107,47 +112,55 @@ const SignUpForm: React.FC = () => {
   };
 
   return (
-    <>
+    <div className={`form ${theme}`}>
       {verifying ? (
-        <form ref={verificationFormRef} onSubmit={handleVerification} className={`max-w-xl flex flex-col items-left justify-center`}>
-          {isLoading ? (
-            <LoadingContainer />
-          ) : (
-            <div className="flex flex-col gap-5 all-width-100 items-center w-full">
+        <form ref={verificationFormRef} onSubmit={handleVerification} className={``}>
+          <div>
+            <div>
+              {isLoading && (
+                <div className={`form-loading-container`}>
+                  <LoadingContainer />
+                </div>
+              )}
+
               <NumberInput name="code" label="Code" required={true} min={0} max={999999} step={1} />
-              <div>
-                <input className="button" type="submit" content="Submit" />
-              </div>
             </div>
-          )}
+
+            <div>
+              <input className="button" type="submit" content="Submit" />
+            </div>
+          </div>
         </form>
       ) : (
-        <form ref={formRef} onSubmit={handleSubmit} className={`max-w-xl flex flex-col items-center justify-center`}>
+        <form ref={verificationFormRef} onSubmit={handleVerification} className={`max-w-xl`}>
           <div id="clerk-captcha" />
 
-          {isLoading ? (
-            <LoadingContainer />
-          ) : (
-            <>
-              <div className="flex flex-col gap-5 all-width-100 items-center w-full">
-                <TextInput name="username" label="Username" required={true} />
+          <div>
+            <div>
+              {isLoading && (
+                <div className={`form-loading-container`}>
+                  <LoadingContainer />
+                </div>
+              )}
 
-                <div className="flex flex-row justify-between gap-5 items-center all-width-100">
+              <TextInput name="username" label="Username" required={true} />
+
+              {/* <div className="flex flex-row justify-between gap-5 items-center all-width-100">
                   <TextInput name="first-name" label="First Name" required={true} />
                   <TextInput name="surname" label="Surname" required={true} />
-                </div>
+                </div> */}
 
-                <EmailInput name="email" label="Email" required={true} />
-                <PasswordInput name="password" label="Password" required={true} includeConfirmation={true} />
-                <div>
-                  <input className="button w-auto" type="submit" content="Submit" />
-                </div>
-              </div>
-            </>
-          )}
+              <EmailInput name="email" label="Email" required={true} />
+              <PasswordInput name="password" label="Password" required={true} includeConfirmation={true} />
+            </div>
+
+            <div>
+              <input className={`button w-auto ${isLoading ? "disabled" : ""}`} type="submit" content="Submit" disabled={isLoading} />
+            </div>
+          </div>
         </form>
       )}
-    </>
+    </div>
   );
 };
 

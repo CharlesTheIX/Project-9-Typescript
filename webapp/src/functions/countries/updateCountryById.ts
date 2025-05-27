@@ -9,7 +9,7 @@ export default async (props: Props): Promise<ApiResponse> => {
   const { _id, update } = props;
 
   try {
-    const response: ApiResponse = await fetch(`${process.env.LOCAL_URI}/api/countries/by-id`, {
+    const response: ApiResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/countries/by-id`, {
       method: "PATCH",
       headers: gbl.defaultInternalHeader,
       body: JSON.stringify({ _id, update }),

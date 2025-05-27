@@ -25,9 +25,10 @@ const MultiTextInput: React.FC<Props> = (props: Props) => {
 
       {label && <label htmlFor={`${name}-current`}>{label}</label>}
 
-      <div className="flex flex-row gap-2 justify-between all-width-100">
+      <div className="flex flex-row gap-2 justify-start w-full">
         <input
           type="text"
+          className="w-full"
           value={currentValue}
           name={`${name}-current`}
           onInput={(event: any) => {
@@ -38,7 +39,6 @@ const MultiTextInput: React.FC<Props> = (props: Props) => {
         />
 
         <FunctionalButton
-          className="w-auto max-w-16"
           callback={() => {
             const valueExists = values.find((item: string) => item === currentValue);
 
@@ -53,7 +53,7 @@ const MultiTextInput: React.FC<Props> = (props: Props) => {
         </FunctionalButton>
       </div>
 
-      <div className="flex flex-row flex-wrap">
+      <div className="flex flex-row flex-wrap gap-2 justify-start">
         {values.map((value: string, key: number) => {
           return (
             <FunctionalButton

@@ -2,8 +2,8 @@
 import Link from "next/link";
 import * as gbl from "@/globals";
 import { useState, useEffect } from "react";
+import SelectInput from "../Inputs/SelectInput";
 import LoadingContainer from "../Misc/LoadingContainer";
-import FunctionalButton from "../Buttons/FunctionalButton";
 import getAllCountries from "@/functions/countries/getAllCountries";
 import getCountriesByContinent from "@/functions/countries/getCountriesByContinent";
 
@@ -23,7 +23,6 @@ const CountryFeed: React.FC = () => {
       setContinent(item);
       setIsLoading(false);
     } catch (error: any) {
-      console.error(error.message);
       setIsLoading(false);
     }
   };
@@ -36,53 +35,37 @@ const CountryFeed: React.FC = () => {
   }, []);
 
   return (
-    <div>
-      <div className="flex flex-col gap-5">
-        <div className="flex flex-col gap-5 items-center">
-          <ul className="flex flex-row gap-5 items-center">
-            <FunctionalButton
-              className={continent === "all" ? "active" : ""}
-              callback={async () => {
-                await fetchCountries("all");
-              }}
-            >
-              All
-            </FunctionalButton>
+    <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-5 items-start">
+        <div className="w-full flex flex-row gap-5 items-start max-h-[78px] overflow-visible z-1">
+          <SelectInput
+            label="Continent"
+            name="continent-select"
+            className="min-w-[250px]"
+            onChange={fetchCountries}
+            defaultValue={{ value: "all", label: "All" }}
+            options={[{ value: "all", label: "All" }, ...gbl.continentOptions]}
+          />
+        </div>
 
-            {gbl.continents.map((item: Continent, key: number) => {
-              return (
-                <FunctionalButton
-                  key={key}
-                  className={continent === item ? "active" : ""}
-                  callback={async () => {
-                    await fetchCountries(item);
-                  }}
-                >
-                  {item}
-                </FunctionalButton>
-              );
-            })}
-          </ul>
-
-          <div className="flex flex-row flex-wrap gap-5 items-center">
-            {isLoading ? (
-              <LoadingContainer />
-            ) : (
-              <>
-                {countries.length === 0 ? (
-                  <p>No countries to display.</p>
-                ) : (
-                  <>
-                    {countries.map((country: Country, key: number) => (
-                      <Link key={key} href={`/countries/${country._id}`}>
-                        {country.displayName}
-                      </Link>
-                    ))}
-                  </>
-                )}
-              </>
-            )}
-          </div>
+        <div className="flex flex-row flex-wrap gap-5 items-center">
+          {isLoading ? (
+            <LoadingContainer />
+          ) : (
+            <>
+              {countries.length === 0 ? (
+                <p>No countries to display.</p>
+              ) : (
+                <>
+                  {countries.map((country: Country, key: number) => (
+                    <Link key={key} href={`/countries/${country._id}`} className="button">
+                      {country.displayName}
+                    </Link>
+                  ))}
+                </>
+              )}
+            </>
+          )}
         </div>
       </div>
     </div>

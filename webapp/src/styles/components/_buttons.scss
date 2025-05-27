@@ -1,5 +1,6 @@
 @use "../palettes/dark" as dark;
 @use "../palettes/light" as light;
+@use "../palettes/custom" as custom;
 
 .button {
   @apply px-5 py-2 w-auto font-bold cursor-pointer;
@@ -8,7 +9,12 @@
   border-bottom-left-radius: 0.5rem;
   transition: color 300ms ease-in-out, background-color 300ms ease-in-out, border-radius 300ms ease-in-out, border-color 300ms ease-in-out;
 
-  &:hover {
+  &:hover,
+  &:active,
+  &:focus,
+  &:focus-within {
+    outline: none;
+    appearance: none;
     border-top-right-radius: 0;
     border-bottom-left-radius: 0;
     border-top-left-radius: 0.5rem;
@@ -22,7 +28,10 @@
     border-color: dark.$color-secondary;
     background-color: dark.$color-secondary;
 
-    &:hover {
+    &:hover,
+    &:active,
+    &:focus,
+    &:focus-within {
       color: dark.$color-secondary;
       background-color: dark.$color-primary;
     }
@@ -32,12 +41,31 @@
 .light {
   .button {
     color: light.$color-primary;
-    border-color: litgh.$color-secondary;
-    background-color: litgh.$color-secondary;
+    border-color: light.$color-secondary;
+    background-color: light.$color-secondary;
 
-    &:hover {
-      color: litgh.$color-secondary;
+    &:hover,
+    &:active,
+    &:focus,
+    &:focus-within {
+      color: light.$color-secondary;
       background-color: light.$color-primary;
+    }
+  }
+}
+
+.custom {
+  .button {
+    color: custom.$color-primary;
+    border-color: custom.$color-secondary;
+    background-color: custom.$color-secondary;
+
+    &:hover,
+    &:active,
+    &:focus,
+    &:focus-within {
+      color: custom.$color-secondary;
+      background-color: custom.$color-primary;
     }
   }
 }

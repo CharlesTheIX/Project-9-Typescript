@@ -1,8 +1,8 @@
 "use client";
+import Link from "next/link";
 import { useState } from "react";
+import { useUserContext } from "@/contexts/userContext";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
-import CountryEditForm from "@/components/Forms/CountryEditForm";
-import FunctionalButton from "@/components/Buttons/FunctionalButton";
 
 type Props = {
   country: Country;
@@ -10,36 +10,29 @@ type Props = {
 
 const CountryPage: React.FC<Props> = (props: Props) => {
   const { country } = props;
-  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const { userRole } = useUserContext();
   const [currentCountry, setCurrentCountry] = useState<Country>(country);
 
   return (
     <DefaultLayout>
       <section>
-        <div>
+        <div className="py-10 flex flex-col gap-5 item-center">
           <h1>{currentCountry.displayName}</h1>
 
-          <FunctionalButton
-            callback={() => {
-              setIsEditing(true);
-            }}
-          >
-            Edit
-          </FunctionalButton>
+          <p className="max-w-3xl">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt auctor sem nec semper. Ut ornare leo id risus blandit, fringilla fringilla lorem sollicitudin.
+            Donec gravida semper lectus, eu aliquet erat ornare sit amet.
+          </p>
+
+          {userRole === "admin" && (
+            <div>
+              <Link className="button" href={`/countries/edit/${country._id}`}>
+                Edit
+              </Link>
+            </div>
+          )}
         </div>
       </section>
-
-      {isEditing ? (
-        <CountryEditForm
-          country={currentCountry}
-          callback={(country: Country) => {
-            setCurrentCountry(country);
-            setIsEditing(false);
-          }}
-        />
-      ) : (
-        <p>Not editing</p>
-      )}
     </DefaultLayout>
   );
 };

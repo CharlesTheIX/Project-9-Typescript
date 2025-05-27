@@ -41,7 +41,7 @@ export default (requestData: Country): FormError => {
         }
         break;
       case "imageUrl":
-        if (requestData[item] && !isUrl(requestData[item], "any")) {
+        if (requestData[item] && !isUrl(requestData[item], "external")) {
           formError.error = true;
           formError.message = updateFormErrorMessage(formError.message, "Image URL");
         }

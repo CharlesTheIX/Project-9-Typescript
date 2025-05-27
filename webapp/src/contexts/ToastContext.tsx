@@ -1,8 +1,11 @@
 "use client";
-import { createContext, useContext, useState, useEffect, useRef } from "react";
+import Bye_SVG from "@/components/SVGs/Bye_SVG";
 import { useThemeContext } from "./themeContext";
+import Error_SVG from "@/components/SVGs/Error_SVG";
+import { createContext, useContext, useState, useEffect, useRef } from "react";
+import Success_SVG from "@/components/SVGs/Success_SVG";
 
-type ToastType = "success" | "error" | "none";
+type ToastType = "success" | "error" | "none" | "bye" | "hi";
 type ToastContextData = {
   title: string;
   type: ToastType;
@@ -74,12 +77,27 @@ export const ToastContextProvider = (props: { children: React.ReactNode }) => {
       {children}
 
       <>
-        {!hidden && (
-          <div ref={toastRef} id="toast-notification" className={`${hide ? "hide" : "show"} ${type} ${theme}`}>
-            {title && <p className="font-bold">{title}</p>}
-            {content && <p className="text-xs" dangerouslySetInnerHTML={{ __html: content }} />}
-          </div>
-        )}
+        {/* {!hidden && ( */}
+        <div ref={toastRef} id="toast-notification" className={`${hide ? "hide" : "show"} ${type} ${theme}`}>
+          {type === "bye" ? (
+            <div className="flex flex-row gap-5 items-center">
+              <Bye_SVG />
+              <p className="font-bold">Goodbye.</p>
+            </div>
+          ) : (
+            <div className="flex flex-row gap-5 items-center">
+              {type === "success" && <Success_SVG />}
+              {type === "error" && <Error_SVG />}
+              {type === "hi" && <Bye_SVG />}
+
+              <div>
+                {title && <p className="font-bold">{title}</p>}
+                {content && <p className="text-xs" dangerouslySetInnerHTML={{ __html: content }} />}
+              </div>
+            </div>
+          )}
+        </div>
+        {/* )} */}
       </>
     </ToastContext.Provider>
   );

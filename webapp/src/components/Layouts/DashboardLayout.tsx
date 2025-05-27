@@ -1,6 +1,8 @@
 "use client";
 import Link from "next/link";
 import { NavigationItem } from "@/locals";
+import Globe_SVG from "../SVGs/Globe_SVG";
+import Profile_SVG from "../SVGs/Profile_SVG";
 import { useThemeContext } from "@/contexts/themeContext";
 
 type Props = {
@@ -9,8 +11,14 @@ type Props = {
 
 const dashboardItems: NavigationItem[] = [
   {
+    href: "/profile",
+    label: "Profile",
+    icon: "profile",
+  },
+  {
     href: "/countries",
     label: "Countries",
+    icon: "globe",
   },
 ];
 
@@ -19,21 +27,27 @@ const DashboardLayout: React.FC<Props> = (props: Props) => {
   const { theme } = useThemeContext();
 
   return (
-    <div className="flex flex-row gap-20 items-start justify-center min-h-screen px-10 w-screen mx-auto max-w-[1500px] all-width-100 relative overflow-visible">
-      <aside id="dashboard-aside" className={`${theme}`}>
-        <nav className="w-full">
-          <ul className="flex flex-col gap-0 all-width-100 items-start justify-start">
-            {dashboardItems.map((item: NavigationItem, key: number) => {
-              return (
-                <li key={key}>
-                  <Link href={item.href}>{item.label}</Link>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
-      </aside>
-      <main className={`${theme} flex flex-col1 mr-3xl min-h-full`}>{children}</main>;
+    <div id="dashboard-layout" className={`${theme} px-10`}>
+      <div>
+        <aside>
+          <nav className="w-full">
+            <ul className="flex flex-col items-start justify-start w-full">
+              {dashboardItems.map((item: NavigationItem, key: number) => {
+                return (
+                  <li key={key}>
+                    <Link href={item.href} className="gap-2 flex flex-row items-center justify-start">
+                      {item.icon === "profile" && <Profile_SVG />}
+                      {item.icon === "globe" && <Globe_SVG />}
+                      <span>{item.label}</span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+        </aside>
+        <main className={`${theme} flex flex-col min-h-full w-full`}>{children}</main>
+      </div>
     </div>
   );
 };

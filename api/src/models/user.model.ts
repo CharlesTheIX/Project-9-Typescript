@@ -29,14 +29,14 @@ const schema = new mongoose.Schema({
     unique: true,
     required: [true, "Clerk ID not provided."],
   },
-  firstName: {
-    type: String,
-    required: [true, "Please provide a first name."],
-  },
-  surname: {
-    type: String,
-    required: [true, "Please provide a surname."],
-  },
+  // firstName: {
+  //   type: String,
+  //   required: [true, "Please provide a first name."],
+  // },
+  // surname: {
+  //   type: String,
+  //   required: [true, "Please provide a surname."],
+  // },
   profileImageURL: {
     type: String,
     default: "",
