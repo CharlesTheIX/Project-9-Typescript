@@ -1,4 +1,3 @@
-@use "./fonts";
 @use "tailwindcss";
 @use "./components";
 @use "./palettes/dark" as dark;
@@ -10,8 +9,6 @@
 }
 
 body {
-  @apply relative text-base;
-  font-family: "Jet_Brains", monospace;
   background-color: dark.$color-primary;
 }
 
