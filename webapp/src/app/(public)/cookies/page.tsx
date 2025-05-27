@@ -6,8 +6,5 @@ export const metadata: Metadata = {
   description: "",
 };
 
-const Page: React.FC = () => {
-  return <CookiesPage />;
-};
-
+const Page: React.FC = () => <CookiesPage />;
 export default Page;

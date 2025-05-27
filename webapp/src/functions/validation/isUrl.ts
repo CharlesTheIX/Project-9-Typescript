@@ -1,6 +1,6 @@
-type UrlType = "internal" | "external" | "any";
+type UrlType = "internal" | "external";
 
-export default (value: any, type: UrlType = "any"): boolean => {
+export default (value: any, type: UrlType = "external"): boolean => {
   var response: boolean = true;
   const internalRegex = new RegExp(/^(\/|\.\/|\.\.\/)[^\s]*$/);
   const externalRegex = new RegExp(/^(https?:\/\/)[^\s/$.?#].[^\s]*$/i);
@@ -13,9 +13,6 @@ export default (value: any, type: UrlType = "any"): boolean => {
         break;
       case "internal":
         if (!internalRegex.test(value)) response = false;
-        break;
-      case "any":
-        if (!externalRegex.test(value) || !internalRegex.test(value)) response = false;
         break;
     }
     return response;

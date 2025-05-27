@@ -36,10 +36,10 @@ const SignUpForm: React.FC = () => {
 
       const formData = new FormData(form);
       const email: string = formData.get("email")?.toString() || "";
-      const surname: string = formData.get("surname")?.toString() || "";
+      // const surname: string = formData.get("surname")?.toString() || "";
       const username: string = formData.get("username")?.toString() || "";
       const password: string = formData.get("password")?.toString() || "";
-      const firstName: string = formData.get("first-name")?.toString() || "";
+      // const firstName: string = formData.get("first-name")?.toString() || "";
       const confirmedPassword: string = formData.get("password-confirmation")?.toString() || "";
       // const requestData: Partial<User> & { password: string } = { email, surname, password, username, firstName };
       const requestData: Partial<User> & { password: string } = { email, password, username };
@@ -132,7 +132,7 @@ const SignUpForm: React.FC = () => {
           </div>
         </form>
       ) : (
-        <form ref={verificationFormRef} onSubmit={handleVerification} className={`max-w-xl`}>
+        <form ref={formRef} onSubmit={handleSubmit} className={`max-w-xl`}>
           <div id="clerk-captcha" />
 
           <div>

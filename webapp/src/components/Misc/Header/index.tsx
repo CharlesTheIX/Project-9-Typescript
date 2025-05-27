@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import * as NI from "./navigationItems";
+import { NavigationItem } from "@/locals";
 import { useUserContext } from "@/contexts/userContext";
 import Terminal_SVG from "@/components/SVGs/Terminal_SVG";
 import { useThemeContext } from "@/contexts/themeContext";
@@ -22,7 +23,7 @@ const Header: React.FC = () => {
             <ul className="flex flex-row gap-5 items-center">
               {!user ? (
                 <>
-                  {NI.signedOutItems.map((item: NI.NavigationItem, key: number) => {
+                  {NI.signedOutItems.map((item: NavigationItem, key: number) => {
                     return (
                       <li key={key} className="button">
                         <Link href={item.href}>{item.label}</Link>
@@ -34,7 +35,7 @@ const Header: React.FC = () => {
                 <>
                   {userRole === "admin" ? (
                     <>
-                      {NI.adminItems.map((item: NI.NavigationItem, key: number) => {
+                      {NI.adminItems.map((item: NavigationItem, key: number) => {
                         return (
                           <li key={key} className="button">
                             <Link href={item.href}>{item.label}</Link>
@@ -44,7 +45,7 @@ const Header: React.FC = () => {
                     </>
                   ) : (
                     <>
-                      {NI.signedInItems.map((item: NI.NavigationItem, key: number) => {
+                      {NI.signedInItems.map((item: NavigationItem, key: number) => {
                         return (
                           <li key={key} className="button">
                             <Link href={item.href}>{item.label}</Link>
