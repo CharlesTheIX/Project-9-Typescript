@@ -12,14 +12,12 @@
     "clean": "rm -rf dist node_modules yarn.lock"
   },
   "dependencies": {
-    "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "mongoose": "^8.14.2"
   },
   "devDependencies": {
-    "@types/bcryptjs": "^3.0.0",
     "@types/cors": "^2.8.18",
     "@types/express": "^5.0.1",
     "@types/mongoose": "^5.11.97",

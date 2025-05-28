@@ -3,7 +3,10 @@
 @use "../palettes/custom" as custom;
 
 .input {
-  @apply flex flex-col gap-2 text-left;
+  @apply gap-2;
+  display: flex;
+  text-align: left;
+  flex-direction: column;
 
   input,
   select {
@@ -13,7 +16,7 @@
     border: 3px solid;
     border-top-right-radius: 0.5rem;
     border-bottom-left-radius: 0.5rem;
-    transition: border-radius 300ms ease-in-out, background-color 300ms ease-in-out, color 300ms ease-in-out, border-color 300ms ease-in-out;
+    transition: all 300ms ease-in-out;
 
     &:focus,
     &:active,
@@ -26,80 +29,162 @@
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
-      -webkit-appearance: none;
       margin: 0;
+      -webkit-appearance: none;
     }
   }
 
-  select {
-    @apply cursor-pointer;
-  }
-
+  select,
   input[type="submit"] {
-    @apply cursor-pointer;
+    cursor: pointer;
   }
 
   input[type="number"] {
     -moz-appearance: textfield;
   }
 
-  .select-input {
-    outline: none;
-    appearance: none;
-    overflow: hidden;
-    border: 3px solid;
-    border-top-right-radius: 0.5rem;
-    border-bottom-left-radius: 0.5rem;
-    transition: border-radius 300ms ease-in-out, background-color 300ms ease-in-out, color 300ms ease-in-out, border-color 300ms ease-in-out;
+  &.multi-text-input {
+    > .input {
+      @apply gap-2;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
 
-    &:focus,
-    &:focus-within,
-    &:active,
-    &:hover {
-      border-top-right-radius: 0;
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0.5rem;
-      border-bottom-right-radius: 0.5rem;
+      input {
+        width: 100%;
+      }
     }
 
-    &:focus,
-    &:focus-within,
-    &:active {
+    > .values {
+      @apply gap-2;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+  }
+
+  &.password-input {
+    > div {
+      @apply gap-5;
+      display: flex;
+      flex-direction: column;
+
+      .password {
+        width: 100%;
+        position: relative;
+
+        input {
+          width: 100%;
+        }
+
+        .hide-show {
+          @apply top-3 right-5;
+          cursor: pointer;
+          position: absolute;
+        }
+      }
+
+      .password-confirmation {
+        @apply gap-2;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        > * {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  &.select-input {
+    &:hover,
+    &.active {
+      > div {
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+      }
+    }
+
+    &.active {
+      > div {
+        button {
+          svg {
+            rotate: 180deg;
+          }
+        }
+
+        ul {
+          max-height: 100px;
+        }
+      }
+    }
+
+    > div {
+      outline: none;
+      appearance: none;
+      overflow: hidden;
+      border: 3px solid;
+      border-top-right-radius: 0.5rem;
+      border-bottom-left-radius: 0.5rem;
+      transition: all 300ms ease-in-out;
+
       button {
+        @apply px-5 py-2;
+        width: 100%;
+        outline: none;
+        cursor: pointer;
+        text-align: left;
+        appearance: none;
+        transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+
         svg {
-          rotate: 180deg;
+          position: absolute;
+          top: calc(0.25rem * 4);
+          right: calc(0.25rem * 5);
+          transition: all 300ms ease-in-out;
         }
       }
 
       ul {
-        max-height: 100px;
+        z-index: 48;
+        max-height: 0px;
+        position: relative;
+        transition: max-height 300ms ease-in-out;
+
+        li {
+          @apply px-5 py-2;
+          cursor: pointer;
+          transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+        }
       }
     }
+  }
 
-    button {
-      @apply px-5 py-2 cursor-pointer w-full text-left;
-      outline: none;
-      appearance: none;
-      transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+  &.rectangle-input {
+    > div {
+      @apply gap-2;
+      display: flex;
+      flex-direction: row;
 
-      svg {
-        position: absolute;
-        transition: all 300ms ease-in-out;
+      > div {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
 
-        top: calc(0.25rem * 4);
-        right: calc(0.25rem * 5);
-      }
-    }
+        > p {
+          @apply text-xs;
+          width: 100%;
+        }
 
-    ul {
-      z-index: 48;
-      max-height: 0px;
-      position: relative;
-      transition: max-height 300ms ease-in-out;
-
-      li {
-        @apply px-5 py-2 cursor-pointer;
-        transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+        > input {
+          width: 100%;
+        }
       }
     }
   }
@@ -130,35 +215,37 @@
       }
     }
 
-    .select-input {
-      button {
-        fill: dark.$color-secondary;
-        color: dark.$color-secondary;
-        stroke: dark.$color-secondary;
-        background-color: dark.$color-primary;
-      }
-
-      ul {
-        li {
-          color: dark.$color-secondary;
-          background-color: dark.$color-primary;
-
-          &:hover {
+    &.select-input {
+      &:hover,
+      &.active {
+        > div {
+          button {
+            fill: dark.$color-primary;
             color: dark.$color-primary;
+            stroke: dark.$color-primary;
             background-color: dark.$color-secondary;
           }
         }
       }
 
-      &:focus,
-      &:focus-within,
-      &:active,
-      &:hover {
+      > div {
         button {
-          fill: dark.$color-primary;
-          color: dark.$color-primary;
-          stroke: dark.$color-primary;
-          background-color: dark.$color-secondary;
+          fill: dark.$color-secondary;
+          color: dark.$color-secondary;
+          stroke: dark.$color-secondary;
+          background-color: dark.$color-primary;
+        }
+
+        ul {
+          li {
+            color: dark.$color-secondary;
+            background-color: dark.$color-primary;
+
+            &:hover {
+              color: dark.$color-primary;
+              background-color: dark.$color-secondary;
+            }
+          }
         }
       }
     }
@@ -190,35 +277,37 @@
       }
     }
 
-    .select-input {
-      button {
-        fill: light.$color-secondary;
-        color: light.$color-secondary;
-        stroke: light.$color-secondary;
-        background-color: light.$color-primary;
-      }
-
-      ul {
-        li {
-          color: light.$color-secondary;
-          background-color: light.$color-primary;
-
-          &:hover {
+    &.select-input {
+      &:hover,
+      &.active {
+        > div {
+          button {
+            fill: light.$color-primary;
             color: light.$color-primary;
+            stroke: light.$color-primary;
             background-color: light.$color-secondary;
           }
         }
       }
 
-      &:focus,
-      &:focus-within,
-      &:active,
-      &:hover {
+      > div {
         button {
-          fill: light.$color-primary;
-          color: light.$color-primary;
-          stroke: light.$color-primary;
-          background-color: light.$color-secondary;
+          fill: light.$color-secondary;
+          color: light.$color-secondary;
+          stroke: light.$color-secondary;
+          background-color: light.$color-primary;
+        }
+
+        ul {
+          li {
+            color: light.$color-secondary;
+            background-color: light.$color-primary;
+
+            &:hover {
+              color: light.$color-primary;
+              background-color: light.$color-secondary;
+            }
+          }
         }
       }
     }
@@ -250,35 +339,37 @@
       }
     }
 
-    .select-input {
-      button {
-        fill: custom.$color-secondary;
-        color: custom.$color-secondary;
-        stroke: custom.$color-secondary;
-        background-color: custom.$color-primary;
-      }
-
-      ul {
-        li {
-          color: custom.$color-secondary;
-          background-color: custom.$color-primary;
-
-          &:hover {
+    &.select-input {
+      &:hover,
+      &.active {
+        > div {
+          button {
+            fill: custom.$color-primary;
             color: custom.$color-primary;
+            stroke: custom.$color-primary;
             background-color: custom.$color-secondary;
           }
         }
       }
 
-      &:focus,
-      &:focus-within,
-      &:active,
-      &:hover {
+      > div {
         button {
-          fill: custom.$color-primary;
-          color: custom.$color-primary;
-          stroke: custom.$color-primary;
-          background-color: custom.$color-secondary;
+          fill: custom.$color-secondary;
+          color: custom.$color-secondary;
+          stroke: custom.$color-secondary;
+          background-color: custom.$color-primary;
+        }
+
+        ul {
+          li {
+            color: custom.$color-secondary;
+            background-color: custom.$color-primary;
+
+            &:hover {
+              color: custom.$color-primary;
+              background-color: custom.$color-secondary;
+            }
+          }
         }
       }
     }

@@ -7,6 +7,7 @@ import updateUserById from "../lib/user/updateUserById";
 import deleteUserById from "../lib/user/deleteUserById";
 import getUserByClerkId from "../lib/user/getUserByClerkId";
 import express, { Router, Request, Response } from "express";
+import getUserByUsername from "../lib/user/getUserByUsername";
 
 const router: Router = express.Router();
 
@@ -49,6 +50,21 @@ router.route("/by-email").post(async (request: Request, response: Response): Pro
     return response.json(res);
   } catch (error: any) {
     console.error(`Get user by email error: ${error.message}`);
+    return response.status(gbl.status.SERVER_ERROR).json(gbl.response_SERVER_ERROR);
+  }
+});
+
+// Get user by username
+router.route("/by-username").post(async (request: Request, response: Response): Promise<any> => {
+  const { username } = request.body;
+
+  if (!username) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: username." });
+
+  try {
+    const res = await getUserByUsername(username);
+    return response.json(res);
+  } catch (error: any) {
+    console.error(`Get user by username error: ${error.message}`);
     return response.status(gbl.status.SERVER_ERROR).json(gbl.response_SERVER_ERROR);
   }
 });

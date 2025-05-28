@@ -1,6 +1,7 @@
 "use client";
 import * as gbl from "@/globals";
 import { useRef, useState } from "react";
+import UrlInput from "../Inputs/UrlInput";
 import TextInput from "../Inputs/TextInput";
 import SelectInput from "../Inputs/SelectInput";
 import MultiTextInput from "../Inputs/MultiTextInput";
@@ -11,11 +12,21 @@ import { useThemeContext } from "@/contexts/themeContext";
 import createCountry from "@/functions/countries/createCountry";
 import validateCountryCreation from "@/functions/forms/validateCountryCreation";
 
+const nullCountry: Country = {
+  names: [],
+  imageUrl: "",
+  displayName: "",
+  continent: "" as Continent,
+  mapRectangle: gbl.nullRectangle,
+  flagRectangle: gbl.nullRectangle,
+};
+
 const CountryCreationForm: React.FC = () => {
   const toast = useToastContext();
   const { theme } = useThemeContext();
   const formRef = useRef<HTMLFormElement>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [defaultValues, setDefaultValues] = useState<Country>(nullCountry);
 
   const handleSubmit = async (event: React.FormEvent): Promise<void> => {
     event?.preventDefault();
@@ -40,13 +51,15 @@ const CountryCreationForm: React.FC = () => {
       const response = await createCountry(requestData);
       if (response.error) throw new Error(response.message);
 
-      formRef.current?.reset();
-
       setIsLoading(false);
       toast.setContent("");
       toast.setHidden(false);
       toast.setType("success");
       toast.setTitle("Country Created");
+      setDefaultValues((prevValue: Country) => {
+        const newValue = { ...prevValue, nullCountry };
+        return newValue;
+      });
     } catch (error: any) {
       setIsLoading(false);
       toast.setHidden(false);
@@ -57,7 +70,7 @@ const CountryCreationForm: React.FC = () => {
   };
 
   return (
-    <div className={`form ${theme}`}>
+    <div className={`form ${theme} ${isLoading ? "loading" : ""}`}>
       <form ref={formRef} onSubmit={handleSubmit} className={`max-w-xl`}>
         <div>
           <div>
@@ -67,16 +80,22 @@ const CountryCreationForm: React.FC = () => {
               </div>
             )}
 
-            <TextInput name="display-name" label="Display Name" required={true} />
-            <MultiTextInput name="names" label="Names" required={true} />
-            <SelectInput name="continent" label="Continent" options={gbl.continentOptions} required={true} />
-            <RectangleInput name="flag-rectangle" label="Flag Rectangle" />
-            <RectangleInput name="map-rectangle" label="Map Rectangle" />
-            <TextInput name="image-url" label="Image Url" />
+            <TextInput name="display-name" label="Display Name" required={true} defaultValue={defaultValues.displayName} />
+            <MultiTextInput name="names" label="Names" required={true} defaultValue={defaultValues.names} defaultCurrentValue={defaultValues.displayName} />
+            <SelectInput
+              required={true}
+              name="continent"
+              label="Continent"
+              options={gbl.continentOptions}
+              defaultValue={{ value: defaultValues.continent, label: defaultValues.continent }}
+            />
+            <RectangleInput name="flag-rectangle" label="Flag Rectangle" defaultValue={defaultValues.flagRectangle} />
+            <RectangleInput name="map-rectangle" label="Map Rectangle" defaultValue={defaultValues.mapRectangle} />
+            <UrlInput name="image-url" label="Image Url" defaultValue={defaultValues.imageUrl} />
           </div>
 
           <div>
-            <input className={`button w-auto ${isLoading ? "disabled" : ""}`} type="submit" content="Submit" disabled={isLoading} />
+            <input className={`button ${isLoading ? "disabled" : ""}`} type="submit" content={isLoading ? "Loading" : "Submit"} disabled={isLoading} />
           </div>
         </div>
       </form>

@@ -13,7 +13,7 @@ const UserControls: React.FC = () => {
   const { user, userRole } = useUserContext();
 
   return (
-    <div id="user-controls" className={`${theme}`}>
+    <div id="user-controls" className={theme}>
       <ul className="flex flex-col">
         {user && (
           <>

@@ -6,7 +6,6 @@ export default async (_id: string): Promise<ApiResponse> => {
   try {
     const objectId = new mongoose.Types.ObjectId(_id);
     const deletedDoc = await Model.deleteOne({ _id: objectId });
-
     if (!deletedDoc) return { ...gbl.response_BAD, message: "User not deleted." };
 
     return { ...gbl.response_DB_UPDATED };

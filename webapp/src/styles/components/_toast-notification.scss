@@ -3,11 +3,18 @@
 @use "../palettes/custom" as custom;
 
 #toast-notification {
-  @apply fixed bottom-10 right-0 z-50 w-auto py-2 px-5 flex flex-col gap-5 items-start max-w-lg;
+  @apply bottom-10 py-2 px-5 gap-5 max-w-lg;
+  right: 0;
+  width: auto;
+  z-index: 50;
+  display: flex;
+  position: fixed;
   overflow: hidden;
   border: 3px solid;
   border-right: none;
+  flex-direction: column;
   text-overflow: ellipsis;
+  align-items: flex-start;
   border-bottom-left-radius: 0.5rem;
   box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
 
@@ -25,9 +32,9 @@
   }
 
   &.dark {
-    &.success,
+    &.hi,
     &.bye,
-    &.hi {
+    &.success {
       color: dark.$color-secondary;
       border-color: dark.$color-secondary;
       background-color: dark.$color-primary;
@@ -51,9 +58,9 @@
   }
 
   &.light {
-    &.success,
+    &.hi,
     &.bye,
-    &.hi {
+    &.success {
       color: light.$color-secondary;
       border-color: light.$color-secondary;
       background-color: light.$color-primary;
@@ -77,9 +84,9 @@
   }
 
   &.custom {
-    &.success,
+    &.hi,
     &.bye,
-    &.hi {
+    &.success {
       color: custom.$color-secondary;
       border-color: custom.$color-secondary;
       background-color: custom.$color-primary;

@@ -3,17 +3,13 @@
 @use "../palettes/custom" as custom;
 
 #user-controls {
-  @apply fixed bottom-5 left-10;
+  @apply bottom-5 left-10;
   z-index: 50;
+  position: fixed;
   border: 3px solid;
   border-top-right-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
   box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
-
-  > div {
-    @apply cursor-pointer p-2;
-    transition: rotate 300ms ease-out;
-  }
 
   ul {
     max-height: 0px;
@@ -25,15 +21,22 @@
       border-bottom-left-radius: 0.5rem;
       transition: background-color 300ms ease-in-out;
 
-      > * {
-        @apply p-2;
-      }
-
       > a {
-        @apply pb-0;
+        @apply p-2;
+        padding-bottom: 0;
         display: inline-block;
       }
+
+      > button {
+        @apply p-2;
+      }
     }
+  }
+
+  > div {
+    @apply p-2;
+    cursor: pointer;
+    transition: rotate 300ms ease-out;
   }
 
   &:hover {
@@ -57,10 +60,20 @@
         fill: dark.$color-primary;
         stroke: dark.$color-primary;
 
+        button {
+          fill: dark.$color-primary;
+          stroke: dark.$color-primary;
+        }
+
         &:hover {
           fill: dark.$color-secondary;
           stroke: dark.$color-secondary;
           background-color: dark.$color-primary;
+
+          button {
+            fill: dark.$color-secondary;
+            stroke: dark.$color-secondary;
+          }
         }
       }
     }
@@ -82,10 +95,20 @@
         fill: light.$color-primary;
         stroke: light.$color-primary;
 
+        button {
+          fill: light.$color-primary;
+          stroke: light.$color-primary;
+        }
+
         &:hover {
           fill: light.$color-secondary;
           stroke: light.$color-secondary;
           background-color: light.$color-primary;
+
+          button {
+            fill: light.$color-secondary;
+            stroke: light.$color-secondary;
+          }
         }
       }
     }
@@ -107,10 +130,20 @@
         fill: custom.$color-primary;
         stroke: custom.$color-primary;
 
+        button {
+          fill: custom.$color-primary;
+          stroke: custom.$color-primary;
+        }
+
         &:hover {
           fill: custom.$color-secondary;
           stroke: custom.$color-secondary;
           background-color: custom.$color-primary;
+
+          button {
+            fill: custom.$color-secondary;
+            stroke: custom.$color-secondary;
+          }
         }
       }
     }

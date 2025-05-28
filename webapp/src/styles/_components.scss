@@ -1,17 +1,100 @@
 @use "./components/forms";
 @use "./components/inputs";
 @use "./components/buttons";
-@use "./components/admin-layout";
+@use "./components/layouts";
 @use "./components/user-controls";
 @use "./components/cookie-banner";
-@use "./components/dashboard-layout";
 @use "./components/toast-notification";
 
 @use "./palettes/dark" as dark;
 @use "./palettes/light" as light;
 @use "./palettes/custom" as custom;
 
+#header {
+  top: 0;
+  right: 0;
+  z-index: 50;
+  width: 100%;
+  width: 100vw;
+  position: sticky;
+
+  > div {
+    @apply py-5 px-10 mt-5;
+    margin: 0 auto;
+    border: 3px solid;
+    max-width: calc(0.25rem * 375);
+    border-top-right-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    width: calc(100% - (0.25rem * 20));
+    box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.5);
+    transition: background-color 300ms ease-in-out, border-color 300ms ease-in-out;
+
+    > div {
+      @apply gap-5 max-w-7xl;
+      display: flex;
+      margin: 0 auto;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+
+      > nav {
+        @apply gap-5;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        > ul {
+          @apply gap-5;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+        }
+      }
+    }
+  }
+
+  &.dark {
+    background: dark.$color-primary;
+
+    > div {
+      color: dark.$color-secondary;
+      background: dark.$color-primary;
+      border-color: dark.$color-secondary;
+    }
+  }
+
+  &.light {
+    background: light.$color-primary;
+
+    > div {
+      color: light.$color-secondary;
+      background: light.$color-primary;
+      border-color: light.$color-secondary;
+    }
+  }
+
+  &.custom {
+    background: custom.$color-primary;
+
+    > div {
+      color: custom.$color-secondary;
+      background: custom.$color-primary;
+      border-color: custom.$color-secondary;
+    }
+  }
+}
+
 #header-logo {
+  @apply gap-1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  p {
+    @apply text-5xl;
+    font-weight: bold;
+  }
+
   &.dark {
     fill: dark.$color-secondary;
     stroke: dark.$color-secondary;
@@ -25,5 +108,134 @@
   &.custom {
     fill: custom.$color-secondary;
     stroke: custom.$color-secondary;
+  }
+}
+
+#sign-out-button {
+  cursor: pointer;
+}
+
+#theme-toggle {
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+}
+
+.scrollbar-y {
+  overflow: hidden;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border: 3px solid;
+    border-radius: 1rem;
+  }
+}
+
+.loading-spinner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.image-container {
+  overflow: hidden;
+  border-top-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  transition: border-color 300ms ease-in-out;
+  box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+.dark,
+.light,
+.custom {
+  .loading-spinner {
+    svg {
+      transition: fill 300ms ease-in-out;
+
+      path {
+        transition: stroke 300ms ease-in-out;
+      }
+    }
+  }
+
+  svg {
+    transition: fill 300ms ease-in-out;
+
+    line,
+    path,
+    rect,
+    polyline {
+      transition: stroke 300ms ease-in-out;
+    }
+  }
+}
+
+.dark {
+  fill: dark.$color-secondary;
+  stroke: dark.$color-secondary;
+
+  .loading-spinner {
+    fill: dark.$color-secondary;
+    stroke: dark.$color-secondary;
+  }
+
+  .scrollbar-y {
+    &::-webkit-scrollbar-track {
+      background: dark.$color-primary;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-color: dark.$color-primary;
+      background-color: dark.$color-secondary;
+    }
+  }
+}
+
+.light {
+  fill: light.$color-secondary;
+  stroke: light.$color-secondary;
+
+  .loading-spinner {
+    fill: light.$color-secondary;
+    stroke: light.$color-secondary;
+  }
+
+  .scrollbar-y {
+    &::-webkit-scrollbar-track {
+      background: light.$color-primary;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-color: light.$color-primary;
+      background-color: light.$color-secondary;
+    }
+  }
+}
+
+.custom {
+  fill: custom.$color-secondary;
+  stroke: custom.$color-secondary;
+
+  .loading-spinner {
+    fill: custom.$color-secondary;
+    stroke: custom.$color-secondary;
+  }
+
+  .scrollbar-y {
+    &::-webkit-scrollbar-track {
+      background: custom.$color-primary;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-color: custom.$color-primary;
+      background-color: custom.$color-secondary;
+    }
   }
 }

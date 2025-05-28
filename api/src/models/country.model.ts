@@ -16,6 +16,7 @@ const schema = new mongoose.Schema({
 
   displayName: {
     type: String,
+    unique: true,
     required: [true, "Please provide a display name."],
   },
   names: {

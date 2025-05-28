@@ -4,7 +4,7 @@ import CookieBanner from "@/components/Banners/CookieBanner";
 import { UserContextProvider } from "@/contexts/userContext";
 import { ToastContextProvider } from "@/contexts/toastContext";
 import { ThemeContextProvider } from "@/contexts/themeContext";
-import { CookieContextProvider } from "@/contexts/cookieContext";
+import { BrowserContextProvider } from "@/contexts/browserContext";
 
 type Props = {
   children: React.ReactNode;
@@ -15,7 +15,7 @@ const AppContextWrapper: React.FC<Readonly<Props>> = (props: Props) => {
 
   return (
     <ClerkProvider>
-      <CookieContextProvider>
+      <BrowserContextProvider>
         <ThemeContextProvider>
           <ToastContextProvider>
             <UserContextProvider>
@@ -25,7 +25,7 @@ const AppContextWrapper: React.FC<Readonly<Props>> = (props: Props) => {
             </UserContextProvider>
           </ToastContextProvider>
         </ThemeContextProvider>
-      </CookieContextProvider>
+      </BrowserContextProvider>
     </ClerkProvider>
   );
 };

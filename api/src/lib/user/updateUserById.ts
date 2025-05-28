@@ -11,13 +11,10 @@ type Props = {
 export default async (props: Props): Promise<ApiResponse> => {
   try {
     const { _id, update } = props;
-
     if (!_id) return { ...gbl.response_BAD, message: "User _id is required." };
-
     if (!update) return { ...gbl.response_NO_CONTENT, message: "No update provided." };
 
     const existingDoc = await getUserById(_id);
-
     if (existingDoc.error) return { ...gbl.response_BAD, message: "User not found." };
 
     const objectId = new mongoose.Types.ObjectId(_id);
@@ -31,8 +28,8 @@ export default async (props: Props): Promise<ApiResponse> => {
       // firstName: update.firstName || existingDoc.data.firstName,
       profileImageURL: update.profileImageURL || existingDoc.data.profileImageURL,
     };
-    const updatedDoc = await Model.updateOne({ _id: objectId }, docUpdate, { new: true });
 
+    const updatedDoc = await Model.updateOne({ _id: objectId }, docUpdate, { new: true });
     if (!updatedDoc || updatedDoc?.modifiedCount === 0) return { ...gbl.response_BAD, message: "User not updated." };
 
     return { ...gbl.response_DB_UPDATED };

@@ -21,7 +21,7 @@ const ThemeToggleButton: React.FC = () => {
   return (
     <button
       id="theme-toggle"
-      className={`${theme} cursor-pointer appearance-none outline-none`}
+      className={theme}
       onClick={() => {
         setTheme((prevValue: ThemeType) => {
           switch (prevValue) {

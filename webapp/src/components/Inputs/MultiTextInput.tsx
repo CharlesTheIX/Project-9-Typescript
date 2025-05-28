@@ -20,15 +20,14 @@ const MultiTextInput: React.FC<Props> = (props: Props) => {
   const [currentValue, setCurrentValue] = useState<string>(defaultCurrentValue);
 
   return (
-    <div className={`input ${className}`}>
+    <div className={`input multi-text-input ${className}`}>
       <input type="hidden" value={JSON.stringify(values)} name={name} required={required} />
 
       {label && <label htmlFor={`${name}-current`}>{label}</label>}
 
-      <div className="flex flex-row gap-2 justify-start w-full">
+      <div className="input">
         <input
           type="text"
-          className="w-full"
           value={currentValue}
           name={`${name}-current`}
           onInput={(event: any) => {
@@ -41,9 +40,7 @@ const MultiTextInput: React.FC<Props> = (props: Props) => {
         <FunctionalButton
           callback={() => {
             const valueExists = values.find((item: string) => item === currentValue);
-
             if (!currentValue || valueExists) return;
-
             setValues((prevValue: string[]) => [...prevValue, currentValue]);
             onAdd(currentValue);
             setCurrentValue("");
@@ -53,12 +50,11 @@ const MultiTextInput: React.FC<Props> = (props: Props) => {
         </FunctionalButton>
       </div>
 
-      <div className="flex flex-row flex-wrap gap-2 justify-start">
+      <div className="values">
         {values.map((value: string, key: number) => {
           return (
             <FunctionalButton
               key={key}
-              className="w-auto"
               callback={() => {
                 onRemove(value);
                 setValues((prevValue: string[]) => {

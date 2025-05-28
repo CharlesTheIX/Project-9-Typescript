@@ -1,8 +1,10 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import Image from "next/image";
+import Edit_SVG from "@/components/SVGs/Edit_SVG";
 import { useUserContext } from "@/contexts/userContext";
-import DefaultLayout from "@/components/Layouts/DefaultLayout";
+import { useThemeContext } from "@/contexts/themeContext";
+import SplitLayout from "@/components/Layouts/SplitLayout";
 
 type Props = {
   country: Country;
@@ -10,30 +12,58 @@ type Props = {
 
 const CountryPage: React.FC<Props> = (props: Props) => {
   const { country } = props;
+  const { theme } = useThemeContext();
   const { userRole } = useUserContext();
-  const [currentCountry, setCurrentCountry] = useState<Country>(country);
 
   return (
-    <DefaultLayout>
-      <section>
-        <div className="py-10 flex flex-col gap-5 item-center">
-          <h1>{currentCountry.displayName}</h1>
+    <SplitLayout>
+      <div>
+        <section>
+          <div className="pt-10 flex flex-col gap-5">
+            <div className="flex flex-row gap-5 items-center">
+              {userRole === "admin" && (
+                <Link className={`${theme}`} href={`/countries/edit/${country._id}`}>
+                  <Edit_SVG width={60} height={60} />
+                </Link>
+              )}
 
-          <p className="max-w-3xl">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt auctor sem nec semper. Ut ornare leo id risus blandit, fringilla fringilla lorem sollicitudin.
-            Donec gravida semper lectus, eu aliquet erat ornare sit amet.
-          </p>
-
-          {userRole === "admin" && (
-            <div>
-              <Link className="button" href={`/countries/edit/${country._id}`}>
-                Edit
-              </Link>
+              <h1>{country.displayName}</h1>
             </div>
-          )}
-        </div>
-      </section>
-    </DefaultLayout>
+
+            <p className="max-w-3xl">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt auctor sem nec semper. Ut ornare leo id risus blandit, fringilla fringilla lorem
+              sollicitudin. Donec gravida semper lectus, eu aliquet erat ornare sit amet.
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <div className="max-w-lg">
+        <section>
+          <div className="pt-10 flex flex-col gap-10 items-center all-width-100">
+            <div className="image-container all-width-100 w-full">
+              {country.imageUrl ? (
+                <Image alt="flag" src={country.imageUrl.replace("http://localhost:3000", "")} width={576} height={411} />
+              ) : (
+                <Image alt="flag" src={"/assets/images/flags/oman.png"} width={576} height={411} />
+              )}
+            </div>
+
+            <div className="flex flex-col gap-0 items-start all-width-100 text-xl">
+              <p>
+                <strong>Capital City:</strong> London
+              </p>
+              <p>
+                <strong>Population:</strong> 120,000,000{" "}
+              </p>
+              <p>
+                <strong>Language(s):</strong> English, Gaelic, Welsh{" "}
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </SplitLayout>
   );
 };
 

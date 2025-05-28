@@ -1,6 +1,7 @@
 "use client";
 import * as gbl from "@/globals";
 import { useRef, useState } from "react";
+import UrlInput from "../Inputs/UrlInput";
 import TextInput from "../Inputs/TextInput";
 import SelectInput from "../Inputs/SelectInput";
 import MultiTextInput from "../Inputs/MultiTextInput";
@@ -85,7 +86,7 @@ const CountryEditForm: React.FC<Props> = (props: Props) => {
             />
             <RectangleInput name="flag-rectangle" label="Flag Rectangle" defaultValue={country.flagRectangle} />
             <RectangleInput name="map-rectangle" label="Map Rectangle" defaultValue={country.mapRectangle} />
-            <TextInput name="image-url" label="Image Url" defaultValue={country.imageUrl} />
+            <UrlInput name="image-url" label="Image Url" defaultValue={country.imageUrl} />
           </div>
 
           <div>

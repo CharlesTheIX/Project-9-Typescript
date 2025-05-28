@@ -1,25 +1,25 @@
 import localFont from "next/font/local";
 
 const JetBrains = localFont({
+  display: "swap",
+  variable: "--font-JetBrains",
   src: [
     {
-      path: "./JetBrainsMono-Regular.ttf",
       weight: "400",
       style: "normal",
+      path: "./JetBrainsMono-Regular.ttf",
     },
     {
-      path: "./JetBrainsMono-Bold.ttf",
       weight: "700",
       style: "normal",
+      path: "./JetBrainsMono-Bold.ttf",
     },
     {
-      path: "./JetBrainsMono-Italic.ttf",
       weight: "400",
       style: "italic",
+      path: "./JetBrainsMono-Italic.ttf",
     },
   ],
-  variable: "--font-JetBrains",
-  display: "swap",
 });
 
 export default JetBrains;

@@ -3,15 +3,18 @@
 @use "../palettes/custom" as custom;
 
 .button {
-  @apply px-5 py-2 w-auto font-bold cursor-pointer;
+  @apply px-5 py-2;
+  width: auto;
+  cursor: pointer;
+  font-weight: bold;
   border: 3px solid;
   border-top-right-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
-  transition: color 300ms ease-in-out, background-color 300ms ease-in-out, border-radius 300ms ease-in-out, border-color 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
 
   &:hover,
-  &:active,
   &:focus,
+  &:active,
   &:focus-within {
     outline: none;
     appearance: none;
@@ -29,8 +32,8 @@
     background-color: dark.$color-secondary;
 
     &:hover,
-    &:active,
     &:focus,
+    &:active,
     &:focus-within {
       color: dark.$color-secondary;
       background-color: dark.$color-primary;
@@ -45,8 +48,8 @@
     background-color: light.$color-secondary;
 
     &:hover,
-    &:active,
     &:focus,
+    &:active,
     &:focus-within {
       color: light.$color-secondary;
       background-color: light.$color-primary;
@@ -61,8 +64,8 @@
     background-color: custom.$color-secondary;
 
     &:hover,
-    &:active,
     &:focus,
+    &:active,
     &:focus-within {
       color: custom.$color-secondary;
       background-color: custom.$color-primary;

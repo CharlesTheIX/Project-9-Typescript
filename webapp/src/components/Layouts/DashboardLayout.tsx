@@ -27,15 +27,15 @@ const DashboardLayout: React.FC<Props> = (props: Props) => {
   const { theme } = useThemeContext();
 
   return (
-    <div id="dashboard-layout" className={`${theme} px-10`}>
+    <div id="dashboard-layout" className={theme}>
       <div>
         <aside>
-          <nav className="w-full">
-            <ul className="flex flex-col items-start justify-start w-full">
+          <nav>
+            <ul>
               {dashboardItems.map((item: NavigationItem, key: number) => {
                 return (
                   <li key={key}>
-                    <Link href={item.href} className="gap-2 flex flex-row items-center justify-start">
+                    <Link href={item.href}>
                       {item.icon === "profile" && <Profile_SVG />}
                       {item.icon === "globe" && <Globe_SVG />}
                       <span>{item.label}</span>
@@ -46,7 +46,7 @@ const DashboardLayout: React.FC<Props> = (props: Props) => {
             </ul>
           </nav>
         </aside>
-        <main className={`${theme} flex flex-col min-h-full w-full`}>{children}</main>
+        <main className={theme}>{children}</main>
       </div>
     </div>
   );

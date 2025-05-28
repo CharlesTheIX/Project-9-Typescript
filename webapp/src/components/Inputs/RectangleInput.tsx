@@ -14,17 +14,18 @@ const RectangleInput: React.FC<Props> = (props: Props) => {
   const [value, setValue] = useState<Rectangle>(defaultValue);
 
   return (
-    <div className={`input ${className} gap-5 flex flex-col`}>
+    <div className={`input rectangle-input ${className}`}>
       <input type="hidden" value={JSON.stringify(value)} name={name} />
 
       {label && <label htmlFor={`${name}-input-x`}>{label}</label>}
 
-      <div className="flex flex-row gap-2 all-width-100">
-        <div className="flex flex-col all-width-100">
-          <p className="text-xs">X</p>
+      <div>
+        <div>
+          <p>X</p>
           <input
             step="1"
             type="number"
+            value={`${value.x}`}
             name={`${name}-input-x`}
             onInput={(event: any) => {
               const target = event.currentTarget || event.target;
@@ -38,11 +39,12 @@ const RectangleInput: React.FC<Props> = (props: Props) => {
           />
         </div>
 
-        <div className="flex flex-col all-width-100">
-          <p className="text-xs">Y</p>
+        <div>
+          <p>Y</p>
           <input
             step="1"
             type="number"
+            value={`${value.y}`}
             name={`${name}-input-y`}
             onInput={(event: any) => {
               const target = event.currentTarget || event.target;
@@ -56,11 +58,12 @@ const RectangleInput: React.FC<Props> = (props: Props) => {
           />
         </div>
 
-        <div className="flex flex-col all-width-100">
-          <p className="text-xs">Width</p>
+        <div>
+          <p>Width</p>
           <input
             step="1"
             type="number"
+            value={`${value.width}`}
             name={`${name}-input-width`}
             onInput={(event: any) => {
               const target = event.currentTarget || event.target;
@@ -74,11 +77,12 @@ const RectangleInput: React.FC<Props> = (props: Props) => {
           />
         </div>
 
-        <div className="flex flex-col all-width-100">
-          <p className="text-xs">Height</p>
+        <div>
+          <p>Height</p>
           <input
             step="1"
             type="number"
+            value={`${value.height}`}
             name={`${name}-input-height`}
             onInput={(event: any) => {
               const target = event.currentTarget || event.target;

@@ -20,48 +20,42 @@ const PasswordInput: React.FC<Props> = (props: Props) => {
   const [confirmationValue, setConfirmationValue] = useState<string>(defaultValue);
 
   return (
-    <>
-      <div className={`input ${className} all-width-100`}>
-        {label && <label htmlFor={name}>{label}</label>}
+    <div className={`input password-input ${className}`}>
+      {label && <label htmlFor={name}>{label}</label>}
 
-        <div className="all-width-100  flex flex-col gap-5">
-          <div className="relative">
-            <input
-              type={type}
-              name={name}
-              value={value}
-              className="w-full"
-              required={required}
-              onInput={(event: any) => {
-                const target = event.currentTarget || event.target;
-                setValue(target.value);
-                onInput(target);
-              }}
-            />
+      <div>
+        <div className="password">
+          <input
+            type={type}
+            name={name}
+            value={value}
+            required={required}
+            onInput={(event: any) => {
+              const target = event.currentTarget || event.target;
+              setValue(target.value);
+              onInput(target);
+            }}
+          />
 
-            <div
-              className="absolute top-3 right-5 cursor-pointer"
-              onClick={() => {
-                setType((prevValue: "password" | "text") => {
-                  return prevValue === "password" ? "text" : "password";
-                });
-              }}
-            >
-              {type === "password" ? <Eye_SVG primaryColor={"inherit"} width={24} height={24} /> : <EyeSlash_SVG primaryColor={undefined} width={24} height={24} />}
-            </div>
+          <div
+            className="hide-show"
+            onClick={() => {
+              setType((prevValue: "password" | "text") => {
+                return prevValue === "password" ? "text" : "password";
+              });
+            }}
+          >
+            {type === "password" ? <Eye_SVG primaryColor={"inherit"} width={24} height={24} /> : <EyeSlash_SVG primaryColor={undefined} width={24} height={24} />}
           </div>
         </div>
-      </div>
 
-      {includeConfirmation && (
-        <div className={`input ${className}-confirmation all-width-100`}>
-          {label && <label htmlFor={name}>{label} Confirmation</label>}
+        {includeConfirmation && (
+          <div className="password-confirmation">
+            {label && <label htmlFor={name}>{label} Confirmation</label>}
 
-          <div className="all-width-100  flex flex-col gap-5">
-            <div className="relative">
+            <div className="password">
               <input
                 type={type}
-                className="w-full"
                 required={required}
                 value={confirmationValue}
                 name={`${name}-confirmation`}
@@ -72,7 +66,7 @@ const PasswordInput: React.FC<Props> = (props: Props) => {
               />
 
               <div
-                className="absolute top-3 right-5 cursor-pointer"
+                className="hide-show"
                 onClick={() => {
                   setType((prevValue: "password" | "text") => {
                     return prevValue === "password" ? "text" : "password";
@@ -83,9 +77,9 @@ const PasswordInput: React.FC<Props> = (props: Props) => {
               </div>
             </div>
           </div>
-        </div>
-      )}
-    </>
+        )}
+      </div>
+    </div>
   );
 };
 

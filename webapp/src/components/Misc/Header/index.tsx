@@ -11,16 +11,16 @@ const Header: React.FC = () => {
   const { user, userRole } = useUserContext();
 
   return (
-    <header className={`sticky top-0 right-0 w-screen ${theme}`}>
-      <div className="py-5 px-10 mt-5 mx-auto">
-        <div className="flex flex-row gap-5 items-center justify-between max-w-7xl mx-auto">
-          <Link id="header-logo" href="/" className={`flex flex-row gap-1 items-center ${theme}`}>
+    <header id="header" className={theme}>
+      <div>
+        <div>
+          <Link id="header-logo" href="/" className={theme}>
             <Terminal_SVG width={50} height={50} />
-            <p className="text-5xl font-bold">P9</p>
+            <p>P9</p>
           </Link>
 
-          <nav className="flex flex-row gap-5 items-center">
-            <ul className="flex flex-row gap-5 items-center">
+          <nav>
+            <ul>
               {!user ? (
                 <>
                   {NI.signedOutItems.map((item: NavigationItem, key: number) => {

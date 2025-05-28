@@ -5,15 +5,15 @@ type Props = {
   children: React.ReactNode;
 };
 
-const DefaultLayout: React.FC<Props> = (props: Props) => {
+const SplitLayout: React.FC<Props> = (props: Props) => {
   const { children } = props;
   const { theme } = useThemeContext();
 
   return (
-    <main id="default-layout" className={theme}>
-      {children}
+    <main id="split-layout" className={theme}>
+      <div>{children}</div>
     </main>
   );
 };
 
-export default DefaultLayout;
+export default SplitLayout;
