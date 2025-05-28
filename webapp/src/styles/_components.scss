@@ -11,6 +11,7 @@
 @use "./palettes/custom" as custom;
 
 #header {
+  @apply pt-5;
   top: 0;
   right: 0;
   z-index: 50;
@@ -19,7 +20,7 @@
   position: sticky;
 
   > div {
-    @apply py-5 px-10 mt-5;
+    @apply py-5 px-10;
     margin: 0 auto;
     border: 3px solid;
     max-width: calc(0.25rem * 375);

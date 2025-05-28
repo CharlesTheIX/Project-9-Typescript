@@ -7,4 +7,5 @@ export const metadata: Metadata = {
 };
 
 const Page: React.FC = () => <CookiesPage />;
+
 export default Page;

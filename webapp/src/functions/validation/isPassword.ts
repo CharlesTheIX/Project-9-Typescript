@@ -12,6 +12,6 @@ export default (value: any, minLength: number = 8): boolean => {
     if (!specialCharacterRegex.test(value)) response = false;
     return response;
   } catch (error: any) {
-    return false
+    return false;
   }
 };

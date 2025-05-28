@@ -5,12 +5,10 @@ const SignInPage: React.FC = () => {
   return (
     <DefaultLayout>
       <section>
-        <div className="py-10 flex flex-col gap-5 item-center">
+        <div className="flex flex-col gap-10 item-center">
           <h1>Sign In</h1>
 
-          <div>
-            <SignInForm />
-          </div>
+          <SignInForm />
         </div>
       </section>
     </DefaultLayout>

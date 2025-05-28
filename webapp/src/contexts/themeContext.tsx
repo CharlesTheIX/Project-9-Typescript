@@ -18,6 +18,7 @@ export const ThemeContextProvider = (props: { children: React.ReactNode }) => {
   const { children } = props;
   const hasInit = useRef<boolean>(false);
   const [theme, setTheme] = useState<ThemeType>(defaultValue.theme);
+
   const value: ThemeContextData = { theme, setTheme };
 
   useEffect(() => {

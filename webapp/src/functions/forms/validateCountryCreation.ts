@@ -1,4 +1,6 @@
 import isUrl from "../validation/isUrl";
+import isName from "../validation/isName";
+import isNumber from "../validation/isNumber";
 import isContinent from "../validation/isContinent";
 import isRectangle from "../validation/isRectangle";
 import isAlphanumeric from "../validation/isAlphanumeric";
@@ -11,7 +13,7 @@ export default (requestData: Country): FormError => {
   Object.keys(requestData).map((item: string) => {
     switch (item) {
       case "displayName":
-        if (!isAlphanumeric(requestData[item], 5)) {
+        if (!isName(requestData[item], 4)) {
           formError.error = true;
           formError.message = updateFormErrorMessage(formError.message, "Display Name");
         }
@@ -26,6 +28,30 @@ export default (requestData: Country): FormError => {
         if (!isContinent(requestData[item])) {
           formError.error = true;
           formError.message = updateFormErrorMessage(formError.message, "Continent");
+        }
+        break;
+      case "description":
+        if (requestData[item] && !isAlphanumeric(requestData[item], 5)) {
+          formError.error = true;
+          formError.message = updateFormErrorMessage(formError.message, "Description");
+        }
+        break;
+      case "capitalCity":
+        if (requestData[item] && !isName(requestData[item], 3)) {
+          formError.error = true;
+          formError.message = updateFormErrorMessage(formError.message, "Capital City");
+        }
+        break;
+      case "languages":
+        if (requestData[item] && requestData[item].length > 0 && !isArrayOfStrings(requestData[item], 1)) {
+          formError.error = true;
+          formError.message = updateFormErrorMessage(formError.message, "Languages");
+        }
+        break;
+      case "population":
+        if (requestData[item] && !isNumber(requestData[item], "int")) {
+          formError.error = true;
+          formError.message = updateFormErrorMessage(formError.message, "Population");
         }
         break;
       case "flagRectangle":

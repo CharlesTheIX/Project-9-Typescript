@@ -9,6 +9,12 @@
 }
 
 body {
+  width: 100vw;
+  display: flex;
+  overflow-x: hidden;
+  align-items: stretch;
+  flex-direction: column;
+  justify-content: space-between;
   background-color: dark.$color-primary;
 }
 
@@ -86,7 +92,7 @@ svg {
 }
 
 .animate-blink {
-  animation: blink 1000ms liner infinite;
+  animation: blink 2000ms linear 0ms infinite forwards;
 }
 
 .all-width-100 > * {
@@ -101,6 +107,9 @@ svg {
 
 @keyframes blink {
   0% {
+    opacity: 0;
+  }
+  49% {
     opacity: 0;
   }
   50% {

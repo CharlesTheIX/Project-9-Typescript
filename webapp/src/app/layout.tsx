@@ -1,9 +1,10 @@
 import "@/styles/globals.scss";
-import Header from "@/components/Misc/Header";
-import Footer from "@/components/Misc/Footer";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata, Viewport } from "next";
 import JetBrains from "@/styles/fonts/JetBrains";
-import AppContextWrapper from "@/components/Misc/AppContextWrapper";
+import AppContextWrapper from "@/components/AppContextWrapper";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -39,15 +40,17 @@ const RootLayout: React.FC<Readonly<Props>> = (props: Props) => {
   const { children } = props;
 
   return (
-    <html lang="en-gb">
-      <body className={`antialiased min-h-screen flex flex-col gap-0 justify-between items-stretch ${JetBrains.className}`}>
-        <AppContextWrapper>
-          <Header />
-          {children}
-          <Footer />
-        </AppContextWrapper>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en-gb">
+        <body className={`antialiased ${JetBrains.className}`}>
+          <AppContextWrapper>
+            <Header />
+            {children}
+            <Footer />
+          </AppContextWrapper>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 };
 

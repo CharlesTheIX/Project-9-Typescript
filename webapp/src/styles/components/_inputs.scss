@@ -9,7 +9,8 @@
   flex-direction: column;
 
   input,
-  select {
+  select,
+  textarea {
     @apply px-5 py-2;
     outline: none;
     appearance: none;
@@ -193,7 +194,8 @@
 .dark {
   .input {
     input,
-    select {
+    select,
+    textarea {
       border-color: dark.$color-secondary;
       background-color: dark.$color-primary;
 
@@ -255,7 +257,8 @@
 .light {
   .input {
     input,
-    select {
+    select,
+    textarea {
       border-color: light.$color-secondary;
       background-color: light.$color-primary;
 
@@ -317,7 +320,8 @@
 .custom {
   .input {
     input,
-    select {
+    select,
+    textarea {
       border-color: custom.$color-secondary;
       background-color: custom.$color-primary;
 

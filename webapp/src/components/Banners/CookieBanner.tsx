@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { useThemeContext } from "@/contexts/themeContext";
-import FunctionalButton from "../Buttons/FunctionalButton";
 import { useBrowserContext } from "@/contexts/browserContext";
 
 const noShowPathnames = ["/cookies"];
@@ -28,8 +27,9 @@ const CookieBanner: React.FC = () => {
             <h5>Cookie Banner</h5>
 
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent blandit quis sapien ac porta. Sed quis eros turpis. Proin suscipit augue sed nisi imperdiet,
-              pharetra dignissim leo sagittis. Nulla eget egestas neque. In hac habitasse platea dictumst. Nullam et lacus leo. facilisis.{" "}
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent blandit quis sapien ac porta. Sed quis
+              eros turpis. Proin suscipit augue sed nisi imperdiet, pharetra dignissim leo sagittis. Nulla eget egestas
+              neque. In hac habitasse platea dictumst. Nullam et lacus leo. facilisis.{" "}
               <Link href={"/cookies"} className="link-text">
                 Cookies policy.
               </Link>
@@ -37,21 +37,25 @@ const CookieBanner: React.FC = () => {
           </div>
 
           <div>
-            <FunctionalButton
-              callback={() => {
+            <button
+              type="button"
+              className="button"
+              onClick={() => {
                 updateCookie(true);
               }}
             >
               Accept
-            </FunctionalButton>
+            </button>
 
-            <FunctionalButton
-              callback={() => {
+            <button
+              type="button"
+              className="button"
+              onClick={() => {
                 setCookie({ name: "null", value: true });
               }}
             >
               Reject
-            </FunctionalButton>
+            </button>
           </div>
         </div>
       </div>

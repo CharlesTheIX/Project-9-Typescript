@@ -32,6 +32,22 @@ const schema = new mongoose.Schema({
     type: String,
     default: "",
   },
+  description: {
+    type: String,
+    default: "",
+  },
+  capitalCity: {
+    type: String,
+    default: "",
+  },
+  languages: {
+    type: [String],
+    default: [],
+  },
+  population: {
+    type: Number,
+    default: 0,
+  },
   flagRectangle: {
     type: {
       x: Number,

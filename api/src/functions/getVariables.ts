@@ -34,4 +34,4 @@ export const mongoDBVariables = (): MongoDBVariables => {
 
 export const cryptoVariables = (): string => {
   return process.env.CRYPTO_SECRET!;
-}
+};

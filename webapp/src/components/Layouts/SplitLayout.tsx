@@ -10,8 +10,8 @@ const SplitLayout: React.FC<Props> = (props: Props) => {
   const { theme } = useThemeContext();
 
   return (
-    <main id="split-layout" className={theme}>
-      <div>{children}</div>
+    <main id="split-layout" className={`${theme} layout`}>
+      {children}
     </main>
   );
 };

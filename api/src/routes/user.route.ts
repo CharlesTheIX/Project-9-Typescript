@@ -1,13 +1,13 @@
 import * as gbl from "../globals";
-import createUser from "../lib/user/createUser";
-import getAllUsers from "../lib/user/getAllUsers";
-import getUserById from "../lib/user/getUserById";
-import getUserByEmail from "../lib/user/getUserByEmail";
-import updateUserById from "../lib/user/updateUserById";
-import deleteUserById from "../lib/user/deleteUserById";
-import getUserByClerkId from "../lib/user/getUserByClerkId";
+import createUser from "../functions/user/createUser";
+import getAllUsers from "../functions/user/getAllUsers";
+import getUserById from "../functions/user/getUserById";
+import getUserByEmail from "../functions/user/getUserByEmail";
+import updateUserById from "../functions/user/updateUserById";
+import deleteUserById from "../functions/user/deleteUserById";
+import getUserByClerkId from "../functions/user/getUserByClerkId";
 import express, { Router, Request, Response } from "express";
-import getUserByUsername from "../lib/user/getUserByUsername";
+import getUserByUsername from "../functions/user/getUserByUsername";
 
 const router: Router = express.Router();
 
@@ -58,7 +58,8 @@ router.route("/by-email").post(async (request: Request, response: Response): Pro
 router.route("/by-username").post(async (request: Request, response: Response): Promise<any> => {
   const { username } = request.body;
 
-  if (!username) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: username." });
+  if (!username)
+    return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: username." });
 
   try {
     const res = await getUserByUsername(username);

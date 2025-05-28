@@ -10,7 +10,7 @@ const DefaultLayout: React.FC<Props> = (props: Props) => {
   const { theme } = useThemeContext();
 
   return (
-    <main id="default-layout" className={theme}>
+    <main id="default-layout" className={`${theme} layout`}>
       {children}
     </main>
   );

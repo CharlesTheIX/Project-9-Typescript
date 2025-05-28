@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import FunctionalButton from "../Buttons/FunctionalButton";
 
 type Props = {
   name: string;
@@ -15,7 +14,17 @@ type Props = {
 };
 
 const MultiTextInput: React.FC<Props> = (props: Props) => {
-  const { name, label = "", className = "", onAdd = () => {}, required = false, defaultValue = [], onInput = () => {}, onRemove = () => {}, defaultCurrentValue = "" } = props;
+  const {
+    name,
+    label = "",
+    className = "",
+    onAdd = () => {},
+    required = false,
+    defaultValue = [],
+    onInput = () => {},
+    onRemove = () => {},
+    defaultCurrentValue = "",
+  } = props;
   const [values, setValues] = useState<string[]>(defaultValue);
   const [currentValue, setCurrentValue] = useState<string>(defaultCurrentValue);
 
@@ -37,8 +46,10 @@ const MultiTextInput: React.FC<Props> = (props: Props) => {
           }}
         />
 
-        <FunctionalButton
-          callback={() => {
+        <button
+          type="button"
+          className="button"
+          onClick={() => {
             const valueExists = values.find((item: string) => item === currentValue);
             if (!currentValue || valueExists) return;
             setValues((prevValue: string[]) => [...prevValue, currentValue]);
@@ -47,15 +58,17 @@ const MultiTextInput: React.FC<Props> = (props: Props) => {
           }}
         >
           Add
-        </FunctionalButton>
+        </button>
       </div>
 
       <div className="values">
         {values.map((value: string, key: number) => {
           return (
-            <FunctionalButton
+            <button
               key={key}
-              callback={() => {
+              type="button"
+              className="button"
+              onClick={() => {
                 onRemove(value);
                 setValues((prevValue: string[]) => {
                   return prevValue.filter((item: string) => item !== value);
@@ -63,7 +76,7 @@ const MultiTextInput: React.FC<Props> = (props: Props) => {
               }}
             >
               {value}
-            </FunctionalButton>
+            </button>
           );
         })}
       </div>

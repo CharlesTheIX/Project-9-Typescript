@@ -3,7 +3,7 @@ import Link from "next/link";
 import * as gbl from "@/globals";
 import { useState, useEffect } from "react";
 import SelectInput from "../Inputs/SelectInput";
-import LoadingContainer from "../Misc/LoadingContainer";
+import LoadingContainer from "../LoadingContainer";
 import getAllCountries from "@/functions/countries/getAllCountries";
 import getCountriesByContinent from "@/functions/countries/getCountriesByContinent";
 
@@ -17,7 +17,14 @@ const CountryFeed: React.FC = () => {
     setIsLoading(true);
 
     try {
-      var response: ApiResponse = item === "all" ? await getAllCountries(200) : await getCountriesByContinent({ continent: item, limit: 200 });
+      var response: ApiResponse;
+
+      if (item === "all") {
+        response = await getAllCountries(200);
+      } else {
+        response = await getCountriesByContinent({ continent: item, limit: 200 });
+      }
+
       if (response.error) throw new Error(response.message);
       setCountries(response.data || []);
       setContinent(item);

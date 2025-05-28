@@ -25,8 +25,10 @@ const Header: React.FC = () => {
                 <>
                   {NI.signedOutItems.map((item: NavigationItem, key: number) => {
                     return (
-                      <li key={key} className="button">
-                        <Link href={item.href}>{item.label}</Link>
+                      <li key={key}>
+                        <Link href={item.href} className="button">
+                          {item.label}
+                        </Link>
                       </li>
                     );
                   })}
@@ -37,8 +39,10 @@ const Header: React.FC = () => {
                     <>
                       {NI.adminItems.map((item: NavigationItem, key: number) => {
                         return (
-                          <li key={key} className="button">
-                            <Link href={item.href}>{item.label}</Link>
+                          <li key={key}>
+                            <Link href={item.href} className="button">
+                              {item.label}
+                            </Link>
                           </li>
                         );
                       })}
@@ -47,8 +51,10 @@ const Header: React.FC = () => {
                     <>
                       {NI.signedInItems.map((item: NavigationItem, key: number) => {
                         return (
-                          <li key={key} className="button">
-                            <Link href={item.href}>{item.label}</Link>
+                          <li key={key}>
+                            <Link href={item.href} className="button">
+                              {item.label}
+                            </Link>
                           </li>
                         );
                       })}

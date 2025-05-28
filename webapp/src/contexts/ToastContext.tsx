@@ -2,8 +2,8 @@
 import Bye_SVG from "@/components/SVGs/Bye_SVG";
 import { useThemeContext } from "./themeContext";
 import Error_SVG from "@/components/SVGs/Error_SVG";
-import { createContext, useContext, useState, useEffect, useRef } from "react";
 import Success_SVG from "@/components/SVGs/Success_SVG";
+import { createContext, useContext, useState, useEffect, useRef } from "react";
 
 type ToastType = "success" | "error" | "none" | "bye" | "hi";
 type ToastContextData = {

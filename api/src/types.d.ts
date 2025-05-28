@@ -13,7 +13,11 @@ type Country = MongoDocDefaults & {
   names: string[];
   continent: string;
   imageUrl?: string;
+  population?: number;
   displayName: string;
+  description?: string;
+  capitalCity?: string;
+  languages?: string[];
   mapRectangle: Rectangle;
   flagRectangle: Rectangle;
 };

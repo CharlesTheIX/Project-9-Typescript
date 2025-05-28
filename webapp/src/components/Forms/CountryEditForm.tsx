@@ -4,9 +4,11 @@ import { useRef, useState } from "react";
 import UrlInput from "../Inputs/UrlInput";
 import TextInput from "../Inputs/TextInput";
 import SelectInput from "../Inputs/SelectInput";
+import NumberInput from "../Inputs/NumberInput";
+import LoadingContainer from "../LoadingContainer";
+import TextareaInput from "../Inputs/TextAreaInput";
 import MultiTextInput from "../Inputs/MultiTextInput";
 import RectangleInput from "../Inputs/RectangleInput";
-import LoadingContainer from "../Misc/LoadingContainer";
 import { useThemeContext } from "@/contexts/themeContext";
 import { useToastContext } from "@/contexts/toastContext";
 import updateCountryById from "@/functions/countries/updateCountryById";
@@ -36,12 +38,28 @@ const CountryEditForm: React.FC<Props> = (props: Props) => {
 
       const formData = new FormData(form);
       const imageUrl: string = formData.get("image-url")?.toString() || "";
+      const description: string = formData.get("description")?.toString() || "";
       const displayName: string = formData.get("display-name")?.toString() || "";
+      const capitalCity: string = formData.get("capital-city")?.toString() || "";
       const names: string[] = JSON.parse(formData.get("names")?.toString() || "[]");
+      const population: number = parseInt(formData.get("population")?.toString() || "0");
+      const languages: string[] = JSON.parse(formData.get("languages")?.toString() || "[]");
       const continent = JSON.parse(formData.get("continent")?.toString() || `${gbl.nullOption}`).value as Continent;
       const mapRectangle: Rectangle = JSON.parse(formData.get("map-rectangle")?.toString() || `${gbl.nullRectangle}`);
       const flagRectangle: Rectangle = JSON.parse(formData.get("flag-rectangle")?.toString() || `${gbl.nullRectangle}`);
-      const requestData: Country = { names, imageUrl, continent, displayName, mapRectangle, flagRectangle };
+
+      const requestData: Country = {
+        names,
+        imageUrl,
+        continent,
+        languages,
+        population,
+        displayName,
+        description,
+        capitalCity,
+        mapRectangle,
+        flagRectangle,
+      };
 
       const hasErrors = validateCountryCreation(requestData);
       if (hasErrors.error) throw new Error(`Invalid ${hasErrors.message}`);
@@ -84,13 +102,22 @@ const CountryEditForm: React.FC<Props> = (props: Props) => {
               options={gbl.continentOptions}
               defaultValue={gbl.continentOptions.find((option: Option) => option.value === country.continent)}
             />
+            <MultiTextInput name="languages" label="Languages" defaultValue={country.languages} />
+            <NumberInput name="population" label="Population" min={0} defaultValue={`${country.population}`} />
+            <TextInput name="capital-city" label="Capital City" defaultValue={country.capitalCity} />
+            <TextareaInput name="description" label="Description" defaultValue={country.description} />
+            <UrlInput name="image-url" label="Image Url" defaultValue={country.imageUrl} />
             <RectangleInput name="flag-rectangle" label="Flag Rectangle" defaultValue={country.flagRectangle} />
             <RectangleInput name="map-rectangle" label="Map Rectangle" defaultValue={country.mapRectangle} />
-            <UrlInput name="image-url" label="Image Url" defaultValue={country.imageUrl} />
           </div>
 
           <div>
-            <input className={`button w-auto ${isLoading ? "disabled" : ""}`} type="submit" content="Submit" disabled={isLoading} />
+            <input
+              type="submit"
+              content="Submit"
+              disabled={isLoading}
+              className={`button w-auto ${isLoading ? "disabled" : ""}`}
+            />
           </div>
         </div>
       </form>

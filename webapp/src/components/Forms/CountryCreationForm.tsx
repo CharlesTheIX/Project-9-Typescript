@@ -4,9 +4,11 @@ import { useRef, useState } from "react";
 import UrlInput from "../Inputs/UrlInput";
 import TextInput from "../Inputs/TextInput";
 import SelectInput from "../Inputs/SelectInput";
+import NumberInput from "../Inputs/NumberInput";
+import LoadingContainer from "../LoadingContainer";
+import TextareaInput from "../Inputs/TextAreaInput";
 import MultiTextInput from "../Inputs/MultiTextInput";
 import RectangleInput from "../Inputs/RectangleInput";
-import LoadingContainer from "../Misc/LoadingContainer";
 import { useToastContext } from "@/contexts/toastContext";
 import { useThemeContext } from "@/contexts/themeContext";
 import createCountry from "@/functions/countries/createCountry";
@@ -15,7 +17,11 @@ import validateCountryCreation from "@/functions/forms/validateCountryCreation";
 const nullCountry: Country = {
   names: [],
   imageUrl: "",
+  languages: [],
+  population: 0,
   displayName: "",
+  description: "",
+  capitalCity: "",
   continent: "" as Continent,
   mapRectangle: gbl.nullRectangle,
   flagRectangle: gbl.nullRectangle,
@@ -38,12 +44,28 @@ const CountryCreationForm: React.FC = () => {
 
       const formData = new FormData(form);
       const imageUrl: string = formData.get("image-url")?.toString() || "";
+      const description: string = formData.get("description")?.toString() || "";
       const displayName: string = formData.get("display-name")?.toString() || "";
+      const capitalCity: string = formData.get("capital-city")?.toString() || "";
       const names: string[] = JSON.parse(formData.get("names")?.toString() || "[]");
+      const population: number = parseInt(formData.get("population")?.toString() || "0");
+      const languages: string[] = JSON.parse(formData.get("languages")?.toString() || "[]");
       const continent = JSON.parse(formData.get("continent")?.toString() || `${gbl.nullOption}`).value as Continent;
       const mapRectangle: Rectangle = JSON.parse(formData.get("map-rectangle")?.toString() || `${gbl.nullRectangle}`);
       const flagRectangle: Rectangle = JSON.parse(formData.get("flag-rectangle")?.toString() || `${gbl.nullRectangle}`);
-      const requestData: Country = { names, imageUrl, continent, displayName, mapRectangle, flagRectangle };
+
+      const requestData: Country = {
+        names,
+        imageUrl,
+        continent,
+        languages,
+        population,
+        displayName,
+        description,
+        capitalCity,
+        mapRectangle,
+        flagRectangle,
+      };
 
       const hasErrors = validateCountryCreation(requestData);
       if (hasErrors.error) throw new Error(`Invalid ${hasErrors.message}`);
@@ -80,8 +102,19 @@ const CountryCreationForm: React.FC = () => {
               </div>
             )}
 
-            <TextInput name="display-name" label="Display Name" required={true} defaultValue={defaultValues.displayName} />
-            <MultiTextInput name="names" label="Names" required={true} defaultValue={defaultValues.names} defaultCurrentValue={defaultValues.displayName} />
+            <TextInput
+              required={true}
+              name="display-name"
+              label="Display Name"
+              defaultValue={defaultValues.displayName}
+            />
+            <MultiTextInput
+              name="names"
+              label="Names"
+              required={true}
+              defaultValue={defaultValues.names}
+              defaultCurrentValue={defaultValues.displayName}
+            />
             <SelectInput
               required={true}
               name="continent"
@@ -89,13 +122,27 @@ const CountryCreationForm: React.FC = () => {
               options={gbl.continentOptions}
               defaultValue={{ value: defaultValues.continent, label: defaultValues.continent }}
             />
+            <MultiTextInput
+              name="languages"
+              label="Languages"
+              defaultValue={defaultValues.languages}
+              defaultCurrentValue={defaultValues.displayName}
+            />
+            <NumberInput name="population" label="Population" min={0} defaultValue={`${defaultValues.population}`} />
+            <TextInput name="capital-city" label="Capital City" defaultValue={defaultValues.capitalCity} />
+            <TextareaInput name="description" label="Description" defaultValue={defaultValues.description} />
+            <UrlInput name="image-url" label="Image Url" defaultValue={defaultValues.imageUrl} />
             <RectangleInput name="flag-rectangle" label="Flag Rectangle" defaultValue={defaultValues.flagRectangle} />
             <RectangleInput name="map-rectangle" label="Map Rectangle" defaultValue={defaultValues.mapRectangle} />
-            <UrlInput name="image-url" label="Image Url" defaultValue={defaultValues.imageUrl} />
           </div>
 
           <div>
-            <input className={`button ${isLoading ? "disabled" : ""}`} type="submit" content={isLoading ? "Loading" : "Submit"} disabled={isLoading} />
+            <input
+              type="submit"
+              disabled={isLoading}
+              content={isLoading ? "Loading" : "Submit"}
+              className={`button ${isLoading ? "disabled" : ""}`}
+            />
           </div>
         </div>
       </form>

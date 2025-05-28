@@ -3,7 +3,7 @@ import express from "express";
 import userRouter from "./routes/user.route";
 import healthRouter from "./routes/health.route";
 import countryRouter from "./routes/country.route";
-import bearerAuthentication from "./lib/auth/bearerAuth";
+import bearerAuthentication from "./functions/auth/bearerAuth";
 
 const version = "v1";
 const app = express();

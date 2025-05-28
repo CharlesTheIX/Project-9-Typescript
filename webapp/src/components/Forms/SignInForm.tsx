@@ -2,8 +2,8 @@
 import { useRef, useState } from "react";
 import { useSignIn } from "@clerk/nextjs";
 import EmailInput from "../Inputs/EmailInput";
+import LoadingContainer from "../LoadingContainer";
 import PasswordInput from "../Inputs/PasswordInput";
-import LoadingContainer from "../Misc/LoadingContainer";
 import { useUserContext } from "@/contexts/userContext";
 import { useToastContext } from "@/contexts/toastContext";
 import { useThemeContext } from "@/contexts/themeContext";
@@ -32,6 +32,7 @@ const SignInForm: React.FC = () => {
       const formData = new FormData(form);
       const email: string = formData.get("email")?.toString() || "";
       const password: string = formData.get("password")?.toString() || "";
+
       const requestData: SignInRequestData = { email, password };
 
       const hasErrors = validateSignIn(requestData);
@@ -72,7 +73,12 @@ const SignInForm: React.FC = () => {
           </div>
 
           <div>
-            <input className={`button w-auto ${isLoading ? "disabled" : ""}`} type="submit" content="Submit" disabled={isLoading} />
+            <input
+              type="submit"
+              content="Submit"
+              disabled={isLoading}
+              className={`button w-auto ${isLoading ? "disabled" : ""}`}
+            />
           </div>
         </div>
       </form>

@@ -13,14 +13,16 @@ const isSignedInRoute = createRouteMatcher(signedInRoutes);
 export default clerkMiddleware(async (auth: ClerkMiddlewareAuth, request: NextRequest) => {
   const { userId } = await auth();
 
-  if (userId && isSignedInRoute(request)) return NextResponse.redirect(new URL("/dashboard", process.env.BASE_URL));
+  if (userId && isSignedInRoute(request)) {
+    return NextResponse.redirect(new URL("/dashboard", process.env.NEXT_PUBLIC_BASE_URL));
+  }
 
   if (isPublicRoute(request)) return NextResponse.next();
 
   if (userId && isAdminRoute(request)) {
     const userResponse = await getUserByClerkId(userId);
     if (userResponse.error || userResponse.data.role !== "admin") {
-      return NextResponse.redirect(new URL("/403", process.env.BASE_URL));
+      return NextResponse.redirect(new URL("/403", process.env.NEXT_PUBLIC_BASE_URL));
     }
 
     return NextResponse.next();
@@ -30,5 +32,7 @@ export default clerkMiddleware(async (auth: ClerkMiddlewareAuth, request: NextRe
 });
 
 export const config = {
-  matcher: ["/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)"],
+  matcher: [
+    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
+  ],
 };

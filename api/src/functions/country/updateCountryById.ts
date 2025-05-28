@@ -11,9 +11,7 @@ type Props = {
 export default async (props: Props): Promise<ApiResponse> => {
   try {
     const { _id, update } = props;
-
     if (!_id) return { ...gbl.response_BAD, message: "Country _id is required." };
-
     if (!update) return { ...gbl.response_NO_CONTENT, message: "No update provided." };
 
     const existingDoc = await getCountryById(_id);
@@ -23,7 +21,11 @@ export default async (props: Props): Promise<ApiResponse> => {
     const docUpdate = {
       updatedAt: new Date(),
       imageUrl: update.imageUrl || existingDoc.data.imageUrl,
+      languages: update.languages || existingDoc.data.languages,
       continent: update.continent || existingDoc.data.continent,
+      population: update.population || existingDoc.data.population,
+      description: update.description || existingDoc.data.description,
+      capitalCity: update.capitalCity || existingDoc.data.capitalCity,
       displayName: update.displayName || existingDoc.data.displayName,
       mapRectangle: update.mapRectangle || existingDoc.data.mapRectangle,
       flagRectangle: update.flagRectangle || existingDoc.data.flagRectangle,
@@ -34,7 +36,6 @@ export default async (props: Props): Promise<ApiResponse> => {
     if (!updatedDoc || updatedDoc?.modifiedCount === 0) return { ...gbl.response_BAD, message: "Country not updated." };
 
     const response = await getCountryById(_id);
-
     return { ...gbl.response_DB_UPDATED, data: response.data };
   } catch (error: any) {
     console.error(`Update country error: ${error.message}`);

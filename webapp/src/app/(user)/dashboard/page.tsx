@@ -3,8 +3,9 @@ import DashboardPage from "@/pages/Dashboard";
 
 export const metadata: Metadata = {
   title: "Dashboard Page",
-  description: ""
+  description: "",
 };
 
-const Page: React.FC = () => <DashboardPage />
+const Page: React.FC = () => <DashboardPage />;
+
 export default Page;

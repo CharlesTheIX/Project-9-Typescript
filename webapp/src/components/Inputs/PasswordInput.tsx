@@ -14,7 +14,15 @@ type Props = {
 };
 
 const PasswordInput: React.FC<Props> = (props: Props) => {
-  const { name, label, className = "", required = false, defaultValue = "", onInput = () => {}, includeConfirmation = false } = props;
+  const {
+    name,
+    label,
+    className = "",
+    required = false,
+    defaultValue = "",
+    onInput = () => {},
+    includeConfirmation = false,
+  } = props;
   const [value, setValue] = useState<string>(defaultValue);
   const [type, setType] = useState<"password" | "text">("password");
   const [confirmationValue, setConfirmationValue] = useState<string>(defaultValue);
@@ -45,7 +53,11 @@ const PasswordInput: React.FC<Props> = (props: Props) => {
               });
             }}
           >
-            {type === "password" ? <Eye_SVG primaryColor={"inherit"} width={24} height={24} /> : <EyeSlash_SVG primaryColor={undefined} width={24} height={24} />}
+            {type === "password" ? (
+              <Eye_SVG primaryColor={"inherit"} width={24} height={24} />
+            ) : (
+              <EyeSlash_SVG primaryColor={undefined} width={24} height={24} />
+            )}
           </div>
         </div>
 
@@ -73,7 +85,11 @@ const PasswordInput: React.FC<Props> = (props: Props) => {
                   });
                 }}
               >
-                {type === "password" ? <Eye_SVG primaryColor={undefined} width={24} height={24} /> : <EyeSlash_SVG primaryColor={undefined} width={24} height={24} />}
+                {type === "password" ? (
+                  <Eye_SVG primaryColor={undefined} width={24} height={24} />
+                ) : (
+                  <EyeSlash_SVG primaryColor={undefined} width={24} height={24} />
+                )}
               </div>
             </div>
           </div>

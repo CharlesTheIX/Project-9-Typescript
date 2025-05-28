@@ -7,4 +7,5 @@ export const metadata: Metadata = {
 };
 
 const Page: React.FC = () => <SignUpPage />;
+
 export default Page;

@@ -1,5 +1,4 @@
-import { ClerkProvider } from "@clerk/nextjs";
-import UserControls from "@/components/Misc/UserControls";
+import UserControls from "@/components/UserControls";
 import CookieBanner from "@/components/Banners/CookieBanner";
 import { UserContextProvider } from "@/contexts/userContext";
 import { ToastContextProvider } from "@/contexts/toastContext";
@@ -14,19 +13,17 @@ const AppContextWrapper: React.FC<Readonly<Props>> = (props: Props) => {
   const { children } = props;
 
   return (
-    <ClerkProvider>
-      <BrowserContextProvider>
-        <ThemeContextProvider>
-          <ToastContextProvider>
-            <UserContextProvider>
-              {children}
-              <UserControls />
-              <CookieBanner />
-            </UserContextProvider>
-          </ToastContextProvider>
-        </ThemeContextProvider>
-      </BrowserContextProvider>
-    </ClerkProvider>
+    <BrowserContextProvider>
+      <ThemeContextProvider>
+        <ToastContextProvider>
+          <UserContextProvider>
+            {children}
+            <UserControls />
+            <CookieBanner />
+          </UserContextProvider>
+        </ToastContextProvider>
+      </ThemeContextProvider>
+    </BrowserContextProvider>
   );
 };
 

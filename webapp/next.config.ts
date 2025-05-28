@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   // images: {
-  //   remotePatterns: [new URL("http://localhost:3000/assets/images/**")],
+  //   remotePatterns: [new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/assets/images/**`)],
   // },
 };
 

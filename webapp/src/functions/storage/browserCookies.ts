@@ -13,7 +13,9 @@ export const getCookieItem = (key: string): CookieType | null => {
 export const setCookieItem = (key: string, value: any, days: number = 7): void => {
   try {
     const expires = new Date(Date.now() + days * 864e5).toUTCString(); // 864e5 = 24h in ms
-    document.cookie = `${encodeURIComponent(key)}=${encodeURIComponent(JSON.stringify(value))}; expires=${expires}; path=/`;
+    document.cookie = `${encodeURIComponent(key)}=${encodeURIComponent(
+      JSON.stringify(value),
+    )}; expires=${expires}; path=/`;
   } catch (error: any) {
     console.error(`Error setting browser cookie item ${key}:`, error);
   }

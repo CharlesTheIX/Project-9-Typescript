@@ -4,10 +4,10 @@ import { useSignUp } from "@clerk/nextjs";
 import TextInput from "../Inputs/TextInput";
 import EmailInput from "../Inputs/EmailInput";
 import NumberInput from "../Inputs/NumberInput";
+import LoadingContainer from "../LoadingContainer";
 import PasswordInput from "../Inputs/PasswordInput";
 import createUser from "@/functions/users/createUser";
 import isNumber from "@/functions/validation/isNumber";
-import LoadingContainer from "../Misc/LoadingContainer";
 import { useToastContext } from "@/contexts/toastContext";
 import { useThemeContext } from "@/contexts/themeContext";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -42,6 +42,7 @@ const SignUpForm: React.FC = () => {
       // const firstName: string = formData.get("first-name")?.toString() || "";
       const confirmedPassword: string = formData.get("password-confirmation")?.toString() || "";
       // const requestData: Partial<User> & { password: string } = { email, surname, password, username, firstName };
+
       const requestData: Partial<User> & { password: string } = { email, password, username };
 
       const hasError = validateSignUp(requestData);
@@ -155,7 +156,12 @@ const SignUpForm: React.FC = () => {
             </div>
 
             <div>
-              <input className={`button w-auto ${isLoading ? "disabled" : ""}`} type="submit" content="Submit" disabled={isLoading} />
+              <input
+                type="submit"
+                content="Submit"
+                disabled={isLoading}
+                className={`button w-auto ${isLoading ? "disabled" : ""}`}
+              />
             </div>
           </div>
         </form>

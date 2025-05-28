@@ -15,7 +15,15 @@ type Props = {
 };
 
 const SelectInput: React.FC<Props> = (props: Props) => {
-  const { name, label, required = false, options, className = "", onChange = () => {}, defaultValue = gbl.nullOption } = props;
+  const {
+    name,
+    label,
+    options,
+    className = "",
+    required = false,
+    onChange = () => {},
+    defaultValue = gbl.nullOption,
+  } = props;
   const { browser } = useBrowserContext();
   const [active, setActive] = useState<boolean>(false);
   const [value, setValue] = useState<Option>(defaultValue);

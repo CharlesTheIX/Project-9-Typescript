@@ -3,8 +3,9 @@ import CountriesPage from "@/pages/Countries";
 
 export const metadata: Metadata = {
   title: "Countries Page",
-  description: ""
+  description: "",
 };
 
 const Page: React.FC = () => <CountriesPage />;
+
 export default Page;

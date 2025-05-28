@@ -7,4 +7,5 @@ export const metadata: Metadata = {
 };
 
 const Page: React.FC = () => <ProfilePage />;
+
 export default Page;

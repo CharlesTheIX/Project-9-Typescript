@@ -1,12 +1,12 @@
 import * as gbl from "../globals";
-import createCountry from "../lib/country/createCountry";
-import getCountryById from "../lib/country/getCountryById";
-import getAllCountries from "../lib/country/getAllCountries";
+import createCountry from "../functions/country/createCountry";
+import getCountryById from "../functions/country/getCountryById";
+import getAllCountries from "../functions/country/getAllCountries";
 import express, { Router, Request, Response } from "express";
-import deleteCountryById from "../lib/country/deleteCountryById";
-import updateCountryById from "../lib/country/updateCountryById";
-import getCountryByDisplayName from "../lib/country/getCountryByDisplayName";
-import getCountriesByContinent from "../lib/country/getCountriesByContinent";
+import deleteCountryById from "../functions/country/deleteCountryById";
+import updateCountryById from "../functions/country/updateCountryById";
+import getCountryByDisplayName from "../functions/country/getCountryByDisplayName";
+import getCountriesByContinent from "../functions/country/getCountriesByContinent";
 
 const router: Router = express.Router();
 
@@ -72,7 +72,18 @@ router.route("/by-continent").post(async (request: Request, response: Response):
 
 // Create country
 router.route("/create").post(async (request: Request, response: Response): Promise<any> => {
-  const { displayName, names, flagRectangle, mapRectangle, continent, imageUrl } = request.body;
+  const {
+    names,
+    imageUrl,
+    continent,
+    languages,
+    population,
+    displayName,
+    description,
+    capitalCity,
+    mapRectangle,
+    flagRectangle,
+  } = request.body;
 
   if (!displayName || !names || names.length === 0 || !flagRectangle || !mapRectangle || !continent) {
     return response.status(gbl.status.BAD).json({
@@ -82,7 +93,18 @@ router.route("/create").post(async (request: Request, response: Response): Promi
   }
 
   try {
-    const res = await createCountry({ displayName, names, flagRectangle, mapRectangle, continent, imageUrl });
+    const res = await createCountry({
+      names,
+      imageUrl,
+      continent,
+      languages,
+      population,
+      displayName,
+      description,
+      capitalCity,
+      mapRectangle,
+      flagRectangle,
+    });
     return response.json(res);
   } catch (error: any) {
     console.error(`Create country error: ${error.message}`);

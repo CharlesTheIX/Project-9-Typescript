@@ -21,26 +21,24 @@ const AdminLayout: React.FC<Props> = (props: Props) => {
   const { theme } = useThemeContext();
 
   return (
-    <div id="admin-layout" className={theme}>
-      <div>
-        <aside>
-          <nav>
-            <ul>
-              {dashboardItems.map((item: NavigationItem, key: number) => {
-                return (
-                  <li key={key}>
-                    <Link href={item.href}>
-                      {item.icon === "users" && <Users_SVG />}
-                      <span>{item.label}</span>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
-        </aside>
-        <main className={theme}>{children}</main>
-      </div>
+    <div id="admin-layout" className={`${theme} layout`}>
+      <aside>
+        <nav>
+          <ul>
+            {dashboardItems.map((item: NavigationItem, key: number) => {
+              return (
+                <li key={key}>
+                  <Link href={item.href}>
+                    {item.icon === "users" && <Users_SVG />}
+                    <span>{item.label}</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+      </aside>
+      <main className={theme}>{children}</main>
     </div>
   );
 };

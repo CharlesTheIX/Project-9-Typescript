@@ -1,12 +1,12 @@
 "use client";
 import Link from "next/link";
-import Cog_SVG from "../SVGs/Cog_SVG";
-import Admin_SVG from "../SVGs/Admin_SVG";
-import Profile_SVG from "../SVGs/Profile_SVG";
-import SignOutButton from "../Buttons/SingOutButton";
+import Cog_SVG from "./SVGs/Cog_SVG";
+import Admin_SVG from "./SVGs/Admin_SVG";
+import Profile_SVG from "./SVGs/Profile_SVG";
+import SignOutButton from "./Buttons/SingOutButton";
 import { useUserContext } from "@/contexts/userContext";
 import { useThemeContext } from "@/contexts/themeContext";
-import ThemeToggleButton from "../Buttons/ThemeToggleButton";
+import ThemeToggleButton from "./Buttons/ThemeToggleButton";
 
 const UserControls: React.FC = () => {
   const { theme } = useThemeContext();

@@ -19,7 +19,7 @@ const CountryPage: React.FC<Props> = (props: Props) => {
     <SplitLayout>
       <div>
         <section>
-          <div className="pt-10 flex flex-col gap-5">
+          <div className="flex flex-col gap-10">
             <div className="flex flex-row gap-5 items-center">
               {userRole === "admin" && (
                 <Link className={`${theme}`} href={`/countries/edit/${country._id}`}>
@@ -31,8 +31,9 @@ const CountryPage: React.FC<Props> = (props: Props) => {
             </div>
 
             <p className="max-w-3xl">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt auctor sem nec semper. Ut ornare leo id risus blandit, fringilla fringilla lorem
-              sollicitudin. Donec gravida semper lectus, eu aliquet erat ornare sit amet.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt auctor sem nec semper. Ut ornare
+              leo id risus blandit, fringilla fringilla lorem sollicitudin. Donec gravida semper lectus, eu aliquet erat
+              ornare sit amet.
             </p>
           </div>
         </section>
@@ -43,7 +44,14 @@ const CountryPage: React.FC<Props> = (props: Props) => {
           <div className="pt-10 flex flex-col gap-10 items-center all-width-100">
             <div className="image-container all-width-100 w-full">
               {country.imageUrl ? (
-                <Image alt="flag" src={country.imageUrl.replace("http://localhost:3000", "")} width={576} height={411} />
+                <Image
+                  width={576}
+                  height={411}
+                  alt={`${country.displayName} flag`}
+                  src={country.imageUrl
+                    .replace("http://localhost:3000", "")
+                    .replace(`${process.env.NEXT_PUBLIC_BASE_URL}`, "")}
+                />
               ) : (
                 <Image alt="flag" src={"/assets/images/flags/oman.png"} width={576} height={411} />
               )}
