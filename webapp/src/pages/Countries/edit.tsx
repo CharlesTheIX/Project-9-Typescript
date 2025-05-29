@@ -22,16 +22,14 @@ const CountryEditPage: React.FC<Props> = (props: Props) => {
             leo id risus blandit, fringilla fringilla lorem sollicitudin. :W Donec gravida semper lectus, eu aliquet
             erat ornare sit amet.
           </p>
-        </div>
-      </section>
 
-      <section>
-        <CountryEditForm
-          country={currentCountry}
-          callback={(value: Country) => {
-            setCurrentCountry(value);
-          }}
-        />
+          <CountryEditForm
+            country={currentCountry}
+            callback={(value: Country) => {
+              setCurrentCountry(value);
+            }}
+          />
+        </div>
       </section>
     </DefaultLayout>
   );

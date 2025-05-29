@@ -26,7 +26,7 @@ const UserControls: React.FC = () => {
             )}
 
             <li>
-              <Link href="/dashboard">
+              <Link href="/profile">
                 <Profile_SVG />
               </Link>
             </li>

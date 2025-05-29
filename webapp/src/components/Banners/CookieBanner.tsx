@@ -14,6 +14,7 @@ const CookieBanner: React.FC = () => {
   const { cookie, setCookie, updateCookie } = useBrowserContext();
 
   useEffect(() => {
+    if (cookie) return;
     setShow(true);
   }, [cookie]);
 

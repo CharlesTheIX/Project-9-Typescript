@@ -28,24 +28,26 @@ const DashboardLayout: React.FC<Props> = (props: Props) => {
 
   return (
     <div id="dashboard-layout" className={`${theme} layout`}>
-      <aside>
-        <nav>
-          <ul>
-            {dashboardItems.map((item: NavigationItem, key: number) => {
-              return (
-                <li key={key}>
-                  <Link href={item.href}>
-                    {item.icon === "profile" && <Profile_SVG />}
-                    {item.icon === "globe" && <Globe_SVG />}
-                    <span>{item.label}</span>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
-      </aside>
-      <main className={theme}>{children}</main>
+      <div>
+        <aside>
+          <nav>
+            <ul>
+              {dashboardItems.map((item: NavigationItem, key: number) => {
+                return (
+                  <li key={key}>
+                    <Link href={item.href}>
+                      {item.icon === "profile" && <Profile_SVG />}
+                      {item.icon === "globe" && <Globe_SVG />}
+                      <span>{item.label}</span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+        </aside>
+        <main className={theme}>{children}</main>
+      </div>
     </div>
   );
 };

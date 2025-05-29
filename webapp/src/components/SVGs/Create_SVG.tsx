@@ -5,7 +5,7 @@ type Props = {
   primaryColor?: string;
 };
 
-const Edit_SVG: React.FC<Props> = (props: Props) => {
+const Create_SVG: React.FC<Props> = (props: Props) => {
   const { className = "", width = 24, height = 24, primaryColor = "inherit" } = props;
 
   return (
@@ -25,17 +25,16 @@ const Edit_SVG: React.FC<Props> = (props: Props) => {
         strokeLinejoin="round"
         d="M20,16v4a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V6A2,2,0,0,1,4,4H8"
       />
-
-      <polygon
-        fill="none"
-        strokeWidth={2}
+      <path
+        strokeWidth={0.2}
+        fill={primaryColor}
         stroke={primaryColor}
         strokeLinecap="round"
         strokeLinejoin="round"
-        points="12.5 15.8 22 6.2 17.8 2 8.3 11.5 8 16 12.5 15.8"
+        d="M20 7h-4V3h-2v4h-4v2h4v4h2V9h4"
       />
     </svg>
   );
 };
 
-export default Edit_SVG;
+export default Create_SVG;

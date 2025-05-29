@@ -10,9 +10,9 @@ const NotFoundPage: React.FC = () => {
 
           <p className="max-w-3xl">The page you are looking for does not exist.</p>
 
-          <div className="flex flex-row gap-5">
+          <div>
             <Link className="button" href="/">
-              Home
+              Dashboard
             </Link>
           </div>
         </div>

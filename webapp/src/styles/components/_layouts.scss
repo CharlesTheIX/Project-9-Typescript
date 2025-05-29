@@ -8,102 +8,100 @@
 
 #admin-layout,
 #dashboard-layout {
-  width: 100%;
-  display: flex;
-  margin: 0 auto;
-  overflow: visible;
-  position: relative;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-end;
-  max-width: calc(0.25rem * 375);
-  transition: background-color 300ms ease-in-out;
-
-  > aside {
-    z-index: 49;
+  > div {
+    @apply pb-10 gap-10;
     width: 100%;
-    height: 100%;
     display: flex;
-    position: sticky;
-    flex-direction: column;
+    margin: 0 auto;
+    overflow: visible;
+    position: relative;
+    flex-direction: row;
     align-items: flex-start;
-    top: calc(0.25rem * 39);
-    justify-content: flex-start;
-    max-width: calc(0.25rem * 50);
+    justify-content: flex-end;
+    max-width: calc(0.25rem * 360);
+    transition: background-color 300ms ease-in-out;
 
-    nav {
+    > aside {
+      z-index: 49;
       width: 100%;
-      border: 3px solid;
-      border-top-right-radius: 0.5rem;
-      border-bottom-left-radius: 0.5rem;
-      box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.5);
-      height: calc(100vh - (0.25rem * 39) - (0.25rem * 29));
-      transition: background-color 300ms ease-in-out, border-color 300ms ease-in-out;
+      display: flex;
+      position: sticky;
+      flex-direction: column;
+      align-items: flex-start;
+      top: calc(0.25rem * 40);
+      justify-content: flex-start;
+      max-width: calc(0.25rem * 50);
 
-      ul {
+      nav {
         width: 100%;
-        height: 100%;
-        display: flex;
-        overflow: hidden;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
+        border: 3px solid;
+        border-top-right-radius: 0.5rem;
+        border-bottom-left-radius: 0.5rem;
+        box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.5);
+        max-height: calc(100vh - (0.25rem * 39) - (0.25rem * 29));
+        transition: background-color 300ms ease-in-out, border-color 300ms ease-in-out;
 
-        li {
-          @apply px-5 py-2;
+        ul {
           width: 100%;
-          cursor: pointer;
-          font-weight: bold;
-          transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+          height: 100%;
+          display: flex;
+          overflow: hidden;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-start;
 
-          a {
-            @apply gap-2;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: flex-start;
+          li {
+            @apply px-5 py-2;
+            width: 100%;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+
+            a {
+              @apply gap-2;
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              justify-content: flex-start;
+            }
           }
         }
       }
     }
-  }
 
-  main {
-    width: 100%;
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
+    main {
+      width: 100%;
+      display: flex;
+      min-height: 100vh;
+      flex-direction: column;
+    }
   }
 
   &.dark {
     background-color: dark.$color-primary;
 
-    > div {
-      background-color: dark.$color-primary;
+    aside {
+      nav {
+        border-color: dark.$color-secondary;
+        background-color: dark.$color-primary;
 
-      > aside {
-        nav {
-          border-color: dark.$color-secondary;
-          background-color: dark.$color-primary;
+        ul {
+          li {
+            color: dark.$color-secondary;
+            background-color: dark.$color-primary;
 
-          ul {
-            li {
-              color: dark.$color-secondary;
-              background-color: dark.$color-primary;
+            a {
+              fill: dark.$color-secondary;
+              stroke: dark.$color-secondary;
+            }
+
+            &:hover {
+              color: dark.$color-primary;
+              background-color: dark.$color-secondary;
 
               a {
-                fill: dark.$color-secondary;
-                stroke: dark.$color-secondary;
-              }
-
-              &:hover {
-                color: dark.$color-primary;
-                background-color: dark.$color-secondary;
-
-                a {
-                  fill: dark.$color-primary;
-                  stroke: dark.$color-primary;
-                }
+                fill: dark.$color-primary;
+                stroke: dark.$color-primary;
               }
             }
           }
@@ -115,32 +113,28 @@
   &.light {
     background-color: light.$color-primary;
 
-    > div {
-      background-color: light.$color-primary;
+    aside {
+      nav {
+        border-color: light.$color-secondary;
+        background-color: light.$color-primary;
 
-      > aside {
-        nav {
-          border-color: light.$color-secondary;
-          background-color: light.$color-primary;
+        ul {
+          li {
+            color: light.$color-secondary;
+            background-color: light.$color-primary;
 
-          ul {
-            li {
-              color: light.$color-secondary;
-              background-color: light.$color-primary;
+            a {
+              fill: light.$color-secondary;
+              stroke: light.$color-secondary;
+            }
+
+            &:hover {
+              color: light.$color-primary;
+              background-color: light.$color-secondary;
 
               a {
-                fill: light.$color-secondary;
-                stroke: light.$color-secondary;
-              }
-
-              &:hover {
-                color: light.$color-primary;
-                background-color: light.$color-secondary;
-
-                a {
-                  fill: light.$color-primary;
-                  stroke: light.$color-primary;
-                }
+                fill: light.$color-primary;
+                stroke: light.$color-primary;
               }
             }
           }
@@ -152,32 +146,28 @@
   &.custom {
     background-color: custom.$color-primary;
 
-    > div {
-      background-color: custom.$color-primary;
+    aside {
+      nav {
+        border-color: custom.$color-secondary;
+        background-color: custom.$color-primary;
 
-      > aside {
-        nav {
-          border-color: custom.$color-secondary;
-          background-color: custom.$color-primary;
+        ul {
+          li {
+            color: custom.$color-secondary;
+            background-color: custom.$color-primary;
 
-          ul {
-            li {
-              color: custom.$color-secondary;
-              background-color: custom.$color-primary;
+            a {
+              fill: custom.$color-secondary;
+              stroke: custom.$color-secondary;
+            }
+
+            &:hover {
+              color: custom.$color-primary;
+              background-color: custom.$color-secondary;
 
               a {
-                fill: custom.$color-secondary;
-                stroke: custom.$color-secondary;
-              }
-
-              &:hover {
-                color: custom.$color-primary;
-                background-color: custom.$color-secondary;
-
-                a {
-                  fill: custom.$color-primary;
-                  stroke: custom.$color-primary;
-                }
+                fill: custom.$color-primary;
+                stroke: custom.$color-primary;
               }
             }
           }
@@ -194,17 +184,14 @@
 }
 
 #split-layout {
+  display: flex;
+  margin: 0 auto;
   max-height: 100vh;
+  flex-direction: row;
+  max-width: calc(0.25rem * 360);
+  justify-content: space-between;
 
-  > div {
-    @apply max-w-7xl gap-5;
-    display: flex;
-    margin: 0 auto;
-    flex-direction: row;
-    justify-content: space-between;
-
-    > * {
-      width: 100%;
-    }
+  > * {
+    width: 100%;
   }
 }

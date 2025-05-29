@@ -12,21 +12,19 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon.ico" },
-      // { url: '/favicon.svg', type: 'image/svg+xml' },
-      // { url: '/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
-      // { url: '/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "/android-chrome-512x512.png", sizes: "512x512", type: "image/png" },
     ],
-    apple: [
-      // { url: '/apple-touch-icon.png', sizes: '180x180' },
-    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
 };
 
 export const viewport: Viewport = {
   initialScale: 1,
-  // maximumScale: 5,
-  // minimumScale: 1,
-  // userScalable: true,
+  maximumScale: 1,
+  minimumScale: 1,
+  userScalable: true,
   viewportFit: "cover",
   width: "device-width",
   themeColor: "#222831",

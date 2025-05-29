@@ -5,6 +5,7 @@
 #cookie-banner {
   top: 0;
   left: 0;
+  opacity: 0;
   z-index: 100;
   width: 100vw;
   height: 100vh;
@@ -15,7 +16,7 @@
   transition: background-color 300ms ease-in-out;
 
   > div {
-    @apply py-5 px-50;
+    @apply py-5 px-10;
     width: 100%;
 
     > div {
@@ -53,6 +54,7 @@
   }
 
   &.show {
+    opacity: 1;
     display: flex;
     background-color: rgba(0, 0, 0, 0.5);
 

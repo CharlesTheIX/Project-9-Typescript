@@ -13,11 +13,9 @@ const CountryCreationPage: React.FC = () => {
             leo id risus blandit, fringilla fringilla lorem sollicitudin. Donec gravida semper lectus, eu aliquet erat
             ornare sit amet.
           </p>
-        </div>
-      </section>
 
-      <section>
-        <CountryCreationForm />
+          <CountryCreationForm />
+        </div>
       </section>
     </DefaultLayout>
   );

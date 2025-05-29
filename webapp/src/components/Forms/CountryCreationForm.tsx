@@ -6,7 +6,7 @@ import TextInput from "../Inputs/TextInput";
 import SelectInput from "../Inputs/SelectInput";
 import NumberInput from "../Inputs/NumberInput";
 import LoadingContainer from "../LoadingContainer";
-import TextareaInput from "../Inputs/TextAreaInput";
+import TextareaInput from "../Inputs/TextareaInput";
 import MultiTextInput from "../Inputs/MultiTextInput";
 import RectangleInput from "../Inputs/RectangleInput";
 import { useToastContext } from "@/contexts/toastContext";
