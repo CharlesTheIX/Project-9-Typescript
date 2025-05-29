@@ -1,0 +1,29 @@
+@use "../themes" as t;
+
+@mixin themes() {
+  @each $theme-name, $theme-vars in t.$themes {
+    &.#{$theme-name} {
+      $color-primary: map-get($theme-vars, color-primary);
+      $color-secondary: map-get($theme-vars, color-secondary);
+
+      fill: $color-secondary;
+      stroke: $color-secondary;
+    }
+  }
+}
+
+#header-logo {
+  @include themes();
+
+  & {
+    @apply gap-1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    p {
+      @apply text-5xl;
+      font-weight: bold;
+    }
+  }
+}

@@ -7,7 +7,7 @@
   "repository": "git@github.com:CharlesTheIX/countries-mono.git",
   "scripts": {
     "create-color-theme": "./.scripts/create_color_theme.sh",
-    "set-up": "chmod +x ./.scripts/init.sh && ./.scripts/init.sh",
-    "restore-color-themes": "./.scripts/restore_color_themes.sh"
+    "restore-color-themes": "./.scripts/restore_color_themes.sh",
+    "set-up": "chmod +x ./.scripts/init.sh && ./.scripts/init.sh"
   }
 }

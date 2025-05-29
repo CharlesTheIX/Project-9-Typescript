@@ -1,68 +1,65 @@
-@use "../palettes/dark" as dark;
-@use "../palettes/light" as light;
-@use "../palettes/custom" as custom;
+@use "../themes" as t;
+
+@mixin themes() {
+  @each $theme-name, $theme-vars in t.$themes {
+    &.#{$theme-name} {
+      $color-primary: map-get($theme-vars, color-primary);
+      $color-secondary: map-get($theme-vars, color-secondary);
+
+      .form-loading-container {
+        background-color: $color-primary;
+      }
+    }
+  }
+}
 
 .form {
-  @apply gap-5;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+  @include themes();
 
-  > form {
+  & {
+    @apply gap-5;
     width: 100%;
     display: flex;
-    align-items: center;
     flex-direction: column;
-    justify-content: flex-start;
 
-    > div {
-      @apply gap-5;
+    > form {
       width: 100%;
       display: flex;
       align-items: center;
       flex-direction: column;
+      justify-content: flex-start;
 
       > div {
+        @apply gap-5;
         width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
 
-        &:nth-child(1) {
-          @apply gap-5;
-          display: flex;
-          position: relative;
-          align-items: center;
-          flex-direction: column;
+        > div {
+          width: 100%;
 
-          > * {
-            width: 100%;
+          &:nth-child(1) {
+            @apply gap-5;
+            display: flex;
+            position: relative;
+            align-items: center;
+            flex-direction: column;
+
+            > * {
+              width: 100%;
+            }
           }
         }
       }
-    }
 
-    .form-loading-container {
-      z-index: 1;
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      transition: background-color 300ms ease-in-out;
-    }
-  }
-
-  &.dark {
-    .form-loading-container {
-      background-color: dark.$color-primary;
-    }
-  }
-
-  &.light {
-    .form-loading-container {
-      background-color: light.$color-primary;
-    }
-  }
-
-  &.custom {
-    .form-loading-container {
-      background-color: custom.$color-primary;
+      .form-loading-container {
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        transition: background-color 300ms ease-in-out;
+      }
     }
   }
 }

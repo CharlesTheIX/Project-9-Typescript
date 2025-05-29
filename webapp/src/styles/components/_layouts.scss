@@ -1,6 +1,44 @@
-@use "../palettes/dark" as dark;
-@use "../palettes/light" as light;
-@use "../palettes/custom" as custom;
+@use "../themes" as t;
+
+@mixin themes() {
+  @each $theme-name, $theme-vars in t.$themes {
+    &.#{$theme-name} {
+      $color-primary: map-get($theme-vars, color-primary);
+      $color-secondary: map-get($theme-vars, color-secondary);
+
+      background-color: $color-primary;
+
+      aside {
+        nav {
+          border-color: $color-secondary;
+          background-color: $color-primary;
+
+          ul {
+            li {
+              color: $color-secondary;
+              background-color: $color-primary;
+
+              a {
+                fill: $color-secondary;
+                stroke: $color-secondary;
+              }
+
+              &:hover {
+                color: $color-primary;
+                background-color: $color-secondary;
+
+                a {
+                  fill: $color-primary;
+                  stroke: $color-primary;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
 
 .layout {
   @apply p-20 gap-20;
@@ -8,6 +46,8 @@
 
 #admin-layout,
 #dashboard-layout {
+  @include themes();
+
   > div {
     @apply pb-10 gap-10;
     width: 100%;
@@ -74,105 +114,6 @@
       display: flex;
       min-height: 100vh;
       flex-direction: column;
-    }
-  }
-
-  &.dark {
-    background-color: dark.$color-primary;
-
-    aside {
-      nav {
-        border-color: dark.$color-secondary;
-        background-color: dark.$color-primary;
-
-        ul {
-          li {
-            color: dark.$color-secondary;
-            background-color: dark.$color-primary;
-
-            a {
-              fill: dark.$color-secondary;
-              stroke: dark.$color-secondary;
-            }
-
-            &:hover {
-              color: dark.$color-primary;
-              background-color: dark.$color-secondary;
-
-              a {
-                fill: dark.$color-primary;
-                stroke: dark.$color-primary;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  &.light {
-    background-color: light.$color-primary;
-
-    aside {
-      nav {
-        border-color: light.$color-secondary;
-        background-color: light.$color-primary;
-
-        ul {
-          li {
-            color: light.$color-secondary;
-            background-color: light.$color-primary;
-
-            a {
-              fill: light.$color-secondary;
-              stroke: light.$color-secondary;
-            }
-
-            &:hover {
-              color: light.$color-primary;
-              background-color: light.$color-secondary;
-
-              a {
-                fill: light.$color-primary;
-                stroke: light.$color-primary;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  &.custom {
-    background-color: custom.$color-primary;
-
-    aside {
-      nav {
-        border-color: custom.$color-secondary;
-        background-color: custom.$color-primary;
-
-        ul {
-          li {
-            color: custom.$color-secondary;
-            background-color: custom.$color-primary;
-
-            a {
-              fill: custom.$color-secondary;
-              stroke: custom.$color-secondary;
-            }
-
-            &:hover {
-              color: custom.$color-primary;
-              background-color: custom.$color-secondary;
-
-              a {
-                fill: custom.$color-primary;
-                stroke: custom.$color-primary;
-              }
-            }
-          }
-        }
-      }
     }
   }
 }

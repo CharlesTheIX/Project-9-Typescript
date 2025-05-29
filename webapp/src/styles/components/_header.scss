@@ -1,0 +1,67 @@
+@use "../themes" as t;
+
+@mixin themes() {
+  @each $theme-name, $theme-vars in t.$themes {
+    &.#{$theme-name} {
+      $color-primary: map-get($theme-vars, color-primary);
+      $color-secondary: map-get($theme-vars, color-secondary);
+
+      background: $color-primary;
+
+      > div {
+        color: $color-secondary;
+        background: $color-primary;
+        border-color: $color-secondary;
+      }
+    }
+  }
+}
+
+#header {
+  @include themes();
+
+  & {
+    @apply pt-5;
+    top: 0;
+    right: 0;
+    z-index: 50;
+    width: 100%;
+    width: 100vw;
+    position: sticky;
+
+    > div {
+      @apply py-5 px-10;
+      margin: 0 auto;
+      border: 3px solid;
+      max-width: calc(0.25rem * 375);
+      border-top-right-radius: 0.5rem;
+      border-bottom-left-radius: 0.5rem;
+      width: calc(100% - (0.25rem * 20));
+      box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.5);
+      transition: background-color 300ms ease-in-out, border-color 300ms ease-in-out;
+
+      > div {
+        @apply gap-5 max-w-7xl;
+        display: flex;
+        margin: 0 auto;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        > nav {
+          @apply gap-5;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+
+          > ul {
+            @apply gap-5;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+          }
+        }
+      }
+    }
+  }
+}

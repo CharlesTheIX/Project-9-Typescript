@@ -8,9 +8,9 @@ YELLOW="\033[33m"
 RESET="\033[0m"
 
 init() {
-  current_dir=$WORKING_DIR
-  app_dirs_array=("api" "webapp" "cli")
-  script_files_array=("create_color_theme.sh" "restore_color_themes.sh")
+  local current_dir=$WORKING_DIR
+  local app_dirs_array=("api" "webapp" "cli")
+  local script_files_array=("create_color_theme.sh" "restore_color_themes.sh")
 
   echo ""
   echo "Updating script modes"
@@ -22,7 +22,6 @@ init() {
     else
       chmod +x "$current_dir/.scripts/$item"
     fi
-
   done
 
   for item in "${app_dirs_array[@]}"; do
@@ -31,13 +30,16 @@ init() {
 
     echo ""
     echo "Setting up: $item"
-
     rm -rf "./node_modules" "./dist" "./yarn.lock" "./.next" && yarn
 
     if [[ ! -f "./.env.local" ]]; then
       echo ""
-      echo "Creating .env files."
+      echo "Creating local .env file."
       mv "./.env.example" "./.env.local"
+    else
+      echo ""
+      echo "Removing example .env file."
+      rm -rf "./.env.example"
     fi
   done
 

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 readonly WORKING_DIR="$(pwd)"
+scss_file="$WORKING_DIR/webapp/src/styles/_themes.scss"
 RED="\033[31m"
 BLUE="\033[34m"
 GREEN="\033[32m"
@@ -9,30 +10,36 @@ RESET="\033[0m"
 
 restore_color_themes() {
   echo ""
-  theme_array=("light" "dark" "custom")
 
-  for item in "${theme_array[@]}"; do
-    primary_color="#000000"
-    secondary_color="#FFFFFF"
+  local light_primary_color="#f3f3e0"
+  local light_secondary_color="#183b4e"
 
-    if [[ "$item" == "light" ]]; then
-      primary_color="#f3f3e0"
-      secondary_color="#183b4e"
-    fi
+  local dark_primary_color="#222831"
+  local dark_secondary_color="#dfd0b8"
 
-    if [[ "$item" == "dark" ]]; then
-      primary_color="#222831"
-      secondary_color="#dfd0b8"
-    fi
+  local custom_primary_color="#a02334"
+  local custom_secondary_color="#ffeead"
 
-    scss_file="$WORKING_DIR/webapp/src/styles/palettes/_$item.scss"
-    cat > "$scss_file" <<EOF \$color-primary: $primary_color; \$color-secondary: $secondary_color;
+  cat > "$scss_file" <<EOF
+\$themes: (
+  dark: (
+    color-primary: $dark_primary_color,
+    color-secondary: $dark_secondary_color
+  ),
+  light: (
+    color-primary: $light_primary_color,
+    color-secondary: $light_secondary_color
+  ),
+  custom: (
+    color-primary: $custom_primary_color,
+    color-secondary: $custom_secondary_color
+  ),
+);
 EOF
 
-    echo ""
-    echo -e "${GREEN}${item} updated!${RESET}"
-    echo ""
-  done
+  echo ""
+  echo -e "${GREEN}Themes reset to defaults!${RESET}"
+  echo ""
 }
 
 restore_color_themes

@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import LoadingContainer from "../LoadingContainer";
+import { useUserContext } from "@/contexts/userContext";
 import getAllCountries from "@/functions/countries/getAllCountries";
 import getCountriesByContinent from "@/functions/countries/getCountriesByContinent";
 
@@ -10,6 +11,7 @@ type Props = {
 
 const CountriesTable: React.FC<Props> = (props: Props) => {
   const { excludeKeys } = props;
+  const { userRole } = useUserContext();
   const [bodyItems, setBodyItems] = useState<any[]>([]);
   const [headItems, setHeadItems] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -72,15 +74,20 @@ const CountriesTable: React.FC<Props> = (props: Props) => {
       {isLoading ? (
         <LoadingContainer />
       ) : (
-        <div>
+        <div className="scrollbar-x">
           {!countries || countries.length === 0 ? (
             <p>No data to display</p>
           ) : (
             <>
-              <ul className="head">
+              <ul className="head flex flex-row items-center justify-between min-w-full">
+                { userRole === "admin" && (
+                  <li>
+                    <p>Edit</p>
+                  </li>
+                ) }
                 {headItems.map((item: string, key: number) => {
                   return (
-                    <li key={key}>
+                    <li key={key} className="flex flex-row gap-2 items-center justify-between">
                       <p>{item}</p>
                     </li>
                   );

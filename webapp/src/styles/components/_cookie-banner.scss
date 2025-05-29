@@ -1,90 +1,83 @@
-@use "../palettes/dark" as dark;
-@use "../palettes/light" as light;
-@use "../palettes/custom" as custom;
+@use "../themes" as t;
 
-#cookie-banner {
-  top: 0;
-  left: 0;
-  opacity: 0;
-  z-index: 100;
-  width: 100vw;
-  height: 100vh;
-  display: hidden;
-  position: fixed;
-  flex-direction: column;
-  justify-content: flex-end;
-  transition: background-color 300ms ease-in-out;
-
-  > div {
-    @apply py-5 px-10;
-    width: 100%;
-
-    > div {
-      @apply gap-20 max-w-7xl;
-      width: 100%;
-      display: flex;
-      margin: 0 auto;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
+@mixin themes() {
+  @each $theme-name, $theme-vars in t.$themes {
+    &.#{$theme-name} {
+      $color-primary: map-get($theme-vars, color-primary);
+      $color-secondary: map-get($theme-vars, color-secondary);
 
       > div {
-        &:nth-child(1) {
-          @apply gap-1;
-          display: flex;
-          text-align: left;
-          flex-direction: column;
-
-          h5 {
-            font-weight: bold;
-          }
-
-          p {
-            @apply text-xs;
-          }
-        }
-
-        &:nth-last-child(1) {
-          @apply gap-5;
-          display: flex;
-          flex-direction: row;
-        }
+        color: $color-secondary;
+        border-color: $color-secondary;
+        background-color: $color-primary;
       }
     }
   }
+}
 
-  &.show {
-    opacity: 1;
-    display: flex;
-    background-color: rgba(0, 0, 0, 0.5);
+#cookie-banner {
+  @include themes();
+
+  & {
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    display: hidden;
+    position: fixed;
+    flex-direction: column;
+    justify-content: flex-end;
+    transition: background-color 300ms ease-in-out;
 
     > div {
-      border-top: 3px solid;
-      animation: slide-up 500ms ease-in-out forwards;
+      @apply py-5 px-10;
+      width: 100%;
+
+      > div {
+        @apply gap-20 max-w-7xl;
+        width: 100%;
+        display: flex;
+        margin: 0 auto;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        > div {
+          &:nth-child(1) {
+            @apply gap-1;
+            display: flex;
+            text-align: left;
+            flex-direction: column;
+
+            h5 {
+              font-weight: bold;
+            }
+
+            p {
+              @apply text-xs;
+            }
+          }
+
+          &:nth-last-child(1) {
+            @apply gap-5;
+            display: flex;
+            flex-direction: row;
+          }
+        }
+      }
     }
-  }
 
-  &.dark {
-    > div {
-      color: dark.$color-secondary;
-      border-color: dark.$color-secondary;
-      background-color: dark.$color-primary;
-    }
-  }
+    &.show {
+      opacity: 1;
+      display: flex;
+      background-color: rgba(0, 0, 0, 0.5);
 
-  &.light {
-    > div {
-      color: light.$color-secondary;
-      border-color: light.$color-secondary;
-      background-color: light.$color-primary;
-    }
-  }
-
-  &.custom {
-    > div {
-      color: custom.$color-secondary;
-      border-color: custom.$color-secondary;
-      background-color: custom.$color-primary;
+      > div {
+        border-top: 3px solid;
+        animation: slide-up 500ms ease-in-out forwards;
+      }
     }
   }
 }

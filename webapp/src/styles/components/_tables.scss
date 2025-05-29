@@ -1,3 +1,16 @@
-@use "../palettes/dark" as dark;
-@use "../palettes/light" as light;
-@use "../palettes/custom" as custom;
+@use "../themes" as t;
+
+.table {
+  > div {
+  }
+}
+
+#countries-table {
+}
+
+@each $theme-name, $theme-vars in t.$themes {
+  .#{$theme-name} {
+    $color-primary: map-get($theme-vars, color-primary);
+    $color-secondary: map-get($theme-vars, color-secondary);
+  }
+}

@@ -146,7 +146,7 @@ const SignUpForm: React.FC = () => {
 
               <TextInput name="username" label="Username" required={true} />
 
-              {/* <div className="flex flex-row justify-between gap-5 items-center all-width-100">
+              {/* <div className="flex flex-row justify-between gap-5 items-center ">
                   <TextInput name="first-name" label="First Name" required={true} />
                   <TextInput name="surname" label="Surname" required={true} />
                 </div> */}

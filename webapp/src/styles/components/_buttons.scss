@@ -1,6 +1,4 @@
-@use "../palettes/dark" as dark;
-@use "../palettes/light" as light;
-@use "../palettes/custom" as custom;
+@use "../themes" as t;
 
 .button {
   @apply px-5 py-2;
@@ -25,50 +23,23 @@
   }
 }
 
-.dark {
-  .button {
-    color: dark.$color-primary;
-    border-color: dark.$color-secondary;
-    background-color: dark.$color-secondary;
+@each $theme-name, $theme-vars in t.$themes {
+  .#{$theme-name} {
+    $color-primary: map-get($theme-vars, color-primary);
+    $color-secondary: map-get($theme-vars, color-secondary);
 
-    &:hover,
-    &:focus,
-    &:active,
-    &:focus-within {
-      color: dark.$color-secondary;
-      background-color: dark.$color-primary;
-    }
-  }
-}
+    .button {
+      color: $color-primary;
+      border-color: $color-secondary;
+      background-color: $color-secondary;
 
-.light {
-  .button {
-    color: light.$color-primary;
-    border-color: light.$color-secondary;
-    background-color: light.$color-secondary;
-
-    &:hover,
-    &:focus,
-    &:active,
-    &:focus-within {
-      color: light.$color-secondary;
-      background-color: light.$color-primary;
-    }
-  }
-}
-
-.custom {
-  .button {
-    color: custom.$color-primary;
-    border-color: custom.$color-secondary;
-    background-color: custom.$color-secondary;
-
-    &:hover,
-    &:focus,
-    &:active,
-    &:focus-within {
-      color: custom.$color-secondary;
-      background-color: custom.$color-primary;
+      &:hover,
+      &:focus,
+      &:active,
+      &:focus-within {
+        color: $color-secondary;
+        background-color: $color-primary;
+      }
     }
   }
 }

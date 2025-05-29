@@ -1,0 +1,21 @@
+@use "../themes" as t;
+
+@mixin themes() {
+  @each $theme-name, $theme-vars in t.$themes {
+    &.#{$theme-name} {
+      $color-primary: map-get($theme-vars, color-primary);
+      $color-secondary: map-get($theme-vars, color-secondary);
+
+      color: $color-secondary;
+      background: $color-primary;
+    }
+  }
+}
+
+main {
+  @include themes();
+
+  & {
+    min-height: 100vh;
+  }
+}

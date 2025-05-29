@@ -1,18 +1,49 @@
 #!/bin/bash
 
 readonly WORKING_DIR="$(pwd)"
+scss_file="$WORKING_DIR/webapp/src/styles/_themes.scss"
 RED="\033[31m"
 BLUE="\033[34m"
 GREEN="\033[32m"
 YELLOW="\033[33m"
 RESET="\033[0m"
 
+[[ -f "$scss_file" ]] && cp "$scss_file" "$scss_file.bak"
+
+update_theme() {
+  local theme="$1"
+  local primary="$2"
+  local secondary="$3"
+  local temp_file="${mktemp}"
+
+  awk -v theme="$theme" -v primary="$primary" -v secondary="$secondary" '
+    BEGIN { in_theme = 0 }
+    {
+      if ($0 ~ "^[[:space:]]*" theme ": *\\(") {
+        print "  " theme ": ("
+        print "    color-primary: " primary ","
+        print "    color-secondary: " secondary
+        print "  ),"
+        in_theme = 1
+        next
+      }
+      if (in_theme && $0 ~ /^[[:space:]]*\),/) {
+        in_theme = 0
+        next
+      }
+      if (!in_theme) print $0
+    }
+  ' "$scss_file" > "$tmp_file"
+
+  mv "$tmp_file" "$scss_file"
+}
+
 create_color_theme() {
   echo ""
-  theme_array=("light" "dark" "custom")
+   local theme_array=("light" "dark" "custom")
 
   while true; do
-    read -p "Select the theme you and to create: light/dark/custom: " selected_theme
+    read -p "Select the theme you want to create: light/dark/custom/all: " selected_theme
     case "$selected_theme" in light|dark|custom|all) break ;; *)
       echo -e "${RED}Invalid Theme. Please type 'light', 'dark', or 'custom'.${RESET}"
       echo ""
@@ -53,9 +84,7 @@ create_color_theme() {
       fi
     done
 
-    scss_file="$WORKING_DIR/webapp/src/styles/palettes/_$item.scss"
-    cat > "$scss_file" <<EOF \$color-primary: $primary_color; \$color-secondary: $secondary_color;
-EOF
+    update_theme "$item" "$primary_color" "$secondary_color"
 
     echo ""
     echo -e "${GREEN}${item} updated!${RESET}"

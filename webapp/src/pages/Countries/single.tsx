@@ -41,23 +41,24 @@ const CountryPage: React.FC<Props> = (props: Props) => {
 
       <div className="max-w-lg">
         <section>
-          <div className="pt-10 flex flex-col gap-10 items-center all-width-100">
-            <div className="image-container all-width-100 w-full">
+          <div className="pt-10 flex flex-col gap-10 items-center">
+            <div className="image-container w-full">
               {country.imageUrl ? (
                 <Image
                   width={576}
                   height={411}
+                  className="w-full"
                   alt={`${country.displayName} flag`}
                   src={country.imageUrl
                     .replace("http://localhost:3000", "")
                     .replace(`${process.env.NEXT_PUBLIC_BASE_URL}`, "")}
                 />
               ) : (
-                <Image alt="flag" src={"/assets/images/flags/oman.png"} width={576} height={411} />
+                <Image className="w-full" alt="flag" src={"/assets/images/flags/oman.png"} width={576} height={411} />
               )}
             </div>
 
-            <div className="flex flex-col gap-0 items-start all-width-100 text-xl">
+            <div className="flex flex-col items-start text-xl w-full">
               <p>
                 <strong>Capital City:</strong> London
               </p>
