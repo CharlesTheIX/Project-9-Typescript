@@ -68,11 +68,11 @@ const CountriesTable: React.FC<Props> = (props: Props) => {
   }, []);
 
   return (
-    <>
+    <div id="countries-table" className="table">
       {isLoading ? (
         <LoadingContainer />
       ) : (
-        <div className="table">
+        <div>
           {!countries || countries.length === 0 ? (
             <p>No data to display</p>
           ) : (
@@ -106,7 +106,7 @@ const CountriesTable: React.FC<Props> = (props: Props) => {
           )}
         </div>
       )}
-    </>
+    </div>
   );
 };
 
