@@ -8,7 +8,7 @@ import LoadingContainer from "../LoadingContainer";
 import PasswordInput from "../Inputs/PasswordInput";
 import createUser from "@/functions/users/createUser";
 import isNumber from "@/functions/validation/isNumber";
-import { useToastContext } from "@/contexts/toastContext";
+import { useToastContext } from "@/contexts/ToastContext";
 import { useThemeContext } from "@/contexts/themeContext";
 import { useRouter, useSearchParams } from "next/navigation";
 import validateSignUp from "@/functions/forms/validateSignUp";

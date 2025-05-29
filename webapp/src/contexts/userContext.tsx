@@ -1,6 +1,6 @@
 "use client";
 import { useUser } from "@clerk/nextjs";
-import { useToastContext } from "./toastContext";
+import { useToastContext } from "./ToastContext";
 import getUserByClerkId from "@/functions/users/getUserByClerkId";
 import { createContext, useContext, useState, useEffect } from "react";
 

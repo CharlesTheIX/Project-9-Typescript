@@ -9,7 +9,7 @@ import LoadingContainer from "../LoadingContainer";
 import TextareaInput from "../Inputs/TextareaInput";
 import MultiTextInput from "../Inputs/MultiTextInput";
 import RectangleInput from "../Inputs/RectangleInput";
-import { useToastContext } from "@/contexts/toastContext";
+import { useToastContext } from "@/contexts/ToastContext";
 import { useThemeContext } from "@/contexts/themeContext";
 import createCountry from "@/functions/countries/createCountry";
 import validateCountryCreation from "@/functions/forms/validateCountryCreation";

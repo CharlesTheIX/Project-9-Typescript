@@ -10,7 +10,7 @@ import TextareaInput from "../Inputs/TextareaInput";
 import MultiTextInput from "../Inputs/MultiTextInput";
 import RectangleInput from "../Inputs/RectangleInput";
 import { useThemeContext } from "@/contexts/themeContext";
-import { useToastContext } from "@/contexts/toastContext";
+import { useToastContext } from "@/contexts/ToastContext";
 import updateCountryById from "@/functions/countries/updateCountryById";
 import validateCountryCreation from "@/functions/forms/validateCountryCreation";
 

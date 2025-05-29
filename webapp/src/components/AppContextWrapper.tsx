@@ -1,7 +1,7 @@
 import UserControls from "@/components/UserControls";
 import CookieBanner from "@/components/Banners/CookieBanner";
 import { UserContextProvider } from "@/contexts/userContext";
-import { ToastContextProvider } from "@/contexts/toastContext";
+import { ToastContextProvider } from "@/contexts/ToastContext";
 import { ThemeContextProvider } from "@/contexts/themeContext";
 import { BrowserContextProvider } from "@/contexts/browserContext";
 
