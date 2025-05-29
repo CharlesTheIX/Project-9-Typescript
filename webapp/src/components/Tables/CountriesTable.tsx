@@ -1,4 +1,5 @@
 "use client";
+import Edit_SVG from "../SVGs/Edit_SVG";
 import { useState, useEffect } from "react";
 import LoadingContainer from "../LoadingContainer";
 import { useUserContext } from "@/contexts/userContext";
@@ -12,6 +13,7 @@ type Props = {
 const CountriesTable: React.FC<Props> = (props: Props) => {
   const { excludeKeys } = props;
   const { userRole } = useUserContext();
+  const [rowCount, setRowCount] = useState<number>(0);
   const [bodyItems, setBodyItems] = useState<any[]>([]);
   const [headItems, setHeadItems] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -36,11 +38,10 @@ const CountriesTable: React.FC<Props> = (props: Props) => {
       const countries = response.data || [];
       if (countries.length > 0) {
         const headItems = Object.keys(countries[0]).filter((key: string) => !excludeKeys.includes(key));
-        const bodyItems = countries.map((item: Country) => {
+        const bodyItems = countries.map((item: any) => {
           const returnItem: any = {};
           headItems.map((key: string) => {
             try {
-              // @ts-ignore
               returnItem[key] = item[key];
             } catch (error: any) {
               returnItem[key] = null;
@@ -51,6 +52,7 @@ const CountriesTable: React.FC<Props> = (props: Props) => {
 
         setHeadItems(headItems);
         setBodyItems(bodyItems);
+        setRowCount(userRole === "admin" ? headItems.length + 1 : headItems.length);
       }
 
       setContinent(item);
@@ -72,22 +74,25 @@ const CountriesTable: React.FC<Props> = (props: Props) => {
   return (
     <div id="countries-table" className="table">
       {isLoading ? (
+        <div className="loading-container">
         <LoadingContainer />
+        </div>
       ) : (
         <div className="scrollbar-x">
           {!countries || countries.length === 0 ? (
             <p>No data to display</p>
           ) : (
             <>
-              <ul className="head flex flex-row items-center justify-between min-w-full">
-                { userRole === "admin" && (
-                  <li>
+              <ul className="head" style={{ gridTemplateColumns: `repeat(${rowCount}, auto)` }}>
+                {userRole === "admin" && (
+                  <li className="edit">
                     <p>Edit</p>
                   </li>
-                ) }
-                {headItems.map((item: string, key: number) => {
+                )}
+
+                {headItems.map((item: string) => {
                   return (
-                    <li key={key} className="flex flex-row gap-2 items-center justify-between">
+                    <li key={item} className={`flex flex-row gap-2 items-center justify-between ${item}`}>
                       <p>{item}</p>
                     </li>
                   );
@@ -95,13 +100,19 @@ const CountriesTable: React.FC<Props> = (props: Props) => {
               </ul>
 
               <div className="body">
-                {bodyItems.map((item: Country, key: number) => {
+                {bodyItems.map((item: any, key: number) => {
                   return (
-                    <ul key={key}>
-                      {Object.values(item).map((value: any, key: number) => {
+                    <ul key={key} style={{ gridTemplateColumns: `repeat(${rowCount}, auto)` }}>
+                      {userRole === "admin" && (
+                        <li className="edit">
+                          <Edit_SVG />
+                        </li>
+                      )}
+
+                      {Object.keys(item).map((key: any) => {
                         return (
-                          <li key={key}>
-                            <p>{JSON.stringify(value)}</p>
+                          <li key={key} className={key}>
+                            <p>{JSON.stringify(item[key])}</p>
                           </li>
                         );
                       })}

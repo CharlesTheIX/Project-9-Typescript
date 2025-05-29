@@ -32,7 +32,7 @@ const CountriesPage: React.FC = () => {
           </p>
 
           {/* <CountryFeed /> */}
-          <CountriesTable excludeKeys={[]} />
+          <CountriesTable excludeKeys={["_id"]} />
         </div>
       </section>
     </DefaultLayout>
