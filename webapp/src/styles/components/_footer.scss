@@ -1,10 +1,11 @@
+@use "sass:map";
 @use "../themes" as t;
 
 @mixin themes() {
   @each $theme-name, $theme-vars in t.$themes {
     &.#{$theme-name} {
-      $color-primary: map-get($theme-vars, color-primary);
-      $color-secondary: map-get($theme-vars, color-secondary);
+      $color-primary: map.get($theme-vars, color-primary);
+      $color-secondary: map.get($theme-vars, color-secondary);
 
       color: $color-secondary;
       background: $color-primary;
@@ -17,6 +18,16 @@ footer {
   @include themes();
 
   & {
+    @apply px-10 py-5;
     border-top: 3px solid;
+
+    section {
+      > div {
+        display: flex;
+        font-size: 10px;
+        text-align: center;
+        flex-direction: column;
+      }
+    }
   }
 }

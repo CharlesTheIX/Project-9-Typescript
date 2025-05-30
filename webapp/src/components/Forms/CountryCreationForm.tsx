@@ -9,8 +9,7 @@ import LoadingContainer from "../LoadingContainer";
 import TextareaInput from "../Inputs/TextareaInput";
 import MultiTextInput from "../Inputs/MultiTextInput";
 import RectangleInput from "../Inputs/RectangleInput";
-import { useToastContext } from "@/contexts/ToastContext";
-import { useThemeContext } from "@/contexts/themeContext";
+import { useToastContext } from "@/contexts/toastContext";
 import createCountry from "@/functions/countries/createCountry";
 import validateCountryCreation from "@/functions/forms/validateCountryCreation";
 
@@ -29,7 +28,6 @@ const nullCountry: Country = {
 
 const CountryCreationForm: React.FC = () => {
   const toast = useToastContext();
-  const { theme } = useThemeContext();
   const formRef = useRef<HTMLFormElement>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [defaultValues, setDefaultValues] = useState<Country>(nullCountry);
@@ -92,7 +90,7 @@ const CountryCreationForm: React.FC = () => {
   };
 
   return (
-    <div className={`form ${theme} ${isLoading ? "loading" : ""}`}>
+    <div className={`form`}>
       <form ref={formRef} onSubmit={handleSubmit} className={`max-w-xl`}>
         <div>
           <div>

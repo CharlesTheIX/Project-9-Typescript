@@ -3,7 +3,7 @@ import Model from "../../models/country.model";
 
 export default async (limit: number = 200): Promise<ApiResponse> => {
   try {
-    const docs = await Model.find().limit(limit).select("-__v -createdAt -updatedAt").lean();
+    const docs = await Model.find().limit(limit).select("-__v").lean();
     if (!docs) return { ...gbl.response_BAD, message: "No Countries found." };
     if (docs.length === 0) return { ...gbl.response_NO_CONTENT, message: "No Countries found." };
 

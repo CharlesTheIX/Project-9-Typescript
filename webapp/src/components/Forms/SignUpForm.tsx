@@ -8,15 +8,13 @@ import LoadingContainer from "../LoadingContainer";
 import PasswordInput from "../Inputs/PasswordInput";
 import createUser from "@/functions/users/createUser";
 import isNumber from "@/functions/validation/isNumber";
-import { useToastContext } from "@/contexts/ToastContext";
-import { useThemeContext } from "@/contexts/themeContext";
+import { useToastContext } from "@/contexts/toastContext";
 import { useRouter, useSearchParams } from "next/navigation";
 import validateSignUp from "@/functions/forms/validateSignUp";
 
 const SignUpForm: React.FC = () => {
   const router = useRouter();
   const toast = useToastContext();
-  const { theme } = useThemeContext();
   const searchParams = useSearchParams();
   const formRef = useRef<HTMLFormElement>(null);
   const { isLoaded, signUp, setActive } = useSignUp();
@@ -113,7 +111,7 @@ const SignUpForm: React.FC = () => {
   };
 
   return (
-    <div className={`form ${theme}`}>
+    <div className={`form`}>
       {verifying ? (
         <form ref={verificationFormRef} onSubmit={handleVerification} className={``}>
           <div>

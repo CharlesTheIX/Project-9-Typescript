@@ -1,3 +1,4 @@
+@use "sass:map";
 @use "../themes" as t;
 
 .input {
@@ -195,8 +196,8 @@
 
 @each $theme-name, $theme-vars in t.$themes {
   .#{$theme-name} {
-    $color-primary: map-get($theme-vars, color-primary);
-    $color-secondary: map-get($theme-vars, color-secondary);
+    $color-primary: map.get($theme-vars, color-primary);
+    $color-secondary: map.get($theme-vars, color-secondary);
 
     .input {
       input,

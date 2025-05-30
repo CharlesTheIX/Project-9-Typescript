@@ -1,4 +1,6 @@
 "use client";
+import Link from "next/link";
+import * as gbl from "@/globals";
 import Edit_SVG from "../SVGs/Edit_SVG";
 import { useState, useEffect } from "react";
 import LoadingContainer from "../LoadingContainer";
@@ -13,9 +15,6 @@ type Props = {
 const CountriesTable: React.FC<Props> = (props: Props) => {
   const { excludeKeys } = props;
   const { userRole } = useUserContext();
-  const [rowCount, setRowCount] = useState<number>(0);
-  const [bodyItems, setBodyItems] = useState<any[]>([]);
-  const [headItems, setHeadItems] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [countries, setCountries] = useState<Country[]>([]);
   const [continent, setContinent] = useState<Continent | "all" | null>(null);
@@ -34,26 +33,6 @@ const CountriesTable: React.FC<Props> = (props: Props) => {
       }
 
       if (response.error) throw new Error(response.message);
-
-      const countries = response.data || [];
-      if (countries.length > 0) {
-        const headItems = Object.keys(countries[0]).filter((key: string) => !excludeKeys.includes(key));
-        const bodyItems = countries.map((item: any) => {
-          const returnItem: any = {};
-          headItems.map((key: string) => {
-            try {
-              returnItem[key] = item[key];
-            } catch (error: any) {
-              returnItem[key] = null;
-            }
-          });
-          return returnItem;
-        });
-
-        setHeadItems(headItems);
-        setBodyItems(bodyItems);
-        setRowCount(userRole === "admin" ? headItems.length + 1 : headItems.length);
-      }
 
       setContinent(item);
       setIsLoading(false);
@@ -75,52 +54,48 @@ const CountriesTable: React.FC<Props> = (props: Props) => {
     <div id="countries-table" className="table">
       {isLoading ? (
         <div className="loading-container">
-        <LoadingContainer />
+          <LoadingContainer />
         </div>
       ) : (
-        <div className="scrollbar-x">
+        <div className="scrollbar-x inner">
           {!countries || countries.length === 0 ? (
             <p>No data to display</p>
           ) : (
-            <>
-              <ul className="head" style={{ gridTemplateColumns: `repeat(${rowCount}, auto)` }}>
-                {userRole === "admin" && (
-                  <li className="edit">
-                    <p>Edit</p>
-                  </li>
-                )}
+            <table>
+              <thead>
+                <tr>
+                  {userRole === "admin" && <td>Edit</td>}
 
-                {headItems.map((item: string) => {
-                  return (
-                    <li key={item} className={`flex flex-row gap-2 items-center justify-between ${item}`}>
-                      <p>{item}</p>
-                    </li>
-                  );
-                })}
-              </ul>
+                  {Object.keys(gbl.nullCountry).map((item: string) => {
+                    if (excludeKeys.includes(item)) return;
+                    return <td key={item}>{item}</td>;
+                  })}
+                </tr>
+              </thead>
 
-              <div className="body">
-                {bodyItems.map((item: any, key: number) => {
+              <tbody>
+                {countries.map((item: any, key: number) => {
                   return (
-                    <ul key={key} style={{ gridTemplateColumns: `repeat(${rowCount}, auto)` }}>
+                    <tr key={key}>
                       {userRole === "admin" && (
-                        <li className="edit">
-                          <Edit_SVG />
-                        </li>
+                        <td>
+                          <Link href={`/countries/edit/${item._id}`}>
+                            <Edit_SVG />
+                          </Link>
+                        </td>
                       )}
 
-                      {Object.keys(item).map((key: any) => {
-                        return (
-                          <li key={key} className={key}>
-                            <p>{JSON.stringify(item[key])}</p>
-                          </li>
-                        );
+                      {Object.keys(gbl.nullCountry).map((i: string, key: number) => {
+                        if (excludeKeys.includes(i)) return;
+                        if (!item[i]) return <td key={key}>N/A</td>;
+
+                        return <td key={key}>{item[i]}</td>;
                       })}
-                    </ul>
+                    </tr>
                   );
                 })}
-              </div>
-            </>
+              </tbody>
+            </table>
           )}
         </div>
       )}

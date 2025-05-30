@@ -1,5 +1,5 @@
+@use "sass:map";
 @use "tailwindcss";
-
 @use "./components";
 @use "./themes" as t;
 
@@ -14,7 +14,7 @@ body {
   align-items: stretch;
   flex-direction: column;
   justify-content: space-between;
-  background-color: map-get(map-get(t.$themes, dark), color-primary);
+  background-color: map.get(map.get(t.$themes, dark), color-primary);
 }
 
 section {

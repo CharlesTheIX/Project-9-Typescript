@@ -9,8 +9,7 @@ import LoadingContainer from "../LoadingContainer";
 import TextareaInput from "../Inputs/TextareaInput";
 import MultiTextInput from "../Inputs/MultiTextInput";
 import RectangleInput from "../Inputs/RectangleInput";
-import { useThemeContext } from "@/contexts/themeContext";
-import { useToastContext } from "@/contexts/ToastContext";
+import { useToastContext } from "@/contexts/toastContext";
 import updateCountryById from "@/functions/countries/updateCountryById";
 import validateCountryCreation from "@/functions/forms/validateCountryCreation";
 
@@ -22,7 +21,6 @@ type Props = {
 const CountryEditForm: React.FC<Props> = (props: Props) => {
   const { country, callback } = props;
   const toast = useToastContext();
-  const { theme } = useThemeContext();
   const formRef = useRef<HTMLFormElement>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -83,7 +81,7 @@ const CountryEditForm: React.FC<Props> = (props: Props) => {
   };
 
   return (
-    <div className={`form ${theme}`}>
+    <div className={`form`}>
       <form ref={formRef} onSubmit={handleSubmit} className={`max-w-xl`}>
         <div>
           <div>

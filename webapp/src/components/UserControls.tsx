@@ -5,16 +5,14 @@ import Admin_SVG from "./SVGs/Admin_SVG";
 import Profile_SVG from "./SVGs/Profile_SVG";
 import SignOutButton from "./Buttons/SingOutButton";
 import { useUserContext } from "@/contexts/userContext";
-import { useThemeContext } from "@/contexts/themeContext";
 import ThemeToggleButton from "./Buttons/ThemeToggleButton";
 
 const UserControls: React.FC = () => {
-  const { theme } = useThemeContext();
   const { user, userRole } = useUserContext();
 
   return (
-    <div id="user-controls" className={theme}>
-      <ul className="flex flex-col">
+    <div id="user-controls">
+      <ul>
         {user && (
           <>
             {userRole === "admin" && (

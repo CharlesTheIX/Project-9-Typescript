@@ -2,14 +2,12 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { useThemeContext } from "@/contexts/themeContext";
 import { useBrowserContext } from "@/contexts/browserContext";
 
 const noShowPathnames = ["/cookies"];
 
 const CookieBanner: React.FC = () => {
   const pathname = usePathname();
-  const { theme } = useThemeContext();
   const [show, setShow] = useState<boolean>(false);
   const { cookie, setCookie, updateCookie } = useBrowserContext();
 
@@ -21,7 +19,7 @@ const CookieBanner: React.FC = () => {
   if (cookie || noShowPathnames.includes(pathname || "")) return;
 
   return (
-    <div id="cookie-banner" className={`${theme} ${show && "show"}`}>
+    <div id="cookie-banner" className={`${show && "show"}`}>
       <div>
         <div>
           <div>

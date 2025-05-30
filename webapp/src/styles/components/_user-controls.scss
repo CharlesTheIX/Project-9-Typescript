@@ -1,11 +1,62 @@
+@use "sass:map";
 @use "../themes" as t;
 
-@mixin themes() {
-  @each $theme-name, $theme-vars in t.$themes {
-    &.#{$theme-name} {
-      $color-primary: map-get($theme-vars, color-primary);
-      $color-secondary: map-get($theme-vars, color-secondary);
+#user-controls {
+  @apply bottom-5 left-10;
+  z-index: 50;
+  position: fixed;
+  border: 3px solid;
+  border-top-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
 
+  ul {
+    display: flex;
+    max-height: 0px;
+    overflow: hidden;
+    flex-direction: column;
+    transition: max-height 300ms ease-in-out;
+
+    > li {
+      border-top-right-radius: 0.5rem;
+      border-bottom-left-radius: 0.5rem;
+      transition: background-color 300ms ease-in-out;
+
+      > a {
+        @apply p-2;
+        padding-bottom: 0;
+        display: inline-block;
+      }
+
+      > button {
+        @apply p-2;
+      }
+    }
+  }
+
+  > div {
+    @apply p-2;
+    cursor: pointer;
+    transition: rotate 300ms ease-out;
+  }
+
+  &:hover {
+    ul {
+      max-height: 1000px;
+    }
+
+    > div {
+      rotate: 90deg;
+    }
+  }
+}
+
+@each $theme-name, $theme-vars in t.$themes {
+  .#{$theme-name} {
+    $color-primary: map.get($theme-vars, color-primary);
+    $color-secondary: map.get($theme-vars, color-secondary);
+
+    #user-controls {
       border-color: $color-secondary;
       background-color: $color-secondary;
 
@@ -37,58 +88,6 @@
       > div {
         fill: $color-primary;
         stroke: $color-primary;
-      }
-    }
-  }
-}
-
-#user-controls {
-  @include themes();
-
-  & {
-    @apply bottom-5 left-10;
-    z-index: 50;
-    position: fixed;
-    border: 3px solid;
-    border-top-right-radius: 0.5rem;
-    border-bottom-left-radius: 0.5rem;
-    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
-
-    ul {
-      max-height: 0px;
-      overflow: hidden;
-      transition: max-height 300ms ease-in-out;
-
-      > li {
-        border-top-right-radius: 0.5rem;
-        border-bottom-left-radius: 0.5rem;
-        transition: background-color 300ms ease-in-out;
-
-        > a {
-          @apply p-2;
-          padding-bottom: 0;
-          display: inline-block;
-        }
-
-        > button {
-          @apply p-2;
-        }
-      }
-    }
-
-    > div {
-      @apply p-2;
-      cursor: pointer;
-      transition: rotate 300ms ease-out;
-    }
-
-    &:hover {
-      ul {
-        max-height: 1000px;
-      }
-
-      > div {
-        rotate: 90deg;
       }
     }
   }

@@ -1,7 +1,23 @@
+@use "sass:map";
 @use "../themes" as t;
 
 .table {
-  > div {
+  display: block;
+
+  .inner {
+    table {
+      min-width: 100%;
+      overflow: hidden;
+
+      thead {
+        top: 0;
+        left: 0;
+        position: sticky;
+      }
+
+      tbody {
+      }
+    }
   }
 }
 
@@ -10,7 +26,7 @@
 
 @each $theme-name, $theme-vars in t.$themes {
   .#{$theme-name} {
-    $color-primary: map-get($theme-vars, color-primary);
-    $color-secondary: map-get($theme-vars, color-secondary);
+    $color-primary: map.get($theme-vars, color-primary);
+    $color-secondary: map.get($theme-vars, color-secondary);
   }
 }

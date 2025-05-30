@@ -1,64 +1,61 @@
+@use "sass:map";
 @use "../themes" as t;
 
-@mixin themes() {
-  @each $theme-name, $theme-vars in t.$themes {
-    &.#{$theme-name} {
-      $color-primary: map-get($theme-vars, color-primary);
-      $color-secondary: map-get($theme-vars, color-secondary);
-
-      .form-loading-container {
-        background-color: $color-primary;
-      }
-    }
-  }
-}
-
 .form {
-  @include themes();
+  @apply gap-5;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 
-  & {
-    @apply gap-5;
+  > form {
     width: 100%;
     display: flex;
+    align-items: center;
     flex-direction: column;
+    justify-content: flex-start;
 
-    > form {
+    > div {
+      @apply gap-5;
       width: 100%;
       display: flex;
       align-items: center;
       flex-direction: column;
-      justify-content: flex-start;
 
       > div {
-        @apply gap-5;
         width: 100%;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
 
-        > div {
-          width: 100%;
+        &:nth-child(1) {
+          @apply gap-5;
+          display: flex;
+          position: relative;
+          align-items: center;
+          flex-direction: column;
 
-          &:nth-child(1) {
-            @apply gap-5;
-            display: flex;
-            position: relative;
-            align-items: center;
-            flex-direction: column;
-
-            > * {
-              width: 100%;
-            }
+          > * {
+            width: 100%;
           }
         }
       }
+    }
 
+    .form-loading-container {
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      transition: background-color 300ms ease-in-out;
+    }
+  }
+}
+
+@each $theme-name, $theme-vars in t.$themes {
+  .#{$theme-name} {
+    $color-primary: map.get($theme-vars, color-primary);
+    $color-secondary: map.get($theme-vars, color-secondary);
+
+    .form {
       .form-loading-container {
-        z-index: 1;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        transition: background-color 300ms ease-in-out;
+        background-color: $color-primary;
       }
     }
   }

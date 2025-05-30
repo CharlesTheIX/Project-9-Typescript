@@ -5,15 +5,13 @@ import EmailInput from "../Inputs/EmailInput";
 import LoadingContainer from "../LoadingContainer";
 import PasswordInput from "../Inputs/PasswordInput";
 import { useUserContext } from "@/contexts/userContext";
-import { useToastContext } from "@/contexts/ToastContext";
-import { useThemeContext } from "@/contexts/themeContext";
+import { useToastContext } from "@/contexts/toastContext";
 import { useRouter, useSearchParams } from "next/navigation";
 import validateSignIn, { SignInRequestData } from "@/functions/forms/validateSignIn";
 
 const SignInForm: React.FC = () => {
   const router = useRouter();
   const toast = useToastContext();
-  const { theme } = useThemeContext();
   const { setToggle } = useUserContext();
   const searchParams = useSearchParams();
   const formRef = useRef<HTMLFormElement>(null);
@@ -58,7 +56,7 @@ const SignInForm: React.FC = () => {
   };
 
   return (
-    <div className={`form ${theme}`}>
+    <div className={`form`}>
       <form ref={formRef} onSubmit={handleSubmit} className={`max-w-xl`}>
         <div>
           <div>

@@ -106,3 +106,21 @@ export const nullOption: Option = {
   value: "",
   label: "",
 };
+
+// Country
+export const nullCountry: Country = {
+  _id: undefined,
+  displayName: "",
+  names: [],
+  continent: "Europe",
+  description: undefined,
+  capitalCity: undefined,
+  languages: undefined,
+  population: undefined,
+  imageUrl: undefined,
+  mapRectangle: nullRectangle,
+  flagRectangle: nullRectangle,
+  updatedAt: undefined,
+  createdAt: undefined,
+  __v: undefined,
+};

@@ -1,7 +1,7 @@
-import UserControls from "@/components/UserControls";
-import CookieBanner from "@/components/Banners/CookieBanner";
+// import UserControls from "@/components/UserControls";
+// import CookieBanner from "@/components/Banners/CookieBanner";
 import { UserContextProvider } from "@/contexts/userContext";
-import { ToastContextProvider } from "@/contexts/ToastContext";
+import { ToastContextProvider } from "@/contexts/toastContext";
 import { ThemeContextProvider } from "@/contexts/themeContext";
 import { BrowserContextProvider } from "@/contexts/browserContext";
 
@@ -18,8 +18,8 @@ const AppContextWrapper: React.FC<Readonly<Props>> = (props: Props) => {
         <ToastContextProvider>
           <UserContextProvider>
             {children}
-            <UserControls />
-            <CookieBanner />
+            {/* <UserControls />
+            <CookieBanner /> */}
           </UserContextProvider>
         </ToastContextProvider>
       </ThemeContextProvider>
