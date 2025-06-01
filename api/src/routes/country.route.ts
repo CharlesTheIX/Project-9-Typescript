@@ -1,12 +1,14 @@
 import * as gbl from "../globals";
+import express, { Router, Request, Response } from "express";
 import createCountry from "../functions/country/createCountry";
 import getCountryById from "../functions/country/getCountryById";
 import getAllCountries from "../functions/country/getAllCountries";
-import express, { Router, Request, Response } from "express";
 import deleteCountryById from "../functions/country/deleteCountryById";
 import updateCountryById from "../functions/country/updateCountryById";
+import createManyCountries from "../functions/country/createManyCountries";
 import getCountryByDisplayName from "../functions/country/getCountryByDisplayName";
 import getCountriesByContinent from "../functions/country/getCountriesByContinent";
+import deleteManyCountriesById from "../functions/country/deleteManyCountriesById";
 
 const router: Router = express.Router();
 
@@ -82,13 +84,13 @@ router.route("/create").post(async (request: Request, response: Response): Promi
     description,
     capitalCity,
     mapRectangle,
-    flagRectangle,
+    flagRectangle
   } = request.body;
 
   if (!displayName || !names || names.length === 0 || !flagRectangle || !mapRectangle || !continent) {
     return response.status(gbl.status.BAD).json({
       ...gbl.response_BAD,
-      message: "Required inputs: displayName, names, continent, flagRectangle, mapRectangle.",
+      message: "Required inputs: displayName, names, continent, flagRectangle, mapRectangle."
     });
   }
 
@@ -103,11 +105,31 @@ router.route("/create").post(async (request: Request, response: Response): Promi
       description,
       capitalCity,
       mapRectangle,
-      flagRectangle,
+      flagRectangle
     });
     return response.json(res);
   } catch (error: any) {
     console.error(`Create country error: ${error.message}`);
+    return response.status(gbl.status.SERVER_ERROR).json(gbl.response_SERVER_ERROR);
+  }
+});
+
+// Create many countries
+router.route("/create-many").post(async (request: Request, response: Response): Promise<any> => {
+  const { countries } = request.body;
+
+  if (!countries || countries.length === 0) {
+    return response.status(gbl.status.BAD).json({
+      ...gbl.response_BAD,
+      message: "Required inputs: countries."
+    });
+  }
+
+  try {
+    const res = await createManyCountries({ countries });
+    return response.json(res);
+  } catch (error: any) {
+    console.error(`Create many countries error: ${error.message}`);
     return response.status(gbl.status.SERVER_ERROR).json(gbl.response_SERVER_ERROR);
   }
 });
@@ -138,6 +160,21 @@ router.route("/by-id").delete(async (request: Request, response: Response): Prom
     return response.json(res);
   } catch (error: any) {
     console.error(`Delete country by _id error: ${error.message}`);
+    return response.status(gbl.status.SERVER_ERROR).json(gbl.response_SERVER_ERROR);
+  }
+});
+
+// Delete many countries by _id
+router.route("/many-by-id").delete(async (request: Request, response: Response): Promise<any> => {
+  const { _ids } = request.body;
+
+  if (!_ids || _ids.length === 0) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: _ids." });
+
+  try {
+    const res = await deleteManyCountriesById({ _ids });
+    return response.json(res);
+  } catch (error: any) {
+    console.error(`Delete many countries by _id error: ${error.message}`);
     return response.status(gbl.status.SERVER_ERROR).json(gbl.response_SERVER_ERROR);
   }
 });

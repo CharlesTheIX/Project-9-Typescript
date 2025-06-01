@@ -1,10 +1,10 @@
 // KEEP THE TYPE IN THIS FILE IN ALPHABETICAL ORDER!
 
 type ApiResponse = {
-  data: any;
   status: number;
   error: boolean;
   message: string;
+  data: CreateManyResponse | any;
 };
 
 type Continent = "Europe" | "Asia" | "Africa" | "North America" | "South America" | "Oceania";
@@ -20,6 +20,17 @@ type Country = MongoDocDefaults & {
   languages?: string[];
   mapRectangle: Rectangle;
   flagRectangle: Rectangle;
+};
+
+type CreateManyResponse = {
+  created: string[];
+  skipped: string[];
+  errors: { displayName: string; message: string }[];
+};
+
+type GetManyResponse = {
+  items: any[],
+  count: number,
 };
 
 type MongoDocDefaults = {
