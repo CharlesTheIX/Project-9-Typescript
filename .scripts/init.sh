@@ -10,7 +10,7 @@ RESET="\033[0m"
 init() {
   local current_dir=$WORKING_DIR
   local app_dirs_array=("api" "webapp" "cli")
-  local script_files_array=("create_color_theme.sh" "restore_color_themes.sh")
+  local script_files_array=("create_color_theme.sh" "restore_color_themes.sh" "create_component.sh")
 
   echo ""
   echo "Updating script modes"

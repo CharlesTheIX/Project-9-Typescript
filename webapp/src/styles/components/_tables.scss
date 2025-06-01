@@ -2,31 +2,287 @@
 @use "../themes" as t;
 
 .table {
-  display: block;
+  @apply gap-5;
+  display: flex;
+  flex-direction: column;
+
+  .controls {
+    @apply gap-2 p-2;
+    display: flex;
+    overflow: hidden;
+    border: 3px solid;
+    flex-direction: column;
+    border-top-right-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+
+    > div {
+      @apply gap-5;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      * {
+        @apply px-2;
+      }
+
+      > p {
+        @apply pb-2;
+        border-bottom: 3px solid;
+      }
+
+      > div {
+        @apply gap-2;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        flex-direction: row;
+        justify-content: flex-start;
+
+        > div {
+          @apply px-2 py-1 gap-2;
+          display: flex;
+          cursor: pointer;
+          overflow: hidden;
+          border: 3px solid;
+          align-items: center;
+          flex-direction: row;
+          border-top-right-radius: 0.5rem;
+          border-bottom-left-radius: 0.5rem;
+          transition: all 300ms ease-in-out;
+
+          &.show,
+          &:hover {
+            border-top-right-radius: 0;
+            border-bottom-left-radius: 0;
+            border-top-left-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+          }
+        }
+      }
+
+      &.search {
+      }
+
+      &.hide-show {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 300ms ease-in-out;
+
+        &.show {
+          max-height: 1000px;
+        }
+      }
+    }
+  }
 
   .inner {
+    border: 3px solid;
+    max-height: 500px;
+    border-top-right-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+
+    > p {
+      @apply px-2 pt-2;
+      font-weight: bold;
+    }
+
     table {
       min-width: 100%;
-      overflow: hidden;
+
+      td,
+      th {
+        @apply p-2;
+        border-left: 3px solid;
+
+        p {
+          @apply gap-10;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+
+          span {
+            max-width: 400px;
+            overflow: hidden;
+            display: -webkit-box;
+            word-wrap: break-word;
+            -webkit-line-clamp: 1;
+            text-overflow: ellipsis;
+            -webkit-box-orient: vertical;
+          }
+
+          svg {
+            cursor: pointer;
+          }
+
+          &.edit {
+            justify-content: center;
+          }
+        }
+
+        &:nth-child(1) {
+          border: none;
+        }
+      }
+
+      td {
+        transition: border-color 300ms ease-in-out;
+      }
 
       thead {
         top: 0;
         left: 0;
+        z-index: 1;
         position: sticky;
+        font-weight: bold;
+        border-bottom: 3px solid;
       }
 
       tbody {
+        tr {
+          border-bottom: 3px solid;
+          transition: color 300ms ease-in-out, background-color 300ms ease-in-out;
+
+          svg {
+            transition: fill 300ms ease-in-out, stroke 300ms ease-in-out;
+          }
+
+          &:nth-child(even) {
+            filter: brightness(1.2);
+          }
+
+          &:hover {
+            filter: brightness(1);
+          }
+        }
       }
     }
   }
-}
 
-#countries-table {
+  .pagination {
+    > div {
+      @apply gap-10;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-end;
+
+      > div {
+        @apply gap-2;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .select-input {
+          position: relative;
+        }
+      }
+    }
+  }
 }
 
 @each $theme-name, $theme-vars in t.$themes {
   .#{$theme-name} {
     $color-primary: map.get($theme-vars, color-primary);
     $color-secondary: map.get($theme-vars, color-secondary);
+
+    .table {
+      .controls {
+        > div {
+          > div {
+            p {
+              border-color: $color-secondary;
+            }
+
+            > div {
+              fill: $color-primary;
+              color: $color-primary;
+              stroke: $color-primary;
+              border-color: $color-secondary;
+              background-color: $color-secondary;
+
+              &.show,
+              &:hover {
+                fill: $color-secondary;
+                color: $color-secondary;
+                stroke: $color-secondary;
+                background-color: $color-primary;
+
+                &:hover {
+                  fill: $color-primary;
+                  color: $color-primary;
+                  stroke: $color-primary;
+                  background-color: $color-secondary;
+                }
+              }
+            }
+          }
+
+          &.search {
+            .search-bar {
+              &.focused {
+                input {
+                  color: $color-primary;
+                  background-color: $color-secondary;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .inner {
+        border-color: $color-secondary;
+
+        table {
+          thead {
+            border-color: $color-secondary;
+
+            tr {
+              color: $color-primary;
+              background-color: $color-secondary;
+
+              th {
+                border-color: $color-secondary;
+
+                p {
+                  fill: $color-primary;
+                  stroke: $color-primary;
+
+                  span {
+                    fill: $color-primary;
+                    stroke: $color-primary;
+                  }
+                }
+              }
+            }
+          }
+
+          tbody {
+            border-color: $color-secondary;
+
+            tr {
+              color: $color-secondary;
+              border-color: $color-secondary;
+              background-color: $color-primary;
+
+              td {
+                border-color: $color-secondary;
+              }
+
+              &:hover {
+                fill: $color-primary;
+                color: $color-primary;
+                stroke: $color-primary;
+                background-color: $color-secondary;
+
+                td {
+                  border-color: $color-secondary;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

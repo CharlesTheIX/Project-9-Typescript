@@ -12,6 +12,7 @@ const isSignedInRoute = createRouteMatcher(signedInRoutes);
 
 export default clerkMiddleware(async (auth: ClerkMiddlewareAuth, request: NextRequest) => {
   const { userId } = await auth();
+  console.log("user id", userId);
 
   if (userId && isSignedInRoute(request)) {
     return NextResponse.redirect(new URL("/dashboard", process.env.NEXT_PUBLIC_BASE_URL));
@@ -21,6 +22,11 @@ export default clerkMiddleware(async (auth: ClerkMiddlewareAuth, request: NextRe
 
   if (userId && isAdminRoute(request)) {
     const userResponse = await getUserByClerkId(userId);
+    console.log(userResponse);
+
+    if (userResponse.error) {
+    }
+
     if (userResponse.error || userResponse.data.role !== "admin") {
       return NextResponse.redirect(new URL("/403", process.env.NEXT_PUBLIC_BASE_URL));
     }

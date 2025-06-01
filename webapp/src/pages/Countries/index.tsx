@@ -35,13 +35,13 @@ const CountriesPage: React.FC = () => {
           <CountriesTable
             excludeKeys={[
               "__v",
-              "_id",
-              "names",
-              "imageUrl",
-              "languages",
-              "population",
-              "description",
-              "capitalCity",
+              // "_id",
+              // "names",
+              // "imageUrl",
+              // "languages",
+              // "population",
+              // "description",
+              // "capitalCity",
               "mapRectangle",
               "flagRectangle",
             ]}

@@ -30,12 +30,12 @@ export default (requestData: Country): FormError => {
           formError.message = updateFormErrorMessage(formError.message, "Continent");
         }
         break;
-      case "description":
-        if (requestData[item] && !isAlphanumeric(requestData[item], 5)) {
-          formError.error = true;
-          formError.message = updateFormErrorMessage(formError.message, "Description");
-        }
-        break;
+      // case "description":
+      // if (requestData[item] && !isAlphanumeric(requestData[item], 5)) {
+      // formError.error = true;
+      // formError.message = updateFormErrorMessage(formError.message, "Description");
+      // }
+      // break;
       case "capitalCity":
         if (requestData[item] && !isName(requestData[item], 3)) {
           formError.error = true;

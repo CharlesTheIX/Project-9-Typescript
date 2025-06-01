@@ -1,0 +1,191 @@
+"use client";
+import { useState } from "react";
+import TableHead from "./TableHead";
+import TableBody from "./TableBody";
+import TableControls from "./TableControls";
+import SelectInput from "../Inputs/SelectInput";
+
+export type SortState = "asc" | "desc" | "shuffled";
+export type TableHeader = {
+  value: any;
+  label: string;
+  hidden?: boolean;
+  canSort?: boolean;
+  canCopy?: boolean;
+  dataType?: "edit";
+  roles?: UserRole[];
+  searchable?: boolean;
+  sortState?: SortState;
+};
+
+type Props = {
+  data: any[];
+  pagination?: boolean;
+  headers: TableHeader[];
+};
+
+const TableCore: React.FC<Props> = (props: Props) => {
+  const { headers, data, pagination } = props;
+  const [tableData, setTableData] = useState<any[]>(data);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [postsPerPage, setPostsPerPage] = useState<number>(1);
+  const [tableHeaders, setTableHeaders] = useState<TableHeader[]>(headers);
+
+  const getNextSortState = (sortState: SortState | undefined): SortState => {
+    switch (sortState) {
+      case "asc":
+        return "desc";
+      case "desc":
+        return "asc";
+      case "shuffled":
+        return "asc";
+      default:
+        return "asc";
+    }
+  };
+
+  const hideShowHeaders = (index: number): void => {
+    setTableHeaders((prevValue: TableHeader[]) => {
+      const newHeaders = [...prevValue];
+      const header = { ...newHeaders[index] };
+      header.hidden = !header.hidden;
+      newHeaders[index] = header;
+      return newHeaders;
+    });
+  };
+
+  const sortTableData = (key: number): void => {
+    const newHeaders = [...tableHeaders];
+    const header = { ...newHeaders[key] };
+    header.sortState = getNextSortState(header.sortState);
+    newHeaders[key] = header;
+    setTableHeaders(newHeaders);
+    setTableData((prevValue: any[]) => {
+      const newData = [...prevValue];
+
+      newHeaders.map((header: TableHeader) => {
+        if (!header.sortState || !header.canSort) return;
+
+        if (header.sortState === "shuffled") {
+          for (let i = newData.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [newData[i], newData[j]] = [newData[j], newData[i]];
+          }
+          return;
+        }
+
+        newData.sort((a, b) => {
+          const aName = a[header.value];
+          const bName = b[header.value];
+          const aIsUndefined = aName === undefined;
+          const bIsUndefined = bName === undefined;
+
+          if (aIsUndefined && bIsUndefined) return 0;
+          if (aIsUndefined) return 1;
+          if (bIsUndefined) return -1;
+
+          switch (header.sortState) {
+            case "asc":
+              return aName!.localeCompare(bName!);
+            case "desc":
+              return bName!.localeCompare(aName!);
+          }
+        });
+      });
+
+      return newData;
+    });
+  };
+
+  const searchTableTable = (searchValue: string): void => {
+    if (!searchValue) return setTableData(data);
+
+    const filteredData = data.filter((item: any) => {
+      return tableHeaders.some((header: TableHeader) => {
+        const key = header.value;
+        const cellValue = item[key];
+
+        if (cellValue === undefined || cellValue === null) return false;
+
+        return String(cellValue).toLowerCase().includes(searchValue.toLowerCase());
+      });
+    });
+
+    setTableData(filteredData);
+  };
+
+  return (
+    <>
+      <TableControls
+        tableHeaders={tableHeaders}
+        hideShowHeaders={hideShowHeaders}
+        searchTableTable={searchTableTable}
+      />
+
+      <div className="scrollbar-x scrollbar-y inner">
+        {!tableData || tableData.length === 0 ? (
+          <p>No data to display</p>
+        ) : (
+          <table>
+            <TableHead tableHeaders={tableHeaders} sortTableData={sortTableData} />
+            <TableBody tableData={tableData} tableHeaders={tableHeaders} />
+          </table>
+        )}
+      </div>
+
+      {tableData && tableData.length > 0 && !pagination && (
+        <div className="pagination">
+          <div>
+            <div>
+              <SelectInput
+                name="posts-per-page"
+                options={[
+                  {
+                    value: 1,
+                    label: "1",
+                  },
+                  {
+                    value: 2,
+                    label: "2",
+                  },
+                  {
+                    value: 3,
+                    label: "3",
+                  },
+                ]}
+                onChange={(event: any) => {
+                  console.log(event);
+                  // setPostsPerPage(event.value);
+                  // setCurrentPage(1);
+                }}
+              />
+              <p>posts per page</p>
+            </div>
+
+            <div>
+              <p
+                onClick={() => {
+                  setCurrentPage(currentPage - 1);
+                }}
+              >
+                prev
+              </p>
+              <p>
+                {currentPage} / {Math.floor(tableData.length / postsPerPage)}
+              </p>
+              <p
+                onClick={() => {
+                  setCurrentPage(currentPage + 1);
+                }}
+              >
+                next
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default TableCore;
