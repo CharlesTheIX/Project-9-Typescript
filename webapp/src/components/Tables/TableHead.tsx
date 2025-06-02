@@ -1,6 +1,8 @@
 "use client";
 import { Fragment } from "react";
+import Edit_SVG from "../SVGs/Edit_SVG";
 import SortAsc_SVG from "../SVGs/SortAsc_SVG";
+import Profile_SVG from "../SVGs/Profile_SVG";
 import SortDesc_SVG from "../SVGs/SortDesc_SVG";
 import { SortState, TableHeader } from "./TableCore";
 import { useUserContext } from "@/contexts/userContext";
@@ -36,24 +38,32 @@ const TableHead: React.FC<Props> = (props: Props) => {
           if (!header.roles || header.roles.length === 0 || header.roles.includes(userRole)) {
             return (
               <th key={key}>
-                <p>
-                  {!header.dataType && (
-                    <>
-                      <span>{header.label}</span>
-                      {header.canSort && (
-                        <span
-                          onClick={() => {
-                            sortTableData(key);
-                          }}
-                        >
-                          {getSortIcon(header.sortState || "shuffled")}
-                        </span>
-                      )}
-                    </>
-                  )}
+                {!header.dataType && (
+                  <p>
+                    <span>{header.label}</span>
+                    {header.canSort && (
+                      <span
+                        className="sort"
+                        onClick={() => {
+                          sortTableData(key);
+                        }}
+                      >
+                        {getSortIcon(header.sortState || "shuffled")}
+                      </span>
+                    )}
+                  </p>
+                )}
 
-                  {header.dataType === "edit" && <span>Edit</span>}
-                </p>
+                {header.dataType === "edit" && (
+                  <p className="edit">
+                    <Edit_SVG />
+                  </p>
+                )}
+                {header.dataType === "impersonate" && (
+                  <p className="impersonate">
+                    <Profile_SVG />
+                  </p>
+                )}
               </th>
             );
           }

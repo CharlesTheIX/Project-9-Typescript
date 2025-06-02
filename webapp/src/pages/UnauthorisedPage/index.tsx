@@ -1,9 +1,11 @@
 import Link from "next/link";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 
+const roles: UserRole[] = ["admin"];
+
 const UnauthorisedPage: React.FC = () => {
   return (
-    <DefaultLayout>
+    <DefaultLayout roles={roles}>
       <section>
         <div className="flex flex-col gap-10">
           <h1>403</h1>

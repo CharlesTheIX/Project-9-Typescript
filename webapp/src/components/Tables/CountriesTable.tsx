@@ -96,7 +96,7 @@ const CountriesTable: React.FC = () => {
           <LoadingContainer />
         </div>
       ) : (
-        <TableCore headers={tableHeaders} data={countries} />
+        <TableCore headers={tableHeaders} data={countries} pagination={true} collection="countries" />
       )}
     </div>
   );

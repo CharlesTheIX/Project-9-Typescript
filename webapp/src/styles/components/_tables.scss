@@ -61,6 +61,12 @@
       }
 
       &.search {
+        .search-bar {
+          > .input {
+            border: none;
+            padding: 0;
+          }
+        }
       }
 
       &.hide-show {
@@ -114,7 +120,8 @@
             cursor: pointer;
           }
 
-          &.edit {
+          &.edit,
+          &.impersonate {
             justify-content: center;
           }
         }
@@ -160,20 +167,35 @@
 
   .pagination {
     > div {
-      @apply gap-10;
+      @apply gap-5;
       display: flex;
       flex-direction: row;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: space-between;
 
       > div {
         @apply gap-2;
         display: flex;
         flex-direction: row;
-        align-items: center;
 
-        .select-input {
-          position: relative;
+        &.posts-per-page {
+          align-items: flex-start;
+          max-height: 46px;
+
+          .select-input {
+            position: relative;
+          }
+
+          p {
+            @apply py-2;
+          }
+        }
+
+        &.page-navigation {
+          @apply gap-1;
+          align-items: center;
+          align-items: flex-start;
+          justify-content: space-between;
         }
       }
     }
@@ -182,42 +204,49 @@
 
 @each $theme-name, $theme-vars in t.$themes {
   .#{$theme-name} {
+    $color-admin: map.get($theme-vars, color-admin);
     $color-primary: map.get($theme-vars, color-primary);
     $color-secondary: map.get($theme-vars, color-secondary);
+    $color-highlight: map.get($theme-vars, color-highlight);
 
     .table {
       .controls {
         > div {
-          > div {
-            p {
-              border-color: $color-secondary;
-            }
-
+          &.hide-show {
             > div {
-              fill: $color-primary;
-              color: $color-primary;
-              stroke: $color-primary;
-              border-color: $color-secondary;
-              background-color: $color-secondary;
+              > .button {
+                fill: $color-primary;
+                color: $color-primary;
+                stroke: $color-primary;
+                border-color: $color-secondary;
+                background-color: $color-secondary;
 
-              &.show,
-              &:hover {
-                fill: $color-secondary;
-                color: $color-secondary;
-                stroke: $color-secondary;
-                background-color: $color-primary;
-
-                &:hover {
-                  fill: $color-primary;
-                  color: $color-primary;
-                  stroke: $color-primary;
-                  background-color: $color-secondary;
+                &.active {
+                  fill: $color-secondary;
+                  color: $color-secondary;
+                  stroke: $color-secondary;
+                  background-color: $color-primary;
                 }
               }
             }
           }
 
           &.search {
+            > div {
+              > p {
+                color: $color-secondary;
+                border-color: $color-secondary;
+                background-color: $color-primary;
+
+                &:hover,
+                &.active {
+                  color: $color-primary;
+                  border-color: $color-secondary;
+                  background-color: $color-secondary;
+                }
+              }
+            }
+
             .search-bar {
               &.focused {
                 input {
@@ -249,6 +278,16 @@
                   stroke: $color-primary;
 
                   span {
+                    &.sort {
+                      fill: $color-primary;
+                      stroke: $color-primary;
+
+                      &:hover {
+                        fill: $color-highlight;
+                        stroke: $color-highlight;
+                      }
+                    }
+
                     fill: $color-primary;
                     stroke: $color-primary;
                   }
@@ -261,6 +300,8 @@
             border-color: $color-secondary;
 
             tr {
+              fill: $color-highlight;
+              stroke: $color-highlight;
               color: $color-secondary;
               border-color: $color-secondary;
               background-color: $color-primary;
@@ -270,9 +311,9 @@
               }
 
               &:hover {
-                fill: $color-primary;
                 color: $color-primary;
-                stroke: $color-primary;
+                fill: $color-highlight;
+                stroke: $color-highlight;
                 background-color: $color-secondary;
 
                 td {

@@ -35,7 +35,6 @@ export const BrowserContextProvider = (props: { children: React.ReactNode }) => 
     const userAgent = navigator.userAgent;
     const storedAcceptanceCookie = getCookieItem(`${process.env.NEXT_PUBLIC_STORAGE_PREFIX}-cookie-acceptance`);
     if (storedAcceptanceCookie && !cookie) setCookie(storedAcceptanceCookie);
-
     if (userAgent.includes("Chrome")) setBrowser("chrome");
     if (userAgent.includes("Firefox")) setBrowser("fireFox");
     if (userAgent.includes("Safari") && !userAgent.includes("Chrome")) setBrowser("safari");

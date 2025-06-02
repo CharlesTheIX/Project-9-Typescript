@@ -8,17 +8,17 @@ import EyeSlash_SVG from "../SVGs/EyeSlash_SVG copy";
 import { useUserContext } from "@/contexts/userContext";
 
 type Props = {
+  searchValue: string;
   tableHeaders: TableHeader[];
   hideShowHeaders: (index: number) => void;
   searchTableTable: (searchValue: string) => void;
+  setSearchValue: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const TableControls: React.FC<Props> = (props: Props) => {
-  const { tableHeaders, hideShowHeaders, searchTableTable } = props;
+  const { tableHeaders, hideShowHeaders, searchTableTable, setSearchValue, searchValue } = props;
   const { userRole } = useUserContext();
-  const [searchValue, setSearchValue] = useState<string>("");
   const [showHideShowDropdown, setShowHideShowDropdown] = useState<boolean>(false);
-
   const debouncedLogSearch = useMemo(() => debounce(searchTableTable, 300), [searchTableTable]);
 
   return (
@@ -29,13 +29,14 @@ const TableControls: React.FC<Props> = (props: Props) => {
             setShowHideShowDropdown(!showHideShowDropdown);
           }}
         >
-          <p className="button">Hide / Show</p>
+          <p className={`button ${showHideShowDropdown ? "active" : ""}`}>Hide / Show</p>
         </div>
 
         <div className={`search-bar font-bold ${searchValue ? "focused" : ""}`}>
           <TextInput
             label="Search"
             name="search-input"
+            defaultValue={searchValue}
             onInput={(inputElement: any) => {
               const value = inputElement.value;
               setSearchValue(value);
@@ -52,7 +53,7 @@ const TableControls: React.FC<Props> = (props: Props) => {
               return (
                 <div
                   key={key}
-                  className={`${!header.hidden ? "show" : ""}`}
+                  className={`button ${!header.hidden ? "active" : ""}`}
                   onClick={() => {
                     hideShowHeaders(key);
                   }}

@@ -3,7 +3,6 @@ import isName from "../validation/isName";
 import isNumber from "../validation/isNumber";
 import isContinent from "../validation/isContinent";
 import isRectangle from "../validation/isRectangle";
-import isAlphanumeric from "../validation/isAlphanumeric";
 import isArrayOfStrings from "../validation/isArrayOfStrings";
 import updateFormErrorMessage from "./updateFormErrorMessage";
 

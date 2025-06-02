@@ -1,8 +1,10 @@
 import AdminLayout from "@/components/Layouts/AdminLayout";
 
+const roles: UserRole[] = ["admin"];
+
 const AdminPage: React.FC = () => {
   return (
-    <AdminLayout>
+    <AdminLayout roles={roles}>
       <section>
         <div className="flex flex-col gap-10">
           <h1>Admin</h1>

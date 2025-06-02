@@ -49,7 +49,7 @@ const SelectInput: React.FC<Props> = (props: Props) => {
         >
           {value.label || "Select an option"}
 
-          <Chevron_SVG direction="down" width={12} height={12} />
+          <Chevron_SVG direction="down" />
         </button>
 
         <ul className="scrollbar-y">

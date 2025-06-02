@@ -6,9 +6,16 @@
     &.#{$theme-name} {
       $color-primary: map.get($theme-vars, color-primary);
       $color-secondary: map.get($theme-vars, color-secondary);
+      $color-highlight: map.get($theme-vars, color-highlight);
 
       fill: $color-secondary;
       stroke: $color-secondary;
+
+      &:hover {
+        fill: $color-highlight;
+        color: $color-highlight;
+        stroke: $color-highlight;
+      }
     }
   }
 }

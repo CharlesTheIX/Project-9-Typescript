@@ -23,6 +23,11 @@ section {
   margin: 0 auto;
 }
 
+aside,
+section {
+  animation: fade-in 1000ms ease-in-out forwards;
+}
+
 h1 {
   @apply text-7xl;
   font-weight: bold;
@@ -51,6 +56,10 @@ h5 {
 h6 {
   @apply text-base;
   font-weight: bold;
+}
+
+button {
+  cursor: pointer;
 }
 
 svg {
@@ -143,5 +152,15 @@ svg {
 
   100% {
     opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 }

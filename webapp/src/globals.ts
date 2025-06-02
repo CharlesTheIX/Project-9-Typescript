@@ -93,6 +93,16 @@ export const continentOptions: Option[] = [
 ];
 export const continents: Continent[] = ["Africa", "Asia", "Europe", "Noth America", "Oceania", "South America"];
 
+// Users
+export const userRoles: UserRole[] = ["admin", "editor", "guest", "test", "user"];
+export const userRoleOptions: Option[] = [
+  { value: "user", label: "User" },
+  { value: "guest", label: "Guest" },
+  { value: "editor", label: "Editor" },
+  { value: "test", label: "Test" },
+  { value: "admin", label: "Admin" },
+];
+
 // Rectangles
 export const nullRectangle: Rectangle = {
   x: 0,

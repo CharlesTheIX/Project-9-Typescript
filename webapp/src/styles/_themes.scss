@@ -1,14 +1,20 @@
 $themes: (
   dark: (
-    color-primary: #222831,
-    color-secondary: #dfd0b8
+    color-admin: #f3c623,
+    color-primary: #10375c,
+    color-secondary: #f4f6ff,
+    color-highlight: #eb8317,
   ),
   light: (
-    color-primary: #f3f3e0,
-    color-secondary: #183b4e
+    color-admin: #f3c623,
+    color-primary: #f4f6ff,
+    color-secondary: #10375c,
+    color-highlight: #eb8317,
   ),
   custom: (
-    color-primary: #a02334,
-    color-secondary: #ffeead
-  )
+    color-admin: #f4f6ff,
+    color-primary: #10375c,
+    color-secondary: #f3c623,
+    color-highlight: #f4f6ff,
+  ),
 );

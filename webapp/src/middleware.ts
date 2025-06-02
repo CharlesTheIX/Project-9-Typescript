@@ -4,7 +4,7 @@ import { ClerkMiddlewareAuth, clerkMiddleware, createRouteMatcher } from "@clerk
 
 const signedInRoutes: string[] = ["/", "/sign-in(.*)", "/sign-up(.*)"];
 const publicRoutes: string[] = ["/", "/sign-in(.*)", "/sign-up(.*)", "/cookies", "/not-found", "/api/:path*"];
-const adminRoutes: string[] = ["/admin/:path*", "/users/:path*", "/countries/create", "/countries/edit/:path*"];
+const adminRoutes: string[] = ["/admin/:path*"];
 
 const isAdminRoute = createRouteMatcher(adminRoutes);
 const isPublicRoute = createRouteMatcher(publicRoutes);

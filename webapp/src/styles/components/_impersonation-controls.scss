@@ -1,0 +1,109 @@
+@use "sass:map";
+@use "../themes" as t;
+
+#impersonation-controls {
+  @apply bottom-5;
+  z-index: 50;
+  position: fixed;
+  border: 3px solid;
+  left: calc(0.25rem * 25);
+  border-top-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
+
+  ul {
+    display: flex;
+    max-height: 0px;
+    overflow: hidden;
+    flex-direction: column;
+    transition: max-height 300ms ease-in-out;
+
+    > li {
+      @apply p-2 gap-2;
+      display: flex;
+      cursor: pointer;
+      flex-direction: row;
+      align-items: center;
+      border-top-right-radius: 0.5rem;
+      border-bottom-left-radius: 0.5rem;
+      transition: background-color 300ms ease-in-out;
+
+      a,
+      p {
+        @apply gap-2;
+        width: 100%;
+        display: flex;
+        font-weight: bold;
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+  }
+
+  > div {
+    @apply p-2 gap-2;
+    display: flex;
+    cursor: pointer;
+    flex-direction: row;
+    align-items: center;
+
+    p {
+      font-weight: bold;
+    }
+  }
+
+  &:hover {
+    ul {
+      max-height: 1000px;
+    }
+  }
+}
+
+@each $theme-name, $theme-vars in t.$themes {
+  .#{$theme-name} {
+    $color-admin: map.get($theme-vars, color-admin);
+    $color-primary: map.get($theme-vars, color-primary);
+    $color-secondary: map.get($theme-vars, color-secondary);
+
+    #impersonation-controls {
+      border-color: $color-admin;
+      background-color: $color-admin;
+
+      > ul {
+        color: $color-admin;
+
+        > li {
+          fill: $color-primary;
+          stroke: $color-primary;
+
+          a,
+          p {
+            fill: $color-primary;
+            color: $color-primary;
+            stroke: $color-primary;
+          }
+
+          &:hover {
+            color: $color-admin;
+            fill: $color-admin;
+            stroke: $color-admin;
+            background-color: $color-primary;
+
+            a,
+            p {
+              color: $color-admin;
+              fill: $color-admin;
+              stroke: $color-admin;
+            }
+          }
+        }
+      }
+
+      > div {
+        fill: $color-primary;
+        color: $color-primary;
+        stroke: $color-primary;
+      }
+    }
+  }
+}

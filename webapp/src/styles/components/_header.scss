@@ -9,7 +9,7 @@
 
       background: $color-primary;
 
-      > div {
+      .main {
         color: $color-secondary;
         background: $color-primary;
         border-color: $color-secondary;
@@ -30,7 +30,19 @@
     width: 100vw;
     position: sticky;
 
-    > div {
+    .header-logo {
+      @apply gap-1;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      p {
+        @apply text-5xl;
+        font-weight: bold;
+      }
+    }
+
+    .main {
       @apply py-5 px-10;
       margin: 0 auto;
       border: 3px solid;

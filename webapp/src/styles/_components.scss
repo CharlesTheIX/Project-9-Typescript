@@ -13,6 +13,8 @@
 @use "./components/tables";
 @use "./components/toast-notification";
 @use "./components/user-controls";
+@use "./components/impersonation-controls";
+@use "./components/impersonation-restricted-banner";
 
 #sign-out-button,
 #theme-toggle {
@@ -72,12 +74,15 @@
 }
 
 .link-text {
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
   text-decoration: underline;
-  text-underline-offset: 0.1rem;
-  transition: text-underline-offset 100ms ease-in-out;
+  text-underline-offset: 0.2em;
+  transition: text-underline-offset 200ms ease-out;
 
   &:hover {
-    text-underline-offset: 0.2rem;
+    text-underline-offset: 0.3em;
   }
 }
 
@@ -96,15 +101,45 @@
 
 @each $theme-name, $theme-vars in t.$themes {
   .#{$theme-name} {
+    $color-admin: map.get($theme-vars, color-admin);
     $color-primary: map.get($theme-vars, color-primary);
+    $color-highlight: map.get($theme-vars, color-highlight);
     $color-secondary: map.get($theme-vars, color-secondary);
 
     fill: $color-secondary;
     stroke: $color-secondary;
 
+    .admin,
+    &.admin {
+      fill: $color-admin;
+      color: $color-admin;
+      stroke: $color-admin;
+    }
+
+    .link-text,
+    .highlight,
+    &.highlight {
+      fill: $color-highlight;
+      color: $color-highlight;
+      stroke: $color-highlight;
+    }
+
     .loading-spinner {
       fill: $color-secondary;
       stroke: $color-secondary;
+    }
+
+    #impersonation-header-tag {
+      div {
+        fill: $color-secondary;
+        stroke: $color-secondary;
+        border-color: $color-secondary;
+
+        p {
+          color: $color-secondary;
+          background-color: $color-primary;
+        }
+      }
     }
 
     .scrollbar-x,

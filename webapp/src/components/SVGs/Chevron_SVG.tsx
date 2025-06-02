@@ -10,25 +10,80 @@ const Chevron_SVG: React.FC<Props> = (props: Props) => {
   const { className = "", width = 24, height = 24, primaryColor = "inherit", direction = "down" } = props;
 
   switch (direction) {
+    case "up":
+      return (
+        <svg
+          fill={"none"}
+          width={width}
+          height={height}
+          viewBox="0 0 24 24"
+          className={className}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            strokeWidth={2}
+            stroke={primaryColor}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M6 15L12 9L18 15M12 15H12.01"
+          />
+        </svg>
+      );
     case "down":
       return (
         <svg
+          fill={"none"}
           width={width}
           height={height}
-          fill={primaryColor}
+          viewBox="0 0 24 24"
           className={className}
-          viewBox="0 -4.5 24 24"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <g transform="translate(-574.000000, -1201.000000)">
-            <path
-              strokeWidth={1}
-              fillRule="evenodd"
-              fill={primaryColor}
-              stroke={primaryColor}
-              d="M597.405,1201.63 C596.576,1200.8 595.23,1200.8 594.401,1201.63 L586.016,1210.88 L577.63,1201.63 C576.801,1200.8 575.455,1200.8 574.626,1201.63 C573.797,1202.46 573.797,1203.81 574.626,1204.64 L584.381,1215.4 C584.83,1215.85 585.429,1216.05 586.016,1216.01 C586.603,1216.05 587.201,1215.85 587.65,1215.4 L597.405,1204.64 C598.234,1203.81 598.234,1202.46 597.405,1201.63"
-            />
-          </g>
+          <path
+            strokeWidth={2}
+            stroke={primaryColor}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M6 9L12 15L18 9M12 9H12.01"
+          />
+        </svg>
+      );
+    case "left":
+      return (
+        <svg
+          fill={"none"}
+          width={width}
+          height={height}
+          viewBox="0 0 24 24"
+          className={className}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M15 6L9 12L15 18M15 12H15.01"
+            strokeWidth={2}
+            stroke={primaryColor}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      );
+    case "right":
+      return (
+        <svg
+          fill={"none"}
+          width={width}
+          height={height}
+          viewBox="0 0 24 24"
+          className={className}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            strokeWidth={2}
+            stroke={primaryColor}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M9 6L15 12L9 18M9 12H9.01"
+          />
         </svg>
       );
   }

@@ -28,6 +28,7 @@
   .#{$theme-name} {
     $color-primary: map.get($theme-vars, color-primary);
     $color-secondary: map.get($theme-vars, color-secondary);
+    $color-highlight: map.get($theme-vars, color-highlight);
 
     .button {
       color: $color-primary;
@@ -39,6 +40,14 @@
       &:active,
       &:focus-within {
         color: $color-secondary;
+        border-color: $color-secondary;
+        background-color: $color-primary;
+      }
+
+      &.disabled {
+        cursor: not-allowed;
+        color: $color-secondary;
+        border-color: $color-secondary;
         background-color: $color-primary;
       }
     }

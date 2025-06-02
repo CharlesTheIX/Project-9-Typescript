@@ -1,54 +1,29 @@
 "use client";
-import Link from "next/link";
-import { NavigationItem } from "@/locals";
-import Globe_SVG from "../SVGs/Globe_SVG";
-import Profile_SVG from "../SVGs/Profile_SVG";
 import { useThemeContext } from "@/contexts/themeContext";
+import { useImpersonationContext } from "@/contexts/impersonationContext";
+import ImpersonationRestrictedBanner from "../Banners/ImpersonationRestrictedBanner";
 
 type Props = {
+  roles?: UserRole[];
   children: React.ReactNode;
 };
 
-const dashboardItems: NavigationItem[] = [
-  {
-    href: "/profile",
-    label: "Profile",
-    icon: "profile",
-  },
-  {
-    href: "/countries",
-    label: "Countries",
-    icon: "globe",
-  },
-];
-
 const DashboardLayout: React.FC<Props> = (props: Props) => {
-  const { children } = props;
+  const { children, roles = [] } = props;
   const { theme } = useThemeContext();
+  const impersonation = useImpersonationContext();
 
   return (
-    <div id="dashboard-layout" className={`${theme} layout`}>
-      <div>
-        <aside>
-          <nav>
-            <ul>
-              {dashboardItems.map((item: NavigationItem, key: number) => {
-                return (
-                  <li key={key}>
-                    <Link href={item.href}>
-                      {item.icon === "profile" && <Profile_SVG />}
-                      {item.icon === "globe" && <Globe_SVG />}
-                      <span>{item.label}</span>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
-        </aside>
-        <main className={theme}>{children}</main>
+    <>
+      <div id="dashboard-layout" className={`${theme} layout`}>
+        <div>
+          <main className={theme}>{children}</main>
+        </div>
       </div>
-    </div>
+      {roles.length > 0 && impersonation.user && !roles.includes(impersonation.user.role) && (
+        <ImpersonationRestrictedBanner acceptedRoles={roles} />
+      )}
+    </>
   );
 };
 

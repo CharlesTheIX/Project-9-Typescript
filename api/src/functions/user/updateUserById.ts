@@ -32,7 +32,8 @@ export default async (props: Props): Promise<ApiResponse> => {
     const updatedDoc = await Model.updateOne({ _id: objectId }, docUpdate, { new: true });
     if (!updatedDoc || updatedDoc?.modifiedCount === 0) return { ...gbl.response_BAD, message: "User not updated." };
 
-    return { ...gbl.response_DB_UPDATED };
+    const response = await getUserById(_id);
+    return { ...gbl.response_DB_UPDATED, data: response.data };
   } catch (error: any) {
     console.error(`Update user error: ${error.message}`);
     return { ...gbl.response_SERVER_ERROR, message: error.message };

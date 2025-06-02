@@ -1,11 +1,11 @@
 import { Metadata } from "next";
-import UsersPage from "@/pages/Users";
+import UsersAdminPage from "@/pages/Users/admin";
 
 export const metadata: Metadata = {
   title: "Users Page",
   description: "",
 };
 
-const Page: React.FC = () => <UsersPage />;
+const Page: React.FC = () => <UsersAdminPage />;
 
 export default Page;
