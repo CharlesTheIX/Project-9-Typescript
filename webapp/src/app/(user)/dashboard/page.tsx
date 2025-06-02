@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import DashboardPage from "@/pages/Dashboard";
 
 export const metadata: Metadata = {
-  title: "Dashboard Page",
+  title: "Dashboard | P9",
   description: "",
 };
 

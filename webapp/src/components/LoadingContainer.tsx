@@ -1,5 +1,5 @@
 "use client";
-import SpinnerSVG from "./SVGs/Spinner_SVG";
+import SpinnerSVG from "@/SVGs/Spinner_SVG";
 
 const LoadingContainer: React.FC = () => {
   return (

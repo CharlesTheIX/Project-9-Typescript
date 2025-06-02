@@ -1,7 +1,7 @@
 "use client";
-import Sun_SVG from "../SVGs/Sun_SVG";
-import Moon_SVG from "../SVGs/Moon_SVG";
-import Paintbrush_SVG from "../SVGs/Paintbrush_SVG";
+import Sun_SVG from "@/SVGs/Sun_SVG";
+import Moon_SVG from "@/SVGs/Moon_SVG";
+import Paintbrush_SVG from "@/SVGs/Paintbrush_SVG";
 import { useThemeContext, ThemeType } from "@/contexts/themeContext";
 
 const ThemeToggleButton: React.FC = () => {

@@ -1,20 +1,22 @@
 "use client";
+import TableCore from "./Table/Core";
 import { useState, useEffect } from "react";
-import LoadingContainer from "../LoadingContainer";
-import TableCore, { TableHeader } from "./TableCore";
 import getAllUsers from "@/functions/users/getAllUsers";
+import LoadingContainer from "@/components/LoadingContainer";
+import { table_headers, table_storage_token } from "@/data/usersTableData";
+import { getLocalStorageItem, removeLocalStorageItem } from "@/functions/storage/localStorage";
 
 const UsersTable: React.FC = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [users, setUsers] = useState<User[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [tableHeaders, setTableHeaders] = useState<TableHeader[]>(table_headers);
+  const [formPreferences, setFormPreferences] = useState<FormPreferences | null>(null);
 
   const fetchUsers = async (): Promise<void> => {
     setIsLoading(true);
-
     try {
       var response: ApiResponse = await getAllUsers(200);
       if (response.error) throw new Error(response.message);
-
       setIsLoading(false);
       setUsers(response.data || []);
     } catch (error: any) {
@@ -23,44 +25,21 @@ const UsersTable: React.FC = () => {
     }
   };
 
-  const tableHeaders: TableHeader[] = [
-    {
-      label: "Edit",
-      value: "",
-      dataType: "edit",
-      roles: ["admin"],
-    },
-    {
-      label: "Impersonate",
-      value: "",
-      dataType: "impersonate",
-      roles: ["admin"],
-    },
-    {
-      label: "_id",
-      value: "_id",
-      canCopy: true,
-      roles: ["admin"],
-    },
-    {
-      canSort: true,
-      canCopy: true,
-      value: "username",
-      label: "Username",
-    },
-    {
-      canSort: true,
-      value: "role",
-      label: "Role",
-    },
-    {
-      value: "email",
-      label: "email",
-    },
-  ];
-
   useEffect(() => {
     if (users.length > 0) return;
+    const formPreferences = getLocalStorageItem(table_storage_token);
+    if (formPreferences) {
+      try {
+        const newTablesHeaders: any = tableHeaders;
+        const formPreferencesJSON: FormPreferences = JSON.parse(formPreferences);
+        formPreferencesJSON.hide?.forEach((item: string) => {
+          if (newTablesHeaders[item]) newTablesHeaders[item].hidden = true;
+        });
+        setTableHeaders(newTablesHeaders);
+      } catch (error: any) {
+        removeLocalStorageItem(table_storage_token);
+      }
+    }
     (async () => {
       await fetchUsers();
     })();
@@ -73,7 +52,14 @@ const UsersTable: React.FC = () => {
           <LoadingContainer />
         </div>
       ) : (
-        <TableCore headers={tableHeaders} data={users} pagination={true} collection={"users"} />
+        <TableCore
+          data={users}
+          pagination={true}
+          collection={"users"}
+          headers={tableHeaders}
+          formPreferences={formPreferences}
+          setFormPreferences={setFormPreferences}
+        />
       )}
     </div>
   );

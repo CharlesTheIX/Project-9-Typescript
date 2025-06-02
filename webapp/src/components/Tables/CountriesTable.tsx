@@ -1,30 +1,30 @@
 "use client";
+import TableCore from "./Table/Core";
 import { useState, useEffect } from "react";
-import LoadingContainer from "../LoadingContainer";
-import TableCore, { TableHeader } from "./TableCore";
+import LoadingContainer from "@/components/LoadingContainer";
 import getAllCountries from "@/functions/countries/getAllCountries";
+import { table_headers, table_storage_token } from "@/data/countriesTableData";
 import getCountriesByContinent from "@/functions/countries/getCountriesByContinent";
+import { getLocalStorageItem, removeLocalStorageItem } from "@/functions/storage/localStorage";
 
 const CountriesTable: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [countries, setCountries] = useState<Country[]>([]);
   const [continent, setContinent] = useState<Continent | "all" | null>(null);
+  const [tableHeaders, setTableHeaders] = useState<TableHeader[]>(table_headers);
+  const [formPreferences, setFormPreferences] = useState<FormPreferences | null>(null);
 
   const fetchCountries = async (item: Continent | "all"): Promise<void> => {
     if (item === continent) return;
     setIsLoading(true);
-
     try {
       var response: ApiResponse;
-
       if (item === "all") {
         response = await getAllCountries(200);
       } else {
         response = await getCountriesByContinent({ continent: item, limit: 200 });
       }
-
       if (response.error) throw new Error(response.message);
-
       setContinent(item);
       setIsLoading(false);
       setCountries(response.data || []);
@@ -34,56 +34,21 @@ const CountriesTable: React.FC = () => {
     }
   };
 
-  const tableHeaders: TableHeader[] = [
-    {
-      label: "Edit",
-      value: "",
-      dataType: "edit",
-      roles: ["admin"],
-    },
-    {
-      label: "_id",
-      value: "_id",
-      canCopy: true,
-      roles: ["admin"],
-    },
-    {
-      canSort: true,
-      canCopy: true,
-      value: "displayName",
-      label: "Display Name",
-    },
-    {
-      canSort: true,
-      canCopy: true,
-      value: "continent",
-      label: "Continent",
-    },
-    {
-      canCopy: true,
-      canSort: true,
-      value: "capitalCity",
-      label: "Capital City",
-    },
-    {
-      canSort: true,
-      canCopy: true,
-      value: "population",
-      label: "Population",
-    },
-    {
-      canCopy: true,
-      value: "imageUrl",
-      label: "Image URL",
-    },
-    {
-      value: "names",
-      label: "Names",
-    },
-  ];
-
   useEffect(() => {
     if (continent) return;
+    const formPreferences = getLocalStorageItem(table_storage_token);
+    if (formPreferences) {
+      try {
+        const newTablesHeaders: any = tableHeaders;
+        const formPreferencesJSON: FormPreferences = JSON.parse(formPreferences);
+        formPreferencesJSON.hide?.forEach((item: string) => {
+          if (newTablesHeaders[item]) newTablesHeaders[item].hidden = true;
+        });
+        setTableHeaders(newTablesHeaders);
+      } catch (error: any) {
+        removeLocalStorageItem(table_storage_token);
+      }
+    }
     (async () => {
       await fetchCountries("all");
     })();
@@ -96,7 +61,14 @@ const CountriesTable: React.FC = () => {
           <LoadingContainer />
         </div>
       ) : (
-        <TableCore headers={tableHeaders} data={countries} pagination={true} collection="countries" />
+        <TableCore
+          data={countries}
+          pagination={true}
+          collection="countries"
+          headers={tableHeaders}
+          formPreferences={formPreferences}
+          setFormPreferences={setFormPreferences}
+        />
       )}
     </div>
   );

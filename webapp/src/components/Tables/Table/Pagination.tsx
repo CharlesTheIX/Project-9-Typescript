@@ -1,7 +1,7 @@
 "use client";
 import { useEffect } from "react";
-import Chevron_SVG from "../SVGs/Chevron_SVG";
-import SelectInput from "../Inputs/SelectInput";
+import Chevron_SVG from "@/SVGs/Chevron_SVG";
+import SelectInput from "@/Inputs/SelectInput";
 
 type Props = {
   data: any[];

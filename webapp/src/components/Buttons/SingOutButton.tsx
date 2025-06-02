@@ -1,6 +1,6 @@
 "use client";
 import { useClerk } from "@clerk/nextjs";
-import SignOut_SVG from "../SVGs/SignOut_SVG";
+import SignOut_SVG from "@/SVGs/SignOut_SVG";
 import { useUserContext } from "@/contexts/userContext";
 import { useImpersonationContext } from "@/contexts/impersonationContext";
 

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import getUserByClerkId from "./functions/users/getUserByClerkId";
+import getUserByClerkId from "@/functions/users/getUserByClerkId";
 import { ClerkMiddlewareAuth, clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
 const signedInRoutes: string[] = ["/", "/sign-in(.*)", "/sign-up(.*)"];
@@ -12,7 +12,6 @@ const isSignedInRoute = createRouteMatcher(signedInRoutes);
 
 export default clerkMiddleware(async (auth: ClerkMiddlewareAuth, request: NextRequest) => {
   const { userId } = await auth();
-  console.log("user id", userId);
 
   if (userId && isSignedInRoute(request)) {
     return NextResponse.redirect(new URL("/dashboard", process.env.NEXT_PUBLIC_BASE_URL));
@@ -22,11 +21,6 @@ export default clerkMiddleware(async (auth: ClerkMiddlewareAuth, request: NextRe
 
   if (userId && isAdminRoute(request)) {
     const userResponse = await getUserByClerkId(userId);
-    console.log(userResponse);
-
-    if (userResponse.error) {
-    }
-
     if (userResponse.error || userResponse.data.role !== "admin") {
       return NextResponse.redirect(new URL("/403", process.env.NEXT_PUBLIC_BASE_URL));
     }
@@ -39,6 +33,6 @@ export default clerkMiddleware(async (auth: ClerkMiddlewareAuth, request: NextRe
 
 export const config = {
   matcher: [
-    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-  ],
+    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)"
+  ]
 };

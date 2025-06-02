@@ -1,5 +1,5 @@
 "use client";
-import * as LS from "../functions/storage/localStorage";
+import * as LS from "@/functions/storage/localStorage";
 import { createContext, useContext, useState, useEffect, useRef } from "react";
 
 export type ThemeType = "light" | "dark" | "custom";
@@ -12,6 +12,7 @@ const defaultValue: ThemeContextData = {
   theme: "dark",
   setTheme: () => {},
 };
+
 const ThemeContext = createContext<ThemeContextData>(defaultValue);
 
 export const ThemeContextProvider = (props: { children: React.ReactNode }) => {

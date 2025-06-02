@@ -1,6 +1,6 @@
 "use client";
 import { useUser } from "@clerk/nextjs";
-import { useToastContext } from "./toastContext";
+import { useToastContext } from "@/contexts/toastContext";
 import getUserByClerkId from "@/functions/users/getUserByClerkId";
 import { createContext, useContext, useState, useEffect } from "react";
 
@@ -20,6 +20,7 @@ const defaultValue: UserContextData = {
   setUser: () => {},
   setToggle: () => {},
 };
+
 const UserContext = createContext<UserContextData>(defaultValue);
 
 export const UserContextProvider = (props: { children: React.ReactNode }) => {

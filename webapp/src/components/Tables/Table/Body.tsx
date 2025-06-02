@@ -1,9 +1,8 @@
 import Link from "next/link";
 import { Fragment } from "react";
-import Edit_SVG from "../SVGs/Edit_SVG";
-import Copy_SVG from "../SVGs/Copy_SVG";
-import { TableHeader } from "./TableCore";
-import Profile_SVG from "../SVGs/Profile_SVG";
+import Edit_SVG from "@/SVGs/Edit_SVG";
+import Copy_SVG from "@/SVGs/Copy_SVG";
+import Profile_SVG from "@/SVGs/Profile_SVG";
 import getUserById from "@/functions/users/getUserById";
 import { useUserContext } from "@/contexts/userContext";
 import { useToastContext } from "@/contexts/toastContext";

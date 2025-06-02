@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import Eye_SVG from "../SVGs/Eye_SVG";
-import EyeSlash_SVG from "../SVGs/EyeSlash_SVG copy";
+import Eye_SVG from "@/SVGs/Eye_SVG";
+import EyeSlash_SVG from "@/SVGs/EyeSlash_SVG copy";
 
 type Props = {
   name: string;

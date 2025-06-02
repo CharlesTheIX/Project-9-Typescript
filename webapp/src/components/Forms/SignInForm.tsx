@@ -1,11 +1,11 @@
 "use client";
 import { useRef, useState } from "react";
 import { useSignIn } from "@clerk/nextjs";
-import EmailInput from "../Inputs/EmailInput";
-import LoadingContainer from "../LoadingContainer";
-import PasswordInput from "../Inputs/PasswordInput";
+import EmailInput from "@/Inputs/EmailInput";
+import PasswordInput from "@/Inputs/PasswordInput";
 import { useUserContext } from "@/contexts/userContext";
 import { useToastContext } from "@/contexts/toastContext";
+import LoadingContainer from "@/components/LoadingContainer";
 import { useRouter, useSearchParams } from "next/navigation";
 import validateSignIn, { SignInRequestData } from "@/functions/forms/validateSignIn";
 

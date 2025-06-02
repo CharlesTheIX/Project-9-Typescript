@@ -1,7 +1,7 @@
 "use client";
+import { useEffect } from "react";
 import { useThemeContext } from "@/contexts/themeContext";
 import { useImpersonationContext } from "@/contexts/impersonationContext";
-import ImpersonationRestrictedBanner from "../Banners/ImpersonationRestrictedBanner";
 
 type Props = {
   roles?: UserRole[];
@@ -13,15 +13,14 @@ const SplitLayout: React.FC<Props> = (props: Props) => {
   const { theme } = useThemeContext();
   const impersonation = useImpersonationContext();
 
+  useEffect(() => {
+    impersonation.setAcceptedRoles(roles);
+  }, [impersonation.user]);
+
   return (
-    <>
-      <main id="split-layout" className={`${theme} layout`}>
-        {children}
-      </main>
-      {roles.length > 0 && impersonation.user && !roles.includes(impersonation.user.role) && (
-        <ImpersonationRestrictedBanner acceptedRoles={roles} />
-      )}
-    </>
+    <main id="split-layout" className={`${theme} layout`}>
+      {children}
+    </main>
   );
 };
 

@@ -1,7 +1,7 @@
 "use client";
+import { useEffect } from "react";
 import { useThemeContext } from "@/contexts/themeContext";
 import { useImpersonationContext } from "@/contexts/impersonationContext";
-import ImpersonationRestrictedBanner from "../Banners/ImpersonationRestrictedBanner";
 
 type Props = {
   roles?: UserRole[];
@@ -13,17 +13,16 @@ const DashboardLayout: React.FC<Props> = (props: Props) => {
   const { theme } = useThemeContext();
   const impersonation = useImpersonationContext();
 
+  useEffect(() => {
+    impersonation.setAcceptedRoles(roles);
+  }, [impersonation.user]);
+
   return (
-    <>
-      <div id="dashboard-layout" className={`${theme} layout`}>
-        <div>
-          <main className={theme}>{children}</main>
-        </div>
+    <div id="dashboard-layout" className={`${theme} layout`}>
+      <div>
+        <main className={theme}>{children}</main>
       </div>
-      {roles.length > 0 && impersonation.user && !roles.includes(impersonation.user.role) && (
-        <ImpersonationRestrictedBanner acceptedRoles={roles} />
-      )}
-    </>
+    </div>
   );
 };
 

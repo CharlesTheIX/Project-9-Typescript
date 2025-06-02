@@ -29,11 +29,23 @@ type FormError = {
   message: string;
 };
 
+type FormPreferences = {
+  hide?: string[];
+  searchValue?: string;
+  postsPerPage?: number;
+};
+
 type MongoDocDefaults = {
   __v?: any;
   _id?: string;
   createdAt?: Date;
   updatedAt?: Date;
+};
+
+type NavigationItem = {
+  href: string;
+  label: string;
+  icon?: string;
 };
 
 type Option = {
@@ -47,6 +59,20 @@ type Rectangle = {
   width: number;
   height: number;
 };
+
+type TableHeader = {
+  value: string;
+  label: string;
+  hidden?: boolean;
+  canSort?: boolean;
+  canCopy?: boolean;
+  roles?: UserRole[];
+  searchable?: boolean;
+  sortState?: SortState;
+  dataType?: "edit" | "impersonate";
+};
+
+type TableSortState = "asc" | "desc" | "shuffled";
 
 type User = MongoDocDefaults & {
   email: string;

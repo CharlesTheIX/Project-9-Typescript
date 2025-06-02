@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import CountryCreationPage from "@/pages/Countries/create";
 
 export const metadata: Metadata = {
-  title: "Country Creation Page",
+  title: "Country Creation | Admin | P9",
   description: "",
 };
 

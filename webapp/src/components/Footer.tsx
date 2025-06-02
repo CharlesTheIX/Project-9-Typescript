@@ -2,8 +2,8 @@
 import Link from "next/link";
 import UserControls from "@/components/UserControls";
 import { useThemeContext } from "@/contexts/themeContext";
-import ImpersonationControls from "./ImpersonationControls";
 import CookieBanner from "@/components/Banners/CookieBanner";
+import ImpersonationControls from "@/components/ImpersonationControls";
 
 const Footer: React.FC = () => {
   const { theme } = useThemeContext();

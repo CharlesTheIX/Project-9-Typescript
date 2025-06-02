@@ -1,7 +1,7 @@
 "use client";
 import * as gbl from "@/globals";
 import { useState } from "react";
-import Chevron_SVG from "../SVGs/Chevron_SVG";
+import Chevron_SVG from "@/SVGs/Chevron_SVG";
 import { useBrowserContext } from "@/contexts/browserContext";
 
 type Props = {

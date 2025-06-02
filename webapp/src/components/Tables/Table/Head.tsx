@@ -1,12 +1,11 @@
 "use client";
 import { Fragment } from "react";
-import Edit_SVG from "../SVGs/Edit_SVG";
-import SortAsc_SVG from "../SVGs/SortAsc_SVG";
-import Profile_SVG from "../SVGs/Profile_SVG";
-import SortDesc_SVG from "../SVGs/SortDesc_SVG";
-import { SortState, TableHeader } from "./TableCore";
+import Edit_SVG from "@/SVGs/Edit_SVG";
+import SortAsc_SVG from "@/SVGs/SortAsc_SVG";
+import Profile_SVG from "@/SVGs/Profile_SVG";
+import SortDesc_SVG from "@/SVGs/SortDesc_SVG";
+import SortShuffled_SVG from "@/SVGs/SortShuffled_SVG";
 import { useUserContext } from "@/contexts/userContext";
-import SortShuffled_SVG from "../SVGs/SortShuffled_SVG";
 
 type Props = {
   tableHeaders: TableHeader[];
@@ -17,7 +16,7 @@ const TableHead: React.FC<Props> = (props: Props) => {
   const { tableHeaders, sortTableData } = props;
   const { userRole } = useUserContext();
 
-  const getSortIcon = (sortState: SortState) => {
+  const getSortIcon = (sortState: TableSortState) => {
     switch (sortState) {
       case "asc":
         return <SortAsc_SVG />;

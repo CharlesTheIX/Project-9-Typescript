@@ -1,13 +1,13 @@
 "use client";
 import Link from "next/link";
-import Profile_SVG from "./SVGs/Profile_SVG";
-import StopImpersonationButton from "./Buttons/StopImpersonationButton";
+import Profile_SVG from "@/SVGs/Profile_SVG";
 import { useImpersonationContext } from "@/contexts/impersonationContext";
+import StopImpersonationButton from "@/components/Buttons/StopImpersonationButton";
 
 const ImpersonationControls: React.FC = () => {
   const impersonation = useImpersonationContext();
 
-  if (!impersonation.user) return <> </>;
+  if (!impersonation.user) return <></>;
 
   return (
     <div id="impersonation-controls">

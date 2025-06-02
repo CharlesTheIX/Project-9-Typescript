@@ -1,12 +1,12 @@
 "use client";
 import * as gbl from "@/globals";
 import { useRef, useState } from "react";
-import UrlInput from "../Inputs/UrlInput";
-import TextInput from "../Inputs/TextInput";
-import EmailInput from "../Inputs/EmailInput";
-import SelectInput from "../Inputs/SelectInput";
-import LoadingContainer from "../LoadingContainer";
+import UrlInput from "@/Inputs/UrlInput";
+import TextInput from "@/Inputs/TextInput";
+import EmailInput from "@/Inputs/EmailInput";
+import SelectInput from "@/Inputs/SelectInput";
 import { useToastContext } from "@/contexts/toastContext";
+import LoadingContainer from "@/components/LoadingContainer";
 import updateUserById from "@/functions/users/updateUserById";
 import validateUserCreation from "@/functions/forms/validateUserCreation";
 

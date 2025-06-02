@@ -1,10 +1,10 @@
-import isUrl from "../validation/isUrl";
-import isName from "../validation/isName";
-import isNumber from "../validation/isNumber";
-import isContinent from "../validation/isContinent";
-import isRectangle from "../validation/isRectangle";
-import isArrayOfStrings from "../validation/isArrayOfStrings";
-import updateFormErrorMessage from "./updateFormErrorMessage";
+import isUrl from "@/functions/validation/isUrl";
+import isName from "@/functions/validation/isName";
+import isNumber from "@/functions/validation/isNumber";
+import isContinent from "@/functions/validation/isContinent";
+import isRectangle from "@/functions/validation/isRectangle";
+import isArrayOfStrings from "@/functions/validation/isArrayOfStrings";
+import updateFormErrorMessage from "@/functions/forms/updateFormErrorMessage";
 
 export default (requestData: Country): FormError => {
   const formError: FormError = { error: false, message: "" };

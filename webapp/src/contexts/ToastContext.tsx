@@ -1,8 +1,8 @@
 "use client";
 import Bye_SVG from "@/components/SVGs/Bye_SVG";
-import { useThemeContext } from "./themeContext";
 import Error_SVG from "@/components/SVGs/Error_SVG";
 import Success_SVG from "@/components/SVGs/Success_SVG";
+import { useThemeContext } from "@/contexts/themeContext";
 import { createContext, useContext, useState, useEffect, useRef } from "react";
 
 type ToastType = "success" | "error" | "none" | "bye" | "hi";
@@ -31,6 +31,7 @@ const defaultValue: ToastContextData = {
   setContent: () => {},
   setTimeout_ms: () => {},
 };
+
 const ToastContext = createContext<ToastContextData>(defaultValue);
 
 export const ToastContextProvider = (props: { children: React.ReactNode }) => {

@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import SignInPage from "@/pages/SignIn";
 
 export const metadata: Metadata = {
-  title: "Sign In Page",
+  title: "Sign In | P9",
   description: "",
 };
 

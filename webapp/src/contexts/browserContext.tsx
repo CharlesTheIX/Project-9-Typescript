@@ -16,6 +16,7 @@ const defaultValue: BrowserContextData = {
   setCookie: () => {},
   updateCookie: () => {},
 };
+
 const BrowserContext = createContext<BrowserContextData>(defaultValue);
 
 export const BrowserContextProvider = (props: { children: React.ReactNode }) => {

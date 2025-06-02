@@ -1,15 +1,15 @@
 "use client";
 import * as gbl from "@/globals";
 import { useRef, useState } from "react";
-import UrlInput from "../Inputs/UrlInput";
-import TextInput from "../Inputs/TextInput";
-import SelectInput from "../Inputs/SelectInput";
-import NumberInput from "../Inputs/NumberInput";
-import LoadingContainer from "../LoadingContainer";
-import TextareaInput from "../Inputs/TextareaInput";
-import MultiTextInput from "../Inputs/MultiTextInput";
-import RectangleInput from "../Inputs/RectangleInput";
+import UrlInput from "@/Inputs/UrlInput";
+import TextInput from "@/Inputs/TextInput";
+import SelectInput from "@/Inputs/SelectInput";
+import NumberInput from "@/Inputs/NumberInput";
+import TextareaInput from "@/Inputs/TextareaInput";
+import MultiTextInput from "@/Inputs/MultiTextInput";
+import RectangleInput from "@/Inputs/RectangleInput";
 import { useToastContext } from "@/contexts/toastContext";
+import LoadingContainer from "@/components/LoadingContainer";
 import updateCountryById from "@/functions/countries/updateCountryById";
 import validateCountryCreation from "@/functions/forms/validateCountryCreation";
 

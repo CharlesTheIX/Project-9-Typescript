@@ -3,8 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import * as gbl from "@/globals";
 import { useState, useEffect } from "react";
-import SelectInput from "../Inputs/SelectInput";
-import LoadingContainer from "../LoadingContainer";
+import SelectInput from "@/Inputs/SelectInput";
+import LoadingContainer from "@/components/LoadingContainer";
 import getAllCountries from "@/functions/countries/getAllCountries";
 import getCountriesByContinent from "@/functions/countries/getCountriesByContinent";
 
@@ -80,9 +80,7 @@ const CountryFeed: React.FC = () => {
                               alt={`${country.displayName} flag`}
                               src={
                                 country.imageUrl
-                                  ? country.imageUrl
-                                      .replace("http://localhost:3000", "")
-                                      .replace(`${process.env.NEXT_PUBLIC_BASE_URL}`, "")
+                                  ? country.imageUrl.replace(`${process.env.NEXT_PUBLIC_BASE_URL}`, "")
                                   : "/assets/images/default-flag.webp"
                               }
                             />

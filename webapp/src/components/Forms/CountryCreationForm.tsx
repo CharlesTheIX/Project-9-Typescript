@@ -1,36 +1,23 @@
 "use client";
 import * as gbl from "@/globals";
 import { useRef, useState } from "react";
-import UrlInput from "../Inputs/UrlInput";
-import TextInput from "../Inputs/TextInput";
-import SelectInput from "../Inputs/SelectInput";
-import NumberInput from "../Inputs/NumberInput";
-import LoadingContainer from "../LoadingContainer";
-import TextareaInput from "../Inputs/TextareaInput";
-import MultiTextInput from "../Inputs/MultiTextInput";
-import RectangleInput from "../Inputs/RectangleInput";
+import UrlInput from "@/Inputs/UrlInput";
+import TextInput from "@/Inputs/TextInput";
+import SelectInput from "@/Inputs/SelectInput";
+import NumberInput from "@/Inputs/NumberInput";
+import TextareaInput from "@/Inputs/TextareaInput";
+import MultiTextInput from "@/Inputs/MultiTextInput";
+import RectangleInput from "@/Inputs/RectangleInput";
 import { useToastContext } from "@/contexts/toastContext";
+import LoadingContainer from "@/components/LoadingContainer";
 import createCountry from "@/functions/countries/createCountry";
 import validateCountryCreation from "@/functions/forms/validateCountryCreation";
-
-const nullCountry: Country = {
-  names: [],
-  imageUrl: "",
-  languages: [],
-  population: 0,
-  displayName: "",
-  description: "",
-  capitalCity: "",
-  continent: "" as Continent,
-  mapRectangle: gbl.nullRectangle,
-  flagRectangle: gbl.nullRectangle,
-};
 
 const CountryCreationForm: React.FC = () => {
   const toast = useToastContext();
   const formRef = useRef<HTMLFormElement>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [defaultValues, setDefaultValues] = useState<Country>(nullCountry);
+  const [defaultValues, setDefaultValues] = useState<Country>(gbl.nullCountry);
 
   const handleSubmit = async (event: React.FormEvent): Promise<void> => {
     event?.preventDefault();
@@ -76,10 +63,7 @@ const CountryCreationForm: React.FC = () => {
       toast.setHidden(false);
       toast.setType("success");
       toast.setTitle("Country Created");
-      setDefaultValues((prevValue: Country) => {
-        const newValue = { ...prevValue, nullCountry };
-        return newValue;
-      });
+      setDefaultValues(gbl.nullCountry);
     } catch (error: any) {
       setIsLoading(false);
       toast.setHidden(false);

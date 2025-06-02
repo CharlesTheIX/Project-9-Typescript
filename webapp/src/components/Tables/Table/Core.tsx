@@ -1,39 +1,28 @@
 "use client";
-import { useState } from "react";
-import TableHead from "./TableHead";
-import TableBody from "./TableBody";
-import TableControls from "./TableControls";
-import TablePagination, { paginationOptions } from "./TablePagination";
-
-export type SortState = "asc" | "desc" | "shuffled";
-export type TableHeader = {
-  value: any;
-  label: string;
-  hidden?: boolean;
-  canSort?: boolean;
-  canCopy?: boolean;
-  roles?: UserRole[];
-  searchable?: boolean;
-  sortState?: SortState;
-  dataType?: "edit" | "impersonate";
-};
+import TableHead from "./Head";
+import TableBody from "./Body";
+import TableControls from "./Controls";
+import { useEffect, useState } from "react";
+import TablePagination, { paginationOptions } from "./Pagination";
 
 type Props = {
   data: any[];
   pagination?: boolean;
   headers: TableHeader[];
   collection?: "countries" | "users";
+  formPreferences: FormPreferences | null;
+  setFormPreferences: React.Dispatch<React.SetStateAction<FormPreferences | null>>;
 };
 
 const TableCore: React.FC<Props> = (props: Props) => {
-  const { headers, data, pagination, collection } = props;
+  const { headers, data, pagination, collection, formPreferences, setFormPreferences } = props;
   const [tableData, setTableData] = useState<any[]>(data);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [searchValue, setSearchValue] = useState<string>("");
   const [tableHeaders, setTableHeaders] = useState<TableHeader[]>(headers);
+  const [searchValue, setSearchValue] = useState<string>(formPreferences?.searchValue || "");
   const [postsPerPage, setPostsPerPage] = useState<number>(paginationOptions[0].value as number);
 
-  const getNextSortState = (sortState: SortState | undefined): SortState => {
+  const getNextSortState = (sortState: TableSortState | undefined): TableSortState => {
     switch (sortState) {
       case "asc":
         return "desc";
@@ -117,6 +106,11 @@ const TableCore: React.FC<Props> = (props: Props) => {
     setCurrentPage(currentPage);
   };
 
+  useEffect(() => {
+    if (formPreferences?.postsPerPage && pagination) paginateTable(currentPage, formPreferences.postsPerPage);
+    if (formPreferences?.searchValue) searchTableTable(formPreferences.searchValue);
+  }, []);
+
   return (
     <>
       <TableControls
@@ -124,7 +118,9 @@ const TableCore: React.FC<Props> = (props: Props) => {
         tableHeaders={tableHeaders}
         setSearchValue={setSearchValue}
         hideShowHeaders={hideShowHeaders}
+        formPreferences={formPreferences}
         searchTableTable={searchTableTable}
+        setFormPreferences={setFormPreferences}
       />
 
       <div className="scrollbar-x scrollbar-y inner">

@@ -1,5 +1,5 @@
 "use client";
-import SignOut_SVG from "../SVGs/SignOut_SVG";
+import SignOut_SVG from "@/SVGs/SignOut_SVG";
 import { useImpersonationContext } from "@/contexts/impersonationContext";
 
 const StopImpersonationButton: React.FC = () => {

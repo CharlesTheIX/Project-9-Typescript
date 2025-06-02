@@ -1,14 +1,14 @@
 "use client";
 import { useRef, useState } from "react";
 import { useSignUp } from "@clerk/nextjs";
-import TextInput from "../Inputs/TextInput";
-import EmailInput from "../Inputs/EmailInput";
-import NumberInput from "../Inputs/NumberInput";
-import LoadingContainer from "../LoadingContainer";
-import PasswordInput from "../Inputs/PasswordInput";
+import TextInput from "@/Inputs/TextInput";
+import EmailInput from "@/Inputs/EmailInput";
+import NumberInput from "@/Inputs/NumberInput";
+import PasswordInput from "@/Inputs/PasswordInput";
 import createUser from "@/functions/users/createUser";
 import isNumber from "@/functions/validation/isNumber";
 import { useToastContext } from "@/contexts/toastContext";
+import LoadingContainer from "@/components/LoadingContainer";
 import { useRouter, useSearchParams } from "next/navigation";
 import validateSignUp from "@/functions/forms/validateSignUp";
 

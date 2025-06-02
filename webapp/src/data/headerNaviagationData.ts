@@ -1,21 +1,19 @@
-import { NavigationItem } from "@/locals";
-
 export const signedOutItems: NavigationItem[] = [
   {
     label: "Sign In",
-    href: "/sign-in",
+    href: "/sign-in"
   },
   {
     label: "Sign Up",
-    href: "/sign-up",
-  },
+    href: "/sign-up"
+  }
 ];
 
 export const signedInItems: NavigationItem[] = [
   {
     label: "Countries",
-    href: "/countries",
-  },
+    href: "/countries"
+  }
 ];
 
 export const adminItems: NavigationItem[] = [...signedInItems];

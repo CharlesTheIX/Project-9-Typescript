@@ -13,12 +13,12 @@ export const generateMetadata = async ({ params }: { params: Params }): Promise<
     const response = await getCountryById(_id);
     if (response.error) throw new Error();
     return {
-      title: `Edit ${response.data.displayName}`,
+      title: `Edit ${response.data.displayName} | Admin | P9`,
       description: `${response.data.displayName}`,
     };
   } catch (error: any) {
     return {
-      title: "404 error | country not found",
+      title: "404 | P9",
       description: "Country not found",
       robots: "noindex, nofollow",
     };
