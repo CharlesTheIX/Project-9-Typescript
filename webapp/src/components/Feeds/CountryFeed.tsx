@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import * as gbl from "@/globals";
 import { useState, useEffect } from "react";
 import SelectInput from "../Inputs/SelectInput";
@@ -65,9 +66,32 @@ const CountryFeed: React.FC = () => {
               ) : (
                 <>
                   {countries.map((country: Country, key: number) => (
-                    <Link key={key} href={`/countries/${country._id}`} className="button">
-                      {country.displayName}
-                    </Link>
+                    <div className="card country-card" key={key}>
+                      <Link key={key} href={`/countries/${country._id}`} />
+
+                      <div>
+                        <div>
+                          <p className="title">{country.displayName}</p>
+
+                          <div className="image-container">
+                            <Image
+                              width={40}
+                              height={30}
+                              alt={`${country.displayName} flag`}
+                              src={
+                                country.imageUrl
+                                  ? country.imageUrl
+                                      .replace("http://localhost:3000", "")
+                                      .replace(`${process.env.NEXT_PUBLIC_BASE_URL}`, "")
+                                  : "/assets/images/default-flag.webp"
+                              }
+                            />
+                          </div>
+                        </div>
+
+                        <p className="content">{country.description}</p>
+                      </div>
+                    </div>
                   ))}
                 </>
               )}
