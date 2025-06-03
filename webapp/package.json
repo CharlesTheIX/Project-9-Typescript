@@ -6,7 +6,6 @@
     "dev": "next dev -p 3022 --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
     "clean": "rm -rf node_modules .next yarn.lock"
   },
   "dependencies": {

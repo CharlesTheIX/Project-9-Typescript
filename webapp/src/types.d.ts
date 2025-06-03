@@ -60,6 +60,11 @@ type Rectangle = {
   height: number;
 };
 
+type Tab = {
+  title: string;
+  content: React.ReactElement;
+};
+
 type TableHeader = {
   value: string;
   label: string;

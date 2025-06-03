@@ -1,22 +1,24 @@
 # Documentation
 
-_Author: David Charles (CharlesTheIX)_
+_Authors[s]: CharlesTheIX_
 
-_Last Updated: 29/05/2025_
-
-## Introduction
+## Overview
 
 The repository uses `yarn` as its packages manager for `node.js` packages.
 
-This repository uses the following languages / frameworks: 
+This repository uses the following languages / frameworks:
+
 - `/.scripts`
+
   - `Bash` (.sh)
 
 - `/api`
+
   - `Typescrpt` (.ts)
   - `Express`
 
 - `/cli`
+
   - `Typescrpt` (.ts)
 
 - `/webapp`
@@ -25,17 +27,10 @@ This repository uses the following languages / frameworks:
   - `Tailwind`
   - `NextJS`
 
-## /.scripts
+## Quick Links
 
+### [Webapp Documentation](./webapp/ReadMe.md)
 
+### [API Documentation](./api/ReadMe.md)
 
-## /api
-
-
-
-## /cli
-
-
-
-## /webapp
-
+### [CLI Documentation](./cli/ReadMe.md)

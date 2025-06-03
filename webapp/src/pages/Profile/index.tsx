@@ -1,6 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
+import TabContainer from "@/components/TabContainer";
+import { profileTabs } from "@/data/profileTabsData";
 import { useUserContext } from "@/contexts/userContext";
+import HeroBanner from "@/components/Banners/HeroBanner";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import { useImpersonationContext } from "@/contexts/impersonationContext";
 
@@ -17,15 +20,21 @@ const ProfilePage: React.FC = () => {
   return (
     <DefaultLayout>
       <section>
-        <div className="flex flex-col gap-10">
-          <h1>Profile: {currentUser?.username}</h1>
+        <HeroBanner
+          icon="profile"
+          title="Profile"
+          content="Here, you can manage your personal details and customize your app experience. View and update your personal details or fine-tune your application set-up to suit your preferences. Everything you need to personalize your account is right at your fingertips."
+          highlights={[
+            {
+              type: "text",
+              content: currentUser?.username || "",
+            },
+          ]}
+        />
+      </section>
 
-          <p className="max-w-3xl">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt auctor sem nec semper. Ut ornare
-            leo id risus blandit, fringilla fringilla lorem sollicitudin. Donec gravida semper lectus, eu aliquet erat
-            ornare sit amet.
-          </p>
-        </div>
+      <section>
+        <TabContainer tabs={profileTabs} />
       </section>
     </DefaultLayout>
   );

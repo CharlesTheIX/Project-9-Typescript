@@ -1,0 +1,87 @@
+@use "sass:map";
+@use "../themes" as t;
+
+.tab-container {
+  display: flex;
+  flex-direction: column;
+
+  > .header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 3px solid;
+    justify-content: flex-end;
+
+    ul {
+      display: flex;
+      overflow: hidden;
+      border: 3px solid;
+      flex-direction: row;
+      border-top-right-radius: 0.5rem;
+
+      border-bottom: none;
+
+      > li {
+        @apply px-5 py-2;
+        cursor: pointer;
+        font-weight: bold;
+        border-left: 3px solid;
+        transition: color 300ms ease-in-out, background-color 300ms ease-in-out;
+
+        &:nth-child(1) {
+          border: none;
+        }
+
+        &.active {
+          cursor: default;
+        }
+      }
+    }
+  }
+
+  > .body {
+    @apply p-5;
+    width: 100%;
+    overflow: hidden;
+    border: 3px solid;
+    border-bottom-left-radius: 0.5rem;
+
+    border-top: none;
+  }
+}
+
+@each $theme-name, $theme-vars in t.$themes {
+  .#{$theme-name} {
+    $color-primary: map.get($theme-vars, color-primary);
+    $color-secondary: map.get($theme-vars, color-secondary);
+    $color-highlight: map.get($theme-vars, color-highlight);
+
+    .tab-container {
+      > .header {
+        ul {
+          > li {
+            color: $color-secondary;
+            border-color: $color-secondary;
+            background-color: $color-primary;
+
+            &:hover,
+            &.active {
+              color: $color-primary;
+              border-color: $color-secondary;
+              background-color: $color-secondary;
+            }
+          }
+        }
+      }
+
+      > .body {
+        width: 100%;
+        overflow: hidden;
+        border: 3px solid;
+        border-bottom-left-radius: 0.5rem;
+
+        border-top: none;
+      }
+    }
+  }
+}

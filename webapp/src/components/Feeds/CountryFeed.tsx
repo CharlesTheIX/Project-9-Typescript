@@ -2,13 +2,16 @@
 import Link from "next/link";
 import Image from "next/image";
 import * as gbl from "@/globals";
+import Edit_SVG from "../SVGs/Edit_SVG";
 import { useState, useEffect } from "react";
 import SelectInput from "@/Inputs/SelectInput";
+import { useUserContext } from "@/contexts/userContext";
 import LoadingContainer from "@/components/LoadingContainer";
 import getAllCountries from "@/functions/countries/getAllCountries";
 import getCountriesByContinent from "@/functions/countries/getCountriesByContinent";
 
 const CountryFeed: React.FC = () => {
+  const { userRole } = useUserContext();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [countries, setCountries] = useState<Country[]>([]);
   const [continent, setContinent] = useState<Continent | "all" | null>(null);
@@ -45,7 +48,7 @@ const CountryFeed: React.FC = () => {
   return (
     <div className="flex flex-col gap-5">
       <div className="flex flex-col gap-5 items-start">
-        <div className="w-full flex flex-row gap-5 items-start max-h-[78px] overflow-visible z-1">
+        <div className="w-full flex flex-row gap-5 items-start max-h-[78px] overflow-visible z-10">
           <SelectInput
             label="Continent"
             name="continent-select"
@@ -70,24 +73,27 @@ const CountryFeed: React.FC = () => {
                       <Link key={key} href={`/countries/${country._id}`} />
 
                       <div>
-                        <div>
+                        <Image
+                          width={40}
+                          height={30}
+                          alt={`${country.displayName} flag`}
+                          src={
+                            country.imageUrl
+                              ? country.imageUrl.replace(`${process.env.NEXT_PUBLIC_BASE_URL}`, "")
+                              : "/assets/images/default-flag.webp"
+                          }
+                        />
+
+                        <div className="header">
+                          {userRole === "admin" && (
+                            <div className="edit">
+                              <Link href={`/admin/countries/edit/${country._id}`}>
+                                <Edit_SVG />
+                              </Link>
+                            </div>
+                          )}
                           <p className="title">{country.displayName}</p>
-
-                          <div className="image-container">
-                            <Image
-                              width={40}
-                              height={30}
-                              alt={`${country.displayName} flag`}
-                              src={
-                                country.imageUrl
-                                  ? country.imageUrl.replace(`${process.env.NEXT_PUBLIC_BASE_URL}`, "")
-                                  : "/assets/images/default-flag.webp"
-                              }
-                            />
-                          </div>
                         </div>
-
-                        <p className="content">{country.description}</p>
                       </div>
                     </div>
                   ))}

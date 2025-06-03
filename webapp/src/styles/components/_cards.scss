@@ -2,7 +2,6 @@
 @use "../themes" as t;
 
 .card {
-  @apply p-5;
   width: auto;
   overflow: hidden;
   border: 3px solid;
@@ -14,44 +13,59 @@
   > a {
     top: 0;
     left: 0;
+    z-index: 1;
     width: 100%;
     height: 100%;
     position: absolute;
   }
 
   > div {
-    @apply gap-2;
+    @apply p-5 gap-5;
     display: flex;
     flex-direction: column;
   }
 
   &.country-card {
-    max-width: 300px;
-
     > div {
-      > div {
-        @apply gap-1;
-        width: 100%;
+      position: relative;
+
+      > img {
+        top: 0;
+        right: 0;
+        position: absolute;
+        border: 3px solid;
+        border-bottom-left-radius: 0.5rem;
+        transition: border-color 300ms ease-in-out;
+
+        border-top: none;
+        border-right: none;
+      }
+
+      .header {
+        @apply gap-2;
         display: flex;
+        align-items: center;
         flex-direction: row;
-        align-items: flex-start;
-        justify-content: space-between;
+        justify-content: flex-start;
 
         .title {
           @apply text-4xl;
-          width: 100%;
           font-weight: bold;
+          padding-right: calc(0.25rem * 10);
         }
-      }
 
-      .content {
-        @apply text-xs;
-        overflow: hidden;
-        display: -webkit-box;
-        word-wrap: break-word;
-        -webkit-line-clamp: 3;
-        text-overflow: ellipsis;
-        -webkit-box-orient: vertical;
+        .edit {
+          z-index: 2;
+          display: flex;
+          position: relative;
+          flex-direction: row;
+          align-items: center;
+          justify-content: flex-end;
+
+          svg {
+            transition: all 300ms ease-in-out;
+          }
+        }
       }
     }
   }
@@ -64,6 +78,47 @@
     $color-highlight: map.get($theme-vars, color-highlight);
 
     .card {
+      &.country-card {
+        color: $color-secondary;
+        border-color: $color-secondary;
+        background-color: $color-primary;
+
+        &:hover {
+          color: $color-primary;
+          border-color: $color-primary;
+          background-color: $color-secondary;
+
+          > div {
+            > img {
+              border-color: $color-primary;
+            }
+
+            .header {
+              .edit {
+                a {
+                  fill: $color-primary;
+                  stroke: $color-primary;
+                }
+              }
+            }
+          }
+        }
+
+        > div {
+          > img {
+            border-color: $color-secondary;
+          }
+
+          .header {
+            .edit {
+              a {
+                fill: $color-secondary;
+                stroke: $color-secondary;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

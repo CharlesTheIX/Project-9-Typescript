@@ -1,20 +1,17 @@
 import Link from "next/link";
+import HeroBanner from "@/components/Banners/HeroBanner";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 
 const NotFoundPage: React.FC = () => {
   return (
     <DefaultLayout>
-      <section>
-        <div className="flex flex-col gap-10">
-          <h1>404</h1>
+      <section className="flex flex-col gap-10">
+        <HeroBanner title="404" icon="error" content="The page you are looking for does not exist." />
 
-          <p className="max-w-3xl">The page you are looking for does not exist.</p>
-
-          <div>
-            <Link className="button" href="/">
-              Dashboard
-            </Link>
-          </div>
+        <div className="flex flex-row gap-5">
+          <Link className="button" href="/">
+            Dashboard
+          </Link>
         </div>
       </section>
     </DefaultLayout>

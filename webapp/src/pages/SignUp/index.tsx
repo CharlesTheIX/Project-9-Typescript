@@ -1,15 +1,14 @@
 import SignUpForm from "@/components/Forms/SignUpForm";
+import HeroBanner from "@/components/Banners/HeroBanner";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 
 const SignUpPage: React.FC = () => {
   return (
     <DefaultLayout>
-      <section>
-        <div className="flex flex-col gap-10 item-center">
-          <h1>Sign Up</h1>
+      <section className="flex flex-col gap-10 item-center">
+        <HeroBanner title="Sign Up" icon="signIn" />
 
-          <SignUpForm />
-        </div>
+        <SignUpForm />
       </section>
     </DefaultLayout>
   );

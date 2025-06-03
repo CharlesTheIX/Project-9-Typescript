@@ -31,17 +31,21 @@
     $color-highlight: map.get($theme-vars, color-highlight);
 
     .button {
-      color: $color-primary;
+      fill: $color-secondary;
+      color: $color-secondary;
+      stroke: $color-secondary;
       border-color: $color-secondary;
-      background-color: $color-secondary;
+      background-color: $color-primary;
 
       &:hover,
       &:focus,
       &:active,
       &:focus-within {
-        color: $color-secondary;
+        fill: $color-primary;
+        color: $color-primary;
+        stroke: $color-primary;
         border-color: $color-secondary;
-        background-color: $color-primary;
+        background-color: $color-secondary;
       }
 
       &.disabled {
