@@ -1,3 +1,4 @@
+import Link from "next/link";
 import SignInForm from "@/components/Forms/SignInForm";
 import HeroBanner from "@/components/Banners/HeroBanner";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
@@ -5,11 +6,11 @@ import DefaultLayout from "@/components/Layouts/DefaultLayout";
 const SignInPage: React.FC = () => {
   return (
     <DefaultLayout>
-      <section className="flex flex-col gap-10 item-center">
-        <HeroBanner title="Sign In" icon="signIn" />
-
-        <SignInForm />
-      </section>
+    <section className="flex flex-col gap-10 item-center">
+    <HeroBanner title="Sign In" icon="signIn" />
+    <p>Need an account? <Link href="/sign-up" className="link-text">Sign up</Link>.</p>
+    <SignInForm />
+    </section>
     </DefaultLayout>
   );
 };
