@@ -1,11 +1,14 @@
 {
-  "name": "webapp",
-  "version": "0.1.0",
   "private": true,
+  "license": "MIT",
+  "version": "0.0.1",
+  "main": "next start",
+  "author": "David Charles (CharlesTheIX)",
+  "name": "project-9-typescript-webapp-nextjs",
   "scripts": {
-    "dev": "next dev -p 3022 --turbopack",
     "build": "next build",
     "start": "next start",
+    "dev": "next dev -p 3022 --turbopack",
     "clean": "rm -rf node_modules .next yarn.lock"
   },
   "dependencies": {
@@ -22,6 +25,5 @@
     "@types/react-dom": "^19",
     "tailwindcss": "^4",
     "typescript": "^5"
-  },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+  }
 }

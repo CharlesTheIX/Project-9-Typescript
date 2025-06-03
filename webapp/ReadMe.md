@@ -1,4 +1,4 @@
-# Webapp Documentation
+# Project 9 - Typescript | Webapp | NextJS
 
 _Authors[s]: CharlesTheIX_
 
