@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import { Schema, model} from "mongoose";
 
-const schema = new mongoose.Schema({
+const schema = new Schema({
   //auto assigned fields
   // _id
   //__v
@@ -57,5 +57,5 @@ schema.pre("save", async function (next: any) {
   }
 });
 
-const User = mongoose.model("User", schema);
+const User = model("User", schema);
 export default User;

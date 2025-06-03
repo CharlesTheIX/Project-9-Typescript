@@ -2,11 +2,11 @@ import * as gbl from "../globals";
 import createUser from "../functions/user/createUser";
 import getAllUsers from "../functions/user/getAllUsers";
 import getUserById from "../functions/user/getUserById";
+import express, { Router, Request, Response } from "express";
 import getUserByEmail from "../functions/user/getUserByEmail";
 import updateUserById from "../functions/user/updateUserById";
 import deleteUserById from "../functions/user/deleteUserById";
 import getUserByClerkId from "../functions/user/getUserByClerkId";
-import express, { Router, Request, Response } from "express";
 import getUserByUsername from "../functions/user/getUserByUsername";
 
 const router: Router = express.Router();

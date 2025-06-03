@@ -48,6 +48,24 @@ type NavigationItem = {
   icon?: string;
 };
 
+type NotificationData = MongoDocDefaults & {
+  readBy: string;
+  subject: string;
+  participants: string[];
+  messages: NotificationMessage[]
+  type: "default" | "message" | "award";
+};
+
+type NotificationMessage = {
+  to: string;
+  from: string;
+  createdAt: Date,
+  content: string;
+  state?: "active" | "deleted";
+};
+
+type NotificationType = "default" | "message" | "award";
+
 type Option = {
   label: string;
   value: string | number;

@@ -40,6 +40,24 @@ type MongoDocDefaults = {
   updatedAt?: Date;
 };
 
+type NotificationData = MongoDocDefaults & {
+  readBy: string;
+  subject: string;
+  participants: string[];
+  messages: NotificationMessage[]
+  type: "default" | "message" | "award";
+};
+
+type NotificationMessage = {
+  to: string;
+  from: string;
+  createdAt: Date,
+  content: string;
+  state?: "active" | "deleted";
+};
+
+type NotificationType = "default" | "message" | "award";
+
 type Rectangle = {
   x: number;
   y: number;

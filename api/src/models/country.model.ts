@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import {Schema, model} from "mongoose";
 
-const schema = new mongoose.Schema({
+const schema = new Schema({
   //auto assigned fields
   // _id
   //__v
@@ -87,5 +87,5 @@ schema.pre("save", async function (next: any) {
 //   }
 // };
 
-const Country = mongoose.model("Country", schema);
+const Country = model("Country", schema);
 export default Country;
