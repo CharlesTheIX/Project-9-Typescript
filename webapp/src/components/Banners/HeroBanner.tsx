@@ -1,18 +1,11 @@
 import Link from "next/link";
 import { Fragment } from "react";
-import Globe_SVG from "../SVGs/Globe_SVG";
-import Admin_SVG from "../SVGs/Admin_SVG";
-import Cookie_SVG from "../SVGs/Cookie_SVG";
-import SignIn_SVG from "../SVGs/SignIn_SVG";
-import Profile_SVG from "../SVGs/Profile_SVG";
-import Dashboard_SVG from "../SVGs/Dashboard_SVG";
-import Terminal_SVG from "@/components/SVGs/Terminal_SVG";
-import Error_SVG from "../SVGs/Error_SVG";
-import Users_SVG from "../SVGs/Users_SVG";
+import getSvg from "@/functions/getSvg";
 
-type Highlight = {
+export type Highlight = {
   href?: string;
-  content: string;
+  icon?: string;
+  content?: string;
   callback?: () => void;
   type: "text" | "link" | "function";
 };
@@ -28,45 +21,21 @@ type Props = {
 const HeroBanner: React.FC<Props> = (props: Props) => {
   const { icon, content, title, iconSize = 75, highlights = [] } = props;
 
-  const getIcon = (icon?: string): React.ReactElement => {
-    switch (icon) {
-      case "users":
-        return <Users_SVG width={iconSize} height={iconSize} />;
-      case "error":
-        return <Error_SVG width={iconSize} height={iconSize} />;
-      case "globe":
-        return <Globe_SVG width={iconSize} height={iconSize} />;
-      case "admin":
-        return <Admin_SVG width={iconSize} height={iconSize} />;
-      case "profile":
-        return <Profile_SVG width={iconSize} height={iconSize} />;
-      case "dashboard":
-        return <Dashboard_SVG width={iconSize} height={iconSize} />;
-      case "signIn":
-        return <SignIn_SVG width={iconSize} height={iconSize} />;
-      case "cookie":
-        return <Cookie_SVG width={iconSize} height={iconSize} />;
-      case "terminal":
-        return <Terminal_SVG width={iconSize} height={iconSize} />;
-      default:
-        return <></>;
-    }
-  };
-
   return (
     <div className="flex flex-col gap-10">
       <div className="flex flex-row gap-2 items-end justify-start">
-        {getIcon(icon)}
+        {getSvg({ icon, size: iconSize })}
 
         <div className="flex flex-col">
           {highlights && (
-            <div className="flex flex-row gap-1 items-center">
+            <div className="flex flex-row gap-2 items-center relative font-bold">
               {highlights.map((highlight: Highlight, key: number) => {
                 switch (highlight.type) {
                   case "text":
                     return (
                       <Fragment key={key}>
-                        <p className="font-bold highlight uppercase">{highlight.content}</p>
+                        {highlight.icon && <>{getSvg({ icon: highlight.icon, size: 24 })}</>}
+                        {highlight.content && <p className="font-bold highlight uppercase">{highlight.content}</p>}
                         {key + 1 < highlights.length && <p>|</p>}
                       </Fragment>
                     );
@@ -74,7 +43,8 @@ const HeroBanner: React.FC<Props> = (props: Props) => {
                     return (
                       <Fragment key={key}>
                         <Link className="font-bold highlight uppercase" href={highlight.href || ""}>
-                          {highlight.content}
+                          {highlight.icon && getSvg({ icon: highlight.icon, size: 24 })}
+                          {highlight.content ? highlight.content : ""}
                         </Link>
                         {key + 1 < highlights.length && <p>|</p>}
                       </Fragment>
@@ -88,7 +58,8 @@ const HeroBanner: React.FC<Props> = (props: Props) => {
                             highlight.callback && highlight.callback();
                           }}
                         >
-                          {highlight.content}
+                          {highlight.icon && getSvg({ icon: highlight.icon, size: 24 })}
+                          {highlight.content ? highlight.content : ""}
                         </p>
                         {key + 1 < highlights.length && <p>|</p>}
                       </Fragment>
