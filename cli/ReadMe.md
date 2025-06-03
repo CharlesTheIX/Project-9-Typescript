@@ -1,4 +1,4 @@
-# CLI Documentation
+# Project 9 - Typescript | CLI | Commander
 
 _Authors[s]: CharlesTheIX_
 

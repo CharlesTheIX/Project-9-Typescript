@@ -1,4 +1,4 @@
-# Documentation
+# Project 9 - Typescript | Documentation
 
 _Authors[s]: CharlesTheIX_
 

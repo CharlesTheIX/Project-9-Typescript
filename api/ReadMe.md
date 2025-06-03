@@ -1,4 +1,4 @@
-# API Documentation
+# Project 9 - Typescript | API | Express | MongoDB
 
 _Authors[s]: CharlesTheIX_
 
