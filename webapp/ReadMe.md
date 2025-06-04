@@ -11,6 +11,9 @@ This project uses `Yarn` as its package manager. This needs to be installed and 
 The following scripts are available to you via the `yarn` command:
 
 ```bash
+  #  Boot up the application environment
+  yarn boot
+
   # Clean up the project's ./node_modules ./.next and ./yarn.lock for a clean install
   yarn clean
 
@@ -25,6 +28,9 @@ The following scripts are available to you via the `yarn` command:
 
   # Start the built application
   yarn start
+
+  # Analyze the application bundles
+  yarn analyze
 
 ```
 

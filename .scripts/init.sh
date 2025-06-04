@@ -8,28 +8,32 @@ YELLOW="\033[33m"
 RESET="\033[0m"
 
 init() {
-  local current_dir=$WORKING_DIR
-  local app_dirs_array=("api" "webapp" "cli")
-  local script_files_array=("create_color_theme.sh" "restore_color_themes.sh" "create_component.sh")
+  local CURRENT_DIR=$WORKING_DIR
+  local APP_DIRS_ARRAY=("api" "webapp" "cli")
+  local SCRIPT_FILES_ARRAY=(
+    "restore_color_themes.sh"
+    "create_color_theme.sh"
+    "boot_up_webapp.sh"
+  )
 
   echo ""
   echo "Updating script modes"
 
-  for item in "${script_files_array[@]}"; do
-    if [[ ! -f "$current_dir/.scripts/$item" ]]; then
+  for iteM IN "${SCRIPT_FILES_ARRAY[@]}"; do
+    if [[ ! -f "$CURRENT_DIR/.scripts/$ITEM" ]]; then
       echo ""
-      echo "Could not find file: $current_dir/.scripts/$item"
+      echo "Could not find file: $CURRENT_DIR/.scripts/$ITEM"
     else
-      chmod +x "$current_dir/.scripts/$item"
+      chmod +x "$CURRENT_DIR/.scripts/$ITEM"
     fi
   done
 
-  for item in "${app_dirs_array[@]}"; do
-    current_dir="$WORKING_DIR/$item"
-    cd "$current_dir"
+  for ITEM in "${APP_DIRS_ARRAY[@]}"; do
+    CURRENT_DIR="$WORKING_DIR/$ITEM"
+    cd "$CURRENT_DIR"
 
     echo ""
-    echo "Setting up: $item"
+    echo "Setting up: $ITEM"
     rm -rf "./node_modules" "./dist" "./yarn.lock" "./.next" && yarn
 
     if [[ ! -f "./.env.local" ]]; then

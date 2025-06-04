@@ -11,7 +11,15 @@ const Footer: React.FC = () => {
   return (
     <footer className={theme}>
       <section>
-        <div>
+      <div className="flex flex-row gap-2 pb-2 items-center justify-center wrap w-full">
+        <Link href="/tech-stack" className="link-text">Tech Stack</Link>
+        <p>|</p>
+        <Link href="/terms-conditions" className="link-text">Terms & Conditions</Link>
+        <p>|</p>
+        <Link href="/cookies" className="link-text">Cookies</Link>
+      </div>
+
+        <div className="flex flex-col text-center items-center justify-center">
           <p>
             Created by{" "}
             <Link className="link-text" href={"https://github.com/CharlesTheIX"} target="_blank">

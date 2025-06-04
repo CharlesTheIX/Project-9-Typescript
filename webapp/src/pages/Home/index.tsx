@@ -10,10 +10,12 @@ const HomePage: React.FC = () => {
 
         <p>
           To view the codebase, visit the{" "}
-          <Link href={process.env.NEXT_PUBLIC_REPO_LINK!} target="_blank" className="link-text">
+          <Link href="https://www.github.com/CharlesTheIX/Project-9-Typescript" target="_blank" className="link-text">
             Github
           </Link>{" "}
           page.
+            <br />
+          Check out the Project_9 <Link href="/tech-stack" className="link-text">tech stack</Link>.
         </p>
 
         <div className="flex flex-row gap-5">

@@ -1,22 +1,22 @@
 #!/bin/bash
 
 readonly WORKING_DIR="$(pwd)"
-scss_file="$WORKING_DIR/webapp/src/styles/_themes.scss"
+SCSS_FILE="$WORKING_DIR/webapp/src/styles/_themes.scss"
 RED="\033[31m"
 BLUE="\033[34m"
 GREEN="\033[32m"
 YELLOW="\033[33m"
 RESET="\033[0m"
 
-[[ -f "$scss_file" ]] && cp "$scss_file" "$scss_file.bak"
+[[ -f "$SCSS_FILE" ]] && cp "$SCSS_FILE" "$SCSS_FILE.bak"
 
 update_theme() {
-  local theme="$1"
-  local primary="$2"
-  local secondary="$3"
-  local temp_file="${mktemp}"
+  local THEME="$1"
+  local PRIMARY="$2"
+  local SECONDARY="$3"
+  local TEMP_FILE="${mktemp}"
 
-  awk -v theme="$theme" -v primary="$primary" -v secondary="$secondary" '
+  awk -v theme="$THEME" -v primary="$PRIMARY" -v secondary="$SECONDARY" '
     BEGIN { in_theme = 0 }
     {
       if ($0 ~ "^[[:space:]]*" theme ": *\\(") {
@@ -33,36 +33,36 @@ update_theme() {
       }
       if (!in_theme) print $0
     }
-  ' "$scss_file" > "$tmp_file"
+  ' "$SCSS_FILE" > "$TMP_FILE"
 
-  mv "$tmp_file" "$scss_file"
+  mv "$TMP_FILE" "$SCSS_FILE"
 }
 
 create_color_theme() {
   echo ""
-   local theme_array=("light" "dark" "custom")
+   local THEME_ARRAY=("light" "dark" "custom")
 
   while true; do
     read -p "Select the theme you want to create: light/dark/custom/all: " selected_theme
-    case "$selected_theme" in light|dark|custom|all) break ;; *)
+    case "$SELECTED_THEME" in light|dark|custom|all) break ;; *)
       echo -e "${RED}Invalid Theme. Please type 'light', 'dark', or 'custom'.${RESET}"
       echo ""
     ;;
     esac
   done
 
-  if [[ "$selected_theme" != "all" ]]; then
-    theme_array=("$selected_theme")
+  if [[ "$SELECTED_THEME" != "all" ]]; then
+    THEME_ARRAY=("$SELECTED_THEME")
   fi
 
-  for item in "${theme_array[@]}"; do
+  for ITEM in "${THEME_ARRAY[@]}"; do
     while true; do
-      read -p "${item} primary color (e.g. #RRGGBB[AA]):" primary_color
+      read -p "${ITEM} primary color (e.g. #RRGGBB[AA]):" PRIMARY_COLOR
 
-      if [[ -z $primary_color ]]; then
-        echo -e "${RED}${item} primary color required.${RESET}"
+      if [[ -z $PRIMARY_COLOR ]]; then
+        echo -e "${RED}${ITEM} primary color required.${RESET}"
         echo ""
-      elif [[ $primary_color =~ ^#[0-9A-Fa-f]{6}([0-9A-Fa-f]{2})?$ ]]; then
+      elif [[ $PRIMARY_COLOR =~ ^#[0-9A-Fa-f]{6}([0-9A-Fa-f]{2})?$ ]]; then
         break
       else
         echo -e "${RED}Invalid format.${RESET}"
@@ -71,12 +71,12 @@ create_color_theme() {
     done
 
     while true; do
-      read -p "${item} secondary color (e.g. #RRGGBB[AA]):" secondary_color
+      read -p "${ITEM} secondary color (e.g. #RRGGBB[AA]):" secondary_color
 
-      if [[ -z $secondary_color ]]; then
-        echo -e "${RED}${item} secondary color required.${RESET}"
+      if [[ -z $SECONDARY_COLOR ]]; then
+        echo -e "${RED}${ITEM} secondary color required.${RESET}"
         echo ""
-      elif [[ $secondary_color =~ ^#[0-9A-Fa-f]{6}([0-9A-Fa-f]{2})?$ ]]; then
+      elif [[ $SECONDARY_COLOR =~ ^#[0-9A-Fa-f]{6}([0-9A-Fa-f]{2})?$ ]]; then
         break
       else
         echo -e "${RED}Invalid format.${RESET}"
@@ -84,10 +84,10 @@ create_color_theme() {
       fi
     done
 
-    update_theme "$item" "$primary_color" "$secondary_color"
+    update_theme "$ITEM" "$PRIMARY_COLOR" "$SECONDARY_COLOR"
 
     echo ""
-    echo -e "${GREEN}${item} updated!${RESET}"
+    echo -e "${GREEN}${ITEM} updated!${RESET}"
     echo ""
   done
 }

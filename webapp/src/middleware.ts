@@ -3,7 +3,7 @@ import getUserByClerkId from "@/functions/users/getUserByClerkId";
 import { ClerkMiddlewareAuth, clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
 const signedInRoutes: string[] = ["/", "/sign-in(.*)", "/sign-up(.*)"];
-const publicRoutes: string[] = ["/", "/sign-in(.*)", "/sign-up(.*)", "/cookies", "/not-found", "/api/:path*"];
+const publicRoutes: string[] = ["/", "/sign-in(.*)", "/sign-up(.*)", "/cookies", "/tech-stack", "/terms-conditions", "/api/:path*"];
 const adminRoutes: string[] = ["/admin/:path*"];
 
 const isAdminRoute = createRouteMatcher(adminRoutes);

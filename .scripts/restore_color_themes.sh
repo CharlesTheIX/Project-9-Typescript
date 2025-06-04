@@ -1,7 +1,7 @@
 #!/bin/bash
 
 readonly WORKING_DIR="$(pwd)"
-scss_file="$WORKING_DIR/webapp/src/styles/_themes.scss"
+SCSS_FILE="$WORKING_DIR/webapp/src/styles/_themes.scss"
 RED="\033[31m"
 BLUE="\033[34m"
 GREEN="\033[32m"
@@ -11,28 +11,28 @@ RESET="\033[0m"
 restore_color_themes() {
   echo ""
 
-  local light_primary_color="#f3f3e0"
-  local light_secondary_color="#183b4e"
+  local LIGHT_PRIMARY_COLOR="#f3f3e0"
+  local LIGHT_SECONDARY_COLOR="#183b4e"
 
-  local dark_primary_color="#222831"
-  local dark_secondary_color="#dfd0b8"
+  local DARK_PRIMARY_COLOR="#222831"
+  local DARK_SECONDARY_COLOR="#dfd0b8"
 
-  local custom_primary_color="#a02334"
-  local custom_secondary_color="#ffeead"
+  local CUSTOM_PRIMARY_COLOR="#a02334"
+  local CUSTOM_SECONDARY_COLOR="#ffeead"
 
-  cat > "$scss_file" <<EOF
+  cat > "$SCSS_FILE" <<EOF
 \$themes: (
   dark: (
-    color-primary: $dark_primary_color,
-    color-secondary: $dark_secondary_color
+    color-primary: $DARK_PRIMARY_COLOR,
+    color-secondary: $DARK_SECONDARY_COLOR
   ),
   light: (
-    color-primary: $light_primary_color,
-    color-secondary: $light_secondary_color
+    color-primary: $LIGHT_PRIMARY_COLOR,
+    color-secondary: $LIGHT_SECONDARY_COLOR
   ),
   custom: (
-    color-primary: $custom_primary_color,
-    color-secondary: $custom_secondary_color
+    color-primary: $CUSTOM_PRIMARY_COLOR,
+    color-secondary: $CUSTOM_SECONDARY_COLOR
   ),
 );
 EOF
