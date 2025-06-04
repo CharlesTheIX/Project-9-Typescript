@@ -3,6 +3,7 @@ import TableHead from "./Head";
 import TableBody from "./Body";
 import TableControls from "./Controls";
 import { useEffect, useState } from "react";
+import getSortedData from "@/functions/getSortedData";
 import TablePagination, { paginationOptions } from "./Pagination";
 
 type Props = {
@@ -20,6 +21,7 @@ const TableCore: React.FC<Props> = (props: Props) => {
   const [tableData, setTableData] = useState<any[]>(data);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [pinnedTableData, setPinnedTableData] = useState<any[]>([]);
+  const [favouriteTableData, setFavouriteTableData] = useState<any[]>([]);
   const [tableHeaders, setTableHeaders] = useState<TableHeader[]>(headers);
   const [searchValue, setSearchValue] = useState<string>(formPreferences?.searchValue || "");
   const [postsPerPage, setPostsPerPage] = useState<number>(paginationOptions[0].value as number);
@@ -48,10 +50,11 @@ const TableCore: React.FC<Props> = (props: Props) => {
   };
 
   const sortTableData = (key: number): void => {
-    const newData = [...tableData];
+    var newData = [...tableData];
     const newHeaders = [...tableHeaders];
     const header = { ...newHeaders[key] };
-    const newPinnedData = [...pinnedTableData];
+    var newPinnedData = [...pinnedTableData];
+    var newFavouriteData = [...favouriteTableData];
     header.sortState = getNextSortState(header.sortState);
     newHeaders[key] = header;
     newHeaders.map((header: TableHeader) => {
@@ -64,41 +67,15 @@ const TableCore: React.FC<Props> = (props: Props) => {
         }
         return;
       }
-      newData.sort((a, b) => {
-        const aName = a[header.value];
-        const bName = b[header.value];
-        const aIsUndefined = aName === undefined;
-        const bIsUndefined = bName === undefined;
-        if (aIsUndefined && bIsUndefined) return 0;
-        if (aIsUndefined) return 1;
-        if (bIsUndefined) return -1;
-        switch (header.sortState) {
-          case "asc":
-            return aName!.localeCompare(bName!);
-          case "desc":
-            return bName!.localeCompare(aName!);
-        }
-      });
-      newPinnedData.sort((a, b) => {
-        const aName = a[header.value];
-        const bName = b[header.value];
-        const aIsUndefined = aName === undefined;
-        const bIsUndefined = bName === undefined;
-        if (aIsUndefined && bIsUndefined) return 0;
-        if (aIsUndefined) return 1;
-        if (bIsUndefined) return -1;
-        switch (header.sortState) {
-          case "asc":
-            return aName!.localeCompare(bName!);
-          case "desc":
-            return bName!.localeCompare(aName!);
-        }
-      });
+      newData = getSortedData({ sort: header.sortState, key: header.value, data: newData });
+      newPinnedData = getSortedData({ sort: header.sortState, key: header.value, data: newPinnedData });
+      newFavouriteData = getSortedData({ sort: header.sortState, key: header.value, data: newFavouriteData });
     });
 
     setTableData(newData);
     setTableHeaders(newHeaders);
     setPinnedTableData(newPinnedData);
+    setFavouriteTableData(newFavouriteData);
   };
 
   const searchTableTable = (searchValue: string): void => {

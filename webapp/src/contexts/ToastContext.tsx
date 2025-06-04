@@ -1,9 +1,6 @@
 "use client";
-import Bye_SVG from "@/components/SVGs/Bye_SVG";
-import Error_SVG from "@/components/SVGs/Error_SVG";
-import Success_SVG from "@/components/SVGs/Success_SVG";
-import { useThemeContext } from "@/contexts/themeContext";
 import getSvg from "@/functions/getSvg";
+import { useThemeContext } from "@/contexts/themeContext";
 import { createContext, useContext, useState, useEffect, useRef } from "react";
 
 type ToastType = "success" | "error" | "none" | "bye" | "hi";

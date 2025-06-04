@@ -1,19 +1,18 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
 import * as gbl from "@/globals";
-import Edit_SVG from "../SVGs/Edit_SVG";
 import { useState, useEffect } from "react";
 import SelectInput from "@/Inputs/SelectInput";
-import { useUserContext } from "@/contexts/userContext";
+import getSortedData from "@/functions/getSortedData";
+// import { useUserContext } from "@/contexts/userContext";
 import LoadingContainer from "@/components/LoadingContainer";
 import getAllCountries from "@/functions/countries/getAllCountries";
 import getCountriesByContinent from "@/functions/countries/getCountriesByContinent";
 
 const CountryFeed: React.FC = () => {
-  const { userRole } = useUserContext();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [countries, setCountries] = useState<Country[]>([]);
+  const [currentSort, setCurrentSort] = useState<"asc" | "desc">("asc");
   const [continent, setContinent] = useState<Continent | "all" | null>(null);
 
   const fetchCountries = async (item: Continent | "all"): Promise<void> => {
@@ -30,7 +29,9 @@ const CountryFeed: React.FC = () => {
       }
 
       if (response.error) throw new Error(response.message);
-      setCountries(response.data || []);
+      const data = getSortedData({ data: response.data || [], sort: currentSort, key: "displayName" });
+
+      setCountries(data);
       setContinent(item);
       setIsLoading(false);
     } catch (error: any) {
@@ -57,6 +58,22 @@ const CountryFeed: React.FC = () => {
             defaultValue={{ value: "all", label: "All" }}
             options={[{ value: "all", label: "All" }, ...gbl.continentOptions]}
           />
+
+          <SelectInput
+            label="sort"
+            name="sort-select"
+            className="min-w-[250px]"
+            defaultValue={{ value: "asc", label: "A to Z" }}
+            onChange={(value: any) => {
+              const data = getSortedData({ data: countries, sort: value, key: "displayName" });
+              setCurrentSort(value);
+              setCountries(data);
+            }}
+            options={[
+              { value: "asc", label: "A to Z" },
+              { value: "desc", label: "Z to A" },
+            ]}
+          />
         </div>
 
         <div className="flex flex-row flex-wrap gap-5 items-center">
@@ -72,26 +89,8 @@ const CountryFeed: React.FC = () => {
                     <div className="card country-card" key={key}>
                       <Link key={key} href={`/countries/${country._id}`} />
 
-                      <div>
-                        <Image
-                          width={40}
-                          height={30}
-                          alt={`${country.displayName} flag`}
-                          src={
-                            country.imageUrl
-                              ? country.imageUrl.replace(`${process.env.NEXT_PUBLIC_BASE_URL}`, "")
-                              : "/assets/images/default-flag.webp"
-                          }
-                        />
-
+                      <div className="inner">
                         <div className="header">
-                          {userRole === "admin" && (
-                            <div className="edit">
-                              <Link href={`/admin/countries/edit/${country._id}`}>
-                                <Edit_SVG />
-                              </Link>
-                            </div>
-                          )}
                           <p className="title">{country.displayName}</p>
                         </div>
                       </div>

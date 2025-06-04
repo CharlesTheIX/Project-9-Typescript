@@ -9,8 +9,9 @@ import Cookie_SVG from "@/SVGs/Cookie_SVG";
 import SignIn_SVG from "@/SVGs/SignIn_SVG";
 import Profile_SVG from "@/SVGs/Profile_SVG";
 import Terminal_SVG from "@/SVGs/Terminal_SVG";
-import Dashboard_SVG from "@/SVGs/Dashboard_SVG";
 import Bye_SVG from "@/components/SVGs/Bye_SVG";
+import Dashboard_SVG from "@/SVGs/Dashboard_SVG";
+import Favourite_SVG from "@/components/SVGs/Favourite";
 import Success_SVG from "@/components/SVGs/Success_SVG";
 
 type Props = {
@@ -23,6 +24,8 @@ export default (props: Props): React.ReactElement => {
   const { icon, size, color = "inherit" } = props;
 
   switch (icon) {
+    case "favourite":
+      return <Favourite_SVG width={size} height={size} primaryColor={color} />;
     case "success":
       return <Success_SVG width={size} height={size} primaryColor={color} />;
     case "bye":

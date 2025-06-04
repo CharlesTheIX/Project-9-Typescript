@@ -6,11 +6,21 @@ const HomePage: React.FC = () => {
   return (
     <DefaultLayout>
       <section className="flex flex-col gap-10">
-        <HeroBanner
-          icon="terminal"
-          title="Project_9"
-          content={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt auctor sem nec semper. Ut ornare leo id risus blandit, fringilla fringilla lorem sollicitudin. Donec gravida semper lectus, eu aliquet erat ornare sit amet.`}
-        />
+        <HeroBanner icon="terminal" title="Project_9" />
+
+        <div className="max-w-3xl flex flex-col gap-5">
+          <p>
+            This application is a part of a larger project that is designed to be a template / repository of components
+            and functionality that make up a full-stack application.
+          </p>
+          <p>
+            To view the codebase, visit the{" "}
+            <Link href="https://www.github.com/CharlesTheIX/Project-9-Typescript" target="_blank" className="link-text">
+              Github
+            </Link>{" "}
+            page.
+          </p>
+        </div>
 
         <div className="flex flex-row gap-5">
           <Link className="button" href="/sign-in">
