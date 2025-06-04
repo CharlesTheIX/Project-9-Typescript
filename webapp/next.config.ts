@@ -1,9 +1,14 @@
 import type { NextConfig } from "next";
 
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+  openAnalyzer: true
+});
+
 const nextConfig: NextConfig = {
-  // images: {
-  //   remotePatterns: [new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/assets/images/**`)],
-  // },
+  images: {
+    remotePatterns: []
+  }
 };
 
-export default nextConfig;
+export default withBundleAnalyzer(nextConfig);

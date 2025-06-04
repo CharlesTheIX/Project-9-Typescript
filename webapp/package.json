@@ -8,6 +8,7 @@
   "scripts": {
     "build": "next build",
     "start": "next start",
+    "analyze": "cross-env ANALYZE=true next build",
     "dev": "next dev -p 3022 --turbopack",
     "clean": "rm -rf node_modules .next yarn.lock"
   },
@@ -19,10 +20,12 @@
     "sass": "^1.89.0"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^15.3.3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "cross-env": "^7.0.3",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
