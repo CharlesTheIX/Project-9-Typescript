@@ -5,10 +5,12 @@ import SelectInput from "@/Inputs/SelectInput";
 
 type Props = {
   data: any[];
+  pinned: boolean;
   tableData: any[];
   currentPage: number;
   searchValue: string;
   postsPerPage: number;
+  pinnedTableData: any[];
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   setPostsPerPage: React.Dispatch<React.SetStateAction<number>>;
   paginateTable: (currentPage: number, postsPerPage: number) => void;
@@ -32,8 +34,18 @@ export const paginationOptions: Option[] = [
   },
 ];
 const TablePagination: React.FC<Props> = (props: Props) => {
-  const { searchValue, data, tableData, currentPage, postsPerPage, setCurrentPage, setPostsPerPage, paginateTable } =
-    props;
+  const {
+    data,
+    pinned,
+    tableData,
+    currentPage,
+    searchValue,
+    postsPerPage,
+    paginateTable,
+    setCurrentPage,
+    setPostsPerPage,
+    pinnedTableData,
+  } = props;
 
   useEffect(() => {
     paginateTable(1, postsPerPage);
@@ -43,7 +55,7 @@ const TablePagination: React.FC<Props> = (props: Props) => {
       <div>
         {searchValue || postsPerPage === data.length ? (
           <div className="w-full justify-end">
-            <p>{searchValue ? tableData.length : data.length} results</p>
+            <p>{searchValue ? (pinned ? pinnedTableData.length : tableData.length) : data.length} results</p>
           </div>
         ) : (
           <>

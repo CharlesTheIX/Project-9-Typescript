@@ -50,7 +50,7 @@
       border-top-right-radius: 0.5rem;
       border-bottom-left-radius: 0.5rem;
       width: calc(100% - (0.25rem * 20));
-      box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.5);
+      // box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
       transition: background-color 300ms ease-in-out, border-color 300ms ease-in-out;
 
       > div {

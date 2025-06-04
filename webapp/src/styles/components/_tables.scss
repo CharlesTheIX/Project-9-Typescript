@@ -19,7 +19,7 @@
       @apply gap-5;
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
+      // justify-content: space-between;
 
       * {
         @apply px-2;
@@ -39,7 +39,7 @@
         justify-content: flex-start;
 
         > div {
-          @apply px-2 py-1 gap-2;
+          @apply px-2 py-1 gap-0;
           display: flex;
           cursor: pointer;
           overflow: hidden;
@@ -61,7 +61,19 @@
       }
 
       &.search {
+        @apply gap-2;
+        width: 100%;
+        justify-content: space-between;
+
+        > * {
+          width: auto;
+        }
+
         .search-bar {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+
           > .input {
             border: none;
             padding: 0;
@@ -310,7 +322,8 @@
                 border-color: $color-secondary;
               }
 
-              &:hover {
+              &:hover,
+              &.pinned {
                 color: $color-primary;
                 fill: $color-highlight;
                 stroke: $color-highlight;
@@ -318,6 +331,27 @@
 
                 td {
                   border-color: $color-secondary;
+                }
+              }
+            }
+          }
+
+          &.pinned {
+            tbody {
+              tr {
+                &.pinned {
+                  fill: $color-highlight;
+                  stroke: $color-highlight;
+                  color: $color-secondary;
+                  border-color: $color-secondary;
+                  background-color: $color-primary;
+
+                  &:hover {
+                    color: $color-primary;
+                    fill: $color-highlight;
+                    stroke: $color-highlight;
+                    background-color: $color-secondary;
+                  }
                 }
               }
             }

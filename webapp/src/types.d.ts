@@ -52,14 +52,14 @@ type NotificationData = MongoDocDefaults & {
   readBy: string;
   subject: string;
   participants: string[];
-  messages: NotificationMessage[]
+  messages: NotificationMessage[];
   type: "default" | "message" | "award";
 };
 
 type NotificationMessage = {
   to: string;
   from: string;
-  createdAt: Date,
+  createdAt: Date;
   content: string;
   state?: "active" | "deleted";
 };
@@ -92,7 +92,7 @@ type TableHeader = {
   roles?: UserRole[];
   searchable?: boolean;
   sortState?: SortState;
-  dataType?: "edit" | "impersonate";
+  dataType?: "edit" | "impersonate" | "pin";
 };
 
 type TableSortState = "asc" | "desc" | "shuffled";

@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import Edit_SVG from "@/SVGs/Edit_SVG";
 import Copy_SVG from "@/SVGs/Copy_SVG";
 import Profile_SVG from "@/SVGs/Profile_SVG";
+import Pin_SVG from "@/components/SVGs/Pin_SVG";
 import getUserById from "@/functions/users/getUserById";
 import { useUserContext } from "@/contexts/userContext";
 import { useToastContext } from "@/contexts/toastContext";
@@ -11,12 +12,14 @@ import { useImpersonationContext } from "@/contexts/impersonationContext";
 
 type Props = {
   tableData: any[];
+  pinnedTableData: any[];
   tableHeaders: TableHeader[];
   collection?: "countries" | "users";
+  setPinnedTableData: React.Dispatch<React.SetStateAction<any[]>>;
 };
 
 const TableBody: React.FC<Props> = (props: Props) => {
-  const { tableData, tableHeaders, collection } = props;
+  const { tableData, tableHeaders, collection, pinnedTableData, setPinnedTableData } = props;
   const toast = useToastContext();
   const { userRole } = useUserContext();
   const impersonation = useImpersonationContext();
@@ -41,10 +44,33 @@ const TableBody: React.FC<Props> = (props: Props) => {
   return (
     <tbody>
       {tableData.map((item: any, key: number) => {
+        const isPinned = pinnedTableData.find((data: any) => data._id === item._id);
+
         return (
-          <tr key={key}>
+          <tr key={key} className={`${isPinned ? "pinned" : ""}`}>
             {tableHeaders.map((header: TableHeader, key: number) => {
               if (header.hidden) return <Fragment key={key} />;
+
+              if (header.dataType === "pin") {
+                return (
+                  <td key={key} className="relative">
+                    <p
+                      className="pin"
+                      onClick={() => {
+                        if (isPinned) {
+                          const newData = pinnedTableData.filter((data: any) => data._id !== item._id);
+                          setPinnedTableData(newData);
+                          return;
+                        }
+
+                        setPinnedTableData((prevValue: any[]) => [...prevValue, item]);
+                      }}
+                    >
+                      <Pin_SVG />
+                    </p>
+                  </td>
+                );
+              }
 
               if (header.dataType === "edit") {
                 return (

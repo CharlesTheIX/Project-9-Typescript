@@ -1,12 +1,17 @@
+import Eye_SVG from "@/SVGs/Eye_SVG";
+import Pin_SVG from "@/SVGs/Pin_SVG";
 import Users_SVG from "@/SVGs/Users_SVG";
 import Globe_SVG from "@/SVGs/Globe_SVG";
 import Admin_SVG from "@/SVGs/Admin_SVG";
 import Error_SVG from "@/SVGs/Error_SVG";
+import Search_SVG from "@/SVGs/Search_SVG";
 import Cookie_SVG from "@/SVGs/Cookie_SVG";
 import SignIn_SVG from "@/SVGs/SignIn_SVG";
 import Profile_SVG from "@/SVGs/Profile_SVG";
 import Terminal_SVG from "@/SVGs/Terminal_SVG";
 import Dashboard_SVG from "@/SVGs/Dashboard_SVG";
+import Bye_SVG from "@/components/SVGs/Bye_SVG";
+import Success_SVG from "@/components/SVGs/Success_SVG";
 
 type Props = {
   icon?: string;
@@ -18,6 +23,14 @@ export default (props: Props): React.ReactElement => {
   const { icon, size, color = "inherit" } = props;
 
   switch (icon) {
+    case "success":
+      return <Success_SVG width={size} height={size} primaryColor={color} />;
+    case "bye":
+      return <Bye_SVG width={size} height={size} primaryColor={color} />;
+    case "pin":
+      return <Pin_SVG width={size} height={size} primaryColor={color} />;
+    case "eye":
+      return <Eye_SVG width={size} height={size} primaryColor={color} />;
     case "users":
       return <Users_SVG width={size} height={size} primaryColor={color} />;
     case "error":
@@ -26,16 +39,18 @@ export default (props: Props): React.ReactElement => {
       return <Globe_SVG width={size} height={size} primaryColor={color} />;
     case "admin":
       return <Admin_SVG width={size} height={size} primaryColor={color} />;
-    case "profile":
-      return <Profile_SVG width={size} height={size} primaryColor={color} />;
-    case "dashboard":
-      return <Dashboard_SVG width={size} height={size} primaryColor={color} />;
+    case "search":
+      return <Search_SVG width={size} height={size} primaryColor={color} />;
     case "signIn":
       return <SignIn_SVG width={size} height={size} primaryColor={color} />;
     case "cookie":
       return <Cookie_SVG width={size} height={size} primaryColor={color} />;
+    case "profile":
+      return <Profile_SVG width={size} height={size} primaryColor={color} />;
     case "terminal":
       return <Terminal_SVG width={size} height={size} primaryColor={color} />;
+    case "dashboard":
+      return <Dashboard_SVG width={size} height={size} primaryColor={color} />;
     default:
       return <></>;
   }

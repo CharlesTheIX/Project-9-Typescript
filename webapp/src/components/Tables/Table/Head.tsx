@@ -4,6 +4,7 @@ import Edit_SVG from "@/SVGs/Edit_SVG";
 import SortAsc_SVG from "@/SVGs/SortAsc_SVG";
 import Profile_SVG from "@/SVGs/Profile_SVG";
 import SortDesc_SVG from "@/SVGs/SortDesc_SVG";
+import Pin_SVG from "@/components/SVGs/Pin_SVG";
 import SortShuffled_SVG from "@/SVGs/SortShuffled_SVG";
 import { useUserContext } from "@/contexts/userContext";
 
@@ -53,6 +54,11 @@ const TableHead: React.FC<Props> = (props: Props) => {
                   </p>
                 )}
 
+                {header.dataType === "pin" && (
+                  <p className="pin">
+                    <Pin_SVG />
+                  </p>
+                )}
                 {header.dataType === "edit" && (
                   <p className="edit">
                     <Edit_SVG />

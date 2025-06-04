@@ -78,7 +78,7 @@
         border: 3px solid;
         border-top-right-radius: 0.5rem;
         border-bottom-left-radius: 0.5rem;
-        box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.5);
+        // box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
         max-height: calc(100vh - (0.25rem * 39) - (0.25rem * 29));
         transition: background-color 300ms ease-in-out, border-color 300ms ease-in-out;
 

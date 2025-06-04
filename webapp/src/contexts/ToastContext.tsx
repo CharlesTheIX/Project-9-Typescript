@@ -3,6 +3,7 @@ import Bye_SVG from "@/components/SVGs/Bye_SVG";
 import Error_SVG from "@/components/SVGs/Error_SVG";
 import Success_SVG from "@/components/SVGs/Success_SVG";
 import { useThemeContext } from "@/contexts/themeContext";
+import getSvg from "@/functions/getSvg";
 import { createContext, useContext, useState, useEffect, useRef } from "react";
 
 type ToastType = "success" | "error" | "none" | "bye" | "hi";
@@ -82,14 +83,14 @@ export const ToastContextProvider = (props: { children: React.ReactNode }) => {
           <div ref={toastRef} id="toast-notification" className={`${hide ? "hide" : "show"} ${type} ${theme}`}>
             {type === "bye" ? (
               <div className="flex flex-row gap-5 items-center">
-                <Bye_SVG />
+                {getSvg({ icon: "bye", size: 30 })}
                 <p className="font-bold">Goodbye.</p>
               </div>
             ) : (
               <div className="flex flex-row gap-5 items-center">
-                {type === "success" && <Success_SVG />}
-                {type === "error" && <Error_SVG />}
-                {type === "hi" && <Bye_SVG />}
+                {type === "success" && <>{getSvg({ icon: "success", size: 30 })}</>}
+                {type === "error" && <>{getSvg({ icon: "error", size: 30 })}</>}
+                {type === "hi" && <>{getSvg({ icon: "bye", size: 30 })}</>}
 
                 <div>
                   {title && <p className="font-bold">{title}</p>}

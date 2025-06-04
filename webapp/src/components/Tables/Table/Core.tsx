@@ -16,8 +16,10 @@ type Props = {
 
 const TableCore: React.FC<Props> = (props: Props) => {
   const { headers, data, pagination, collection, formPreferences, setFormPreferences } = props;
+  const [pinned, setPinned] = useState<boolean>(false);
   const [tableData, setTableData] = useState<any[]>(data);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [pinnedTableData, setPinnedTableData] = useState<any[]>([]);
   const [tableHeaders, setTableHeaders] = useState<TableHeader[]>(headers);
   const [searchValue, setSearchValue] = useState<string>(formPreferences?.searchValue || "");
   const [postsPerPage, setPostsPerPage] = useState<number>(paginationOptions[0].value as number);
@@ -46,43 +48,61 @@ const TableCore: React.FC<Props> = (props: Props) => {
   };
 
   const sortTableData = (key: number): void => {
+    const newData = [...tableData];
     const newHeaders = [...tableHeaders];
     const header = { ...newHeaders[key] };
+    const newPinnedData = [...pinnedTableData];
     header.sortState = getNextSortState(header.sortState);
     newHeaders[key] = header;
-    setTableHeaders(newHeaders);
-    setTableData((prevValue: any[]) => {
-      const newData = [...prevValue];
-      newHeaders.map((header: TableHeader) => {
-        if (!header.sortState || !header.canSort) return;
-        if (header.sortState === "shuffled") {
-          for (let i = newData.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [newData[i], newData[j]] = [newData[j], newData[i]];
-          }
-          return;
+    newHeaders.map((header: TableHeader) => {
+      if (!header.sortState || !header.canSort) return;
+      if (header.sortState === "shuffled") {
+        for (let i = newData.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [newData[i], newData[j]] = [newData[j], newData[i]];
+          [newPinnedData[i], newPinnedData[j]] = [newPinnedData[j], newPinnedData[i]];
         }
-        newData.sort((a, b) => {
-          const aName = a[header.value];
-          const bName = b[header.value];
-          const aIsUndefined = aName === undefined;
-          const bIsUndefined = bName === undefined;
-          if (aIsUndefined && bIsUndefined) return 0;
-          if (aIsUndefined) return 1;
-          if (bIsUndefined) return -1;
-          switch (header.sortState) {
-            case "asc":
-              return aName!.localeCompare(bName!);
-            case "desc":
-              return bName!.localeCompare(aName!);
-          }
-        });
+        return;
+      }
+      newData.sort((a, b) => {
+        const aName = a[header.value];
+        const bName = b[header.value];
+        const aIsUndefined = aName === undefined;
+        const bIsUndefined = bName === undefined;
+        if (aIsUndefined && bIsUndefined) return 0;
+        if (aIsUndefined) return 1;
+        if (bIsUndefined) return -1;
+        switch (header.sortState) {
+          case "asc":
+            return aName!.localeCompare(bName!);
+          case "desc":
+            return bName!.localeCompare(aName!);
+        }
       });
-      return newData;
+      newPinnedData.sort((a, b) => {
+        const aName = a[header.value];
+        const bName = b[header.value];
+        const aIsUndefined = aName === undefined;
+        const bIsUndefined = bName === undefined;
+        if (aIsUndefined && bIsUndefined) return 0;
+        if (aIsUndefined) return 1;
+        if (bIsUndefined) return -1;
+        switch (header.sortState) {
+          case "asc":
+            return aName!.localeCompare(bName!);
+          case "desc":
+            return bName!.localeCompare(aName!);
+        }
+      });
     });
+
+    setTableData(newData);
+    setTableHeaders(newHeaders);
+    setPinnedTableData(newPinnedData);
   };
 
   const searchTableTable = (searchValue: string): void => {
+    setPinned(false);
     if (!searchValue) return paginateTable(1, paginationOptions[0].value as number);
     const filteredData = data.filter((item: any) => {
       return tableHeaders.some((header: TableHeader) => {
@@ -99,10 +119,11 @@ const TableCore: React.FC<Props> = (props: Props) => {
 
   const paginateTable = (currentPage: number, postsPerPage: number): void => {
     const startIndex = (currentPage - 1) * postsPerPage;
-    const endIndex = Math.min(startIndex + postsPerPage, data.length);
-    const dataSlice = data.slice(startIndex, endIndex);
+    var maxLength = pinned ? pinnedTableData.length : data.length;
+    const endIndex = Math.min(startIndex + postsPerPage, maxLength);
+    const dataSlice = pinned ? pinnedTableData.slice(startIndex, endIndex) : data.slice(startIndex, endIndex);
+    pinned ? setPinnedTableData(dataSlice) : setTableData(dataSlice);
     setPostsPerPage(postsPerPage);
-    setTableData(dataSlice);
     setCurrentPage(currentPage);
   };
 
@@ -114,6 +135,8 @@ const TableCore: React.FC<Props> = (props: Props) => {
   return (
     <>
       <TableControls
+        pinned={pinned}
+        setPinned={setPinned}
         searchValue={searchValue}
         tableHeaders={tableHeaders}
         setSearchValue={setSearchValue}
@@ -124,25 +147,54 @@ const TableCore: React.FC<Props> = (props: Props) => {
       />
 
       <div className="scrollbar-x scrollbar-y inner">
-        {!tableData || tableData.length === 0 ? (
-          <p>No data to display</p>
+        {pinned ? (
+          <>
+            {!pinnedTableData || pinnedTableData.length === 0 ? (
+              <p>No pined data to display</p>
+            ) : (
+              <table className="pinned">
+                <TableHead tableHeaders={tableHeaders} sortTableData={sortTableData} />
+                <TableBody
+                  collection={collection}
+                  tableData={pinnedTableData}
+                  tableHeaders={tableHeaders}
+                  pinnedTableData={pinnedTableData}
+                  setPinnedTableData={setPinnedTableData}
+                />
+              </table>
+            )}
+          </>
         ) : (
-          <table>
-            <TableHead tableHeaders={tableHeaders} sortTableData={sortTableData} />
-            <TableBody tableData={tableData} tableHeaders={tableHeaders} collection={collection} />
-          </table>
+          <>
+            {!tableData || tableData.length === 0 ? (
+              <p>No data to display</p>
+            ) : (
+              <table>
+                <TableHead tableHeaders={tableHeaders} sortTableData={sortTableData} />
+                <TableBody
+                  tableData={tableData}
+                  collection={collection}
+                  tableHeaders={tableHeaders}
+                  pinnedTableData={pinnedTableData}
+                  setPinnedTableData={setPinnedTableData}
+                />
+              </table>
+            )}
+          </>
         )}
       </div>
 
       {tableData && tableData.length > 0 && pagination && (
         <TablePagination
           data={data}
+          pinned={pinned}
           tableData={tableData}
           currentPage={currentPage}
           searchValue={searchValue}
           postsPerPage={postsPerPage}
           paginateTable={paginateTable}
           setCurrentPage={setCurrentPage}
+          pinnedTableData={pinnedTableData}
           setPostsPerPage={setPostsPerPage}
         />
       )}
