@@ -28,7 +28,7 @@ const CountryPage: React.FC<Props> = (props: Props) => {
         highlights.push({
           type: "link",
           content: "Edit",
-          href: `/admin/countries/edit/${country._id}`,
+          href: `/admin/countries/edit/${country?._id}`,
         });
       }
     } else {
@@ -36,7 +36,7 @@ const CountryPage: React.FC<Props> = (props: Props) => {
         highlights.push({
           type: "link",
           content: "Edit",
-          href: `/admin/countries/edit/${country._id}`,
+          href: `/admin/countries/edit/${country?._id}`,
         });
       }
     }
@@ -49,8 +49,8 @@ const CountryPage: React.FC<Props> = (props: Props) => {
 
     highlights.push({
       type: "link",
-      content: country.continent,
-      href: `/countries/continents/${country.continent.toLowerCase()}`,
+      content: country?.continent,
+      href: `/countries/continents/${country?.continent.toLowerCase()}`,
     });
 
     return highlights;
@@ -62,9 +62,9 @@ const CountryPage: React.FC<Props> = (props: Props) => {
         <section className="flex flex-col gap-10">
           <HeroBanner
             icon="globe"
-            title={country.displayName}
+            title={country?.displayName}
             highlights={getHighlights()}
-            content={country.description}
+            content={country?.description}
           />
         </section>
 
@@ -93,15 +93,15 @@ const CountryPage: React.FC<Props> = (props: Props) => {
         <section className="flex flex-col items-start text-xl w-full">
           <p>
             <strong>Capital City: </strong>
-            {country.capitalCity ? country.capitalCity : "-"}
+            {country?.capitalCity ? country?.capitalCity : "-"}
           </p>
           <p>
             <strong>Population: </strong>
-            {country.population ? country.population : "-"}
+            {country?.population ? country?.population : "-"}
           </p>
           <p>
             <strong>Language(s): </strong>
-            {country.languages && country.languages.length > 0 ? country.languages.join(", ") : "-"}
+            {country?.languages && country?.languages.length > 0 ? country?.languages.join(", ") : "-"}
           </p>
         </section>
       </div>
@@ -110,11 +110,11 @@ const CountryPage: React.FC<Props> = (props: Props) => {
         <Image
           width={768}
           height={512}
-          alt={`${country.displayName} flag`}
+          alt={`${country?.displayName} flag`}
           className="mx-auto w-auto"
           src={
-            country.imageUrl
-              ? country.imageUrl.replace(`${process.env.NEXT_PUBLIC_BASE_URL}`, "")
+            country?.imageUrl
+              ? country?.imageUrl.replace(`${process.env.NEXT_PUBLIC_BASE_URL}`, "")
               : "/assets/images/default-flag.webp"
           }
         />
@@ -129,21 +129,21 @@ const CountryPage: React.FC<Props> = (props: Props) => {
             className="w-full h-auto"
             src={`/assets/images/world-outline.jpg`}
           />
-          {country.imageUrl && (
+          {country?.imageUrl && (
             <>
               <Image
                 width={512}
                 height={341}
                 className="w-full h-full top-0 left-0 absolute"
-                alt={`${country.displayName} world location`}
-                src={country.imageUrl.replace(`${process.env.NEXT_PUBLIC_BASE_URL}`, "").replace("/flags", "/worlds")}
+                alt={`${country?.displayName} world location`}
+                src={country?.imageUrl.replace(`${process.env.NEXT_PUBLIC_BASE_URL}`, "").replace("/flags", "/worlds")}
               />
               <Image
                 width={512}
                 height={341}
                 className="w-full h-full top-0 left-0 absolute"
-                alt={`${country.displayName} world location`}
-                src={country.imageUrl
+                alt={`${country?.displayName} world location`}
+                src={country?.imageUrl
                   .replace(`${process.env.NEXT_PUBLIC_BASE_URL}`, "")
                   .replace("/flags", "/world-overlays")}
               />

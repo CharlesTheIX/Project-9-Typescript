@@ -31,7 +31,7 @@ const UserEditPage: React.FC<Props> = (props: Props) => {
             },
             {
               type: "function",
-              content: currentUser.username,
+              content: currentUser?.username,
               callback: () => {
                 impersonate(user, "/dashboard");
               },

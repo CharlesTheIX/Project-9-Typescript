@@ -34,8 +34,8 @@ const CountryEditPage: React.FC<Props> = (props: Props) => {
             },
             {
               type: "link",
-              content: currentCountry.displayName,
-              href: `/countries/${currentCountry._id}`,
+              content: currentCountry?.displayName,
+              href: `/countries/${currentCountry?._id}`,
             },
           ]}
         />

@@ -7,7 +7,7 @@
   "name": "project-9-typescript-webapp-nextjs",
   "scripts": {
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3022",
     "dev": "next dev -p 3022 --turbopack",
     "clean": "rm -rf node_modules .next yarn.lock",
     "analyze": "cross-env ANALYZE=true next build"

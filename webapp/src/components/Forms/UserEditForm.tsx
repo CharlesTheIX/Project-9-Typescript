@@ -26,7 +26,7 @@ const UserEditForm: React.FC<Props> = (props: Props) => {
     setIsLoading(true);
 
     try {
-      if (!user._id) throw new Error("User _id could not be found.");
+      if (!user?._id) throw new Error("User _id could not be found.");
 
       const form = formRef.current;
       if (!form) throw new Error("Form does not exist.");
@@ -47,7 +47,7 @@ const UserEditForm: React.FC<Props> = (props: Props) => {
       const hasErrors = validateUserCreation(requestData);
       if (hasErrors.error) throw new Error(`Invalid ${hasErrors.message}`);
 
-      const response = await updateUserById({ _id: user._id, update: requestData });
+      const response = await updateUserById({ _id: user?._id, update: requestData });
       if (response.error) throw new Error(response.message);
 
       setIsLoading(false);
@@ -76,16 +76,16 @@ const UserEditForm: React.FC<Props> = (props: Props) => {
               </div>
             )}
 
-            <TextInput name="username" label="Username" required={true} defaultValue={user.username} />
-            <EmailInput name="email" label="Email" required={true} defaultValue={user.email} />
+            <TextInput name="username" label="Username" required={true} defaultValue={user?.username} />
+            <EmailInput name="email" label="Email" required={true} defaultValue={user?.email} />
             <SelectInput
               name="role"
               label="Role"
               required={true}
               options={gbl.userRoleOptions}
-              defaultValue={gbl.userRoleOptions.find((option: Option) => option.value === user.role)}
+              defaultValue={gbl.userRoleOptions.find((option: Option) => option.value === user?.role)}
             />
-            <UrlInput name="profile-image-url" label="Profile Image Url" defaultValue={user.profileImageURL} />
+            <UrlInput name="profile-image-url" label="Profile Image Url" defaultValue={user?.profileImageURL} />
           </div>
 
           <div>

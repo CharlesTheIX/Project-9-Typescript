@@ -29,7 +29,7 @@ const CountryEditForm: React.FC<Props> = (props: Props) => {
     setIsLoading(true);
 
     try {
-      if (!country._id) throw new Error("Country _id could not be found.");
+      if (!country?._id) throw new Error("Country _id could not be found.");
 
       const form = formRef.current;
       if (!form) throw new Error("Form does not exist.");
@@ -62,7 +62,7 @@ const CountryEditForm: React.FC<Props> = (props: Props) => {
       const hasErrors = validateCountryCreation(requestData);
       if (hasErrors.error) throw new Error(`Invalid ${hasErrors.message}`);
 
-      const response = await updateCountryById({ _id: country._id, update: requestData });
+      const response = await updateCountryById({ _id: country?._id, update: requestData });
       if (response.error) throw new Error(response.message);
 
       setIsLoading(false);
@@ -91,22 +91,22 @@ const CountryEditForm: React.FC<Props> = (props: Props) => {
               </div>
             )}
 
-            <TextInput name="display-name" label="Display Name" required={true} defaultValue={country.displayName} />
-            <MultiTextInput name="names" label="Names" required={true} defaultValue={country.names} />
+            <TextInput name="display-name" label="Display Name" required={true} defaultValue={country?.displayName} />
+            <MultiTextInput name="names" label="Names" required={true} defaultValue={country?.names} />
             <SelectInput
               required={true}
               name="continent"
               label="Continent"
               options={gbl.continentOptions}
-              defaultValue={gbl.continentOptions.find((option: Option) => option.value === country.continent)}
+              defaultValue={gbl.continentOptions.find((option: Option) => option.value === country?.continent)}
             />
-            <MultiTextInput name="languages" label="Languages" defaultValue={country.languages} />
-            <NumberInput name="population" label="Population" min={0} defaultValue={`${country.population}`} />
-            <TextInput name="capital-city" label="Capital City" defaultValue={country.capitalCity} />
-            <TextareaInput name="description" label="Description" defaultValue={country.description} />
-            <UrlInput name="image-url" label="Image Url" defaultValue={country.imageUrl} />
-            <RectangleInput name="flag-rectangle" label="Flag Rectangle" defaultValue={country.flagRectangle} />
-            <RectangleInput name="map-rectangle" label="Map Rectangle" defaultValue={country.mapRectangle} />
+            <MultiTextInput name="languages" label="Languages" defaultValue={country?.languages} />
+            <NumberInput name="population" label="Population" min={0} defaultValue={`${country?.population}`} />
+            <TextInput name="capital-city" label="Capital City" defaultValue={country?.capitalCity} />
+            <TextareaInput name="description" label="Description" defaultValue={country?.description} />
+            <UrlInput name="image-url" label="Image Url" defaultValue={country?.imageUrl} />
+            <RectangleInput name="flag-rectangle" label="Flag Rectangle" defaultValue={country?.flagRectangle} />
+            <RectangleInput name="map-rectangle" label="Map Rectangle" defaultValue={country?.mapRectangle} />
           </div>
 
           <div>
