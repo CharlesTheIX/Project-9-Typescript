@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useUserContext } from "@/contexts/userContext";
 import LoadingContainer from "@/components/LoadingContainer";
 import { useImpersonationContext } from "@/contexts/impersonationContext";
-import getNotificationsContainingParticipants from "@/functions/notifications/getNotificationsContainingParticipants";
+import getNotificationsContainingParticipants from "@/lib/notifications/getNotificationsContainingParticipants";
 
 type Props = {
   pingErrorLimit?: number;
@@ -23,7 +23,7 @@ const NotificationsTab: React.FC<Props> = (props: Props) => {
     var targetUser = impersonate.user ? impersonate.user : user;
     setPingLoading(true);
     setLoading(true);
-    
+
     const getNotifications = async (): Promise<void> => {
       try {
         if (!targetUser) throw new Error("no active user.");

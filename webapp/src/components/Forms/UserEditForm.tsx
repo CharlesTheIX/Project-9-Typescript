@@ -7,8 +7,8 @@ import EmailInput from "@/Inputs/EmailInput";
 import SelectInput from "@/Inputs/SelectInput";
 import { useToastContext } from "@/contexts/toastContext";
 import LoadingContainer from "@/components/LoadingContainer";
-import updateUserById from "@/functions/users/updateUserById";
-import validateUserCreation from "@/functions/forms/validateUserCreation";
+import updateUserById from "@/lib/users/updateUserById";
+import validateUserCreation from "@/lib/forms/validateUserCreation";
 
 type Props = {
   user: User;

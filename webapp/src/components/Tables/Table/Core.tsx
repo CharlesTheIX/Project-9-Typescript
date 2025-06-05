@@ -3,7 +3,7 @@ import TableHead from "./Head";
 import TableBody from "./Body";
 import TableControls from "./Controls";
 import { useEffect, useState } from "react";
-import getSortedData from "@/functions/getSortedData";
+import getSortedData from "@/lib/getSortedData";
 import TablePagination, { paginationOptions } from "./Pagination";
 
 type Props = {

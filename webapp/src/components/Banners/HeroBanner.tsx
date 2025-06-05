@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Fragment } from "react";
-import getSvg from "@/functions/getSvg";
+import getSvg from "@/lib/getSvg";
 
 export type Highlight = {
   href?: string;

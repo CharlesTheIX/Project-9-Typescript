@@ -1,11 +1,11 @@
 "use client";
 import Eye_SVG from "@/SVGs/Eye_SVG";
 import TextInput from "@/Inputs/TextInput";
-import { debounce } from "@/functions/debounce";
+import { debounce } from "@/lib/debounce";
 import EyeSlash_SVG from "@/SVGs/EyeSlash_SVG copy";
 import { Fragment, useState, useMemo } from "react";
 import { useUserContext } from "@/contexts/userContext";
-import getSvg from "@/functions/getSvg";
+import getSvg from "@/lib/getSvg";
 
 type Props = {
   pinned: boolean;

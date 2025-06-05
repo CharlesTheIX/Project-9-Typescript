@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from "react";
 
 type Props = {
@@ -38,7 +39,7 @@ const TabContainer: React.FC<Props> = (props: Props) => {
         </ul>
       </div>
 
-      <div className="body">{activeTab === null ? <></> : <>{tabs[activeTab].content}</>}</div>
+      <div className="body scrollbar-y">{activeTab === null ? <></> : <>{tabs[activeTab].content}</>}</div>
     </div>
   );
 };

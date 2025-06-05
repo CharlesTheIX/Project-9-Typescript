@@ -1,8 +1,8 @@
-import isUrl from "@/functions/validation/isUrl";
-import isEmail from "@/functions/validation/isEmail";
-import isUserRole from "@/functions/validation/isUserRole";
-import isAlphanumeric from "@/functions/validation/isAlphanumeric";
-import updateFormErrorMessage from "@/functions/forms/updateFormErrorMessage";
+import isUrl from "@/lib/validation/isUrl";
+import isEmail from "@/lib/validation/isEmail";
+import isUserRole from "@/lib/validation/isUserRole";
+import isAlphanumeric from "@/lib/validation/isAlphanumeric";
+import updateFormErrorMessage from "@/lib/forms/updateFormErrorMessage";
 
 export default (requestData: Partial<User>): FormError => {
   const formError: FormError = { error: false, message: "" };

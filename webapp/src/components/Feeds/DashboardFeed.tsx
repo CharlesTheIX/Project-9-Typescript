@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import getSvg from "@/functions/getSvg";
+import getSvg from "@/lib/getSvg";
 import { useState, useEffect } from "react";
 import { useUserContext } from "@/contexts/userContext";
 import { useImpersonationContext } from "@/contexts/impersonationContext";

@@ -4,10 +4,10 @@ import Edit_SVG from "@/SVGs/Edit_SVG";
 import Copy_SVG from "@/SVGs/Copy_SVG";
 import Profile_SVG from "@/SVGs/Profile_SVG";
 import Pin_SVG from "@/components/SVGs/Pin_SVG";
-import getUserById from "@/functions/users/getUserById";
+import getUserById from "@/lib/users/getUserById";
 import { useUserContext } from "@/contexts/userContext";
 import { useToastContext } from "@/contexts/toastContext";
-import copyContentToClipboard from "@/functions/copyContentToClipboard";
+import copyContentToClipboard from "@/lib/copyContentToClipboard";
 import { useImpersonationContext } from "@/contexts/impersonationContext";
 
 type Props = {

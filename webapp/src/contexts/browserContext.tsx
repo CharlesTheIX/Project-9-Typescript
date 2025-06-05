@@ -1,6 +1,6 @@
 "use client";
 import { createContext, useContext, useState, useEffect } from "react";
-import { getCookieItem, setCookieItem, CookieType } from "@/functions/storage/browserCookies";
+import { getCookieItem, setCookieItem, CookieType } from "@/lib/storage/browserCookies";
 
 type Browser = "safari" | "chrome" | "fireFox";
 type BrowserContextData = {

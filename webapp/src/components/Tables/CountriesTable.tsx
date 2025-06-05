@@ -2,10 +2,10 @@
 import TableCore from "./Table/Core";
 import { useState, useEffect } from "react";
 import LoadingContainer from "@/components/LoadingContainer";
-import getAllCountries from "@/functions/countries/getAllCountries";
+import getAllCountries from "@/lib/countries/getAllCountries";
 import { table_headers, table_storage_token } from "@/data/countriesTableData";
-import getCountriesByContinent from "@/functions/countries/getCountriesByContinent";
-import { getLocalStorageItem, removeLocalStorageItem } from "@/functions/storage/localStorage";
+import getCountriesByContinent from "@/lib/countries/getCountriesByContinent";
+import { getLocalStorageItem, removeLocalStorageItem } from "@/lib/storage/localStorage";
 
 const CountriesTable: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);

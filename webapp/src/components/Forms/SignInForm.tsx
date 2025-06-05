@@ -7,7 +7,7 @@ import { useUserContext } from "@/contexts/userContext";
 import { useToastContext } from "@/contexts/toastContext";
 import LoadingContainer from "@/components/LoadingContainer";
 import { useRouter, useSearchParams } from "next/navigation";
-import validateSignIn, { SignInRequestData } from "@/functions/forms/validateSignIn";
+import validateSignIn, { SignInRequestData } from "@/lib/forms/validateSignIn";
 
 const SignInForm: React.FC = () => {
   const router = useRouter();

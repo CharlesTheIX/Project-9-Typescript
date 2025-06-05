@@ -1,9 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
-import getUserByClerkId from "@/functions/users/getUserByClerkId";
+import getUserByClerkId from "@/lib/users/getUserByClerkId";
 import { ClerkMiddlewareAuth, clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
 const signedInRoutes: string[] = ["/", "/sign-in(.*)", "/sign-up(.*)"];
-const publicRoutes: string[] = ["/", "/sign-in(.*)", "/sign-up(.*)", "/cookies", "/tech-stack", "/terms-conditions", "/api/:path*"];
+const publicRoutes: string[] = [
+  "/",
+  "/sign-in(.*)",
+  "/sign-up(.*)",
+  "/cookies",
+  "/tech-stack",
+  "/terms-conditions",
+  "/api/:path*",
+];
 const adminRoutes: string[] = ["/admin/:path*"];
 
 const isAdminRoute = createRouteMatcher(adminRoutes);
@@ -33,6 +41,6 @@ export default clerkMiddleware(async (auth: ClerkMiddlewareAuth, request: NextRe
 
 export const config = {
   matcher: [
-    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)"
-  ]
+    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
+  ],
 };

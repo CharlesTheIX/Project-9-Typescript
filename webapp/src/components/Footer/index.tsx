@@ -1,5 +1,7 @@
 "use client";
 import Link from "next/link";
+import { Fragment } from "react";
+import { navigationItems } from "./data";
 import UserControls from "@/components/UserControls";
 import { useThemeContext } from "@/contexts/themeContext";
 import CookieBanner from "@/components/Banners/CookieBanner";
@@ -11,13 +13,18 @@ const Footer: React.FC = () => {
   return (
     <footer className={theme}>
       <section>
-      <div className="flex flex-row gap-2 pb-2 items-center justify-center wrap w-full">
-        <Link href="/tech-stack" className="link-text">Tech Stack</Link>
-        <p>|</p>
-        <Link href="/terms-conditions" className="link-text">Terms & Conditions</Link>
-        <p>|</p>
-        <Link href="/cookies" className="link-text">Cookies</Link>
-      </div>
+        <div className="flex flex-row gap-2 pb-2 items-center justify-center wrap w-full">
+          {navigationItems.map((item: NavigationItem, key: number) => {
+            return (
+              <Fragment key={key}>
+                <Link href={item.href} className="link-text" key={key}>
+                  {item.label}
+                </Link>
+                {key != navigationItems.length - 1 && <p>|</p>}
+              </Fragment>
+            );
+          })}
+        </div>
 
         <div className="flex flex-col text-center items-center justify-center">
           <p>
@@ -27,7 +34,7 @@ const Footer: React.FC = () => {
             </Link>
             .
           </p>
-          <p>Copyright &copy; {new Date().getFullYear()}.</p>
+          {/* <p>Copyright &copy; {new Date().getFullYear()}.</p> */}
         </div>
       </section>
 

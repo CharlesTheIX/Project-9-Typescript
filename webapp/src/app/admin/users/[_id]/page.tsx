@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import UserEditPage from "@/pages/Users/edit";
-import getUserById from "@/functions/users/getUserById";
-import getAllUsers from "@/functions/users/getAllUsers";
+import getUserById from "@/lib/users/getUserById";
+import getAllUsers from "@/lib/users/getAllUsers";
 
 type Params = Promise<{ _id: string }>;
 

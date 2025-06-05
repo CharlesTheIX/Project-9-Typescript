@@ -10,8 +10,8 @@ import MultiTextInput from "@/Inputs/MultiTextInput";
 import RectangleInput from "@/Inputs/RectangleInput";
 import { useToastContext } from "@/contexts/toastContext";
 import LoadingContainer from "@/components/LoadingContainer";
-import updateCountryById from "@/functions/countries/updateCountryById";
-import validateCountryCreation from "@/functions/forms/validateCountryCreation";
+import updateCountryById from "@/lib/countries/updateCountryById";
+import validateCountryCreation from "@/lib/forms/validateCountryCreation";
 
 type Props = {
   country: Country;

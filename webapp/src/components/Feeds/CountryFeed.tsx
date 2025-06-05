@@ -3,11 +3,11 @@ import Link from "next/link";
 import * as gbl from "@/globals";
 import { useState, useEffect } from "react";
 import SelectInput from "@/Inputs/SelectInput";
-import getSortedData from "@/functions/getSortedData";
+import getSortedData from "@/lib/getSortedData";
 // import { useUserContext } from "@/contexts/userContext";
 import LoadingContainer from "@/components/LoadingContainer";
-import getAllCountries from "@/functions/countries/getAllCountries";
-import getCountriesByContinent from "@/functions/countries/getCountriesByContinent";
+import getAllCountries from "@/lib/countries/getAllCountries";
+import getCountriesByContinent from "@/lib/countries/getCountriesByContinent";
 
 const CountryFeed: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);

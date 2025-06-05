@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import NotificationEditPage from "@/pages/Notifications/edit";
-import getNotificationById from "@/functions/notifications/getNotificationById";
-import getAllNotifications from "@/functions/notifications/getAllNotifications";
+import getNotificationById from "@/lib/notifications/getNotificationById";
+import getAllNotifications from "@/lib/notifications/getAllNotifications";
 
 type Params = Promise<{ _id: string }>;
 
@@ -14,13 +14,13 @@ export const generateMetadata = async ({ params }: { params: Params }): Promise<
     if (response.error) throw new Error();
     return {
       title: `Edit ${response.data.displayName} | Admin | P9`,
-      description: `${response.data.displayName}`
+      description: `${response.data.displayName}`,
     };
   } catch (error: any) {
     return {
       title: "404 | P9",
       description: "Notification not found",
-      robots: "noindex, nofollow"
+      robots: "noindex, nofollow",
     };
   }
 };

@@ -1,10 +1,10 @@
 "use client";
 import TableCore from "./Table/Core";
 import { useState, useEffect } from "react";
-import getAllUsers from "@/functions/users/getAllUsers";
+import getAllUsers from "@/lib/users/getAllUsers";
+import { table_headers, table_storage_token } from "./data";
 import LoadingContainer from "@/components/LoadingContainer";
-import { table_headers, table_storage_token } from "@/data/usersTableData";
-import { getLocalStorageItem, removeLocalStorageItem } from "@/functions/storage/localStorage";
+import { getLocalStorageItem, removeLocalStorageItem } from "@/lib/storage/localStorage";
 
 const UsersTable: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);

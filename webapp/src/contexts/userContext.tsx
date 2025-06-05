@@ -1,7 +1,7 @@
 "use client";
 import { useUser } from "@clerk/nextjs";
 import { useToastContext } from "@/contexts/toastContext";
-import getUserByClerkId from "@/functions/users/getUserByClerkId";
+import getUserByClerkId from "@/lib/users/getUserByClerkId";
 import { createContext, useContext, useState, useEffect } from "react";
 
 type ToggleType = "sign-in" | "sign-out" | "none";

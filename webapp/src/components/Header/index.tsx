@@ -2,9 +2,9 @@
 import Link from "next/link";
 import { useUser } from "@clerk/nextjs";
 import Terminal_SVG from "@/SVGs/Terminal_SVG";
-import * as NI from "@/data/headerNaviagationData";
 import { useUserContext } from "@/contexts/userContext";
 import { useThemeContext } from "@/contexts/themeContext";
+import { signedOutItems, signedInItems, adminItems } from "./data";
 
 const Header: React.FC = () => {
   const { theme } = useThemeContext();
@@ -25,7 +25,7 @@ const Header: React.FC = () => {
               <ul>
                 {!user ? (
                   <>
-                    {NI.signedOutItems.map((item: NavigationItem, key: number) => {
+                    {signedOutItems.map((item: NavigationItem, key: number) => {
                       return (
                         <li key={key}>
                           <Link href={item.href} className="button">
@@ -39,7 +39,7 @@ const Header: React.FC = () => {
                   <>
                     {userContext.userRole === "admin" ? (
                       <>
-                        {NI.adminItems.map((item: NavigationItem, key: number) => {
+                        {adminItems.map((item: NavigationItem, key: number) => {
                           return (
                             <li key={key}>
                               <Link href={item.href} className="button">
@@ -51,7 +51,7 @@ const Header: React.FC = () => {
                       </>
                     ) : (
                       <>
-                        {NI.signedInItems.map((item: NavigationItem, key: number) => {
+                        {signedInItems.map((item: NavigationItem, key: number) => {
                           return (
                             <li key={key}>
                               <Link href={item.href} className="button">

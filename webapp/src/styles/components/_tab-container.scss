@@ -42,7 +42,7 @@
   > .body {
     @apply p-5;
     width: 100%;
-    overflow: hidden;
+    max-height: 60vh;
     border: 3px solid;
     border-bottom-left-radius: 0.5rem;
 
@@ -75,12 +75,6 @@
       }
 
       > .body {
-        width: 100%;
-        overflow: hidden;
-        border: 3px solid;
-        border-bottom-left-radius: 0.5rem;
-
-        border-top: none;
       }
     }
   }

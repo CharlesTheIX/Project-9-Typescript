@@ -1,6 +1,6 @@
-import isEmail from "@/functions/validation/isEmail";
-import isPassword from "@/functions/validation/isPassword";
-import updateFormErrorMessage from "@/functions/forms/updateFormErrorMessage";
+import isEmail from "@/lib/validation/isEmail";
+import isPassword from "@/lib/validation/isPassword";
+import updateFormErrorMessage from "@/lib/forms/updateFormErrorMessage";
 
 export type SignInRequestData = {
   email: string;

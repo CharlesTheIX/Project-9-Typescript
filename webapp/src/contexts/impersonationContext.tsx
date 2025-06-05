@@ -1,10 +1,10 @@
 "use client";
 import { useRouter } from "next/navigation";
-import getUserById from "@/functions/users/getUserById";
+import getUserById from "@/lib/users/getUserById";
 import { useToastContext } from "@/contexts/toastContext";
 import { createContext, useContext, useState, useEffect, useRef } from "react";
 import ImpersonationRestrictedBanner from "@/components/Banners/ImpersonationRestrictedBanner";
-import { getLocalStorageItem, removeLocalStorageItem, setLocalStorageItem } from "@/functions/storage/localStorage";
+import { getLocalStorageItem, removeLocalStorageItem, setLocalStorageItem } from "@/lib/storage/localStorage";
 
 type ImpersonationContextData = {
   user: User | null;
@@ -20,7 +20,7 @@ const defaultValue: ImpersonationContextData = {
   setUser: () => {},
   impersonate: () => {},
   setAcceptedRoles: () => {},
-  stopImpersonating: () => {}
+  stopImpersonating: () => {},
 };
 
 const ImpersonationContext = createContext<ImpersonationContextData>(defaultValue);
@@ -52,7 +52,7 @@ export const ImpersonationContextProvider = (props: { children: React.ReactNode 
     setUser,
     impersonate,
     setAcceptedRoles,
-    stopImpersonating
+    stopImpersonating,
   };
 
   useEffect(() => {

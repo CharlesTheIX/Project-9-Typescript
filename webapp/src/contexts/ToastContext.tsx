@@ -1,5 +1,5 @@
 "use client";
-import getSvg from "@/functions/getSvg";
+import getSvg from "@/lib/getSvg";
 import { useThemeContext } from "@/contexts/themeContext";
 import { createContext, useContext, useState, useEffect, useRef } from "react";
 

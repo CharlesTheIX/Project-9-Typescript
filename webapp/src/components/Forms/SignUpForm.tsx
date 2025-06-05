@@ -5,12 +5,12 @@ import TextInput from "@/Inputs/TextInput";
 import EmailInput from "@/Inputs/EmailInput";
 import NumberInput from "@/Inputs/NumberInput";
 import PasswordInput from "@/Inputs/PasswordInput";
-import createUser from "@/functions/users/createUser";
-import isNumber from "@/functions/validation/isNumber";
+import createUser from "@/lib/users/createUser";
+import isNumber from "@/lib/validation/isNumber";
 import { useToastContext } from "@/contexts/toastContext";
 import LoadingContainer from "@/components/LoadingContainer";
 import { useRouter, useSearchParams } from "next/navigation";
-import validateSignUp from "@/functions/forms/validateSignUp";
+import validateSignUp from "@/lib/forms/validateSignUp";
 
 const SignUpForm: React.FC = () => {
   const router = useRouter();

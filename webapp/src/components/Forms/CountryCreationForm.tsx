@@ -10,8 +10,8 @@ import MultiTextInput from "@/Inputs/MultiTextInput";
 import RectangleInput from "@/Inputs/RectangleInput";
 import { useToastContext } from "@/contexts/toastContext";
 import LoadingContainer from "@/components/LoadingContainer";
-import createCountry from "@/functions/countries/createCountry";
-import validateCountryCreation from "@/functions/forms/validateCountryCreation";
+import createCountry from "@/lib/countries/createCountry";
+import validateCountryCreation from "@/lib/forms/validateCountryCreation";
 
 const CountryCreationForm: React.FC = () => {
   const toast = useToastContext();
