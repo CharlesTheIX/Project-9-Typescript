@@ -19,11 +19,11 @@ const ImpersonationRestrictedBanner: React.FC<Props> = (props: Props) => {
   return (
     <>
       {visible && impersonation.user && (
-        <div id="impersonation-restricted-banner" className={theme}>
-          <div className="background" />
+        <div id="impersonation-restricted-banner" className={`${theme} top-0 left-0 w-screen h-screen fixed`}>
+          <div className="background top-0 left-0 w-full h-full absolute" />
 
-          <section>
-            <div>
+          <section className="w-full h-full flex relative items-center flex-col justify-center">
+            <div className="gap-10 w-full flex flex-col">
               <p className="text-3xl max-w-3xl">
                 The user <span className="font-bold admin">{impersonation.user?.username}</span> does not have access to
                 this page.
@@ -31,7 +31,7 @@ const ImpersonationRestrictedBanner: React.FC<Props> = (props: Props) => {
 
               <p className="font-bold admin">Accepted Roles: {acceptedRoles.join(", ")}</p>
 
-              <div className="controls">
+              <div className="controls gap-2 flex wrap flex-row">
                 <Link className="button" href={`/profile`}>
                   View User Profile
                 </Link>

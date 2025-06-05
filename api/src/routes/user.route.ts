@@ -13,10 +13,11 @@ const router: Router = express.Router();
 
 // Get all users
 router.route("/all").post(async (request: Request, response: Response): Promise<any> => {
+  const query = request.query;
   const { limit } = request.body;
 
   try {
-    const res = await getAllUsers(limit);
+    const res = await getAllUsers({ limit, query });
     return response.json(res);
   } catch (error: any) {
     console.error(`Get all users error: ${error.message}`);
@@ -26,12 +27,13 @@ router.route("/all").post(async (request: Request, response: Response): Promise<
 
 // Get user by _id
 router.route("/by-id").post(async (request: Request, response: Response): Promise<any> => {
+  const query = request.query;
   const { _id } = request.body;
 
   if (!_id) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: _id." });
 
   try {
-    const res = await getUserById(_id);
+    const res = await getUserById({ _id, query });
     return response.json(res);
   } catch (error: any) {
     console.error(`Get user by _id error: ${error.message}`);
@@ -41,12 +43,13 @@ router.route("/by-id").post(async (request: Request, response: Response): Promis
 
 // Get user by email
 router.route("/by-email").post(async (request: Request, response: Response): Promise<any> => {
+  const query = request.query;
   const { email } = request.body;
 
   if (!email) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: email." });
 
   try {
-    const res = await getUserByEmail(email);
+    const res = await getUserByEmail({ email, query });
     return response.json(res);
   } catch (error: any) {
     console.error(`Get user by email error: ${error.message}`);
@@ -56,13 +59,14 @@ router.route("/by-email").post(async (request: Request, response: Response): Pro
 
 // Get user by username
 router.route("/by-username").post(async (request: Request, response: Response): Promise<any> => {
+  const query = request.query;
   const { username } = request.body;
 
   if (!username)
     return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: username." });
 
   try {
-    const res = await getUserByUsername(username);
+    const res = await getUserByUsername({ username, query });
     return response.json(res);
   } catch (error: any) {
     console.error(`Get user by username error: ${error.message}`);
@@ -72,12 +76,13 @@ router.route("/by-username").post(async (request: Request, response: Response): 
 
 // Get user by clerkId
 router.route("/by-clerk-id").post(async (request: Request, response: Response): Promise<any> => {
+  const query = request.query;
   const { clerkId } = request.body;
 
   if (!clerkId) return { ...gbl.response_BAD, message: "Required inputs: clerkId." };
 
   try {
-    const res = await getUserByClerkId(clerkId);
+    const res = await getUserByClerkId({ clerkId, query });
     return response.json(res);
   } catch (error: any) {
     console.error(`Get user by clerkId error: ${error.message}`);
@@ -87,20 +92,16 @@ router.route("/by-clerk-id").post(async (request: Request, response: Response): 
 
 // Create user
 router.route("/create").post(async (request: Request, response: Response): Promise<any> => {
-  // const { email, role, clerkId, username, firstName, surname, profileImageURL } = request.body;
   const { email, role, clerkId, username, profileImageURL } = request.body;
 
-  // if (!email || !role || !clerkId || !username || !firstName || !surname) {
   if (!email || !role || !clerkId || !username) {
     return response.status(gbl.status.BAD).json({
       ...gbl.response_BAD,
-      // message: "Required Inputs: email, role, clerkId, username, firstName, surname.",
       message: "Required Inputs: email, role, clerkId, username.",
     });
   }
 
   try {
-    // const res = await createUser({ email, role, clerkId, username, firstName, surname, profileImageURL });
     const res = await createUser({ email, role, clerkId, username, profileImageURL });
     return response.json(res);
   } catch (error: any) {
@@ -111,12 +112,13 @@ router.route("/create").post(async (request: Request, response: Response): Promi
 
 // Update user by _id
 router.route("/by-id").patch(async (request: Request, response: Response): Promise<any> => {
+  const query = request.query;
   const { _id, update } = request.body;
 
   if (!_id) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: _id." });
 
   try {
-    const res = await updateUserById({ _id, update });
+    const res = await updateUserById({ _id, update, query });
     return response.json(res);
   } catch (error: any) {
     console.error(`Update user by _id error: ${error.message}`);

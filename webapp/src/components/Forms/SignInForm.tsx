@@ -1,11 +1,11 @@
 "use client";
+import FormCore from "./Form/Core";
 import { useRef, useState } from "react";
 import { useSignIn } from "@clerk/nextjs";
 import EmailInput from "@/Inputs/EmailInput";
 import PasswordInput from "@/Inputs/PasswordInput";
 import { useUserContext } from "@/contexts/userContext";
 import { useToastContext } from "@/contexts/toastContext";
-import LoadingContainer from "@/components/LoadingContainer";
 import { useRouter, useSearchParams } from "next/navigation";
 import validateSignIn, { SignInRequestData } from "@/lib/forms/validateSignIn";
 
@@ -56,31 +56,12 @@ const SignInForm: React.FC = () => {
   };
 
   return (
-    <div className={`form`}>
-      <form ref={formRef} onSubmit={handleSubmit} className={`max-w-xl`}>
-        <div>
-          <div>
-            {isLoading && (
-              <div className={`form-loading-container`}>
-                <LoadingContainer />
-              </div>
-            )}
-
-            <EmailInput name="email" label="Email" required={true} />
-            <PasswordInput name="password" label="Password" required={true} />
-          </div>
-
-          <div>
-            <input
-              type="submit"
-              content="Submit"
-              disabled={isLoading}
-              className={`button w-auto ${isLoading ? "disabled" : ""}`}
-            />
-          </div>
-        </div>
-      </form>
-    </div>
+    <FormCore ref={formRef} isLoading={isLoading} handleSubmit={handleSubmit}>
+      <>
+        <EmailInput name="email" label="Email" required={true} />
+        <PasswordInput name="password" label="Password" required={true} />
+      </>
+    </FormCore>
   );
 };
 

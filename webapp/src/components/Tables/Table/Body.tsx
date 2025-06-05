@@ -53,9 +53,9 @@ const TableBody: React.FC<Props> = (props: Props) => {
 
               if (header.dataType === "pin") {
                 return (
-                  <td key={key} className="relative">
+                  <td key={key} className="relative p-2">
                     <p
-                      className="pin"
+                      className="pin gap-10 flex flex-row justify-center"
                       onClick={() => {
                         if (isPinned) {
                           const newData = pinnedTableData.filter((data: any) => data._id !== item._id);
@@ -74,8 +74,8 @@ const TableBody: React.FC<Props> = (props: Props) => {
 
               if (header.dataType === "edit") {
                 return (
-                  <td key={key} className="relative">
-                    <p className="edit">
+                  <td key={key} className="relative p-2">
+                    <p className="edit gap-10 flex flex-row justify-center">
                       {collection === "users" ? (
                         <Link href={`/admin/${collection}/${item._id}`} className="inline-block z-10">
                           <Edit_SVG />
@@ -92,8 +92,9 @@ const TableBody: React.FC<Props> = (props: Props) => {
 
               if (header.dataType === "impersonate") {
                 return (
-                  <td key={key} className="relative">
+                  <td key={key} className="relative p-2">
                     <p
+                      className="impersonate inline-block z-10 gap-10 flex flex-row justify-center"
                       onClick={async () => {
                         try {
                           const response = await getUserById(item._id);
@@ -106,7 +107,6 @@ const TableBody: React.FC<Props> = (props: Props) => {
                           toast.setTitle("Impersonation Failed");
                         }
                       }}
-                      className="impersonate inline-block z-10"
                     >
                       <Profile_SVG />
                     </p>
@@ -116,7 +116,7 @@ const TableBody: React.FC<Props> = (props: Props) => {
 
               if (!item[header.value]) {
                 return (
-                  <td key={key} className="text-center">
+                  <td key={key} className="text-center p-2">
                     -
                   </td>
                 );
@@ -124,17 +124,17 @@ const TableBody: React.FC<Props> = (props: Props) => {
 
               if (!header.roles || header.roles.length === 0 || header.roles.includes(userRole)) {
                 return (
-                  <td key={key} className="relative">
+                  <td key={key} className="relative p-2">
                     {collection === "users" ? (
                       <Link className="link-wrapper" href={`/admin/${collection}/${item._id}`} />
                     ) : (
                       <Link className="link-wrapper" href={`/${collection}/${item._id}`} />
                     )}
 
-                    <p>
-                      <span>{item[header.value]}</span>
+                    <p className="gap-10 flex flex-row justify-between">
+                      <span className="overflow-hidden">{item[header.value]}</span>
                       <span
-                        className="z-10"
+                        className="z-10 overflow-hidden"
                         onClick={async () => {
                           if (!header.canCopy) return;
                           await copyContent(item[header.value]);

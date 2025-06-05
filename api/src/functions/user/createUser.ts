@@ -2,7 +2,6 @@ import * as gbl from "../../globals";
 import Model from "../../models/user.model";
 
 export default async (props: User): Promise<ApiResponse> => {
-  // const { email, role, clerkId, username, firstName, surname, profileImageURL } = props;
   const { email, role, clerkId, username, profileImageURL } = props;
 
   try {
@@ -10,9 +9,7 @@ export default async (props: User): Promise<ApiResponse> => {
       role,
       email,
       clerkId,
-      // surname,
       username,
-      // firstName,
       profileImageURL: profileImageURL || "",
     });
 

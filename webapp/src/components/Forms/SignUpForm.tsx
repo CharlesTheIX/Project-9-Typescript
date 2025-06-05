@@ -1,16 +1,16 @@
 "use client";
+import FormCore from "./Form/Core";
 import { useRef, useState } from "react";
 import { useSignUp } from "@clerk/nextjs";
 import TextInput from "@/Inputs/TextInput";
 import EmailInput from "@/Inputs/EmailInput";
 import NumberInput from "@/Inputs/NumberInput";
-import PasswordInput from "@/Inputs/PasswordInput";
 import createUser from "@/lib/users/createUser";
 import isNumber from "@/lib/validation/isNumber";
-import { useToastContext } from "@/contexts/toastContext";
-import LoadingContainer from "@/components/LoadingContainer";
-import { useRouter, useSearchParams } from "next/navigation";
+import PasswordInput from "@/Inputs/PasswordInput";
 import validateSignUp from "@/lib/forms/validateSignUp";
+import { useToastContext } from "@/contexts/toastContext";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const SignUpForm: React.FC = () => {
   const router = useRouter();
@@ -34,12 +34,9 @@ const SignUpForm: React.FC = () => {
 
       const formData = new FormData(form);
       const email: string = formData.get("email")?.toString() || "";
-      // const surname: string = formData.get("surname")?.toString() || "";
       const username: string = formData.get("username")?.toString() || "";
       const password: string = formData.get("password")?.toString() || "";
-      // const firstName: string = formData.get("first-name")?.toString() || "";
       const confirmedPassword: string = formData.get("password-confirmation")?.toString() || "";
-      // const requestData: Partial<User> & { password: string } = { email, surname, password, username, firstName };
 
       const requestData: Partial<User> & { password: string } = { email, password, username };
 
@@ -56,7 +53,6 @@ const SignUpForm: React.FC = () => {
       toast.setHidden(false);
       toast.setType("success");
       toast.setTitle(`A verification code has been sent to ${email}.`);
-      // setSignUpData({ email, surname, username, firstName, clerkId: "", role: "user" });
       setSignUpData({ email, username, clerkId: "", role: "user" });
     } catch (error: any) {
       setIsLoading(false);
@@ -86,10 +82,8 @@ const SignUpForm: React.FC = () => {
       const response = await createUser({
         role: "user",
         email: signUpData.email,
-        // surname: signUpData.surname,
         username: signUpData.username,
-        // firstName: signUpData.firstName,
-        clerkId: signUp.createdUserId as string,
+        clerkId: signUp.createdUserId as string
       });
       if (response.error) throw new Error(response.message);
 
@@ -111,60 +105,21 @@ const SignUpForm: React.FC = () => {
   };
 
   return (
-    <div className={`form`}>
+    <>
       {verifying ? (
-        <form ref={verificationFormRef} onSubmit={handleVerification} className={``}>
-          <div>
-            <div>
-              {isLoading && (
-                <div className={`form-loading-container`}>
-                  <LoadingContainer />
-                </div>
-              )}
-
-              <NumberInput name="code" label="Code" required={true} min={0} max={999999} step={1} />
-            </div>
-
-            <div>
-              <input className="button" type="submit" content="Submit" />
-            </div>
-          </div>
-        </form>
+        <FormCore ref={verificationFormRef} isLoading={isLoading} handleSubmit={handleVerification}>
+          <NumberInput name="code" label="Code" required={true} min={0} max={999999} step={1} />
+        </FormCore>
       ) : (
-        <form ref={formRef} onSubmit={handleSubmit} className={`max-w-xl`}>
-          <div id="clerk-captcha" />
-
-          <div>
-            <div>
-              {isLoading && (
-                <div className={`form-loading-container`}>
-                  <LoadingContainer />
-                </div>
-              )}
-
-              <TextInput name="username" label="Username" required={true} />
-
-              {/* <div className="flex flex-row justify-between gap-5 items-center ">
-                  <TextInput name="first-name" label="First Name" required={true} />
-                  <TextInput name="surname" label="Surname" required={true} />
-                </div> */}
-
-              <EmailInput name="email" label="Email" required={true} />
-              <PasswordInput name="password" label="Password" required={true} includeConfirmation={true} />
-            </div>
-
-            <div>
-              <input
-                type="submit"
-                content="Submit"
-                disabled={isLoading}
-                className={`button w-auto ${isLoading ? "disabled" : ""}`}
-              />
-            </div>
-          </div>
-        </form>
+        <FormCore ref={formRef} isLoading={isLoading} handleSubmit={handleSubmit}>
+          <>
+            <TextInput name="username" label="Username" required={true} />
+            <EmailInput name="email" label="Email" required={true} />
+            <PasswordInput name="password" label="Password" required={true} includeConfirmation={true} />
+          </>
+        </FormCore>
       )}
-    </div>
+    </>
   );
 };
 

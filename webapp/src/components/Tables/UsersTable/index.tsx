@@ -1,33 +1,24 @@
 "use client";
-import TableCore from "./Table/Core";
+import TableCore from "../Table/Core";
 import { useState, useEffect } from "react";
+import getAllUsers from "@/lib/users/getAllUsers";
 import LoadingContainer from "@/components/LoadingContainer";
-import getAllCountries from "@/lib/countries/getAllCountries";
-import { table_headers, table_storage_token } from "@/data/countriesTableData";
-import getCountriesByContinent from "@/lib/countries/getCountriesByContinent";
+import { users_table_headers, users_table_storage_token } from "./data";
 import { getLocalStorageItem, removeLocalStorageItem } from "@/lib/storage/localStorage";
 
-const CountriesTable: React.FC = () => {
+const UsersTable: React.FC = () => {
+  const [users, setUsers] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [countries, setCountries] = useState<Country[]>([]);
-  const [continent, setContinent] = useState<Continent | "all" | null>(null);
-  const [tableHeaders, setTableHeaders] = useState<TableHeader[]>(table_headers);
+  const [tableHeaders, setTableHeaders] = useState<TableHeader[]>(users_table_headers);
   const [formPreferences, setFormPreferences] = useState<FormPreferences | null>(null);
 
-  const fetchCountries = async (item: Continent | "all"): Promise<void> => {
-    if (item === continent) return;
+  const fetchUsers = async (): Promise<void> => {
     setIsLoading(true);
     try {
-      var response: ApiResponse;
-      if (item === "all") {
-        response = await getAllCountries(200);
-      } else {
-        response = await getCountriesByContinent({ continent: item, limit: 200 });
-      }
+      var response: ApiResponse = await getAllUsers(200);
       if (response.error) throw new Error(response.message);
-      setContinent(item);
       setIsLoading(false);
-      setCountries(response.data || []);
+      setUsers(response.data || []);
     } catch (error: any) {
       console.error(error);
       setIsLoading(false);
@@ -35,8 +26,8 @@ const CountriesTable: React.FC = () => {
   };
 
   useEffect(() => {
-    if (continent) return;
-    const formPreferences = getLocalStorageItem(table_storage_token);
+    if (users.length > 0) return;
+    const formPreferences = getLocalStorageItem(users_table_storage_token);
     if (formPreferences) {
       try {
         const newTablesHeaders: any = tableHeaders;
@@ -46,11 +37,11 @@ const CountriesTable: React.FC = () => {
         });
         setTableHeaders(newTablesHeaders);
       } catch (error: any) {
-        removeLocalStorageItem(table_storage_token);
+        removeLocalStorageItem(users_table_storage_token);
       }
     }
     (async () => {
-      await fetchCountries("all");
+      await fetchUsers();
     })();
   }, []);
 
@@ -62,9 +53,9 @@ const CountriesTable: React.FC = () => {
         </div>
       ) : (
         <TableCore
-          data={countries}
+          data={users}
           pagination={true}
-          collection="countries"
+          collection={"users"}
           headers={tableHeaders}
           formPreferences={formPreferences}
           setFormPreferences={setFormPreferences}
@@ -74,4 +65,4 @@ const CountriesTable: React.FC = () => {
   );
 };
 
-export default CountriesTable;
+export default UsersTable;

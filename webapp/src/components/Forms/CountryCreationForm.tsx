@@ -1,5 +1,6 @@
 "use client";
 import * as gbl from "@/globals";
+import FormCore from "./Form/Core";
 import { useRef, useState } from "react";
 import UrlInput from "@/Inputs/UrlInput";
 import TextInput from "@/Inputs/TextInput";
@@ -9,7 +10,6 @@ import TextareaInput from "@/Inputs/TextareaInput";
 import MultiTextInput from "@/Inputs/MultiTextInput";
 import RectangleInput from "@/Inputs/RectangleInput";
 import { useToastContext } from "@/contexts/toastContext";
-import LoadingContainer from "@/components/LoadingContainer";
 import createCountry from "@/lib/countries/createCountry";
 import validateCountryCreation from "@/lib/forms/validateCountryCreation";
 
@@ -49,7 +49,7 @@ const CountryCreationForm: React.FC = () => {
         description,
         capitalCity,
         mapRectangle,
-        flagRectangle,
+        flagRectangle
       };
 
       const hasErrors = validateCountryCreation(requestData);
@@ -74,61 +74,72 @@ const CountryCreationForm: React.FC = () => {
   };
 
   return (
-    <div className={`form`}>
-      <form ref={formRef} onSubmit={handleSubmit} className={`max-w-xl`}>
-        <div>
-          <div>
-            {isLoading && (
-              <div className={`form-loading-container`}>
-                <LoadingContainer />
-              </div>
-            )}
-
-            <TextInput
-              required={true}
-              name="display-name"
-              label="Display Name"
-              defaultValue={defaultValues.displayName}
-            />
-            <MultiTextInput
-              name="names"
-              label="Names"
-              required={true}
-              defaultValue={defaultValues.names}
-              defaultCurrentValue={defaultValues.displayName}
-            />
-            <SelectInput
-              required={true}
-              name="continent"
-              label="Continent"
-              options={gbl.continentOptions}
-              defaultValue={{ value: defaultValues.continent, label: defaultValues.continent }}
-            />
-            <MultiTextInput
-              name="languages"
-              label="Languages"
-              defaultValue={defaultValues.languages}
-              defaultCurrentValue={defaultValues.displayName}
-            />
-            <NumberInput name="population" label="Population" min={0} defaultValue={`${defaultValues.population}`} />
-            <TextInput name="capital-city" label="Capital City" defaultValue={defaultValues.capitalCity} />
-            <TextareaInput name="description" label="Description" defaultValue={defaultValues.description} />
-            <UrlInput name="image-url" label="Image Url" defaultValue={defaultValues.imageUrl} />
-            <RectangleInput name="flag-rectangle" label="Flag Rectangle" defaultValue={defaultValues.flagRectangle} />
-            <RectangleInput name="map-rectangle" label="Map Rectangle" defaultValue={defaultValues.mapRectangle} />
-          </div>
-
-          <div>
-            <input
-              type="submit"
-              disabled={isLoading}
-              content={isLoading ? "Loading" : "Submit"}
-              className={`button ${isLoading ? "disabled" : ""}`}
-            />
-          </div>
-        </div>
-      </form>
-    </div>
+    <FormCore ref={formRef} isLoading={isLoading} handleSubmit={handleSubmit}>
+      <>
+        <TextInput
+          required={true}
+          className="w-full"
+          name="display-name"
+          label="Display Name"
+          defaultValue={defaultValues.displayName}
+        />
+        <MultiTextInput
+          name="names"
+          label="Names"
+          required={true}
+          className="w-full"
+          defaultValue={defaultValues.names}
+          defaultCurrentValue={defaultValues.displayName}
+        />
+        <SelectInput
+          required={true}
+          name="continent"
+          label="Continent"
+          className="w-full"
+          options={gbl.continentOptions}
+          defaultValue={{ value: defaultValues.continent, label: defaultValues.continent }}
+        />
+        <MultiTextInput
+          name="languages"
+          label="Languages"
+          className="w-full"
+          defaultValue={defaultValues.languages}
+          defaultCurrentValue={defaultValues.displayName}
+        />
+        <NumberInput
+          min={0}
+          name="population"
+          className="w-full"
+          label="Population"
+          defaultValue={`${defaultValues.population}`}
+        />
+        <TextInput
+          className="w-full"
+          name="capital-city"
+          label="Capital City"
+          defaultValue={defaultValues.capitalCity}
+        />
+        <TextareaInput
+          className="w-full"
+          name="description"
+          label="Description"
+          defaultValue={defaultValues.description}
+        />
+        <UrlInput name="image-url" label="Image Url" defaultValue={defaultValues.imageUrl} className="w-full" />
+        <RectangleInput
+          className="w-full"
+          name="flag-rectangle"
+          label="Flag Rectangle"
+          defaultValue={defaultValues.flagRectangle}
+        />
+        <RectangleInput
+          className="w-full"
+          name="map-rectangle"
+          label="Map Rectangle"
+          defaultValue={defaultValues.mapRectangle}
+        />
+      </>
+    </FormCore>
   );
 };
 

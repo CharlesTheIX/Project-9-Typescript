@@ -22,59 +22,15 @@
   @include themes();
 
   & {
-    @apply pt-5;
-    top: 0;
-    right: 0;
     z-index: 50;
-    width: 100%;
-    width: 100vw;
-    position: sticky;
-
-    .header-logo {
-      @apply gap-1;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-
-      p {
-        @apply text-5xl;
-        font-weight: bold;
-      }
-    }
 
     .main {
-      @apply py-5 px-10;
-      margin: 0 auto;
       border: 3px solid;
       max-width: calc(0.25rem * 375);
       border-top-right-radius: 0.5rem;
       border-bottom-left-radius: 0.5rem;
       width: calc(100% - (0.25rem * 20));
-      // box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
       transition: background-color 300ms ease-in-out, border-color 300ms ease-in-out;
-
-      > div {
-        @apply gap-5 max-w-7xl;
-        display: flex;
-        margin: 0 auto;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-
-        > nav {
-          @apply gap-5;
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-
-          > ul {
-            @apply gap-5;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-          }
-        }
-      }
     }
   }
 }

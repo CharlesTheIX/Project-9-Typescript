@@ -34,15 +34,15 @@ const AdminLayout: React.FC<Props> = (props: Props) => {
   }, [impersonation.user]);
 
   return (
-    <div id="admin-layout" className={`${theme} layout`}>
-      <div>
-        <aside>
-          <nav>
-            <ul>
+    <div id="admin-layout" className={`${theme} p-20 gap-20`}>
+      <div className="pb-10 gap-10 w-full flex my-0 mx-auto overflow-visible relative flex-row items-start justify-end">
+        <aside className="w-full flex sticky flex-col items-start justify-start">
+          <nav className="w-full">
+            <ul className="w-full h-full flex overflow-hidden flex-col items-start justify-start">
               {dashboardItems.map((item: NavigationItem, key: number) => {
                 return (
-                  <li key={key}>
-                    <Link href={item.href}>
+                  <li key={key} className="px-5 py-2 w-dull cursor-pointer font-bold">
+                    <Link href={item.href} className="gap-2 flex flex-row itams-center justify-start">
                       {item.icon === "users" && <Users_SVG />}
                       {item.icon === "globe" && <Globe_SVG />}
                       <span>{item.label}</span>
@@ -53,7 +53,7 @@ const AdminLayout: React.FC<Props> = (props: Props) => {
             </ul>
           </nav>
         </aside>
-        <main className={theme}>{children}</main>
+        <main className={`${theme} gap-10 w-full flex min-h-screen flex-col`}>{children}</main>
       </div>
     </div>
   );

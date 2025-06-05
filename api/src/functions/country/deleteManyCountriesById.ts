@@ -18,7 +18,7 @@ export default async (props: Props): Promise<ApiResponse> => {
   try {
     for (const _id of _ids) {
       try {
-        const existingDoc = await getCountryById(_id);
+        const existingDoc = await getCountryById({ _id });
         if (existingDoc.error || !existingDoc.data) {
           result.skipped.push(_id);
           continue;

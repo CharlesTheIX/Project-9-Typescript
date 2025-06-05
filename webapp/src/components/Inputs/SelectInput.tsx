@@ -22,7 +22,7 @@ const SelectInput: React.FC<Props> = (props: Props) => {
     className = "",
     required = false,
     onChange = () => {},
-    defaultValue = gbl.nullOption,
+    defaultValue = gbl.nullOption
   } = props;
   const { browser } = useBrowserContext();
   const [active, setActive] = useState<boolean>(false);
@@ -34,9 +34,10 @@ const SelectInput: React.FC<Props> = (props: Props) => {
 
       {label && <label htmlFor={`${name}-select`}>{label}</label>}
 
-      <div className={`relative `}>
+      <div className="relative outline-none appearance-none overflow-hidden">
         <button
           type="button"
+          className="px-5 py-2 w-full outline-none cursor-pointer text-left appearance-none"
           onClick={() => {
             if (browser === "safari") return setActive(!active);
           }}
@@ -52,11 +53,12 @@ const SelectInput: React.FC<Props> = (props: Props) => {
           <Chevron_SVG direction="down" />
         </button>
 
-        <ul className="scrollbar-y">
+        <ul className="scrollbar-y relative">
           {options.map((option: Option, key: number) => {
             return (
               <li
                 key={key}
+                className="px-5 py-2 cursor-pointer"
                 onClick={() => {
                   const targetOption = options[key];
                   setActive(false);

@@ -1,5 +1,6 @@
 "use client";
 import * as gbl from "@/globals";
+import FormCore from "./Form/Core";
 import { useRef, useState } from "react";
 import UrlInput from "@/Inputs/UrlInput";
 import TextInput from "@/Inputs/TextInput";
@@ -9,7 +10,6 @@ import TextareaInput from "@/Inputs/TextareaInput";
 import MultiTextInput from "@/Inputs/MultiTextInput";
 import RectangleInput from "@/Inputs/RectangleInput";
 import { useToastContext } from "@/contexts/toastContext";
-import LoadingContainer from "@/components/LoadingContainer";
 import updateCountryById from "@/lib/countries/updateCountryById";
 import validateCountryCreation from "@/lib/forms/validateCountryCreation";
 
@@ -56,7 +56,7 @@ const CountryEditForm: React.FC<Props> = (props: Props) => {
         description,
         capitalCity,
         mapRectangle,
-        flagRectangle,
+        flagRectangle
       };
 
       const hasErrors = validateCountryCreation(requestData);
@@ -81,45 +81,49 @@ const CountryEditForm: React.FC<Props> = (props: Props) => {
   };
 
   return (
-    <div className={`form`}>
-      <form ref={formRef} onSubmit={handleSubmit} className={`max-w-xl`}>
-        <div>
-          <div>
-            {isLoading && (
-              <div className={`form-loading-container`}>
-                <LoadingContainer />
-              </div>
-            )}
-
-            <TextInput name="display-name" label="Display Name" required={true} defaultValue={country?.displayName} />
-            <MultiTextInput name="names" label="Names" required={true} defaultValue={country?.names} />
-            <SelectInput
-              required={true}
-              name="continent"
-              label="Continent"
-              options={gbl.continentOptions}
-              defaultValue={gbl.continentOptions.find((option: Option) => option.value === country?.continent)}
-            />
-            <MultiTextInput name="languages" label="Languages" defaultValue={country?.languages} />
-            <NumberInput name="population" label="Population" min={0} defaultValue={`${country?.population}`} />
-            <TextInput name="capital-city" label="Capital City" defaultValue={country?.capitalCity} />
-            <TextareaInput name="description" label="Description" defaultValue={country?.description} />
-            <UrlInput name="image-url" label="Image Url" defaultValue={country?.imageUrl} />
-            <RectangleInput name="flag-rectangle" label="Flag Rectangle" defaultValue={country?.flagRectangle} />
-            <RectangleInput name="map-rectangle" label="Map Rectangle" defaultValue={country?.mapRectangle} />
-          </div>
-
-          <div>
-            <input
-              type="submit"
-              content="Submit"
-              disabled={isLoading}
-              className={`button w-auto ${isLoading ? "disabled" : ""}`}
-            />
-          </div>
-        </div>
-      </form>
-    </div>
+    <FormCore ref={formRef} isLoading={isLoading} handleSubmit={handleSubmit}>
+      <>
+        <TextInput
+          required={true}
+          className="w-full"
+          name="display-name"
+          label="Display Name"
+          defaultValue={country?.displayName}
+        />
+        <MultiTextInput name="names" label="Names" required={true} className="w-full" defaultValue={country?.names} />
+        <SelectInput
+          required={true}
+          name="continent"
+          label="Continent"
+          className="w-full"
+          options={gbl.continentOptions}
+          defaultValue={gbl.continentOptions.find((option: Option) => option.value === country?.continent)}
+        />
+        <MultiTextInput className="w-full" name="languages" label="Languages" defaultValue={country?.languages} />
+        <NumberInput
+          min={0}
+          name="population"
+          className="w-full"
+          label="Population"
+          defaultValue={`${country?.population}`}
+        />
+        <TextInput className="w-full" name="capital-city" label="Capital City" defaultValue={country?.capitalCity} />
+        <TextareaInput className="w-full" name="description" label="Description" defaultValue={country?.description} />
+        <UrlInput className="w-full" name="image-url" label="Image Url" defaultValue={country?.imageUrl} />
+        <RectangleInput
+          className="w-full"
+          name="flag-rectangle"
+          label="Flag Rectangle"
+          defaultValue={country?.flagRectangle}
+        />
+        <RectangleInput
+          className="w-full"
+          name="map-rectangle"
+          label="Map Rectangle"
+          defaultValue={country?.mapRectangle}
+        />
+      </>
+    </FormCore>
   );
 };
 

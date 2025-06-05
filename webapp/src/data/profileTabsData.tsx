@@ -1,7 +1,7 @@
-import MenuTab from "@/pages/Profile/Tabs/MenuTab";
-import FriendsTab from "@/pages/Profile/Tabs/FriendsTab";
-import DetailsTab from "@/pages/Profile/Tabs/DetailsTab";
-import NotificationsTab from "@/pages/Profile/Tabs/Notifications";
+import MenuTab from "@/components/TabContainers/ProfileTabContainer/Tabs/MenuTab";
+import FriendsTab from "@/components/TabContainers/ProfileTabContainer/Tabs/FriendsTab";
+import DetailsTab from "@/components/TabContainers/ProfileTabContainer/Tabs/DetailsTab";
+import NotificationsTab from "@/components/TabContainers/ProfileTabContainer/Tabs/Notifications";
 
 export const profileTabs: Tab[] = [
   {

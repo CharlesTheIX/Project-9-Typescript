@@ -31,13 +31,14 @@ const PasswordInput: React.FC<Props> = (props: Props) => {
     <div className={`input password-input ${className}`}>
       {label && <label htmlFor={name}>{label}</label>}
 
-      <div>
-        <div className="password">
+      <div className="gap-5 flex flex-col">
+        <div className="relative w-full">
           <input
             type={type}
             name={name}
             value={value}
             required={required}
+            className="px-5 py-2 outline-none appearance-none w-full"
             onInput={(event: any) => {
               const target = event.currentTarget || event.target;
               setValue(target.value);
@@ -46,7 +47,7 @@ const PasswordInput: React.FC<Props> = (props: Props) => {
           />
 
           <div
-            className="hide-show"
+            className="top-3 right-5 cursor-pointer absolute"
             onClick={() => {
               setType((prevValue: "password" | "text") => {
                 return prevValue === "password" ? "text" : "password";
@@ -62,15 +63,16 @@ const PasswordInput: React.FC<Props> = (props: Props) => {
         </div>
 
         {includeConfirmation && (
-          <div className="password-confirmation">
+          <div className="gap-2 w-full flex flex-col">
             {label && <label htmlFor={name}>{label} Confirmation</label>}
 
-            <div className="password">
+            <div className="relative w-full">
               <input
                 type={type}
                 required={required}
                 value={confirmationValue}
                 name={`${name}-confirmation`}
+                className="px-5 py-2 outline-none appearance-none w-full"
                 onInput={(event: any) => {
                   const target = event.currentTarget || event.target;
                   setConfirmationValue(target.value);
@@ -78,7 +80,7 @@ const PasswordInput: React.FC<Props> = (props: Props) => {
               />
 
               <div
-                className="hide-show"
+                className="top-3 right-5 cursor-pointer absolute"
                 onClick={() => {
                   setType((prevValue: "password" | "text") => {
                     return prevValue === "password" ? "text" : "password";

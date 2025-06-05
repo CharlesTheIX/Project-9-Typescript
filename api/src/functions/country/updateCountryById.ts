@@ -5,16 +5,18 @@ import Model from "../../models/country.model";
 
 type Props = {
   _id: string;
+  query?: any;
   update?: Partial<Country>;
 };
 
 export default async (props: Props): Promise<ApiResponse> => {
+  const { _id, update, query } = props;
+
   try {
-    const { _id, update } = props;
     if (!_id) return { ...gbl.response_BAD, message: "Country _id is required." };
     if (!update) return { ...gbl.response_NO_CONTENT, message: "No update provided." };
-
-    const existingDoc = await getCountryById(_id);
+    
+    const existingDoc = await getCountryById({ _id });
     if (existingDoc.error) return { ...gbl.response_BAD, message: "Country not found." };
 
     const objectId = new mongoose.Types.ObjectId(_id);
@@ -29,13 +31,13 @@ export default async (props: Props): Promise<ApiResponse> => {
       displayName: update.displayName || existingDoc.data.displayName,
       mapRectangle: update.mapRectangle || existingDoc.data.mapRectangle,
       flagRectangle: update.flagRectangle || existingDoc.data.flagRectangle,
-      names: update.names && update.names.length > 0 ? update.names : existingDoc.data.names,
+      names: update.names && update.names.length > 0 ? update.names : existingDoc.data.names
     };
 
     const updatedDoc = await Model.updateOne({ _id: objectId }, docUpdate, { new: true });
     if (!updatedDoc || updatedDoc?.modifiedCount === 0) return { ...gbl.response_BAD, message: "Country not updated." };
 
-    const response = await getCountryById(_id);
+    const response = await getCountryById({ _id, query });
     return { ...gbl.response_DB_UPDATED, data: response.data };
   } catch (error: any) {
     console.error(`Update country error: ${error.message}`);

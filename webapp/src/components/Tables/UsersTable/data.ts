@@ -1,5 +1,5 @@
-export const table_storage_token = `${process.env.NEXT_PUBLIC_STORAGE_PREFIX}_USERS_FORM_PREFERENCES`;
-export const table_headers: TableHeader[] = [
+export const users_table_storage_token = `${process.env.NEXT_PUBLIC_STORAGE_PREFIX}_USERS_FORM_PREFERENCES`;
+export const users_table_headers: TableHeader[] = [
   {
     label: "Pin",
     value: "",

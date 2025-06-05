@@ -1,3 +1,10 @@
+import ApiTab from "./Tabs/ApiTab";
+import CicdTab from "./Tabs/CicdTab";
+import WebappTab from "./Tabs/WebappTab";
+import DatabaseTab from "./Tabs/DatabaseTab";
+import ServicesTab from "./Tabs/ServicesTab";
+import InfrastructureTab from "./Tabs/InfrastructureTab";
+
 export const webappTabCardData = [
   {
     title: "Webapp",
@@ -141,5 +148,32 @@ export const infrastructureTabCardData = [
     documentationLink: "https://developer.hashicorp.com/terraform/docs",
     content:
       "Terraform is used for Infrastructure as Code (IaC), enabling repeatable, version-controlled provisioning of cloud resources and services on AWS.",
+  },
+];
+
+export const techStackTabs: Tab[] = [
+  {
+    title: "Webapp",
+    content: <WebappTab />
+  },
+  {
+    title: "API",
+    content: <ApiTab />
+  },
+  {
+    title: "Database",
+    content: <DatabaseTab />
+  },
+  {
+    title: "Services",
+    content: <ServicesTab />
+  },
+  {
+    title: "CI / CD",
+    content: <CicdTab />
+  },
+  {
+    title: "Infrastructure",
+    content: <InfrastructureTab />
   },
 ];

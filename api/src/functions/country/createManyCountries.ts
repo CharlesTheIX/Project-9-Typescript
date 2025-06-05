@@ -1,6 +1,5 @@
 import * as gbl from "../../globals";
 import Model from "../../models/country.model";
-import getCountryByDisplayName from "./getCountryByDisplayName";
 
 type Props = {
   countries: Country[];
@@ -30,12 +29,6 @@ export default async (props: Props): Promise<ApiResponse> => {
       } = country;
 
       try {
-        const existingDoc = await getCountryByDisplayName(displayName);
-        if (!existingDoc.error) {
-          result.skipped.push(displayName);
-          continue;
-        }
-
         const newDoc = new Model({
           names,
           continent,

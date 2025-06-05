@@ -11,8 +11,8 @@ const Footer: React.FC = () => {
   const { theme } = useThemeContext();
 
   return (
-    <footer className={theme}>
-      <section>
+    <footer className={`${theme} px-10 py-5`}>
+      <section className="text-[10px]">
         <div className="flex flex-row gap-2 pb-2 items-center justify-center wrap w-full">
           {navigationItems.map((item: NavigationItem, key: number) => {
             return (

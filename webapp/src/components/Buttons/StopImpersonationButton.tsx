@@ -2,12 +2,17 @@
 import SignOut_SVG from "@/SVGs/SignOut_SVG";
 import { useImpersonationContext } from "@/contexts/impersonationContext";
 
-const StopImpersonationButton: React.FC = () => {
+type Props = {
+  className?: string;
+};
+
+const SignOutButton: React.FC<Props> = (props: Props) => {
+  const { className } = props;
   const impersonation = useImpersonationContext();
 
   return (
     <button
-      id="stop-impersonation-button"
+      className={`${className} outline-none cursor-pointer appearance-none`}
       onClick={() => {
         impersonation.stopImpersonating(null);
       }}
@@ -17,4 +22,4 @@ const StopImpersonationButton: React.FC = () => {
   );
 };
 
-export default StopImpersonationButton;
+export default SignOutButton;

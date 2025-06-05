@@ -11,10 +11,11 @@ const router: Router = express.Router();
 
 // Get all notifications
 router.route("/all").post(async (request: Request, response: Response): Promise<any> => {
+  const query = request.query;
   const { limit } = request.body;
 
   try {
-    const res = await getAllNotifications(limit);
+    const res = await getAllNotifications({ limit, query });
     return response.json(res);
   } catch (error: any) {
     console.error(`Get all notifications error: ${error.message}`);
@@ -24,12 +25,13 @@ router.route("/all").post(async (request: Request, response: Response): Promise<
 
 // Get notification by _id
 router.route("/by-id").post(async (request: Request, response: Response): Promise<any> => {
+  const query = request.query;
   const { _id } = request.body;
 
   if (!_id) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: _id." });
 
   try {
-    const res = await getNotificationById(_id);
+    const res = await getNotificationById({ _id, query });
     return response.json(res);
   } catch (error: any) {
     console.error(`Get notification by _id error: ${error.message}`);
@@ -39,13 +41,14 @@ router.route("/by-id").post(async (request: Request, response: Response): Promis
 
 // Get notifications containing participants
 router.route("/by-participants").post(async (request: Request, response: Response): Promise<any> => {
+  const query = request.query;
   const { participants } = request.body;
 
   if (!participants || participants.length < 1)
     return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: participants." });
 
   try {
-    const res = await getNotificationsContainingParticipants(participants);
+    const res = await getNotificationsContainingParticipants({ participants, query });
     return response.json(res);
   } catch (error: any) {
     console.error(`Get notifications containing participants error: ${error.message}`);
@@ -75,12 +78,13 @@ router.route("/create").post(async (request: Request, response: Response): Promi
 
 // Update notification by _id
 router.route("/by-id").patch(async (request: Request, response: Response): Promise<any> => {
+  const query = request.query;
   const { _id, update } = request.body;
 
   if (!_id) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: _id." });
 
   try {
-    const res = await updateNotificationById({ _id, update });
+    const res = await updateNotificationById({ _id, update, query });
     return response.json(res);
   } catch (error: any) {
     console.error(`Update notification by _id error: ${error.message}`);

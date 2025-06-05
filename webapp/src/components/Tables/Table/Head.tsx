@@ -30,20 +30,20 @@ const TableHead: React.FC<Props> = (props: Props) => {
     }
   };
   return (
-    <thead>
+    <thead className="top-0 left-0 sticky font-bold">
       <tr>
         {tableHeaders.map((header: TableHeader, key: number) => {
           if (header.hidden) return <Fragment key={key} />;
 
           if (!header.roles || header.roles.length === 0 || header.roles.includes(userRole)) {
             return (
-              <th key={key}>
+              <th key={key} className="p-2">
                 {!header.dataType && (
-                  <p>
-                    <span>{header.label}</span>
+                  <p className="gap-10 flex flex-row justify-between">
+                    <span className="overflow-hidden">{header.label}</span>
                     {header.canSort && (
                       <span
-                        className="sort"
+                        className="sort overflow-hidden"
                         onClick={() => {
                           sortTableData(key);
                         }}
@@ -55,17 +55,17 @@ const TableHead: React.FC<Props> = (props: Props) => {
                 )}
 
                 {header.dataType === "pin" && (
-                  <p className="pin">
+                  <p className="pin gap-10 flex flex-row justify-center">
                     <Pin_SVG />
                   </p>
                 )}
                 {header.dataType === "edit" && (
-                  <p className="edit">
+                  <p className="edit gap-10 flex flex-row justify-center">
                     <Edit_SVG />
                   </p>
                 )}
                 {header.dataType === "impersonate" && (
-                  <p className="impersonate">
+                  <p className="impersonate gap-10 flex flex-row justify-center">
                     <Profile_SVG />
                   </p>
                 )}

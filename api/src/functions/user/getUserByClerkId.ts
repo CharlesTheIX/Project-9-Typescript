@@ -1,11 +1,19 @@
 import * as gbl from "../../globals";
 import Model from "../../models/user.model";
+import getProjectionFromQuery from "../getProjectionFromQuery";
 
-export default async (clerkId: string): Promise<ApiResponse> => {
+type Props = {
+  query?: any;
+  clerkId: string;
+};
+
+export default async (props: Props): Promise<ApiResponse> => {
+  const { clerkId, query } = props;
+
   try {
-    const doc = await Model.findOne({ clerkId: clerkId });
+    const projection = getProjectionFromQuery(query);
+    const doc = await Model.findOne({ clerkId: clerkId }).select(projection).lean();
     if (!doc) return { ...gbl.response_BAD, message: `No user found with clerkId: ${clerkId}.` };
-
     return { ...gbl.response_OK, data: doc };
   } catch (error: any) {
     console.error(`Get user by clerkId error: ${error.message}`);

@@ -2,17 +2,8 @@
 @use "../themes" as t;
 
 .input {
-  @apply gap-2;
-  display: flex;
-  text-align: left;
-  flex-direction: column;
-
   input,
-  select,
   textarea {
-    @apply px-5 py-2;
-    outline: none;
-    appearance: none;
     border: 3px solid;
     border-top-right-radius: 0.5rem;
     border-bottom-left-radius: 0.5rem;
@@ -38,70 +29,8 @@
     min-height: 150px;
   }
 
-  select,
-  input[type="submit"] {
-    cursor: pointer;
-  }
-
   input[type="number"] {
     -moz-appearance: textfield;
-  }
-
-  &.multi-text-input {
-    > .input {
-      @apply gap-2;
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-
-      input {
-        width: 100%;
-      }
-    }
-
-    > .values {
-      @apply gap-2;
-      width: 100%;
-      display: flex;
-      flex-wrap: wrap;
-      flex-direction: row;
-      justify-content: flex-start;
-    }
-  }
-
-  &.password-input {
-    > div {
-      @apply gap-5;
-      display: flex;
-      flex-direction: column;
-
-      .password {
-        width: 100%;
-        position: relative;
-
-        input {
-          width: 100%;
-        }
-
-        .hide-show {
-          @apply top-3 right-5;
-          cursor: pointer;
-          position: absolute;
-        }
-      }
-
-      .password-confirmation {
-        @apply gap-2;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-
-        > * {
-          width: 100%;
-        }
-      }
-    }
   }
 
   &.select-input {
@@ -130,21 +59,12 @@
     }
 
     > div {
-      outline: none;
-      appearance: none;
-      overflow: hidden;
       border: 3px solid;
       border-top-right-radius: 0.5rem;
       border-bottom-left-radius: 0.5rem;
       transition: all 300ms ease-in-out;
 
       button {
-        @apply px-5 py-2;
-        width: 100%;
-        outline: none;
-        cursor: pointer;
-        text-align: left;
-        appearance: none;
         transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
 
         svg {
@@ -158,36 +78,10 @@
       ul {
         z-index: 48;
         max-height: 0px;
-        position: relative;
         transition: max-height 300ms ease-in-out;
 
         li {
-          @apply px-5 py-2;
-          cursor: pointer;
           transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
-        }
-      }
-    }
-  }
-
-  &.rectangle-input {
-    > div {
-      @apply gap-2;
-      display: flex;
-      flex-direction: row;
-
-      > div {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-
-        > p {
-          @apply text-xs;
-          width: 100%;
-        }
-
-        > input {
-          width: 100%;
         }
       }
     }

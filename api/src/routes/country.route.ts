@@ -14,10 +14,11 @@ const router: Router = express.Router();
 
 // Get all countries
 router.route("/all").post(async (request: Request, response: Response): Promise<any> => {
+  const query = request.query;
   const { limit } = request.body;
 
   try {
-    const res = await getAllCountries(limit);
+    const res = await getAllCountries({ limit, query });
     return response.json(res);
   } catch (error: any) {
     console.error(`Get all countries error: ${error.message}`);
@@ -27,12 +28,13 @@ router.route("/all").post(async (request: Request, response: Response): Promise<
 
 // Get country by _id
 router.route("/by-id").post(async (request: Request, response: Response): Promise<any> => {
+  const query = request.query;
   const { _id } = request.body;
 
   if (!_id) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: _id." });
 
   try {
-    const res = await getCountryById(_id);
+    const res = await getCountryById({ _id, query });
     return response.json(res);
   } catch (error: any) {
     console.error(`Get country by _id error: ${error.message}`);
@@ -42,6 +44,7 @@ router.route("/by-id").post(async (request: Request, response: Response): Promis
 
 // Get country by displayName
 router.route("/by-display-name").post(async (request: Request, response: Response): Promise<any> => {
+  const query = request.query;
   const { displayName } = request.body;
 
   if (!displayName) {
@@ -49,7 +52,7 @@ router.route("/by-display-name").post(async (request: Request, response: Respons
   }
 
   try {
-    const res = await getCountryByDisplayName(displayName);
+    const res = await getCountryByDisplayName({ displayName, query });
     return response.json(res);
   } catch (error: any) {
     console.error(`Get country by display name error: ${error.message}`);
@@ -59,12 +62,13 @@ router.route("/by-display-name").post(async (request: Request, response: Respons
 
 // Get country by continent
 router.route("/by-continent").post(async (request: Request, response: Response): Promise<any> => {
+  const query = request.query;
   const { continent, limit } = request.body;
 
   if (!continent) return { ...gbl.response_BAD, message: "Required inputs: continent." };
 
   try {
-    const res = await getCountriesByContinent({ continent, limit });
+    const res = await getCountriesByContinent({ continent, limit, query });
     return response.json(res);
   } catch (error: any) {
     console.error(`Get country by continent error: ${error.message}`);
@@ -136,12 +140,13 @@ router.route("/create-many").post(async (request: Request, response: Response): 
 
 // Update country by _id
 router.route("/by-id").patch(async (request: Request, response: Response): Promise<any> => {
+  const query = request.query;
   const { _id, update } = request.body;
 
   if (!_id) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: _id." });
 
   try {
-    const res = await updateCountryById({ _id, update });
+    const res = await updateCountryById({ _id, update, query });
     return response.json(res);
   } catch (error: any) {
     console.error(`Update country by _id error: ${error.message}`);

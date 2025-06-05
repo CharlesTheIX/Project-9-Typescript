@@ -1,13 +1,13 @@
 "use client";
 import * as gbl from "@/globals";
+import FormCore from "./Form/Core";
 import { useRef, useState } from "react";
 import UrlInput from "@/Inputs/UrlInput";
 import TextInput from "@/Inputs/TextInput";
 import EmailInput from "@/Inputs/EmailInput";
 import SelectInput from "@/Inputs/SelectInput";
-import { useToastContext } from "@/contexts/toastContext";
-import LoadingContainer from "@/components/LoadingContainer";
 import updateUserById from "@/lib/users/updateUserById";
+import { useToastContext } from "@/contexts/toastContext";
 import validateUserCreation from "@/lib/forms/validateUserCreation";
 
 type Props = {
@@ -41,7 +41,7 @@ const UserEditForm: React.FC<Props> = (props: Props) => {
         role,
         email,
         username,
-        profileImageURL,
+        profileImageURL
       };
 
       const hasErrors = validateUserCreation(requestData);
@@ -66,39 +66,20 @@ const UserEditForm: React.FC<Props> = (props: Props) => {
   };
 
   return (
-    <div className={`form`}>
-      <form ref={formRef} onSubmit={handleSubmit} className={`max-w-xl`}>
-        <div>
-          <div>
-            {isLoading && (
-              <div className={`form-loading-container`}>
-                <LoadingContainer />
-              </div>
-            )}
-
-            <TextInput name="username" label="Username" required={true} defaultValue={user?.username} />
-            <EmailInput name="email" label="Email" required={true} defaultValue={user?.email} />
-            <SelectInput
-              name="role"
-              label="Role"
-              required={true}
-              options={gbl.userRoleOptions}
-              defaultValue={gbl.userRoleOptions.find((option: Option) => option.value === user?.role)}
-            />
-            <UrlInput name="profile-image-url" label="Profile Image Url" defaultValue={user?.profileImageURL} />
-          </div>
-
-          <div>
-            <input
-              type="submit"
-              content="Submit"
-              disabled={isLoading}
-              className={`button w-auto ${isLoading ? "disabled" : ""}`}
-            />
-          </div>
-        </div>
-      </form>
-    </div>
+    <FormCore ref={formRef} isLoading={isLoading} handleSubmit={handleSubmit}>
+      <>
+        <TextInput name="username" label="Username" required={true} defaultValue={user?.username} />
+        <EmailInput name="email" label="Email" required={true} defaultValue={user?.email} />
+        <SelectInput
+          name="role"
+          label="Role"
+          required={true}
+          options={gbl.userRoleOptions}
+          defaultValue={gbl.userRoleOptions.find((option: Option) => option.value === user?.role)}
+        />
+        <UrlInput name="profile-image-url" label="Profile Image Url" defaultValue={user?.profileImageURL} />
+      </>
+    </FormCore>
   );
 };
 

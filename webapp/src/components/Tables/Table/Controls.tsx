@@ -1,11 +1,12 @@
 "use client";
 import Eye_SVG from "@/SVGs/Eye_SVG";
-import TextInput from "@/Inputs/TextInput";
 import { debounce } from "@/lib/debounce";
+import TextInput from "@/Inputs/TextInput";
+import Pin_SVG from "@/components/SVGs/Pin_SVG";
 import EyeSlash_SVG from "@/SVGs/EyeSlash_SVG copy";
 import { Fragment, useState, useMemo } from "react";
+import Search_SVG from "@/components/SVGs/Search_SVG";
 import { useUserContext } from "@/contexts/userContext";
-import getSvg from "@/lib/getSvg";
 
 type Props = {
   pinned: boolean;
@@ -29,39 +30,40 @@ const TableControls: React.FC<Props> = (props: Props) => {
     hideShowHeaders,
     searchTableTable,
     formPreferences,
-    setFormPreferences,
+    setFormPreferences
   } = props;
   const { userRole } = useUserContext();
   const [showHideShowDropdown, setShowHideShowDropdown] = useState<boolean>(false);
   const debouncedLogSearch = useMemo(() => debounce(searchTableTable, 300), [searchTableTable]);
 
   return (
-    <div className="controls">
-      <div className="search">
-        <div className="flex flex-row gap-2 items-center">
+    <div className="controls gap-2 p-2 flex overflow-hidden flex-col">
+      <div className="search gap-2 flex flex-row w-full justify-between">
+        <div className="flex flex-row gap-2 items-center px-2 w-auto gap-2 wrap justify-start">
           <div
-            className={`button ${showHideShowDropdown ? "active" : ""}`}
+            className={`button ${showHideShowDropdown ? "active" : ""} px-2 py-1 gap-0 flex cursor-pointer overflow-hidden items-center flex-row`}
             onClick={() => {
               setShowHideShowDropdown(!showHideShowDropdown);
             }}
           >
-            {getSvg({ icon: "eye", size: 50 })}
+            <Eye_SVG width={50} height={50} />
           </div>
 
           <div
-            className={`button ${showHideShowDropdown ? "active" : ""}`}
+            className={`button ${showHideShowDropdown ? "active" : ""} px-2 py-1 gap-0 flex cursor-pointer overflow-hidden items-center flex-row`}
             onClick={() => {
               setPinned(!pinned);
             }}
           >
-            {getSvg({ icon: "pin", size: 50 })}
+            <Pin_SVG width={50} height={50} />
           </div>
         </div>
 
-        <div className={`search-bar font-bold ${searchValue ? "focused" : ""}`}>
-          <label htmlFor="search-input">{getSvg({ icon: "search", size: 60 })}</label>
+        <div className={`search-bar font-bold ${searchValue ? "focused" : ""} px-2 w-auto flex flex-row items-center wrap justify-start gap-2`}>
+          <label htmlFor="search-input"><Search_SVG width={50} height={50} /></label>
           <TextInput
             name="search-input"
+            className="border-none p-0"
             defaultValue={searchValue}
             onInput={(inputElement: any) => {
               const value = inputElement.value;
@@ -76,13 +78,13 @@ const TableControls: React.FC<Props> = (props: Props) => {
         </div>
       </div>
 
-      <div className={`hide-show ${showHideShowDropdown ? "show" : ""}`}>
+      <div className={`hide-show ${showHideShowDropdown ? "show" : ""} gap-5 flex flex-row overflow-hidden wrap`}>
         {tableHeaders.map((header: TableHeader, key: number) => {
           if (!header.roles || header.roles.length === 0 || header.roles.includes(userRole)) {
             return (
               <div
                 key={key}
-                className={`button ${!header.hidden ? "active" : ""}`}
+                className={`button ${!header.hidden ? "active" : ""} px-2 flex wrap items-center flex-row justify-start`}
                 onClick={() => {
                   const newFormPreferences: any = formPreferences || {};
                   if (!newFormPreferences.hide) newFormPreferences.hide = [];
@@ -97,7 +99,7 @@ const TableControls: React.FC<Props> = (props: Props) => {
                   hideShowHeaders(key);
                 }}
               >
-                <p>{header.label}</p>
+                <p className="pb-2">{header.label}</p>
                 {header.hidden ? <EyeSlash_SVG width={32} height={32} /> : <Eye_SVG width={32} height={32} />}
               </div>
             );

@@ -11,36 +11,36 @@ const UserControls: React.FC = () => {
   const { user, userRole } = useUserContext();
 
   return (
-    <div id="user-controls">
-      <ul>
+    <div id="user-controls" className="fixed bottom-5 left-10">
+      <ul className="flex overflow-hidden flex-col">
         {user && (
           <>
             {userRole === "admin" && (
               <li>
-                <Link href={"/admin"}>
+                <Link href={"/admin"} className="p-2">
                   <Admin_SVG />
                 </Link>
               </li>
             )}
 
             <li>
-              <Link href="/profile">
+              <Link href="/profile" className="p-2 pb-0 inline-block">
                 <Profile_SVG />
               </Link>
             </li>
 
             <li>
-              <SignOutButton />
+              <SignOutButton className="p-2" />
             </li>
           </>
         )}
 
         <li>
-          <ThemeToggleButton />
+          <ThemeToggleButton className="p-2" />
         </li>
       </ul>
 
-      <div>
+      <div className="p-2 cursor-pointer">
         <Cog_SVG />
       </div>
     </div>

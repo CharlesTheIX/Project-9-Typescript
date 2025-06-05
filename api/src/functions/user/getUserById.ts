@@ -1,13 +1,21 @@
 import mongoose from "mongoose";
 import * as gbl from "../../globals";
 import Model from "../../models/user.model";
+import getProjectionFromQuery from "../getProjectionFromQuery";
 
-export default async (_id: string): Promise<ApiResponse> => {
+type Props = {
+  _id: string;
+  query?: any;
+};
+
+export default async (props: Props): Promise<ApiResponse> => {
+  const { _id, query } = props;
+
   try {
+    const projection = getProjectionFromQuery(query);
     const objectId = new mongoose.Types.ObjectId(_id);
-    const doc = await Model.findById(objectId);
+    const doc = await Model.findById(objectId).select(projection).lean();
     if (!doc) return { ...gbl.response_BAD, message: `No user found with an _id of ${_id}.` };
-
     return { ...gbl.response_OK, data: doc };
   } catch (error: any) {
     console.error(`Get user by _id error: ${error.message}`);

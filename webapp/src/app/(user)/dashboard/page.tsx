@@ -7,5 +7,4 @@ export const metadata: Metadata = {
 };
 
 const Page: React.FC = () => <DashboardPage />;
-
 export default Page;

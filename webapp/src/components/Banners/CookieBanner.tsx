@@ -19,13 +19,16 @@ const CookieBanner: React.FC = () => {
   if (cookie || noShowPathnames.includes(pathname || "")) return;
 
   return (
-    <div id="cookie-banner" className={`${show && "show"}`}>
-      <div>
-        <div>
-          <div>
+    <div
+      id="cookie-banner"
+      className={`${show && "show"} top-0 left-0 w-screen h-screen fixed flex flex-col justify-end`}
+    >
+      <div className="py-5 px-10 w-full">
+        <div className="gap-20 max-w-7xl w-full flex flex-row my-0 mx-auto items-center justify-between">
+          <div className="gap-1 flex flex-col text-left">
             <h5>Cookie Banner</h5>
 
-            <p>
+            <p className="text-xs">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent blandit quis sapien ac porta. Sed quis
               eros turpis. Proin suscipit augue sed nisi imperdiet, pharetra dignissim leo sagittis. Nulla eget egestas
               neque. In hac habitasse platea dictumst. Nullam et lacus leo. facilisis.{" "}
@@ -35,7 +38,7 @@ const CookieBanner: React.FC = () => {
             </p>
           </div>
 
-          <div>
+          <div className="gap-5 flex flex-row">
             <button
               type="button"
               className="button"

@@ -18,7 +18,7 @@ const DefaultLayout: React.FC<Props> = (props: Props) => {
   }, [impersonation.user]);
 
   return (
-    <main id="default-layout" className={`${theme} layout`}>
+    <main id="default-layout" className={`${theme} p-20 gap-20 flex min-h-screen flex-col`}>
       {children}
     </main>
   );

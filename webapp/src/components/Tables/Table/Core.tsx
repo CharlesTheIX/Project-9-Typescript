@@ -4,10 +4,12 @@ import TableBody from "./Body";
 import TableControls from "./Controls";
 import { useEffect, useState } from "react";
 import getSortedData from "@/lib/getSortedData";
+import LoadingContainer from "@/components/LoadingContainer";
 import TablePagination, { paginationOptions } from "./Pagination";
 
 type Props = {
   data: any[];
+  isLoading?: boolean;
   pagination?: boolean;
   headers: TableHeader[];
   collection?: "countries" | "users";
@@ -16,7 +18,7 @@ type Props = {
 };
 
 const TableCore: React.FC<Props> = (props: Props) => {
-  const { headers, data, pagination, collection, formPreferences, setFormPreferences } = props;
+  const { isLoading = false, headers, data, pagination, collection, formPreferences, setFormPreferences } = props;
   const [pinned, setPinned] = useState<boolean>(false);
   const [tableData, setTableData] = useState<any[]>(data);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -110,72 +112,80 @@ const TableCore: React.FC<Props> = (props: Props) => {
   }, []);
 
   return (
-    <>
-      <TableControls
-        pinned={pinned}
-        setPinned={setPinned}
-        searchValue={searchValue}
-        tableHeaders={tableHeaders}
-        setSearchValue={setSearchValue}
-        hideShowHeaders={hideShowHeaders}
-        formPreferences={formPreferences}
-        searchTableTable={searchTableTable}
-        setFormPreferences={setFormPreferences}
-      />
+    <div className="table gap-5 flex flex-col">
+      {isLoading ? (
+        <div className="loading-container">
+          <LoadingContainer />
+        </div>
+      ) : (
+        <>
+          <TableControls
+            pinned={pinned}
+            setPinned={setPinned}
+            searchValue={searchValue}
+            tableHeaders={tableHeaders}
+            setSearchValue={setSearchValue}
+            hideShowHeaders={hideShowHeaders}
+            formPreferences={formPreferences}
+            searchTableTable={searchTableTable}
+            setFormPreferences={setFormPreferences}
+          />
 
-      <div className="scrollbar-x scrollbar-y inner">
-        {pinned ? (
-          <>
-            {!pinnedTableData || pinnedTableData.length === 0 ? (
-              <p>No pined data to display</p>
+          <div className="scrollbar-x scrollbar-y inner">
+            {pinned ? (
+              <>
+                {!pinnedTableData || pinnedTableData.length === 0 ? (
+                  <p className="px-2 pt-2 font-bold">No pined data to display</p>
+                ) : (
+                  <table className="pinned min-w-full">
+                    <TableHead tableHeaders={tableHeaders} sortTableData={sortTableData} />
+                    <TableBody
+                      collection={collection}
+                      tableData={pinnedTableData}
+                      tableHeaders={tableHeaders}
+                      pinnedTableData={pinnedTableData}
+                      setPinnedTableData={setPinnedTableData}
+                    />
+                  </table>
+                )}
+              </>
             ) : (
-              <table className="pinned">
-                <TableHead tableHeaders={tableHeaders} sortTableData={sortTableData} />
-                <TableBody
-                  collection={collection}
-                  tableData={pinnedTableData}
-                  tableHeaders={tableHeaders}
-                  pinnedTableData={pinnedTableData}
-                  setPinnedTableData={setPinnedTableData}
-                />
-              </table>
+              <>
+                {!tableData || tableData.length === 0 ? (
+                  <p className="px-2 pt-2 font-bold">No data to display</p>
+                ) : (
+                  <table className="min-w-full">
+                    <TableHead tableHeaders={tableHeaders} sortTableData={sortTableData} />
+                    <TableBody
+                      tableData={tableData}
+                      collection={collection}
+                      tableHeaders={tableHeaders}
+                      pinnedTableData={pinnedTableData}
+                      setPinnedTableData={setPinnedTableData}
+                    />
+                  </table>
+                )}
+              </>
             )}
-          </>
-        ) : (
-          <>
-            {!tableData || tableData.length === 0 ? (
-              <p>No data to display</p>
-            ) : (
-              <table>
-                <TableHead tableHeaders={tableHeaders} sortTableData={sortTableData} />
-                <TableBody
-                  tableData={tableData}
-                  collection={collection}
-                  tableHeaders={tableHeaders}
-                  pinnedTableData={pinnedTableData}
-                  setPinnedTableData={setPinnedTableData}
-                />
-              </table>
-            )}
-          </>
-        )}
-      </div>
+          </div>
 
-      {tableData && tableData.length > 0 && pagination && (
-        <TablePagination
-          data={data}
-          pinned={pinned}
-          tableData={tableData}
-          currentPage={currentPage}
-          searchValue={searchValue}
-          postsPerPage={postsPerPage}
-          paginateTable={paginateTable}
-          setCurrentPage={setCurrentPage}
-          pinnedTableData={pinnedTableData}
-          setPostsPerPage={setPostsPerPage}
-        />
+          {tableData && tableData.length > 0 && pagination && (
+            <TablePagination
+              data={data}
+              pinned={pinned}
+              tableData={tableData}
+              currentPage={currentPage}
+              searchValue={searchValue}
+              postsPerPage={postsPerPage}
+              paginateTable={paginateTable}
+              setCurrentPage={setCurrentPage}
+              pinnedTableData={pinnedTableData}
+              setPostsPerPage={setPostsPerPage}
+            />
+          )}
+        </>
       )}
-    </>
+    </div>
   );
 };
 

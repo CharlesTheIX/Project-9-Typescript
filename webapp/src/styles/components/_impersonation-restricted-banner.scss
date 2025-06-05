@@ -4,7 +4,7 @@
 @mixin themes() {
   @each $theme-name, $theme-vars in t.$themes {
     &.#{$theme-name} {
-      $color-admin: map.get($theme-vars, color-admin);
+      $color-highlight: map.get($theme-vars, color-highlight);
       $color-primary: map.get($theme-vars, color-primary);
       $color-secondary: map.get($theme-vars, color-secondary);
 
@@ -14,22 +14,6 @@
 
       > section {
         color: $color-secondary;
-
-        // > div {
-        //   .controls {
-        //     .button {
-        //       color: $color-secondary;
-        //       border-color: $color-admin;
-        //       background-color: $color-admin;
-
-        //       &:hover {
-        //         color: $color-admin;
-        //         border-color: $color-secondary;
-        //         background-color: $color-secondary;
-        //       }
-        //     }
-        //   }
-        // }
       }
     }
   }
@@ -39,44 +23,6 @@
   @include themes();
 
   & {
-    top: 0;
-    left: 0;
     z-index: 100;
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-
-    > .background {
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 1;
-      position: absolute;
-    }
-
-    > section {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      position: relative;
-      align-items: center;
-      flex-direction: column;
-      justify-content: center;
-
-      > div {
-        @apply gap-10;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-
-        .controls {
-          @apply gap-2;
-          display: flex;
-          flex-wrap: wrap;
-          flex-direction: row;
-        }
-      }
-    }
   }
 }

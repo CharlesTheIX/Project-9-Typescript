@@ -1,13 +1,34 @@
 import mongoose from "mongoose";
 import * as gbl from "../../globals";
 import Model from "../../models/notification.model";
+import getSortFromQuery from "../getSortFromQuery";
+import getProjectionFromQuery from "../getProjectionFromQuery";
 
-export default async (participants: string[]): Promise<ApiResponse> => {
-  
+type Props = {
+  query?: any;
+  limit?: number;
+  participants: string[];
+};
+
+export default async (props: Props): Promise<ApiResponse> => {
+  const { query, limit = 200, participants } = props;
+
   try {
+    const sort = getSortFromQuery(query);
+    const projection = getProjectionFromQuery(query);
     var participantIds = participants.map((_id: string) => new mongoose.Types.ObjectId(_id));
-    const docs = await Model.find({participants:  { $in: participantIds } });
-    if (!docs) return { ...gbl.response_BAD, message: `No notifications found with the participants: ${participants.join(", ")}.` };
+    const docs = await Model.find({ participants: { $in: participantIds } })
+      .select(projection)
+      .limit(limit)
+      .sort(sort)
+      .lean();
+
+    if (!docs) {
+      return {
+        ...gbl.response_BAD,
+        message: `No notifications found with the participants: ${participants.join(", ")}.`
+      };
+    }
 
     return { ...gbl.response_OK, data: docs };
   } catch (error: any) {

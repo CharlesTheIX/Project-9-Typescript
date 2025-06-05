@@ -1,0 +1,41 @@
+@use "sass:map";
+@use "../themes" as t;
+
+.modal {
+  z-index: 52;
+
+  > .background {
+    z-index: 2;
+    opacity: 0.8;
+  }
+
+  > .content {
+    z-index: 2;
+    max-height: 60vh;
+    border: 3px solid;
+    border-top-right-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+  }
+}
+
+@each $theme-name, $theme-vars in t.$themes {
+  .#{$theme-name} {
+    $color-primary: map.get($theme-vars, color-primary);
+    $color-highlight: map.get($theme-vars, color-highlight);
+    $color-secondary: map.get($theme-vars, color-secondary);
+
+    fill: $color-secondary;
+    stroke: $color-secondary;
+
+    .modal {
+      > .background {
+        background-color: $color-primary;
+      }
+
+      > .content {
+        border-color: $color-secondary;
+        background-color: $color-primary;
+      }
+    }
+  }
+}

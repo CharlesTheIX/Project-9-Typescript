@@ -52,16 +52,17 @@ const TablePagination: React.FC<Props> = (props: Props) => {
   }, []);
   return (
     <div className="pagination">
-      <div>
+      <div className="gap-5 flex flex-row items-center justify-between">
         {searchValue || postsPerPage === data.length ? (
-          <div className="w-full justify-end">
+          <div className="w-full justify-end gap-2 flex flex-row">
             <p>{searchValue ? (pinned ? pinnedTableData.length : tableData.length) : data.length} results</p>
           </div>
         ) : (
           <>
-            <div className="posts-per-page">
+            <div className="posts-per-page justify-end gap-2 flex flex-row items-start">
               <div className="min-w-[100px]">
                 <SelectInput
+                  className="relative"
                   name="posts-per-page"
                   options={paginationOptions}
                   defaultValue={paginationOptions[0]}
@@ -74,10 +75,10 @@ const TablePagination: React.FC<Props> = (props: Props) => {
                 />
               </div>
 
-              <p>posts per page</p>
+              <p className="py-2">posts per page</p>
             </div>
 
-            <div className="page-navigation">
+            <div className="page-navigation justify-between gap-1 flex flex-row items-start">
               <button
                 className={`${currentPage <= 1 ? "disabled" : ""}`}
                 onClick={() => {

@@ -14,13 +14,13 @@ export const generateMetadata = async ({ params }: { params: Params }): Promise<
     if (response.error) throw new Error();
     return {
       title: `Edit ${response.data.displayName} | Admin | P9`,
-      description: `${response.data.displayName}`,
+      description: `${response.data.displayName}`
     };
   } catch (error: any) {
     return {
       title: "404 | P9",
       description: "Country not found",
-      robots: "noindex, nofollow",
+      robots: "noindex, nofollow"
     };
   }
 };
@@ -47,5 +47,4 @@ const Page = async ({ params }: { params: Params }): Promise<React.JSX.Element> 
     notFound();
   }
 };
-
 export default Page;

@@ -38,23 +38,13 @@
   @include themes();
 
   & {
-    @apply bottom-10 py-2 px-5 gap-5 max-w-lg;
-    right: 0;
-    width: auto;
     z-index: 50;
-    display: flex;
-    position: fixed;
-    overflow: hidden;
     border: 3px solid;
     border-right: none;
-    flex-direction: column;
     text-overflow: ellipsis;
-    align-items: flex-start;
     border-bottom-left-radius: 0.5rem;
-    // box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
 
     p {
-      overflow: hidden;
       display: -webkit-box;
       word-wrap: break-word;
       -webkit-line-clamp: 3;

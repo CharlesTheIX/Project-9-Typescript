@@ -1,11 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
-import TabContainer from "@/components/TabContainer";
-import { profileTabs } from "@/data/profileTabsData";
 import { useUserContext } from "@/contexts/userContext";
 import HeroBanner from "@/components/Banners/HeroBanner";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import { useImpersonationContext } from "@/contexts/impersonationContext";
+import ProfileTabContainer from "@/components/TabContainers/ProfileTabContainer";
 
 const ProfilePage: React.FC = () => {
   const user = useUserContext();
@@ -27,14 +26,14 @@ const ProfilePage: React.FC = () => {
           highlights={[
             {
               type: "text",
-              content: currentUser?.username || "",
-            },
+              content: currentUser?.username || ""
+            }
           ]}
         />
       </section>
 
       <section>
-        <TabContainer tabs={profileTabs} />
+        <ProfileTabContainer />
       </section>
     </DefaultLayout>
   );

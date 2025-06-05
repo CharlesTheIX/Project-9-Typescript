@@ -23,6 +23,7 @@ const UrlInput: React.FC<Props> = (props: Props) => {
         name={name}
         value={value}
         required={required}
+        className="px-5 py-2 outline-none appearance-none"
         onInput={(event: any) => {
           const target = event.currentTarget || event.target;
           setValue(target.value);

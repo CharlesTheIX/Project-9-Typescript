@@ -1,7 +1,7 @@
 import Link from "next/link";
-import TabSection from "./TabSection";
 import HeroBanner from "@/components/Banners/HeroBanner";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
+import TechStackTabsContainer from "@/components/TabContainers/TechStackTabContainer";
 
 const TechStackPage: React.FC = () => {
   return (
@@ -22,7 +22,9 @@ const TechStackPage: React.FC = () => {
         </p>
       </section>
 
-      <TabSection />
+    <section>
+      <TechStackTabsContainer />
+    </section>
     </DefaultLayout>
   );
 };

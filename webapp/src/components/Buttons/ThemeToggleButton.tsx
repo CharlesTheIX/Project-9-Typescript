@@ -4,7 +4,12 @@ import Moon_SVG from "@/SVGs/Moon_SVG";
 import Paintbrush_SVG from "@/SVGs/Paintbrush_SVG";
 import { useThemeContext, ThemeType } from "@/contexts/themeContext";
 
-const ThemeToggleButton: React.FC = () => {
+type Props = {
+  className?: string;
+};
+
+const ThemeToggleButton: React.FC<Props> = (props: Props) => {
+  const { className = "" } = props;
   const { theme, setTheme } = useThemeContext();
 
   const getThemeIcon = (theme: ThemeType): React.ReactNode => {
@@ -20,7 +25,7 @@ const ThemeToggleButton: React.FC = () => {
 
   return (
     <button
-      id="theme-toggle"
+      className={`${className} outline-none cursor-pointer appearance-none`}
       onClick={() => {
         setTheme((prevValue: ThemeType) => {
           switch (prevValue) {

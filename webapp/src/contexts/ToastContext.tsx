@@ -27,7 +27,7 @@ const defaultValue: ToastContextData = {
   setTitle: () => {},
   setHidden: () => {},
   setContent: () => {},
-  setTimeout_ms: () => {},
+  setTimeout_ms: () => {}
 };
 
 const ToastContext = createContext<ToastContextData>(defaultValue);
@@ -53,7 +53,7 @@ export const ToastContextProvider = (props: { children: React.ReactNode }) => {
     setHidden,
     timeout_ms,
     setContent,
-    setTimeout_ms,
+    setTimeout_ms
   };
 
   useEffect(() => {
@@ -77,11 +77,17 @@ export const ToastContextProvider = (props: { children: React.ReactNode }) => {
 
       <>
         {!hidden && (
-          <div ref={toastRef} id="toast-notification" className={`${hide ? "hide" : "show"} ${type} ${theme}`}>
+          <div
+            ref={toastRef}
+            id="toast-notification"
+            className={`${
+              hide ? "hide" : "show"
+            } ${type} ${theme} bottom-10 py-2 px-5 gap-5 max-w-lg right-0 w-auto flex fixed overflow-hidden flex-col items-start`}
+          >
             {type === "bye" ? (
               <div className="flex flex-row gap-5 items-center">
                 {getSvg({ icon: "bye", size: 30 })}
-                <p className="font-bold">Goodbye.</p>
+                <p className="font-bold overflow-hidden">Goodbye.</p>
               </div>
             ) : (
               <div className="flex flex-row gap-5 items-center">
@@ -90,8 +96,8 @@ export const ToastContextProvider = (props: { children: React.ReactNode }) => {
                 {type === "hi" && <>{getSvg({ icon: "bye", size: 30 })}</>}
 
                 <div>
-                  {title && <p className="font-bold">{title}</p>}
-                  {content && <p className="text-xs" dangerouslySetInnerHTML={{ __html: content }} />}
+                  {title && <p className="font-bold overflow-hidden">{title}</p>}
+                  {content && <p className="text-xs overflow-hidden">{content}</p>}
                 </div>
               </div>
             )}

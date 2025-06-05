@@ -61,16 +61,16 @@
 
 @each $theme-name, $theme-vars in t.$themes {
   .#{$theme-name} {
-    $color-admin: map.get($theme-vars, color-admin);
     $color-primary: map.get($theme-vars, color-primary);
+    $color-highlight: map.get($theme-vars, color-highlight);
     $color-secondary: map.get($theme-vars, color-secondary);
 
     #impersonation-controls {
-      border-color: $color-admin;
-      background-color: $color-admin;
+      border-color: $color-highlight;
+      background-color: $color-highlight;
 
       > ul {
-        color: $color-admin;
+        color: $color-highlight;
 
         > li {
           fill: $color-primary;
@@ -84,16 +84,16 @@
           }
 
           &:hover {
-            color: $color-admin;
-            fill: $color-admin;
-            stroke: $color-admin;
+            color: $color-highlight;
+            fill: $color-highlight;
+            stroke: $color-highlight;
             background-color: $color-primary;
 
             a,
             p {
-              color: $color-admin;
-              fill: $color-admin;
-              stroke: $color-admin;
+              color: $color-highlight;
+              fill: $color-highlight;
+              stroke: $color-highlight;
             }
           }
         }

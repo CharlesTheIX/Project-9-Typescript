@@ -18,9 +18,9 @@ const DashboardLayout: React.FC<Props> = (props: Props) => {
   }, [impersonation.user]);
 
   return (
-    <div id="dashboard-layout" className={`${theme} layout`}>
-      <div>
-        <main className={theme}>{children}</main>
+    <div id="dashboard-layout" className={`${theme} p-20 gap-20`}>
+      <div className="pb-10 gap-10 w-full flex my-0 mx-auto overflow-visible relative flex-row items-start justify-end">
+        <main className={`${theme} gap-10 w-full flex min-h-screen flex-col`}>{children}</main>
       </div>
     </div>
   );

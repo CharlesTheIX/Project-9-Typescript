@@ -12,17 +12,17 @@ const Header: React.FC = () => {
   const userContext = useUserContext();
 
   return (
-    <header id="header" className={`${theme}  relative`}>
-      <div className="main">
-        <div>
-          <Link href="/" className={`${theme} header-logo`}>
+    <header id="header" className={`${theme}  relative pt-5 top-0 right-0 w-screen sticky`}>
+      <div className="main py-5 px-10 mx-auto my-0">
+        <div className="gap-5 max-w-7xl flex my-0 mx-auto flex-row items-center justify-between">
+          <Link href="/" className="header-logo gap-1 flex flex-row items-center">
             <Terminal_SVG width={50} height={50} />
-            <p>P9</p>
+            <p className="text-5-xl font-bold">P9</p>
           </Link>
 
           {isLoaded && (
-            <nav>
-              <ul>
+            <nav className="gap-5 flex flex-row items-center">
+              <ul className="gap-5 flex flex-row items-center">
                 {!user ? (
                   <>
                     {signedOutItems.map((item: NavigationItem, key: number) => {
