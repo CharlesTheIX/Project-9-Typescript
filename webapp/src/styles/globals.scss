@@ -25,7 +25,7 @@ section {
 
 aside,
 section {
-  animation: fade-in 1000ms ease-in-out forwards;
+  animation: fade-in 1000ms ease-out forwards;
 }
 
 h1 {
@@ -63,19 +63,19 @@ button {
 }
 
 svg {
-  transition: fill 300ms ease-in-out;
+  transition: fill 300ms ease-out;
 
   path,
   line,
   rect,
   polyline {
-    transition: stroke 300ms ease-in-out;
+    transition: stroke 300ms ease-out;
   }
 }
 
 @each $theme-name, $theme-vars in t.$themes {
   .#{$theme-name} {
-    transition: color 300ms ease-in-out, background-color 300ms ease-in-out, border-color 300ms ease-in-out;
+    transition: color 300ms ease-out, background-color 300ms ease-out, border-color 300ms ease-out;
   }
 }
 

@@ -7,7 +7,7 @@
     border: 3px solid;
     border-top-right-radius: 0.5rem;
     border-bottom-left-radius: 0.5rem;
-    transition: border 300ms ease-in-out, color 300ms ease-in-out, background-color 300ms ease-in-out;
+    transition: border 300ms ease-out, color 300ms ease-out, background-color 300ms ease-out;
 
     &:focus,
     &:active,
@@ -53,35 +53,35 @@
         }
 
         ul {
-          max-height: 100px;
+          max-height: 1000px;
         }
       }
     }
 
     > div {
       border: 3px solid;
+      transition: all 300ms ease-out;
       border-top-right-radius: 0.5rem;
       border-bottom-left-radius: 0.5rem;
-      transition: all 300ms ease-in-out;
 
       button {
-        transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+        transition: background-color 300ms ease-out, color 300ms ease-out;
 
         svg {
           position: absolute;
           top: calc(0.25rem * 2);
           right: calc(0.25rem * 2);
-          transition: all 300ms ease-in-out;
+          transition: all 300ms ease-out;
         }
       }
 
       ul {
         z-index: 48;
         max-height: 0px;
-        transition: max-height 300ms ease-in-out;
+        transition: max-height 300ms ease-out;
 
         li {
-          transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+          transition: background-color 300ms ease-out, color 300ms ease-out;
         }
       }
     }

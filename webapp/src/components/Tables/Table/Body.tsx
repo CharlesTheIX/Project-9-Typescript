@@ -92,7 +92,7 @@ const TableBody: React.FC<Props> = (props: Props) => {
 
               if (header.dataType === "impersonate") {
                 return (
-                  <td key={key} className="relative p-2">
+                  <td key={key} className="relative p-2 text-center">
                     <p
                       className="impersonate inline-block z-10 gap-10 flex flex-row justify-center"
                       onClick={async () => {

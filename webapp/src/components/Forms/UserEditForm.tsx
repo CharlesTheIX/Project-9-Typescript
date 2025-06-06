@@ -41,7 +41,7 @@ const UserEditForm: React.FC<Props> = (props: Props) => {
         role,
         email,
         username,
-        profileImageURL
+        profileImageURL,
       };
 
       const hasErrors = validateUserCreation(requestData);

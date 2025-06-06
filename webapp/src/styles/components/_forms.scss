@@ -2,9 +2,19 @@
 @use "../themes" as t;
 
 .form {
+  &.loading {
+    height: 300px;
+    max-height: 300px;
+  }
+
+  overflow: hidden;
+  max-height: 10000px;
+  justify-content: center;
+  transition: max-height 300ms ease-out;
+
   .form-loading-container {
     z-index: 1;
-    transition: background-color 300ms ease-in-out;
+    transition: background-color 300ms ease-out;
   }
 }
 

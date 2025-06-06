@@ -10,10 +10,9 @@
       border-bottom: none;
       border-top-right-radius: 0.5rem;
 
-
       > li {
         border-left: 3px solid;
-        transition: color 300ms ease-in-out, background-color 300ms ease-in-out;
+        transition: color 300ms ease-out, background-color 300ms ease-out;
 
         &:nth-child(1) {
           border: none;
@@ -31,7 +30,6 @@
     border: 3px solid;
     border-top: none;
     border-bottom-left-radius: 0.5rem;
-
   }
 }
 

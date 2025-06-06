@@ -17,7 +17,7 @@ const UserControls: React.FC = () => {
           <>
             {userRole === "admin" && (
               <li>
-                <Link href={"/admin"} className="p-2">
+                <Link href={"/admin"} className="p-2 pb-0 inline-block">
                   <Admin_SVG />
                 </Link>
               </li>

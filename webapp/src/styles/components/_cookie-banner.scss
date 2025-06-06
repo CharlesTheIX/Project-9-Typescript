@@ -5,7 +5,7 @@
   opacity: 0;
   z-index: 100;
   display: hidden;
-  transition: background-color 300ms ease-in-out;
+  transition: background-color 300ms ease-out;
 
   &.show {
     opacity: 1;
@@ -14,7 +14,7 @@
 
     > div {
       border-top: 3px solid;
-      animation: slide-up 500ms ease-in-out forwards;
+      animation: slide-up 500ms ease-out forwards;
     }
   }
 }

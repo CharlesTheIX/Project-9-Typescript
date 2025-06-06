@@ -1,6 +1,7 @@
 import * as gbl from "../../globals";
 import Model from "../../models/country.model";
 import getSortFromQuery from "../getSortFromQuery";
+import getSearchFromQuery from "../getSearchFromQuery";
 import getProjectionFromQuery from "../getProjectionFromQuery";
 
 type Props = {
@@ -13,8 +14,10 @@ export default async (props: Props): Promise<ApiResponse> => {
 
   try {
     const sort = getSortFromQuery(query);
+    const search = getSearchFromQuery(query);
     const projection = getProjectionFromQuery(query);
-    const docs = await Model.find().select(projection).sort(sort).limit(limit).lean();
+    const docs = await Model.find({ $or: search }).select(projection).sort(sort).limit(limit).lean();
+
     if (!docs) return { ...gbl.response_BAD, message: "No Countries found." };
     if (docs.length === 0) return { ...gbl.response_NO_CONTENT, message: "No Countries found." };
 

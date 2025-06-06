@@ -107,12 +107,13 @@ const TableCore: React.FC<Props> = (props: Props) => {
   };
 
   useEffect(() => {
+    setTableData(data);
     if (formPreferences?.postsPerPage && pagination) paginateTable(currentPage, formPreferences.postsPerPage);
     if (formPreferences?.searchValue) searchTableTable(formPreferences.searchValue);
-  }, []);
+  }, [data]);
 
   return (
-    <div className="table gap-5 flex flex-col">
+    <div className="table-container gap-5 flex flex-col">
       {isLoading ? (
         <div className="loading-container">
           <LoadingContainer />
@@ -135,7 +136,7 @@ const TableCore: React.FC<Props> = (props: Props) => {
             {pinned ? (
               <>
                 {!pinnedTableData || pinnedTableData.length === 0 ? (
-                  <p className="px-2 pt-2 font-bold">No pined data to display</p>
+                  <p className="px-5 pt-2 font-bold">No pined data to display</p>
                 ) : (
                   <table className="pinned min-w-full">
                     <TableHead tableHeaders={tableHeaders} sortTableData={sortTableData} />
@@ -152,7 +153,7 @@ const TableCore: React.FC<Props> = (props: Props) => {
             ) : (
               <>
                 {!tableData || tableData.length === 0 ? (
-                  <p className="px-2 pt-2 font-bold">No data to display</p>
+                  <p className="px-5 pt-2 font-bold">No data to display</p>
                 ) : (
                   <table className="min-w-full">
                     <TableHead tableHeaders={tableHeaders} sortTableData={sortTableData} />

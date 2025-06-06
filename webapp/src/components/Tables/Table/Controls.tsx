@@ -30,7 +30,7 @@ const TableControls: React.FC<Props> = (props: Props) => {
     hideShowHeaders,
     searchTableTable,
     formPreferences,
-    setFormPreferences
+    setFormPreferences,
   } = props;
   const { userRole } = useUserContext();
   const [showHideShowDropdown, setShowHideShowDropdown] = useState<boolean>(false);
@@ -41,29 +41,39 @@ const TableControls: React.FC<Props> = (props: Props) => {
       <div className="search gap-2 flex flex-row w-full justify-between">
         <div className="flex flex-row gap-2 items-center px-2 w-auto gap-2 wrap justify-start">
           <div
-            className={`button ${showHideShowDropdown ? "active" : ""} px-2 py-1 gap-0 flex cursor-pointer overflow-hidden items-center flex-row`}
+            className={`${
+              showHideShowDropdown ? "active" : ""
+            } button px-2 py-1 gap-0 flex cursor-pointer overflow-hidden items-center flex-row`}
             onClick={() => {
               setShowHideShowDropdown(!showHideShowDropdown);
             }}
           >
-            <Eye_SVG width={50} height={50} />
+            <Eye_SVG width={30} height={30} />
           </div>
 
           <div
-            className={`button ${showHideShowDropdown ? "active" : ""} px-2 py-1 gap-0 flex cursor-pointer overflow-hidden items-center flex-row`}
+            className={`${
+              pinned ? "active" : ""
+            } button px-2 py-1 gap-0 flex cursor-pointer overflow-hidden items-center flex-row`}
             onClick={() => {
               setPinned(!pinned);
             }}
           >
-            <Pin_SVG width={50} height={50} />
+            <Pin_SVG width={30} height={30} />
           </div>
         </div>
 
-        <div className={`search-bar font-bold ${searchValue ? "focused" : ""} px-2 w-auto flex flex-row items-center wrap justify-start gap-2`}>
-          <label htmlFor="search-input"><Search_SVG width={50} height={50} /></label>
+        <div
+          className={`search-bar font-bold ${
+            searchValue ? "focused" : ""
+          } px-2 w-auto flex flex-row items-center wrap justify-start gap-2`}
+        >
+          <label htmlFor="search-input">
+            <Search_SVG width={40} height={40} />
+          </label>
           <TextInput
             name="search-input"
-            className="border-none p-0"
+            className="border-[0px] p-0"
             defaultValue={searchValue}
             onInput={(inputElement: any) => {
               const value = inputElement.value;
@@ -78,13 +88,15 @@ const TableControls: React.FC<Props> = (props: Props) => {
         </div>
       </div>
 
-      <div className={`hide-show ${showHideShowDropdown ? "show" : ""} gap-5 flex flex-row overflow-hidden wrap`}>
+      <div className={`hide-show ${showHideShowDropdown ? "show" : ""} gap-5 flex flex-row overflow-hidden wrap px-2`}>
         {tableHeaders.map((header: TableHeader, key: number) => {
           if (!header.roles || header.roles.length === 0 || header.roles.includes(userRole)) {
             return (
               <div
                 key={key}
-                className={`button ${!header.hidden ? "active" : ""} px-2 flex wrap items-center flex-row justify-start`}
+                className={`button ${
+                  !header.hidden ? "active" : ""
+                } px-2 flex wrap items-center flex-row justify-start gap-5`}
                 onClick={() => {
                   const newFormPreferences: any = formPreferences || {};
                   if (!newFormPreferences.hide) newFormPreferences.hide = [];
@@ -99,8 +111,8 @@ const TableControls: React.FC<Props> = (props: Props) => {
                   hideShowHeaders(key);
                 }}
               >
-                <p className="pb-2">{header.label}</p>
-                {header.hidden ? <EyeSlash_SVG width={32} height={32} /> : <Eye_SVG width={32} height={32} />}
+                <p>{header.label}</p>
+                {header.hidden ? <EyeSlash_SVG width={24} height={24} /> : <Eye_SVG width={24} height={24} />}
               </div>
             );
           }

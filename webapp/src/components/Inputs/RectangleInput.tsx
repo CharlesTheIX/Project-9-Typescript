@@ -14,10 +14,14 @@ const RectangleInput: React.FC<Props> = (props: Props) => {
   const [value, setValue] = useState<Rectangle>(defaultValue);
 
   return (
-    <div className={`input ${className}`}>
+    <div className={`input rectangle-input ${className} gap-2 flex flex-col text-left w-full`}>
       <input type="hidden" value={JSON.stringify(value)} name={name} />
 
-      {label && <label htmlFor={`${name}-input-x`}>{label}</label>}
+      {label && (
+        <label htmlFor={`${name}-input-x`} className="font-bold">
+          {label}
+        </label>
+      )}
 
       <div className="gap-2 flex flex-row">
         <div className="w-full flex flex-col">

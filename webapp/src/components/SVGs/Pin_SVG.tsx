@@ -10,7 +10,7 @@ const Pin_SVG: React.FC<Props> = (props: Props) => {
 
   return (
     <svg
-      fill={"none"}
+      fill={primaryColor}
       width={width}
       height={height}
       viewBox="0 0 24 24"

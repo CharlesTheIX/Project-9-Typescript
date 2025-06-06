@@ -2,7 +2,7 @@ import * as gbl from "../../globals";
 import Model from "../../models/notification.model";
 
 export default async (props: NotificationData): Promise<ApiResponse> => {
-  const { subject, participants, messages, type, readBy }  = props;
+  const { subject, participants, messages, type, readBy } = props;
 
   try {
     const newDoc = new Model({
@@ -12,7 +12,6 @@ export default async (props: NotificationData): Promise<ApiResponse> => {
       type: type || "default",
       readBy: readBy || "none",
     });
-
     if (!newDoc) return { ...gbl.response_BAD, message: "Notification not created." };
 
     const createdDoc = await newDoc.save();

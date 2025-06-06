@@ -12,7 +12,7 @@ export default async (props: Country): Promise<ApiResponse> => {
     description,
     capitalCity,
     mapRectangle,
-    flagRectangle
+    flagRectangle,
   } = props;
 
   try {
@@ -26,9 +26,8 @@ export default async (props: Country): Promise<ApiResponse> => {
       languages: languages || [],
       population: population || 0,
       description: description || "",
-      capitalCity: capitalCity || ""
+      capitalCity: capitalCity || "",
     });
-
     if (!newDoc) return { ...gbl.response_BAD, message: "Country not created." };
 
     const createdDoc = await newDoc.save();

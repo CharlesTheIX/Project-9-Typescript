@@ -1,6 +1,7 @@
 import * as gbl from "../../globals";
 import Model from "../../models/country.model";
 import getSortFromQuery from "../getSortFromQuery";
+import getSearchFromQuery from "../getSearchFromQuery";
 import getProjectionFromQuery from "../getProjectionFromQuery";
 
 type Props = {
@@ -14,8 +15,9 @@ export default async (props: Props): Promise<ApiResponse> => {
 
   try {
     const sort = getSortFromQuery(query);
+    const search = getSearchFromQuery(query);
     const projection = getProjectionFromQuery(query);
-    const docs = await Model.find({ $or: [{ continent: continent }] })
+    const docs = await Model.find({ $and: [{ continent: continent }, { $or: search }] })
       .select(projection)
       .limit(limit)
       .sort(sort)

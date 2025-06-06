@@ -28,8 +28,12 @@ const PasswordInput: React.FC<Props> = (props: Props) => {
   const [confirmationValue, setConfirmationValue] = useState<string>(defaultValue);
 
   return (
-    <div className={`input password-input ${className}`}>
-      {label && <label htmlFor={name}>{label}</label>}
+    <div className={`input password-input ${className} gap-2 flex flex-col text-left w-full`}>
+      {label && (
+        <label htmlFor={name} className="font-bold">
+          {label}
+        </label>
+      )}
 
       <div className="gap-5 flex flex-col">
         <div className="relative w-full">

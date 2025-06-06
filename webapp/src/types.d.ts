@@ -9,7 +9,7 @@ type ApiResponse = {
   message: string;
 };
 
-type Continent = "Europe" | "Asia" | "Africa" | "Noth America" | "South America" | "Oceania";
+type Continent = "Europe" | "Asia" | "Africa" | "North America" | "South America" | "Oceania";
 
 type Country = MongoDocDefaults & {
   names: string[];

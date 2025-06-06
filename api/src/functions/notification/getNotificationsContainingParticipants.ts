@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 import * as gbl from "../../globals";
-import Model from "../../models/notification.model";
 import getSortFromQuery from "../getSortFromQuery";
+import Model from "../../models/notification.model";
+import getSearchFromQuery from "../getSearchFromQuery";
 import getProjectionFromQuery from "../getProjectionFromQuery";
 
 type Props = {
@@ -15,9 +16,10 @@ export default async (props: Props): Promise<ApiResponse> => {
 
   try {
     const sort = getSortFromQuery(query);
+    const search = getSearchFromQuery(query);
     const projection = getProjectionFromQuery(query);
     var participantIds = participants.map((_id: string) => new mongoose.Types.ObjectId(_id));
-    const docs = await Model.find({ participants: { $in: participantIds } })
+    const docs = await Model.find({ $and: [{ participants: { $in: participantIds } }, { $or: search }] })
       .select(projection)
       .limit(limit)
       .sort(sort)
@@ -26,7 +28,7 @@ export default async (props: Props): Promise<ApiResponse> => {
     if (!docs) {
       return {
         ...gbl.response_BAD,
-        message: `No notifications found with the participants: ${participants.join(", ")}.`
+        message: `No notifications found with the participants: ${participants.join(", ")}.`,
       };
     }
 

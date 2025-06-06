@@ -83,7 +83,7 @@ const SignUpForm: React.FC = () => {
         role: "user",
         email: signUpData.email,
         username: signUpData.username,
-        clerkId: signUp.createdUserId as string
+        clerkId: signUp.createdUserId as string,
       });
       if (response.error) throw new Error(response.message);
 

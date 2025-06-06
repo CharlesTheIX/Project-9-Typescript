@@ -20,7 +20,7 @@ export const status = {
   NOT_FOUND: 404,
   CONFLICT: 409,
   // 5**
-  SERVER_ERROR: 500
+  SERVER_ERROR: 500,
 };
 
 const defaultError = { data: null, error: true };
@@ -30,56 +30,56 @@ const defaultSuccess = { data: null, error: false };
 export const response_OK: ApiResponse = {
   ...defaultSuccess,
   status: status.OK,
-  message: "Success."
+  message: "Success.",
 };
 export const response_DB_UPDATED: ApiResponse = {
   ...defaultSuccess,
   message: "DB Updated.",
-  status: status.DB_UPDATED
+  status: status.DB_UPDATED,
 };
 export const response_NO_CONTENT: ApiResponse = {
   ...defaultSuccess,
   message: "No Content.",
-  status: status.NO_CONTENT
+  status: status.NO_CONTENT,
 };
 
 // 4** Responses
 export const response_BAD: ApiResponse = {
   ...defaultError,
   status: status.BAD,
-  message: "Bad Request."
+  message: "Bad Request.",
 };
 export const response_UNAUTHORISED: ApiResponse = {
   ...defaultError,
   message: "Unauthorised.",
-  status: status.UNAUTHORISED
+  status: status.UNAUTHORISED,
 };
 export const response_FORBIDDEN: ApiResponse = {
   ...defaultError,
   message: "Forbidden.",
-  status: status.FORBIDDEN
+  status: status.FORBIDDEN,
 };
 export const response_NOT_FOUND: ApiResponse = {
   ...defaultError,
   message: "Not Found.",
-  status: status.NOT_FOUND
+  status: status.NOT_FOUND,
 };
 export const response_CONFLICT: ApiResponse = {
   ...defaultError,
   message: "Conflict.",
-  status: status.CONFLICT
+  status: status.CONFLICT,
 };
 
 // 5** Responses
 export const response_SERVER_ERROR: ApiResponse = {
   ...defaultError,
   message: "Server Error.",
-  status: status.SERVER_ERROR
+  status: status.SERVER_ERROR,
 };
 
 // API
 export const defaultInternalHeader = {
-  "Content-Type": "application/json"
+  "Content-Type": "application/json",
 };
 
 // Continents
@@ -89,9 +89,9 @@ export const continentOptions: Option[] = [
   { value: "Africa", label: "Africa" },
   { value: "Oceania", label: "Oceania" },
   { value: "North America", label: "North America" },
-  { value: "South America", label: "South America" }
+  { value: "South America", label: "South America" },
 ];
-export const continents: Continent[] = ["Africa", "Asia", "Europe", "Noth America", "Oceania", "South America"];
+export const continents: Continent[] = ["Africa", "Asia", "Europe", "North America", "Oceania", "South America"];
 
 // Users
 export const userRoles: UserRole[] = ["admin", "editor", "guest", "test", "user"];
@@ -100,7 +100,7 @@ export const userRoleOptions: Option[] = [
   { value: "guest", label: "Guest" },
   { value: "editor", label: "Editor" },
   { value: "test", label: "Test" },
-  { value: "admin", label: "Admin" }
+  { value: "admin", label: "Admin" },
 ];
 
 // Rectangles
@@ -108,13 +108,13 @@ export const nullRectangle: Rectangle = {
   x: 0,
   y: 0,
   width: 0,
-  height: 0
+  height: 0,
 };
 
 // Options
 export const nullOption: Option = {
   value: "",
-  label: ""
+  label: "",
 };
 
 // Country
@@ -132,5 +132,5 @@ export const nullCountry: Country = {
   flagRectangle: nullRectangle,
   updatedAt: undefined,
   createdAt: undefined,
-  __v: undefined
+  __v: undefined,
 };

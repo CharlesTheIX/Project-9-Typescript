@@ -15,13 +15,13 @@ const dashboardItems: NavigationItem[] = [
   {
     href: "/admin/users",
     label: "Users",
-    icon: "users"
+    icon: "users",
   },
   {
     href: "/admin/countries",
     label: "Countries",
-    icon: "globe"
-  }
+    icon: "globe",
+  },
 ];
 
 const AdminLayout: React.FC<Props> = (props: Props) => {
@@ -41,8 +41,8 @@ const AdminLayout: React.FC<Props> = (props: Props) => {
             <ul className="w-full h-full flex overflow-hidden flex-col items-start justify-start">
               {dashboardItems.map((item: NavigationItem, key: number) => {
                 return (
-                  <li key={key} className="px-5 py-2 w-dull cursor-pointer font-bold">
-                    <Link href={item.href} className="gap-2 flex flex-row itams-center justify-start">
+                  <li key={key} className="px-5 py-2 w-full cursor-pointer font-bold">
+                    <Link href={item.href} className="gap-2 flex flex-row items-center justify-start">
                       {item.icon === "users" && <Users_SVG />}
                       {item.icon === "globe" && <Globe_SVG />}
                       <span>{item.label}</span>

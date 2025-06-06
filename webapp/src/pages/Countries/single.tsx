@@ -50,7 +50,7 @@ const CountryPage: React.FC<Props> = (props: Props) => {
     highlights.push({
       type: "link",
       content: country?.continent,
-      href: `/countries/continents/${country?.continent.toLowerCase()}`,
+      href: `/countries/continents/${country?.continent.toLowerCase().replace(" ", "-")}`,
     });
 
     return highlights;

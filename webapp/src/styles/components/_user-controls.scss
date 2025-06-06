@@ -9,12 +9,12 @@
 
   ul {
     max-height: 0px;
-    transition: max-height 300ms ease-in-out;
+    transition: max-height 300ms ease-out;
 
     > li {
       border-top-right-radius: 0.5rem;
       border-bottom-left-radius: 0.5rem;
-      transition: background-color 300ms ease-in-out;
+      transition: background-color 300ms ease-out;
     }
   }
 

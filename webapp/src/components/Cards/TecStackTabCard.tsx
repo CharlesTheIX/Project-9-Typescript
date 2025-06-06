@@ -21,9 +21,11 @@ const TechStackTabCard: React.FC<TechStackTabCardData> = (props: TechStackTabCar
       {content && <p className="w-full">{content}</p>}
 
       {documentationLink && (
-        <Link href={documentationLink} className="link-text">
-          Documentation
-        </Link>
+        <div className="text-right">
+          <Link href={documentationLink} className="link-text">
+            Documentation
+          </Link>
+        </div>
       )}
     </div>
   );

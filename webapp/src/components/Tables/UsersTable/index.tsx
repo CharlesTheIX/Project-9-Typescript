@@ -2,7 +2,6 @@
 import TableCore from "../Table/Core";
 import { useState, useEffect } from "react";
 import getAllUsers from "@/lib/users/getAllUsers";
-import LoadingContainer from "@/components/LoadingContainer";
 import { users_table_headers, users_table_storage_token } from "./data";
 import { getLocalStorageItem, removeLocalStorageItem } from "@/lib/storage/localStorage";
 
@@ -46,22 +45,15 @@ const UsersTable: React.FC = () => {
   }, []);
 
   return (
-    <div className="table">
-      {isLoading ? (
-        <div className="loading-container">
-          <LoadingContainer />
-        </div>
-      ) : (
-        <TableCore
-          data={users}
-          pagination={true}
-          collection={"users"}
-          headers={tableHeaders}
-          formPreferences={formPreferences}
-          setFormPreferences={setFormPreferences}
-        />
-      )}
-    </div>
+    <TableCore
+      data={users}
+      pagination={true}
+      collection={"users"}
+      isLoading={isLoading}
+      headers={tableHeaders}
+      formPreferences={formPreferences}
+      setFormPreferences={setFormPreferences}
+    />
   );
 };
 

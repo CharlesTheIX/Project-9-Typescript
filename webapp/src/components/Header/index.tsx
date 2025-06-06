@@ -17,7 +17,7 @@ const Header: React.FC = () => {
         <div className="gap-5 max-w-7xl flex my-0 mx-auto flex-row items-center justify-between">
           <Link href="/" className="header-logo gap-1 flex flex-row items-center">
             <Terminal_SVG width={50} height={50} />
-            <p className="text-5-xl font-bold">P9</p>
+            <p className="text-5xl font-bold">P9</p>
           </Link>
 
           {isLoaded && (

@@ -12,10 +12,10 @@ const FormCore = forwardRef<HTMLFormElement, Props>((props: Props, ref) => {
   const { children, handleSubmit, isLoading = false } = props;
 
   return (
-    <div className="form gap-5 w-full flex flex-col">
+    <div className={`${isLoading ? "loading" : ""} form gap-5 w-full flex flex-col`}>
       <form ref={ref} onSubmit={handleSubmit} className={`max-w-xl w-full flex items-center flex-col justify-start`}>
-        <div className="gap-5 w-full flex items-center flex-col">
-          <div className="w-full ga-5 flex relative items-center flex-col">
+        <div className="inner gap-5 w-full flex items-center flex-col">
+          <div className="w-full gap-5 flex relative items-center flex-col">
             {isLoading && (
               <div className={`form-loading-container w-full h-full absolute`}>
                 <LoadingContainer />

@@ -9,7 +9,11 @@
     "build": "tsc",
     "start": "node ./dist/server.js",
     "dev": "yarn build && yarn start",
-    "clean": "rm -rf dist node_modules yarn.lock"
+    "clean": "rm -rf dist node_modules yarn.lock",
+    "docker:stop": "docker stop p9-ts-api",
+    "docker:remove": "docker rm p9-ts-api",
+    "docker:build": "docker build -t p9-ts-express-api .",
+    "docker:run": "docker run -d -p 4022:4022 --name p9-ts-api p9-ts-express-api"
   },
   "dependencies": {
     "cors": "^2.8.5",

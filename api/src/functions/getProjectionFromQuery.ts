@@ -1,5 +1,5 @@
 export default (query: any): { [key: string]: 1 | 0 } => {
-  const projection: { [key: string]: 1 | 0 } = { __v: 0 };
+  const projection: { [key: string]: 1 | 0 } = {};
 
   try {
     const fields: string = query?.project;

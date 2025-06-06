@@ -15,11 +15,15 @@ const EmailInput: React.FC<Props> = (props: Props) => {
   const [value, setValue] = useState<string>(defaultValue);
 
   return (
-    <div className={`input ${className} gap-2 flex flex-col text-left`}>
-      {label && <label htmlFor={name}>{label}</label>}
+    <div className={`input email-input ${className} gap-2 flex flex-col text-left w-full`}>
+      {label && (
+        <label htmlFor={name} className="font-bold">
+          {label}
+        </label>
+      )}
 
       <input
-        name={name} 
+        name={name}
         type="email"
         value={value}
         required={required}

@@ -28,8 +28,12 @@ const NumberInput: React.FC<Props> = (props: Props) => {
   const [value, setValue] = useState<string>(defaultValue);
 
   return (
-    <div className={`input ${className}`}>
-      {label && <label htmlFor={name}>{label}</label>}
+    <div className={`input number-input ${className} gap-2 flex flex-col text-left w-full`}>
+      {label && (
+        <label htmlFor={name} className="font-bold">
+          {label}
+        </label>
+      )}
 
       <input
         min={min}

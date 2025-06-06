@@ -47,7 +47,7 @@
 
   > div {
     max-width: calc(0.25rem * 360);
-    transition: background-color 300ms ease-in-out;
+    transition: background-color 300ms ease-out;
 
     > aside {
       z-index: 49;
@@ -59,11 +59,11 @@
         border-top-right-radius: 0.5rem;
         border-bottom-left-radius: 0.5rem;
         max-height: calc(100vh - (0.25rem * 39) - (0.25rem * 29));
-        transition: background-color 300ms ease-in-out, border-color 300ms ease-in-out;
+        transition: background-color 300ms ease-out, border-color 300ms ease-out;
 
         ul {
           li {
-            transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+            transition: background-color 300ms ease-out, color 300ms ease-out;
           }
         }
       }

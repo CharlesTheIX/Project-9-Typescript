@@ -23,6 +23,7 @@ import Favourite_SVG from "@/components/SVGs/Favourite";
 import Success_SVG from "@/components/SVGs/Success_SVG";
 import Express_SVG from "@/components/SVGs/Express_SVG";
 import Tailwind_SVG from "@/components/SVGs/Tailwind_SVG";
+import Document_SVG from "@/components/SVGs/Document_SVG";
 import Terraform_SVG from "@/components/SVGs/Terraform_SVG";
 import Typescript_SVG from "@/components/SVGs/Typescript_SVG";
 
@@ -36,6 +37,8 @@ export default (props: Props): React.ReactElement => {
   const { icon, size, color = "inherit" } = props;
 
   switch (icon) {
+    case "document":
+      return <Document_SVG width={size} height={size} primaryColor={color} />;
     case "terraform":
       return <Terraform_SVG width={size} height={size} primaryColor={color} />;
     case "aws":
