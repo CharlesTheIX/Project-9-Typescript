@@ -4,7 +4,7 @@ type ApiResponse = {
   status: number;
   error: boolean;
   message: string;
-  data: CreateManyResponse | any;
+  data: ApiManyResponseData | any;
 };
 
 type Continent = "Europe" | "Asia" | "Africa" | "North America" | "South America" | "Oceania";
@@ -22,10 +22,10 @@ type Country = MongoDocDefaults & {
   flagRectangle: Rectangle;
 };
 
-type CreateManyResponse = {
+type ApiManyResponseData = {
   created: string[];
   skipped: string[];
-  errors: { displayName: string; message: string }[];
+  errors: { id: string; message: string }[];
 };
 
 type GetManyResponse = {

@@ -2,6 +2,7 @@ import * as gbl from "../../globals";
 import Model from "../../models/country.model";
 import getSortFromQuery from "../getSortFromQuery";
 import getSearchFromQuery from "../getSearchFromQuery";
+import { countriesDefaultQueryValues } from "../getVariables";
 import getProjectionFromQuery from "../getProjectionFromQuery";
 
 type Props = {
@@ -10,13 +11,14 @@ type Props = {
   continent: Continent;
 };
 
+const defaultQueryValues = countriesDefaultQueryValues();
 export default async (props: Props): Promise<ApiResponse> => {
   const { continent, limit = 200, query } = props;
 
   try {
-    const sort = getSortFromQuery(query);
-    const search = getSearchFromQuery(query);
-    const projection = getProjectionFromQuery(query);
+    const sort = getSortFromQuery({ query, defaultValue: defaultQueryValues.sort });
+    const search = getSearchFromQuery({ query, defaultFields: defaultQueryValues.searchFields });
+    const projection = getProjectionFromQuery({ query, defaultValue: defaultQueryValues.projection });
     const docs = await Model.find({ $and: [{ continent: continent }, { $or: search }] })
       .select(projection)
       .limit(limit)

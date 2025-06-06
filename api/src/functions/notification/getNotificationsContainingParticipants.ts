@@ -4,6 +4,7 @@ import getSortFromQuery from "../getSortFromQuery";
 import Model from "../../models/notification.model";
 import getSearchFromQuery from "../getSearchFromQuery";
 import getProjectionFromQuery from "../getProjectionFromQuery";
+import { notificationsDefaultQueryValues } from "../getVariables";
 
 type Props = {
   query?: any;
@@ -11,13 +12,14 @@ type Props = {
   participants: string[];
 };
 
+const defaultQueryValues = notificationsDefaultQueryValues();
 export default async (props: Props): Promise<ApiResponse> => {
   const { query, limit = 200, participants } = props;
 
   try {
     const sort = getSortFromQuery(query);
     const search = getSearchFromQuery(query);
-    const projection = getProjectionFromQuery(query);
+    const projection = getProjectionFromQuery({ query, defaultValue: defaultQueryValues.projection });
     var participantIds = participants.map((_id: string) => new mongoose.Types.ObjectId(_id));
     const docs = await Model.find({ $and: [{ participants: { $in: participantIds } }, { $or: search }] })
       .select(projection)

@@ -1,5 +1,6 @@
 import * as gbl from "../../globals";
 import Model from "../../models/user.model";
+import { usersDefaultQueryValues } from "../getVariables";
 import getProjectionFromQuery from "../getProjectionFromQuery";
 
 type Props = {
@@ -7,11 +8,12 @@ type Props = {
   username: string;
 };
 
+const defaultQueryValues = usersDefaultQueryValues();
 export default async (props: Props): Promise<ApiResponse> => {
   const { username, query } = props;
 
   try {
-    const projection = getProjectionFromQuery(query);
+    const projection = getProjectionFromQuery({ query, defaultValue: defaultQueryValues.projection });
     const doc = await Model.findOne({ username: username }).select(projection).lean();
     if (!doc) return { ...gbl.response_BAD, message: `No user found with username: ${username}.` };
     return { ...gbl.response_OK, data: doc };

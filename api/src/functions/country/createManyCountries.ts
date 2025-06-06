@@ -7,7 +7,7 @@ type Props = {
 
 export default async (props: Props): Promise<ApiResponse> => {
   const { countries } = props;
-  const result: CreateManyResponse = {
+  const result: ApiManyResponseData = {
     errors: [],
     created: [],
     skipped: []
@@ -43,19 +43,19 @@ export default async (props: Props): Promise<ApiResponse> => {
         });
 
         if (!newDoc) {
-          result.errors.push({ displayName, message: "Country not created" });
+          result.errors.push({ id: displayName, message: "Country not created" });
           continue;
         }
 
         const createdDoc = await newDoc.save();
         if (!createdDoc) {
-          result.errors.push({ displayName, message: "Country not created" });
+          result.errors.push({ id: displayName, message: "Country not created" });
           continue;
         }
 
         result.created.push(displayName);
       } catch (error: any) {
-        result.errors.push({ displayName: country.displayName, message: error.mresssge });
+        result.errors.push({ id: country.displayName, message: error.mresssge });
       }
     }
 

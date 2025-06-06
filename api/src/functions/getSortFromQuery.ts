@@ -1,21 +1,31 @@
 import { SortOrder } from "mongoose";
 
-export default (query: any): { [key: string]: SortOrder } => {
-  const sort: { [key: string]: SortOrder } = {};
+export type SortType = {
+  [key: string]: SortOrder;
+};
+type Props = {
+  query:any;
+  defaultValue?: SortType;
+};
+
+export default (props: Props): SortType => {
+  const {query, defaultValue = {}} = props;
+  var sort: SortType = defaultValue;
 
   try {
     const fields: string = query?.sort;
 
     if (fields) {
+      const customSort: SortType = {};
       fields.split(",").forEach((field: string) => {
         field = field.trim();
-
         if (field.startsWith("-")) {
-          sort[field.replace("-", "")] = -1;
+          customSort[field.replace("-", "")] = -1;
         } else {
-          sort[field] = 1;
+          customSort[field] = 1;
         }
       });
+      sort = customSort;
     }
 
     return sort;

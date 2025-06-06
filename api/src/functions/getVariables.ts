@@ -12,7 +12,7 @@ export const mongoDBVariables = (): MongoDBVariables => {
   const variables: MongoDBVariables = {
     uri: "",
     username: "",
-    password: "",
+    password: ""
   };
 
   switch (environment) {
@@ -33,4 +33,29 @@ export const mongoDBVariables = (): MongoDBVariables => {
 
 export const cryptoVariables = (): string => {
   return process.env.CRYPTO_SECRET!;
+};
+
+export const countriesDefaultQueryValues = (): any => {
+  return {
+    search: "",
+    projection: {},
+    sort: { displayName: 1 },
+    searchFields: ["displayName", "captalCity", "_id"]
+  };
+};
+export const usersDefaultQueryValues = (): any => {
+  return {
+    search: "",
+    projection: {},
+    sort: { username: 1 },
+    searchFields: ["username", "_id"]
+  };
+};
+export const notificationsDefaultQueryValues = (): any => {
+  return {
+    sort: {},
+    search: "",
+    projection: {},
+    searchFields: ["_id"]
+  };
 };

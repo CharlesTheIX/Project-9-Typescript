@@ -9,6 +9,7 @@ import createManyCountries from "../functions/country/createManyCountries";
 import getCountryByDisplayName from "../functions/country/getCountryByDisplayName";
 import getCountriesByContinent from "../functions/country/getCountriesByContinent";
 import deleteManyCountriesById from "../functions/country/deleteManyCountriesById";
+import updateManyCountriesById from "../functions/country/updateManyCountriesById";
 
 const router: Router = express.Router();
 
@@ -30,7 +31,6 @@ router.route("/all").post(async (request: Request, response: Response): Promise<
 router.route("/by-id").post(async (request: Request, response: Response): Promise<any> => {
   const query = request.query;
   const { _id } = request.body;
-
   if (!_id) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: _id." });
 
   try {
@@ -46,7 +46,6 @@ router.route("/by-id").post(async (request: Request, response: Response): Promis
 router.route("/by-display-name").post(async (request: Request, response: Response): Promise<any> => {
   const query = request.query;
   const { displayName } = request.body;
-
   if (!displayName) {
     return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: displayName." });
   }
@@ -64,7 +63,6 @@ router.route("/by-display-name").post(async (request: Request, response: Respons
 router.route("/by-continent").post(async (request: Request, response: Response): Promise<any> => {
   const query = request.query;
   const { continent, limit } = request.body;
-
   if (!continent) return { ...gbl.response_BAD, message: "Required inputs: continent." };
 
   try {
@@ -90,7 +88,6 @@ router.route("/create").post(async (request: Request, response: Response): Promi
     mapRectangle,
     flagRectangle
   } = request.body;
-
   if (!displayName || !names || names.length === 0 || !flagRectangle || !mapRectangle || !continent) {
     return response.status(gbl.status.BAD).json({
       ...gbl.response_BAD,
@@ -121,7 +118,6 @@ router.route("/create").post(async (request: Request, response: Response): Promi
 // Create many countries
 router.route("/create-many").post(async (request: Request, response: Response): Promise<any> => {
   const { countries } = request.body;
-
   if (!countries || countries.length === 0) {
     return response.status(gbl.status.BAD).json({
       ...gbl.response_BAD,
@@ -142,7 +138,6 @@ router.route("/create-many").post(async (request: Request, response: Response): 
 router.route("/by-id").patch(async (request: Request, response: Response): Promise<any> => {
   const query = request.query;
   const { _id, update } = request.body;
-
   if (!_id) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: _id." });
 
   try {
@@ -154,10 +149,23 @@ router.route("/by-id").patch(async (request: Request, response: Response): Promi
   }
 });
 
+// Update many countries by _id
+router.route("/many-by-id").patch(async (request: Request, response: Response): Promise<any> => {
+  const { updates } = request.body;
+  if (!updates || updates.length === 0) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: updates." });
+
+  try {
+    const res = await updateManyCountriesById({ updates });
+    return response.json(res);
+  } catch (error: any) {
+    console.error(`Update many countries by _id error: ${error.message}`);
+    return response.status(gbl.status.SERVER_ERROR).json(gbl.response_SERVER_ERROR);
+  }
+});
+
 // Delete country by _id
 router.route("/by-id").delete(async (request: Request, response: Response): Promise<any> => {
   const { _id } = request.body;
-
   if (!_id) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: _id." });
 
   try {
@@ -172,7 +180,6 @@ router.route("/by-id").delete(async (request: Request, response: Response): Prom
 // Delete many countries by _id
 router.route("/many-by-id").delete(async (request: Request, response: Response): Promise<any> => {
   const { _ids } = request.body;
-
   if (!_ids || _ids.length === 0) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: _ids." });
 
   try {

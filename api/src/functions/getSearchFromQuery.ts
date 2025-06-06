@@ -1,16 +1,21 @@
-export type OrSearch = { [key: string]: { $regex: string; $options: any } }[];
 
-const allSearchFields = ["-displayName"];
+export type Search = { [key: string]: { $regex: string; $options: any } };
+type Props = {
+  query: any;
+  defaultValue?: Search[];
+  defaultFields?: string[];
+};
 
-export default (query: any): OrSearch[] => {
-  var search: any[] = [];
+export default (props: Props): Search[] => {
+  const { query, defaultValue = [], defaultFields = []} = props;
+  var search: Search[] = defaultValue;
 
   try {
     const value: string = query?.value;
     if (!value) return search;
 
-    var fields: string[] = allSearchFields;
-    if (query?.search) fields = query?.search.split(",");
+    var fields: string[] = defaultFields;
+    if (query?.search && query?.search !== "all")  fields = query?.search.split(",");
 
     search = fields.map((field: string) => {
       field = field.trim();
