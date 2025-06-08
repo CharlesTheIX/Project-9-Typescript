@@ -15,7 +15,7 @@ export default async (props: Props): Promise<ApiResponse> => {
 
   try {
     for (const user of users) {
-      const { role, email, clerkId, username, profileType, profileImageUrl } = user;
+      const { role, email, clerkId, username, profilePrivacy, profileImageUrl, contacts } = user;
 
       try {
         const newDoc = new Model({
@@ -23,8 +23,9 @@ export default async (props: Props): Promise<ApiResponse> => {
           email,
           clerkId,
           username,
-          profileType: profileType || "user",
+          contacts: contacts || [],
           profileImageUrl: profileImageUrl || "",
+          profilePrivacy: profilePrivacy || "private",
         });
 
         if (!newDoc) {

@@ -9,24 +9,20 @@
 
 // API Responses
 export const status = {
-  // 2**
   OK: 200,
   DB_UPDATED: 201,
   NO_CONTENT: 204,
-  // 4**
   BAD: 400,
   UNAUTHORISED: 401,
   FORBIDDEN: 403,
   NOT_FOUND: 404,
   CONFLICT: 409,
-  // 5**
   SERVER_ERROR: 500,
 };
 
 const defaultError = { data: null, error: true };
 const defaultSuccess = { data: null, error: false };
 
-// 2** Responses
 export const response_OK: ApiResponse = {
   ...defaultSuccess,
   status: status.OK,
@@ -43,7 +39,6 @@ export const response_NO_CONTENT: ApiResponse = {
   status: status.NO_CONTENT,
 };
 
-// 4** Responses
 export const response_BAD: ApiResponse = {
   ...defaultError,
   status: status.BAD,
@@ -70,7 +65,6 @@ export const response_CONFLICT: ApiResponse = {
   status: status.CONFLICT,
 };
 
-// 5** Responses
 export const response_SERVER_ERROR: ApiResponse = {
   ...defaultError,
   message: "Server Error.",
@@ -94,8 +88,12 @@ export const continentOptions: Option[] = [
 export const continents: Continent[] = ["Africa", "Asia", "Europe", "North America", "Oceania", "South America"];
 
 // Users
-export const userRoles: UserRole[] = ["admin", "editor", "guest", "test", "user"];
-export const userProfileTypes: UserProfileType[] = ["public", "private"];
+export const userProfilePrivacyOptions: Option[] = [
+  { value: "private", label: "Private" },
+  { value: "public", label: "Public" },
+  { value: "contacts_only", label: "Contacts only" },
+];
+export const userProfilePrivacyTypes: UserPrivacyType[] = ["public", "private", "contacts_only"];
 export const userRoleOptions: Option[] = [
   { value: "user", label: "User" },
   { value: "guest", label: "Guest" },
@@ -103,26 +101,19 @@ export const userRoleOptions: Option[] = [
   { value: "test", label: "Test" },
   { value: "admin", label: "Admin" },
 ];
-export const userProfileTypeOptions: Option[] = [
-  { value: "private", label: "Private" },
-  { value: "public", label: "Public" },
-];
+export const userRoles: UserRole[] = ["admin", "editor", "guest", "test", "user"];
 
-// Rectangles
+// Nulls
+export const nullOption: Option = {
+  value: "",
+  label: "",
+};
 export const nullRectangle: Rectangle = {
   x: 0,
   y: 0,
   width: 0,
   height: 0,
 };
-
-// Options
-export const nullOption: Option = {
-  value: "",
-  label: "",
-};
-
-// Country
 export const nullCountry: Country = {
   _id: undefined,
   displayName: "",

@@ -3,10 +3,11 @@ import express, { Router, Request, Response } from "express";
 import createNotification from "../lib/notification/createNotification";
 import getAllNotifications from "../lib/notification/getAllNotifications";
 import getNotificationById from "../lib/notification/getNotificationById";
-import sendFriendInvitation from "../lib/notification/sendFriendInvitation";
+import sendContactInvitation from "../lib/notification/sendContactInvitation";
 import deleteNotificationById from "../lib/notification/deleteNotificationById";
 import updateNotificationById from "../lib/notification/updateNotificationById";
 import createManyNotifications from "../lib/notification/createManyNotifications";
+import acceptContactInvitation from "../lib/notification/acceptContactInvitation";
 import deleteManyNotificationsById from "../lib/notification/deleteManyNotificationsById";
 import updateManyNotificationsById from "../lib/notification/updateManyNotificationsById";
 import getNotificationsContainingParticipants from "../lib/notification/getNotificationsContainingParticipants";
@@ -98,8 +99,8 @@ router.route("/create-many").post(async (request: Request, response: Response): 
   }
 });
 
-// Send Friend Invitation
-router.route("/send-friend-invitation").post(async (request: Request, response: Response): Promise<any> => {
+// Send Contact Invitation
+router.route("/send-contact-invitation").post(async (request: Request, response: Response): Promise<any> => {
   const { invitationData } = request.body;
 
   if (!invitationData) {
@@ -110,10 +111,30 @@ router.route("/send-friend-invitation").post(async (request: Request, response: 
   }
 
   try {
-    const res = await sendFriendInvitation({ invitationData });
+    const res = await sendContactInvitation({ invitationData });
     return response.json(res);
   } catch (error: any) {
-    console.error(`Send Friend Invitation error: ${error.message}`);
+    console.error(`Send contact invitation error: ${error.message}`);
+    return response.status(gbl.status.SERVER_ERROR).json(gbl.response_SERVER_ERROR);
+  }
+});
+
+// Accept Contact Invitation
+router.route("/accept-contact-invitation").post(async (request: Request, response: Response): Promise<any> => {
+  const { notificationId } = request.body;
+
+  if (!notificationId) {
+    return response.status(gbl.status.BAD).json({
+      ...gbl.response_BAD,
+      message: "Required Inputs: notificationId.",
+    });
+  }
+
+  try {
+    const res = await acceptContactInvitation({ notificationId });
+    return response.json(res);
+  } catch (error: any) {
+    console.error(`Accept contact invitation error: ${error.message}`);
     return response.status(gbl.status.SERVER_ERROR).json(gbl.response_SERVER_ERROR);
   }
 });

@@ -9,7 +9,7 @@ export type InvitationData = {
 };
 export default async (invitationData: InvitationData): Promise<ApiResponse> => {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/notifications/send-friend-invitation`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/notifications/send-contact-invitation`, {
       method: "POST",
       headers: defaultInternalHeader,
       body: JSON.stringify({ invitationData }),

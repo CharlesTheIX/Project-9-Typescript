@@ -27,18 +27,18 @@ const schema = new Schema(
       enum: ["admin", "editor", "user", "guest", "test"],
       default: "user",
     },
-    profileType: {
+    profilePrivacy: {
       type: String,
-      enum: ["public", "private"],
+      enum: ["public", "private", "contacts_only"],
       default: "private",
     },
-    friends: {
+    contacts: {
       type: [
         {
           status: {
             type: String,
-            enum: ["active", "pending", "blocked"],
-            default: "pending",
+            enum: ["active", "pending", "blocked", "none"],
+            default: "none",
           },
           userId: {
             type: Schema.Types.ObjectId,

@@ -73,12 +73,12 @@ type User = MongoDocDefaults & {
   clerkId: string;
   username: string;
   profileImageUrl?: string;
-  friends?: UserFriendData[];
-  profileType?: UserProfileType;
+  contacts?: UserContactData[];
+  profilePrivacy?: UserPrivacyType;
 };
-type UserFriendData = {
+type UserContactData = {
   userId: string;
-  status: "active" | "pending" | "blocked";
+  status: "active" | "pending" | "blocked" | "none";
 };
-type UserProfileType = "public" | "private";
+type UserPrivacyType = "public" | "private" | "contacts_only";
 type UserRole = "admin" | "editor" | "user" | "guest" | "test";

@@ -38,8 +38,8 @@ export const users_table_headers: TableHeader[] = [
   },
   {
     canSort: true,
-    value: "profileType",
-    label: "Profile Type",
+    value: "profilePrivacy",
+    label: "Profile Privacy",
     roles: ["admin"],
   },
   {

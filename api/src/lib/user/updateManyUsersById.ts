@@ -28,10 +28,10 @@ export default async (props: Props): Promise<ApiResponse> => {
         updatedAt: new Date(),
         role: update.update.role || existingDoc.data.role,
         email: update.update.email || existingDoc.data.email,
-        friends: update.update.friends || existingDoc.data.friends,
         clerkId: update.update.clerkId || existingDoc.data.clerkId,
+        contacts: update.update.contacts || existingDoc.data.contacts,
         username: update.update.username || existingDoc.data.username,
-        profileType: update.update.profileType || existingDoc.data.profileType,
+        profilePrivacy: update.update.profilePrivacy || existingDoc.data.profilePrivacy,
         profileImageUrl: update.update.profileImageUrl || existingDoc.data.profileImageUrl,
       };
 

@@ -2,12 +2,13 @@ import * as gbl from "../globals";
 import createUser from "../lib/user/createUser";
 import getAllUsers from "../lib/user/getAllUsers";
 import getUserById from "../lib/user/getUserById";
-import express, { Router, Request, Response } from "express";
 import getUserByEmail from "../lib/user/getUserByEmail";
 import updateUserById from "../lib/user/updateUserById";
 import deleteUserById from "../lib/user/deleteUserById";
 import createManyUsers from "../lib/user/createManyUsers";
+import getUserContacts from "../lib/user/getUserContacts";
 import getUserByClerkId from "../lib/user/getUserByClerkId";
+import express, { Router, Request, Response } from "express";
 import getUserByUsername from "../lib/user/getUserByUsername";
 import updateManyUsersById from "../lib/user/updateManyUsersById";
 import deleteManyUsersById from "../lib/user/deleteManyUsersById";
@@ -88,9 +89,24 @@ router.route("/by-clerk-id").post(async (request: Request, response: Response): 
   }
 });
 
+// Get user contacts
+router.route("/contacts").post(async (request: Request, response: Response): Promise<any> => {
+  const query = request.query;
+  const { _id } = request.body;
+  if (!_id) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: _id." });
+
+  try {
+    const res = await getUserContacts({ _id, query });
+    return response.json(res);
+  } catch (error: any) {
+    console.error(`Get user contacts error: ${error.message}`);
+    return response.status(gbl.status.SERVER_ERROR).json(gbl.response_SERVER_ERROR);
+  }
+});
+
 // Create user
 router.route("/create").post(async (request: Request, response: Response): Promise<any> => {
-  const { email, role, clerkId, username, profileImageUrl, profileType, friends } = request.body;
+  const { email, role, clerkId, username, profileImageUrl, profilePrivacy, contacts } = request.body;
   if (!email || !role || !clerkId || !username) {
     return response.status(gbl.status.BAD).json({
       ...gbl.response_BAD,
@@ -99,7 +115,7 @@ router.route("/create").post(async (request: Request, response: Response): Promi
   }
 
   try {
-    const res = await createUser({ email, role, clerkId, username, profileImageUrl, profileType, friends });
+    const res = await createUser({ email, role, clerkId, username, profileImageUrl, profilePrivacy, contacts });
     return response.json(res);
   } catch (error: any) {
     console.error(`Create user error: ${error.message}`);

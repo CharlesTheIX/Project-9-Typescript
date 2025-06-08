@@ -25,9 +25,9 @@ export default async (props: Props): Promise<ApiResponse> => {
       role: update.role || existingDoc.data.role,
       email: update.email || existingDoc.data.email,
       clerkId: update.clerkId || existingDoc.data.clerkId,
-      friends: update.friends || existingDoc.data.friends,
+      contacts: update.contacts || existingDoc.data.contacts,
       username: update.username || existingDoc.data.username,
-      profileType: update.profileType || existingDoc.data.profileType,
+      profilePrivacy: update.profilePrivacy || existingDoc.data.profilePrivacy,
       profileImageUrl: update.profileImageUrl || existingDoc.data.profileImageUrl,
     };
 

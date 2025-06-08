@@ -2,8 +2,9 @@
 import { useState } from "react";
 import UserSearchbar from "@/components/UserSearchbar";
 import { useUserContext } from "@/contexts/userContext";
+import ProfileContactsFeed from "@/components/Feeds/ProfileContactsFeed";
 
-const FriendsTab: React.FC = () => {
+const ContactsTab: React.FC = () => {
   const { user } = useUserContext();
   const [activeSection, setActiveSection] = useState<"view" | "search">("view");
 
@@ -11,7 +12,7 @@ const FriendsTab: React.FC = () => {
     <div className="flex flex-col gap-5">
       <div className="flex flex-row gap-5 items-start justify-between">
         <div className="flex flex-col gap-1">
-          <h3>Friends</h3>
+          <h3>Contacts</h3>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt auctor sem nec semper. Ut ornare
             leo id risus blandit, fringilla fringilla lorem sollicitudin. Donec gravida semper lectus, eu aliquet erat
@@ -39,9 +40,9 @@ const FriendsTab: React.FC = () => {
       <div>
         {activeSection === "view" ? (
           <>
-            {!user?.friends || user?.friends.length === 0 ? (
+            {!user?.contacts || user?.contacts.length === 0 ? (
               <>
-                <p>No friends yet... </p>
+                <p>No Contacts yet... </p>
                 <p
                   className="link-text"
                   onClick={() => {
@@ -52,7 +53,7 @@ const FriendsTab: React.FC = () => {
                 </p>
               </>
             ) : (
-              <>Friend Feed</>
+              <ProfileContactsFeed />
             )}
           </>
         ) : (
@@ -63,4 +64,4 @@ const FriendsTab: React.FC = () => {
   );
 };
 
-export default FriendsTab;
+export default ContactsTab;

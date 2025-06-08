@@ -1,23 +1,22 @@
 "use client";
+import { useState, useMemo } from "react";
 import { debounce } from "@/lib/debounce";
 import TextInput from "./Inputs/TextInput";
 import getAllUsers from "@/lib/users/getAllUsers";
 import LoadingContainer from "./LoadingContainer";
-import { useState, useMemo, Fragment } from "react";
 import { useUserContext } from "@/contexts/userContext";
-import ProfileFriendTabCard from "./Cards/ProfileFriendTabCard";
 import { useToastContext } from "@/contexts/toastContext";
-import { defaultInternalHeader } from "@/globals";
-import sendFriendInvitation, { InvitationData } from "@/lib/notifications/sendFriendInvitation";
+import ProfileContactTabCard from "./Cards/ProfileContactTabCard";
+import sendContactInvitation, { InvitationData } from "@/lib/notifications/sendContactInvitation";
 
 type Props = {
   limit?: number;
   debounceTimeout?: number;
-  profileType?: UserProfileType;
+  profilePrivacy?: UserPrivacyType;
 };
 
 const UserSearchbar: React.FC<Props> = (props: Props) => {
-  const { profileType = "private", limit = 10, debounceTimeout = 1000 } = props;
+  const { profilePrivacy = "private", limit = 10, debounceTimeout = 1000 } = props;
   const toast = useToastContext();
   const { user } = useUserContext();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -27,13 +26,15 @@ const UserSearchbar: React.FC<Props> = (props: Props) => {
   const searchUsersByProfileType = async (value: string): Promise<void> => {
     setIsLoading(true);
     try {
+      if (value === "") throw new Error();
+
       const response = await getAllUsers({
         limit,
         sort: ["username"],
-        and: "profileType",
         searchValue: value,
         search: ["username"],
-        andValue: profileType,
+        and: "profilePrivacy",
+        andValue: profilePrivacy,
         project: ["username", "profileImageUrl"],
       });
       if (response.error || !response.data) throw new Error(response.message);
@@ -63,14 +64,15 @@ const UserSearchbar: React.FC<Props> = (props: Props) => {
             to: targetUserId,
             from: user._id || "",
             createdAt: new Date(),
-            content: `You have be invited to become friends with ${user.username}.`,
+            content: `You have be invited to become contacts with ${user.username}.`,
           },
         ],
       };
-      const invitationResponse = await sendFriendInvitation(invitationData);
+      const invitationResponse = await sendContactInvitation(invitationData);
       if (invitationResponse.error) throw new Error(invitationResponse.message);
 
-      await searchUsersByProfileType(searchValue);
+      await searchUsersByProfileType("");
+
       setIsLoading(false);
       toast.setContent("");
       toast.setHidden(false);
@@ -125,15 +127,14 @@ const UserSearchbar: React.FC<Props> = (props: Props) => {
             {displayedUsers.length === 0 ? (
               <>{searchValue ? <p>No results found.</p> : <p>Start your search in the input above.</p>}</>
             ) : (
-              <ul>
+              <ul className="flex flex-row gap-5 wrap">
                 {displayedUsers.map((displayedUser: Partial<User>, key: number) => {
-                  // if (displayedUser._id === user?._id) return <Fragment key={key}></Fragment>;
                   return (
                     <li key={key}>
-                      <ProfileFriendTabCard
+                      <ProfileContactTabCard
                         user={user}
                         targetUser={displayedUser}
-                        sendFriendInvitation={sendInvitation}
+                        sendContactInvitation={sendInvitation}
                       />
                     </li>
                   );

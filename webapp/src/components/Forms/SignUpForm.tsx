@@ -9,8 +9,8 @@ import createUser from "@/lib/users/createUser";
 import SelectInput from "../Inputs/SelectInput";
 import isNumber from "@/lib/validation/isNumber";
 import PasswordInput from "@/Inputs/PasswordInput";
+import { userProfilePrivacyOptions } from "@/globals";
 import validateSignUp from "@/lib/forms/validateSignUp";
-import { userProfileTypeOptions } from "@/globals";
 import { useToastContext } from "@/contexts/toastContext";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -39,10 +39,11 @@ const SignUpForm: React.FC = () => {
       const username: string = formData.get("username")?.toString() || "";
       const password: string = formData.get("password")?.toString() || "";
       const confirmedPassword: string = formData.get("password-confirmation")?.toString() || "";
-      const profileType = JSON.parse(formData.get("profile-type")?.toString() || `${userProfileTypeOptions[0]}`)
-        .value as UserProfileType;
+      const profilePrivacy = JSON.parse(
+        formData.get("profile-privacy")?.toString() || `${userProfilePrivacyOptions[0]}`,
+      ).value as UserPrivacyType;
 
-      const requestData: Partial<User> & { password: string } = { email, password, username, profileType };
+      const requestData: Partial<User> & { password: string } = { email, password, username, profilePrivacy };
 
       const hasError = validateSignUp(requestData);
       if (hasError.error) throw new Error(hasError.message);
@@ -57,7 +58,7 @@ const SignUpForm: React.FC = () => {
       toast.setHidden(false);
       toast.setType("success");
       toast.setTitle(`A verification code has been sent to ${email}.`);
-      setSignUpData({ email, username, clerkId: "", role: "user", profileType });
+      setSignUpData({ email, username, clerkId: "", role: "user", profilePrivacy });
     } catch (error: any) {
       setIsLoading(false);
       toast.setHidden(false);
@@ -122,10 +123,10 @@ const SignUpForm: React.FC = () => {
             <PasswordInput name="password" label="Password" required={true} includeConfirmation={true} />
             <SelectInput
               required={false}
-              name="profile-type"
-              label="Profile Type"
-              options={userProfileTypeOptions}
-              defaultValue={userProfileTypeOptions[0]}
+              name="profile-privacy"
+              label="Profile Privacy"
+              options={userProfilePrivacyOptions}
+              defaultValue={userProfilePrivacyOptions[0]}
             />
           </>
         </FormCore>

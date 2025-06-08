@@ -8,7 +8,7 @@ import SelectInput from "@/Inputs/SelectInput";
 import updateUserById from "@/lib/users/updateUserById";
 import { useToastContext } from "@/contexts/toastContext";
 import validateUserCreation from "@/lib/forms/validateUserCreation";
-import { nullOption, userProfileTypeOptions, userRoleOptions } from "@/globals";
+import { nullOption, userProfilePrivacyOptions, userRoleOptions } from "@/globals";
 
 type Props = {
   user: User;
@@ -36,14 +36,15 @@ const UserEditForm: React.FC<Props> = (props: Props) => {
       const username: string = formData.get("username")?.toString() || "";
       const profileImageUrl: string = formData.get("profile-image-url")?.toString() || "";
       const role = JSON.parse(formData.get("role")?.toString() || `${nullOption}`).value as UserRole;
-      const profileType = JSON.parse(formData.get("profile-type")?.toString() || `${userProfileTypeOptions[0]}`)
-        .value as UserProfileType;
+      const profilePrivacy = JSON.parse(
+        formData.get("profile-privacy")?.toString() || `${userProfilePrivacyOptions[0]}`,
+      ).value as UserPrivacyType;
 
       const requestData: Partial<User> = {
         role,
         email,
         username,
-        profileType,
+        profilePrivacy,
         profileImageUrl,
       };
 
@@ -83,10 +84,10 @@ const UserEditForm: React.FC<Props> = (props: Props) => {
         <UrlInput name="profile-image-url" label="Profile Image Url" defaultValue={user?.profileImageUrl} />
         <SelectInput
           required={false}
-          name="profile-type"
-          label="Profile Type"
-          options={userProfileTypeOptions}
-          defaultValue={userProfileTypeOptions.find((option: Option) => option.value === user?.profileType)}
+          name="profile-privacy"
+          label="Profile Privacy"
+          options={userProfilePrivacyOptions}
+          defaultValue={userProfilePrivacyOptions.find((option: Option) => option.value === user?.profilePrivacy)}
         />
       </>
     </FormCore>

@@ -1,12 +1,12 @@
 import MenuTab from "./Tabs/MenuTab";
-import FriendsTab from "./Tabs/FriendsTab";
 import DetailsTab from "./Tabs/DetailsTab";
+import ContactsTab from "./Tabs/ContactsTab";
 import NotificationsTab from "./Tabs/Notifications";
 
 export const profileTabs: Tab[] = [
   {
-    title: "Friends",
-    content: <FriendsTab />,
+    title: "Contacts",
+    content: <ContactsTab />,
   },
   {
     title: "Details",
@@ -18,7 +18,6 @@ export const profileTabs: Tab[] = [
   },
   {
     title: "Notifications",
-    content: <NotificationsTab />
-  }
+    content: <NotificationsTab />,
+  },
 ];
-

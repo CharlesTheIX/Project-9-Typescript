@@ -2,7 +2,7 @@ import * as gbl from "../../globals";
 import Model from "../../models/user.model";
 
 export default async (props: User): Promise<ApiResponse> => {
-  const { email, role, clerkId, username, profileImageUrl, profileType, friends } = props;
+  const { email, role, clerkId, username, profileImageUrl, profilePrivacy, contacts } = props;
 
   try {
     const newDoc = new Model({
@@ -10,9 +10,9 @@ export default async (props: User): Promise<ApiResponse> => {
       email,
       clerkId,
       username,
-      friends: friends || [],
-      profileType: profileType || "private",
+      contacts: contacts || [],
       profileImageUrl: profileImageUrl || "",
+      profilePrivacy: profilePrivacy || "private",
     });
     if (!newDoc) return { ...gbl.response_BAD, message: "User not created." };
 

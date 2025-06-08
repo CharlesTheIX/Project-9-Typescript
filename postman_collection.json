@@ -721,6 +721,82 @@
 					"response": []
 				},
 				{
+					"name": "Notifications-send-contact-invitation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"invitationData\": {\r\n        \"toId\": \"68346c0aec5b1e0bf204d3e4\",\r\n        \"type\": \"invitation\",\r\n        \"fromId\": \"68346c0aec5b1e0bf204d3e4\",\r\n        \"subject\": \"New Invitation from Postman\",\r\n        \"messages\": [\r\n            {\r\n                \"state\": \"active\",\r\n                \"to\": \"68346c0aec5b1e0bf204d3e4\",\r\n                \"from\": \"68346c0aec5b1e0bf204d3e4\",\r\n                \"content\": \"You have be invited to become contacts with Postman.\"\r\n            }\r\n        ]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{VERSION}}/notifications/send-contact-invitation",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"notifications",
+								"send-contact-invitation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Notifications-accept-contact-invitation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"NotificationId\": \"68455d16ec91c7ee8d9a5a78\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{VERSION}}/notifications/accept-contact-invitation",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"notifications",
+								"accept-contact-invitation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Notifications-get-by-id",
 					"request": {
 						"auth": {
@@ -938,7 +1014,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"_id\": \"6842d490a66d0ae38bb23b20\",\r\n    \"update\": {\r\n        \"profileType\": \"public\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"_id\": \"68346c0aec5b1e0bf204d3e4\",\r\n    \"update\": {\r\n        \"contacts\": []\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1021,7 +1097,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"test-1@google.com\",\r\n    \"role\": \"test\",\r\n    \"clerkId\": \"-2\",\r\n    \"username\": \"TestUser_2\",\r\n    \"profileType\": \"private\",\r\n    \"profileImageUrl\": \"\",\r\n    \"friends\": [{ \"status\": \"pending\", \"userId\": \"684308273530237beb28c3fe\"}]\r\n}",
+							"raw": "{\r\n    \"email\": \"test-1@google.com\",\r\n    \"role\": \"test\",\r\n    \"clerkId\": \"-2\",\r\n    \"username\": \"TestUser_2\",\r\n    \"profileType\": \"private\",\r\n    \"profileImageUrl\": \"\",\r\n    \"contacts\": [{ \"status\": \"pending\", \"userId\": \"684308273530237beb28c3fe\"}]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1059,7 +1135,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"users\": [\r\n        {\r\n            \"email\": \"test_1@google.com\",\r\n            \"role\": \"test\",\r\n            \"clerkId\": \"test-1\",\r\n            \"username\": \"TestUser-1\",\r\n            \"profileType\": \"staff\",\r\n            \"profileImageUrl\": \"\",\r\n            \"friends\": []\r\n        },\r\n        {\r\n            \"email\": \"test_2@google.com\",\r\n            \"role\": \"test\",\r\n            \"clerkId\": \"test-2\",\r\n            \"username\": \"TestUser-2\",\r\n            \"profileType\": \"staff\",\r\n            \"profileImageUrl\": \"\",\r\n            \"friends\": []\r\n        },\r\n        {\r\n            \"email\": \"test_3@google.com\",\r\n            \"role\": \"test\",\r\n            \"clerkId\": \"test-3\",\r\n            \"username\": \"TestUser-3\",\r\n            \"profileType\": \"staff\",\r\n            \"profileImageUrl\": \"\",\r\n            \"friends\": []\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"users\": [\r\n        {\r\n            \"email\": \"test_1@google.com\",\r\n            \"role\": \"test\",\r\n            \"clerkId\": \"test-1\",\r\n            \"username\": \"TestUser-1\",\r\n            \"profileType\": \"staff\",\r\n            \"profileImageUrl\": \"\",\r\n            \"contacts\": []\r\n        },\r\n        {\r\n            \"email\": \"test_2@google.com\",\r\n            \"role\": \"test\",\r\n            \"clerkId\": \"test-2\",\r\n            \"username\": \"TestUser-2\",\r\n            \"profileType\": \"staff\",\r\n            \"profileImageUrl\": \"\",\r\n            \"contacts\": []\r\n        },\r\n        {\r\n            \"email\": \"test_3@google.com\",\r\n            \"role\": \"test\",\r\n            \"clerkId\": \"test-3\",\r\n            \"username\": \"TestUser-3\",\r\n            \"profileType\": \"staff\",\r\n            \"profileImageUrl\": \"\",\r\n            \"contacts\": []\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1182,6 +1258,50 @@
 									"key": "project",
 									"value": "displayName, continent",
 									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users-get-contacts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"68346c0aec5b1e0bf204d3e4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{VERSION}}/users/contacts?project=username, profileImageUrl",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"users",
+								"contacts"
+							],
+							"query": [
+								{
+									"key": "project",
+									"value": "username, profileImageUrl"
 								}
 							]
 						}

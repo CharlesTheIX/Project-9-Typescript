@@ -2,8 +2,8 @@ import isUrl from "@/lib/validation/isUrl";
 import isEmail from "@/lib/validation/isEmail";
 import isUserRole from "@/lib/validation/isUserRole";
 import isAlphanumeric from "@/lib/validation/isAlphanumeric";
-import isUserProfileType from "../validation/isUserProfileType";
 import updateFormErrorMessage from "@/lib/forms/updateFormErrorMessage";
+import isUserProfilePrivacyType from "../validation/isUserProfilePrivacyType";
 
 export default (requestData: Partial<User>): FormError => {
   const formError: FormError = { error: false, message: "" };
@@ -34,10 +34,10 @@ export default (requestData: Partial<User>): FormError => {
           formError.message = updateFormErrorMessage(formError.message, "Profile Image URL");
         }
         break;
-      case "profileType":
-        if (requestData[item] && !isUserProfileType(requestData[item])) {
+      case "profilePrivacy":
+        if (requestData[item] && !isUserProfilePrivacyType(requestData[item])) {
           formError.error = true;
-          formError.message = updateFormErrorMessage(formError.message, "Profile type");
+          formError.message = updateFormErrorMessage(formError.message, "Profile privacy");
         }
         break;
     }

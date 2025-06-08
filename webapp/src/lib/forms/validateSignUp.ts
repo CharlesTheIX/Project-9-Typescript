@@ -1,8 +1,8 @@
 import isEmail from "@/lib/validation/isEmail";
 import isPassword from "@/lib/validation/isPassword";
 import isAlphanumeric from "@/lib/validation/isAlphanumeric";
-import isUserProfileType from "../validation/isUserProfileType";
 import updateFormErrorMessage from "@/lib/forms/updateFormErrorMessage";
+import isUserProfilePrivacyType from "../validation/isUserProfilePrivacyType";
 
 export default (requestData: Partial<User> & { password: string }): FormError => {
   const formError: FormError = { error: false, message: "" };
@@ -27,10 +27,10 @@ export default (requestData: Partial<User> & { password: string }): FormError =>
           formError.message = updateFormErrorMessage(formError.message, "Password");
         }
         break;
-      case "profileType":
-        if (!isUserProfileType(requestData[item])) {
+      case "profilePrivacy":
+        if (!isUserProfilePrivacyType(requestData[item])) {
           formError.error = true;
-          formError.message = updateFormErrorMessage(formError.message, "Profile type");
+          formError.message = updateFormErrorMessage(formError.message, "Profile privacy");
         }
         break;
     }
