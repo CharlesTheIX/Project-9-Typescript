@@ -1,6 +1,6 @@
 import app from "./app";
 import dotenv from "dotenv";
-import connectToMongoDB from "./functions/connectToMongoDB";
+import connectToMongoDB from "./lib/connectToMongoDB";
 
 dotenv.config({ path: "./.env.local" });
 

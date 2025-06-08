@@ -1,16 +1,34 @@
-/*
-  KEEP THE TYPE IN THIS FILE IN ALPHABETICAL ORDER!
-*/
+// KEEP THE TYPE IN THIS FILE IN ALPHABETICAL ORDER!
 
+/* A */
 type ApiResponse = {
-  data: any;
   status: number;
   error: boolean;
   message: string;
+  data: ApiResponseDataType;
 };
+type ApiManyResponseData = {
+  created: string[];
+  skipped: string[];
+  errors: { id: string; message: string }[];
+};
+type ApiMultiResponseData = {
+  items: any[];
+  count: number;
+};
+type ApiParamOptions = {
+  and?: string;
+  limit?: number;
+  sort?: string[];
+  search?: string[];
+  andValue?: string;
+  project?: string[];
+  searchValue?: string;
+};
+type ApiResponseDataType = null | any | any[] | ApiManyResponseData | ApiMultiResponseData;
 
+/* C */
 type Continent = "Europe" | "Asia" | "Africa" | "North America" | "South America" | "Oceania";
-
 type Country = MongoDocDefaults & {
   names: string[];
   continent: string;
@@ -24,17 +42,18 @@ type Country = MongoDocDefaults & {
   flagRectangle: Rectangle;
 };
 
+/* F */
 type FormError = {
   error: boolean;
   message: string;
 };
-
 type FormPreferences = {
   hide?: string[];
   searchValue?: string;
   postsPerPage?: number;
 };
 
+/* M */
 type MongoDocDefaults = {
   __v?: any;
   _id?: string;
@@ -42,20 +61,19 @@ type MongoDocDefaults = {
   updatedAt?: Date;
 };
 
+/* N */
 type NavigationItem = {
   href: string;
   label: string;
   icon?: string;
 };
-
 type NotificationData = MongoDocDefaults & {
   readBy: string;
   subject: string;
+  type: NotificationType;
   participants: string[];
   messages: NotificationMessage[];
-  type: "default" | "message" | "award";
 };
-
 type NotificationMessage = {
   to: string;
   from: string;
@@ -63,14 +81,15 @@ type NotificationMessage = {
   content: string;
   state?: "active" | "deleted";
 };
+type NotificationType = "default" | "message" | "award" | "invitation";
 
-type NotificationType = "default" | "message" | "award";
-
+/* O */
 type Option = {
   label: string;
   value: string | number;
 };
 
+/* R */
 type Rectangle = {
   x: number;
   y: number;
@@ -78,11 +97,11 @@ type Rectangle = {
   height: number;
 };
 
+/* R */
 type Tab = {
   title: string;
   content: React.ReactElement;
 };
-
 type TableHeader = {
   value: string;
   label: string;
@@ -94,17 +113,22 @@ type TableHeader = {
   sortState?: SortState;
   dataType?: "edit" | "impersonate" | "pin";
 };
-
 type TableSortState = "asc" | "desc" | "shuffled";
 
+/* U */
 type User = MongoDocDefaults & {
   email: string;
   role: UserRole;
   clerkId: string;
-  // surname: string;
   username: string;
-  // firstName: string;
-  profileImageURL?: string;
+  profileImageUrl?: string;
+  friends?: UserFriendData[];
+  profileType?: UserProfileType;
 };
-
+type UserFriendData = {
+  userId: string;
+  status: "active" | "pending" | "blocked";
+};
+type UserFriendStatus = "active" | "pending" | "blocked";
+type UserProfileType = "public" | "private";
 type UserRole = "admin" | "editor" | "user" | "guest" | "test";

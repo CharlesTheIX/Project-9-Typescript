@@ -1,5 +1,4 @@
 "use client";
-import * as gbl from "@/globals";
 import FormCore from "./Form/Core";
 import { useRef, useState } from "react";
 import UrlInput from "@/Inputs/UrlInput";
@@ -12,12 +11,13 @@ import RectangleInput from "@/Inputs/RectangleInput";
 import { useToastContext } from "@/contexts/toastContext";
 import createCountry from "@/lib/countries/createCountry";
 import validateCountryCreation from "@/lib/forms/validateCountryCreation";
+import { continentOptions, nullCountry, nullOption, nullRectangle } from "@/globals";
 
 const CountryCreationForm: React.FC = () => {
   const toast = useToastContext();
   const formRef = useRef<HTMLFormElement>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [defaultValues, setDefaultValues] = useState<Country>(gbl.nullCountry);
+  const [defaultValues, setDefaultValues] = useState<Country>(nullCountry);
 
   const handleSubmit = async (event: React.FormEvent): Promise<void> => {
     event?.preventDefault();
@@ -35,9 +35,9 @@ const CountryCreationForm: React.FC = () => {
       const names: string[] = JSON.parse(formData.get("names")?.toString() || "[]");
       const population: number = parseInt(formData.get("population")?.toString() || "0");
       const languages: string[] = JSON.parse(formData.get("languages")?.toString() || "[]");
-      const continent = JSON.parse(formData.get("continent")?.toString() || `${gbl.nullOption}`).value as Continent;
-      const mapRectangle: Rectangle = JSON.parse(formData.get("map-rectangle")?.toString() || `${gbl.nullRectangle}`);
-      const flagRectangle: Rectangle = JSON.parse(formData.get("flag-rectangle")?.toString() || `${gbl.nullRectangle}`);
+      const continent = JSON.parse(formData.get("continent")?.toString() || `${nullOption}`).value as Continent;
+      const mapRectangle: Rectangle = JSON.parse(formData.get("map-rectangle")?.toString() || `${nullRectangle}`);
+      const flagRectangle: Rectangle = JSON.parse(formData.get("flag-rectangle")?.toString() || `${nullRectangle}`);
 
       const requestData: Country = {
         names,
@@ -49,7 +49,7 @@ const CountryCreationForm: React.FC = () => {
         description,
         capitalCity,
         mapRectangle,
-        flagRectangle
+        flagRectangle,
       };
 
       const hasErrors = validateCountryCreation(requestData);
@@ -63,7 +63,7 @@ const CountryCreationForm: React.FC = () => {
       toast.setHidden(false);
       toast.setType("success");
       toast.setTitle("Country Created");
-      setDefaultValues(gbl.nullCountry);
+      setDefaultValues(nullCountry);
     } catch (error: any) {
       setIsLoading(false);
       toast.setHidden(false);
@@ -96,7 +96,7 @@ const CountryCreationForm: React.FC = () => {
           name="continent"
           label="Continent"
           className="w-full"
-          options={gbl.continentOptions}
+          options={continentOptions}
           defaultValue={{ value: defaultValues.continent, label: defaultValues.continent }}
         />
         <MultiTextInput

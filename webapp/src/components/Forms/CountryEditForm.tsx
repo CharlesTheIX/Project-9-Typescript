@@ -1,5 +1,4 @@
 "use client";
-import * as gbl from "@/globals";
 import FormCore from "./Form/Core";
 import { useRef, useState } from "react";
 import UrlInput from "@/Inputs/UrlInput";
@@ -11,6 +10,7 @@ import MultiTextInput from "@/Inputs/MultiTextInput";
 import RectangleInput from "@/Inputs/RectangleInput";
 import { useToastContext } from "@/contexts/toastContext";
 import updateCountryById from "@/lib/countries/updateCountryById";
+import { continentOptions, nullOption, nullRectangle } from "@/globals";
 import validateCountryCreation from "@/lib/forms/validateCountryCreation";
 
 type Props = {
@@ -42,9 +42,9 @@ const CountryEditForm: React.FC<Props> = (props: Props) => {
       const names: string[] = JSON.parse(formData.get("names")?.toString() || "[]");
       const population: number = parseInt(formData.get("population")?.toString() || "0");
       const languages: string[] = JSON.parse(formData.get("languages")?.toString() || "[]");
-      const continent = JSON.parse(formData.get("continent")?.toString() || `${gbl.nullOption}`).value as Continent;
-      const mapRectangle: Rectangle = JSON.parse(formData.get("map-rectangle")?.toString() || `${gbl.nullRectangle}`);
-      const flagRectangle: Rectangle = JSON.parse(formData.get("flag-rectangle")?.toString() || `${gbl.nullRectangle}`);
+      const continent = JSON.parse(formData.get("continent")?.toString() || `${nullOption}`).value as Continent;
+      const mapRectangle: Rectangle = JSON.parse(formData.get("map-rectangle")?.toString() || `${nullRectangle}`);
+      const flagRectangle: Rectangle = JSON.parse(formData.get("flag-rectangle")?.toString() || `${nullRectangle}`);
 
       const requestData: Country = {
         names,
@@ -56,7 +56,7 @@ const CountryEditForm: React.FC<Props> = (props: Props) => {
         description,
         capitalCity,
         mapRectangle,
-        flagRectangle
+        flagRectangle,
       };
 
       const hasErrors = validateCountryCreation(requestData);
@@ -96,8 +96,8 @@ const CountryEditForm: React.FC<Props> = (props: Props) => {
           name="continent"
           label="Continent"
           className="w-full"
-          options={gbl.continentOptions}
-          defaultValue={gbl.continentOptions.find((option: Option) => option.value === country?.continent)}
+          options={continentOptions}
+          defaultValue={continentOptions.find((option: Option) => option.value === country?.continent)}
         />
         <MultiTextInput className="w-full" name="languages" label="Languages" defaultValue={country?.languages} />
         <NumberInput

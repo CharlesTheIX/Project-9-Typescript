@@ -6,9 +6,11 @@ import TextInput from "@/Inputs/TextInput";
 import EmailInput from "@/Inputs/EmailInput";
 import NumberInput from "@/Inputs/NumberInput";
 import createUser from "@/lib/users/createUser";
+import SelectInput from "../Inputs/SelectInput";
 import isNumber from "@/lib/validation/isNumber";
 import PasswordInput from "@/Inputs/PasswordInput";
 import validateSignUp from "@/lib/forms/validateSignUp";
+import { userProfileTypeOptions } from "@/globals";
 import { useToastContext } from "@/contexts/toastContext";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -37,8 +39,10 @@ const SignUpForm: React.FC = () => {
       const username: string = formData.get("username")?.toString() || "";
       const password: string = formData.get("password")?.toString() || "";
       const confirmedPassword: string = formData.get("password-confirmation")?.toString() || "";
+      const profileType = JSON.parse(formData.get("profile-type")?.toString() || `${userProfileTypeOptions[0]}`)
+        .value as UserProfileType;
 
-      const requestData: Partial<User> & { password: string } = { email, password, username };
+      const requestData: Partial<User> & { password: string } = { email, password, username, profileType };
 
       const hasError = validateSignUp(requestData);
       if (hasError.error) throw new Error(hasError.message);
@@ -53,7 +57,7 @@ const SignUpForm: React.FC = () => {
       toast.setHidden(false);
       toast.setType("success");
       toast.setTitle(`A verification code has been sent to ${email}.`);
-      setSignUpData({ email, username, clerkId: "", role: "user" });
+      setSignUpData({ email, username, clerkId: "", role: "user", profileType });
     } catch (error: any) {
       setIsLoading(false);
       toast.setHidden(false);
@@ -116,6 +120,13 @@ const SignUpForm: React.FC = () => {
             <TextInput name="username" label="Username" required={true} />
             <EmailInput name="email" label="Email" required={true} />
             <PasswordInput name="password" label="Password" required={true} includeConfirmation={true} />
+            <SelectInput
+              required={false}
+              name="profile-type"
+              label="Profile Type"
+              options={userProfileTypeOptions}
+              defaultValue={userProfileTypeOptions[0]}
+            />
           </>
         </FormCore>
       )}

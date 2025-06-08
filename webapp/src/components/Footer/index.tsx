@@ -30,11 +30,10 @@ const Footer: React.FC = () => {
           <p>
             Created by{" "}
             <Link className="link-text" href={"https://github.com/CharlesTheIX"} target="_blank">
-              David Charles
+              CharlesTheIX
             </Link>
             .
           </p>
-          {/* <p>Copyright &copy; {new Date().getFullYear()}.</p> */}
         </div>
       </section>
 

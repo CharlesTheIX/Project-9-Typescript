@@ -1,6 +1,7 @@
 import isEmail from "@/lib/validation/isEmail";
 import isPassword from "@/lib/validation/isPassword";
 import isAlphanumeric from "@/lib/validation/isAlphanumeric";
+import isUserProfileType from "../validation/isUserProfileType";
 import updateFormErrorMessage from "@/lib/forms/updateFormErrorMessage";
 
 export default (requestData: Partial<User> & { password: string }): FormError => {
@@ -24,6 +25,12 @@ export default (requestData: Partial<User> & { password: string }): FormError =>
         if (!isPassword(requestData[item], 8)) {
           formError.error = true;
           formError.message = updateFormErrorMessage(formError.message, "Password");
+        }
+        break;
+      case "profileType":
+        if (!isUserProfileType(requestData[item])) {
+          formError.error = true;
+          formError.message = updateFormErrorMessage(formError.message, "Profile type");
         }
         break;
     }

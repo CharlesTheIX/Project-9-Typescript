@@ -21,7 +21,7 @@ const TabContainer: React.FC<Props> = (props: Props) => {
 
   return (
     <div className="tab-container flex flex-col">
-      <div className="header w-full flex lfex-row justify-end">
+      <div className="header w-full flex flex-row justify-end">
         <ul className="flex overflow-hidden flex-row">
           {tabs.map((tab: Tab, key: number) => {
             return (

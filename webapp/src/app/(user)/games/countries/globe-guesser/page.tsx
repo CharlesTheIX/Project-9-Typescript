@@ -1,10 +1,10 @@
 import { Metadata } from "next";
-import GlobeGusserGamePage from "@/pages/Games/Countries/globe-guesser";
+import GlobeGuessingGamePage from "@/pages/Games/Countries/globe-guessing";
 
 export const metadata: Metadata = {
   title: "Globe Guesser | Countries | Games | P9",
-  description: ""
+  description: "",
 };
 
-const Page: React.FC = () => <GlobeGusserGamePage />;
+const Page: React.FC = () => <GlobeGuessingGamePage />;
 export default Page;

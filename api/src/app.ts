@@ -4,7 +4,7 @@ import userRouter from "./routes/user.route";
 import healthRouter from "./routes/health.route";
 import countryRouter from "./routes/country.route";
 import notificationRouter from "./routes/notification.route";
-import bearerAuthentication from "./functions/auth/bearerAuth";
+import bearerAuthentication from "./lib/auth/bearerAuth";
 
 const version = "v1";
 const app = express();

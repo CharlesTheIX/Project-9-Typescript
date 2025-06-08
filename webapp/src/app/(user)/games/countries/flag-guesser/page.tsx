@@ -1,10 +1,10 @@
 import { Metadata } from "next";
-import FlagGusserGamePage from "@/pages/Games/Countries/flag-guesser";
+import FlagGuessingGamePage from "@/pages/Games/Countries/flag-guessing";
 
 export const metadata: Metadata = {
   title: "Flag Guesser | Countries | Games | P9",
-  description: ""
+  description: "",
 };
 
-const Page: React.FC = () => <FlagGusserGamePage />;
+const Page: React.FC = () => <FlagGuessingGamePage />;
 export default Page;

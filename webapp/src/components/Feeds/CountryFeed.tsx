@@ -4,10 +4,8 @@ import * as gbl from "@/globals";
 import { useState, useEffect } from "react";
 import SelectInput from "@/Inputs/SelectInput";
 import getSortedData from "@/lib/getSortedData";
-// import { useUserContext } from "@/contexts/userContext";
 import LoadingContainer from "@/components/LoadingContainer";
 import getAllCountries from "@/lib/countries/getAllCountries";
-import getCountriesByContinent from "@/lib/countries/getCountriesByContinent";
 
 const CountryFeed: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -23,9 +21,9 @@ const CountryFeed: React.FC = () => {
       var response: ApiResponse;
 
       if (item === "all") {
-        response = await getAllCountries(200);
+        response = await getAllCountries({ limit: 200 });
       } else {
-        response = await getCountriesByContinent({ continent: item, limit: 200 });
+        response = await getAllCountries({ limit: 200, and: "continent", andValue: item });
       }
 
       if (response.error) throw new Error(response.message);

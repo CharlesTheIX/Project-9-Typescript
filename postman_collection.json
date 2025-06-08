@@ -10,378 +10,6 @@
 			"name": "Countries",
 			"item": [
 				{
-					"name": "Countries-create",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{bearer_token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"names\": [\"testing\"],\r\n    \"imageUrl\": \"\",\r\n    \"continent\": \"Europe\",\r\n    \"languages\": [\"testing\"],\r\n    \"population\": 100,\r\n    \"displayName\": \"Test Country\",\r\n    \"description\": \"\",\r\n    \"capitalCity\": \"Test City\",\r\n    \"mapRectangle\": { \"x\": 0, \"y\": 0, \"width\": 0, \"height\": 0 },\r\n    \"flagRectangle\": { \"x\": 0, \"y\": 0, \"width\": 0, \"height\": 0 }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{BASE_URL}}/{{VERSION}}/countries/create",
-							"host": [
-								"{{BASE_URL}}"
-							],
-							"path": [
-								"{{VERSION}}",
-								"countries",
-								"create"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Countries-create-many",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{bearer_token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"countries\": [\r\n        {\r\n            \"names\": [\r\n                \"testing 1\"\r\n            ],\r\n            \"continent\": \"Europe\",\r\n            \"displayName\": \"Test Country 1\",\r\n            \"mapRectangle\": {\r\n                \"x\": 0,\r\n                \"y\": 0,\r\n                \"width\": 0,\r\n                \"height\": 0\r\n            },\r\n            \"flagRectangle\": {\r\n                \"x\": 0,\r\n                \"y\": 0,\r\n                \"width\": 0,\r\n                \"height\": 0\r\n            }\r\n        },\r\n        {\r\n            \"names\": [\r\n                \"testing 2\"\r\n            ],\r\n            \"continent\": \"Europe\",\r\n            \"displayName\": \"Test Country 2\",\r\n            \"mapRectangle\": {\r\n                \"x\": 0,\r\n                \"y\": 0,\r\n                \"width\": 0,\r\n                \"height\": 0\r\n            },\r\n            \"flagRectangle\": {\r\n                \"x\": 0,\r\n                \"y\": 0,\r\n                \"width\": 0,\r\n                \"height\": 0\r\n            }\r\n        },\r\n        {\r\n            \"names\": [\r\n                \"testing 3\"\r\n            ],\r\n            \"continent\": \"Europe\",\r\n            \"displayName\": \"Test Country 3\",\r\n            \"mapRectangle\": {\r\n                \"x\": 0,\r\n                \"y\": 0,\r\n                \"width\": 0,\r\n                \"height\": 0\r\n            },\r\n            \"flagRectangle\": {\r\n                \"x\": 0,\r\n                \"y\": 0,\r\n                \"width\": 0,\r\n                \"height\": 0\r\n            }\r\n        }\r\n    ]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{BASE_URL}}/{{VERSION}}/countries/create-many",
-							"host": [
-								"{{BASE_URL}}"
-							],
-							"path": [
-								"{{VERSION}}",
-								"countries",
-								"create-many"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Countries-get-all",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{bearer_token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"limit\": 200\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{BASE_URL}}/{{VERSION}}/countries/all",
-							"host": [
-								"{{BASE_URL}}"
-							],
-							"path": [
-								"{{VERSION}}",
-								"countries",
-								"all"
-							],
-							"query": [
-								{
-									"key": "sort",
-									"value": "-displayName",
-									"disabled": true
-								},
-								{
-									"key": "project",
-									"value": "displayName",
-									"disabled": true
-								},
-								{
-									"key": "search",
-									"value": "continent, displayName",
-									"disabled": true
-								},
-								{
-									"key": "value",
-									"value": "test",
-									"disabled": true
-								},
-								{
-									"key": "limit",
-									"value": "200",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Countries-get-by-id",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{bearer_token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"_id\": \"6842d490a66d0ae38bb23b20\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{BASE_URL}}/{{VERSION}}/countries/by-id",
-							"host": [
-								"{{BASE_URL}}"
-							],
-							"path": [
-								"{{VERSION}}",
-								"countries",
-								"by-id"
-							],
-							"query": [
-								{
-									"key": "project",
-									"value": "displayName, continent",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Countries-get-by-continent",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{bearer_token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"continent\": \"Europe\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{BASE_URL}}/{{VERSION}}/countries/by-continent",
-							"host": [
-								"{{BASE_URL}}"
-							],
-							"path": [
-								"{{VERSION}}",
-								"countries",
-								"by-continent"
-							],
-							"query": [
-								{
-									"key": "sort",
-									"value": "-displayName",
-									"disabled": true
-								},
-								{
-									"key": "project",
-									"value": "displayName, continent",
-									"disabled": true
-								},
-								{
-									"key": "search",
-									"value": "continent, displayName",
-									"disabled": true
-								},
-								{
-									"key": "value",
-									"value": "test",
-									"disabled": true
-								},
-								{
-									"key": "limit",
-									"value": "200",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Countries-get-by-display-name",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{bearer_token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"displayName\": \"Test Country\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}/{{version}}/countries/by-display-name",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"{{version}}",
-								"countries",
-								"by-display-name"
-							],
-							"query": [
-								{
-									"key": "project",
-									"value": "displayName, continent",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Countries-delete-by-id",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{bearer_token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"_id\": \"6842d490a66d0ae38bb23b20\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{BASE_URL}}/{{VERSION}}/countries/by-id",
-							"host": [
-								"{{BASE_URL}}"
-							],
-							"path": [
-								"{{VERSION}}",
-								"countries",
-								"by-id"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Countries-delete-many-by-id",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{bearer_token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"_ids\": [\r\n        \"6842d8f7a66d0ae38bb23b3c\",\r\n        \"6842d8f7a66d0ae38bb23b40\",\r\n        \"6842d8f7a66d0ae38bb23b44\"\r\n    ]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{BASE_URL}}/{{VERSION}}/countries/many-by-id",
-							"host": [
-								"{{BASE_URL}}"
-							],
-							"path": [
-								"{{VERSION}}",
-								"countries",
-								"many-by-id"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Countries-update-by-id",
 					"request": {
 						"auth": {
@@ -389,7 +17,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{bearer_token}}",
+									"value": "{{BEARER_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -434,7 +62,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{bearer_token}}",
+									"value": "{{BEARER_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -443,7 +71,396 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"updates\": [\r\n        { \"_id\": \"6842f925cffbd33364697629\", \"update\": { \"description\": \"a new description 1\"} },\r\n        { \"_id\": \"6842f925cffbd3336469762d\", \"update\": { \"description\": \"a new description 2\"} },\r\n        { \"_id\": \"6842f925cffbd33364697631\", \"update\": { \"description\": \"a new description 3\"} }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"updates\": [\r\n        {\r\n            \"_id\": \"6842f925cffbd33364697629\",\r\n            \"update\": {\r\n                \"description\": \"a new description 1\"\r\n            }\r\n        },\r\n        {\r\n            \"_id\": \"6842f925cffbd3336469762d\",\r\n            \"update\": {\r\n                \"description\": \"a new description 2\"\r\n            }\r\n        },\r\n        {\r\n            \"_id\": \"6842f925cffbd33364697631\",\r\n            \"update\": {\r\n                \"description\": \"a new description 3\"\r\n            }\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{VERSION}}/countries/many-by-id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"countries",
+								"many-by-id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Countries-create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"names\": [\r\n        \"testing\"\r\n    ],\r\n    \"imageUrl\": \"\",\r\n    \"continent\": \"Europe\",\r\n    \"languages\": [\r\n        \"testing\"\r\n    ],\r\n    \"population\": 100,\r\n    \"displayName\": \"Test Country\",\r\n    \"description\": \"\",\r\n    \"capitalCity\": \"Test City\",\r\n    \"mapRectangle\": {\r\n        \"x\": 0,\r\n        \"y\": 0,\r\n        \"width\": 0,\r\n        \"height\": 0\r\n    },\r\n    \"flagRectangle\": {\r\n        \"x\": 0,\r\n        \"y\": 0,\r\n        \"width\": 0,\r\n        \"height\": 0\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{VERSION}}/countries/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"countries",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Countries-create-many",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"countries\": [\r\n        {\r\n            \"names\": [\r\n                \"testing 1\"\r\n            ],\r\n            \"continent\": \"Europe\",\r\n            \"displayName\": \"Test Country 1\",\r\n            \"mapRectangle\": {\r\n                \"x\": 0,\r\n                \"y\": 0,\r\n                \"width\": 0,\r\n                \"height\": 0\r\n            },\r\n            \"flagRectangle\": {\r\n                \"x\": 0,\r\n                \"y\": 0,\r\n                \"width\": 0,\r\n                \"height\": 0\r\n            }\r\n        },\r\n        {\r\n            \"names\": [\r\n                \"testing 2\"\r\n            ],\r\n            \"continent\": \"Europe\",\r\n            \"displayName\": \"Test Country 2\",\r\n            \"mapRectangle\": {\r\n                \"x\": 0,\r\n                \"y\": 0,\r\n                \"width\": 0,\r\n                \"height\": 0\r\n            },\r\n            \"flagRectangle\": {\r\n                \"x\": 0,\r\n                \"y\": 0,\r\n                \"width\": 0,\r\n                \"height\": 0\r\n            }\r\n        },\r\n        {\r\n            \"names\": [\r\n                \"testing 3\"\r\n            ],\r\n            \"continent\": \"Europe\",\r\n            \"displayName\": \"Test Country 3\",\r\n            \"mapRectangle\": {\r\n                \"x\": 0,\r\n                \"y\": 0,\r\n                \"width\": 0,\r\n                \"height\": 0\r\n            },\r\n            \"flagRectangle\": {\r\n                \"x\": 0,\r\n                \"y\": 0,\r\n                \"width\": 0,\r\n                \"height\": 0\r\n            }\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{VERSION}}/countries/create-many",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"countries",
+								"create-many"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Countries-get-all",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"limit\": 200\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{VERSION}}/countries/all?project=displayName, continent&and=continent&andValue=Europe",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"countries",
+								"all"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "-displayName",
+									"disabled": true
+								},
+								{
+									"key": "project",
+									"value": "displayName, continent"
+								},
+								{
+									"key": "search",
+									"value": "continent, displayName",
+									"disabled": true
+								},
+								{
+									"key": "searchValue",
+									"value": "test",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "200",
+									"disabled": true
+								},
+								{
+									"key": "and",
+									"value": "continent"
+								},
+								{
+									"key": "andValue",
+									"value": "Europe"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Countries-get-by-id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"6842d490a66d0ae38bb23b20\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{VERSION}}/countries/by-id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"countries",
+								"by-id"
+							],
+							"query": [
+								{
+									"key": "project",
+									"value": "displayName, continent",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Countries-get-by-continent",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"continent\": \"Europe\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{VERSION}}/countries/by-continent",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"countries",
+								"by-continent"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "-displayName",
+									"disabled": true
+								},
+								{
+									"key": "project",
+									"value": "displayName, continent",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "continent, displayName",
+									"disabled": true
+								},
+								{
+									"key": "searchValue",
+									"value": "test",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "200",
+									"disabled": true
+								},
+								{
+									"key": "and",
+									"value": "continent",
+									"disabled": true
+								},
+								{
+									"key": "andValue",
+									"value": "Asia",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Countries-get-by-display-name",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"displayName\": \"Test Country\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{VERSION}}/countries/by-display-name",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"countries",
+								"by-display-name"
+							],
+							"query": [
+								{
+									"key": "project",
+									"value": "displayName, continent",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Countries-delete-by-id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"6842d490a66d0ae38bb23b20\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{VERSION}}/countries/by-id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"countries",
+								"by-id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Countries-delete-many-by-id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_ids\": [\r\n        \"6842d8f7a66d0ae38bb23b3c\",\r\n        \"6842d8f7a66d0ae38bb23b40\",\r\n        \"6842d8f7a66d0ae38bb23b44\"\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -467,17 +484,100 @@
 			]
 		},
 		{
-			"name": "Users",
+			"name": "Notifications",
 			"item": [
 				{
-					"name": "Users-create",
+					"name": "Notifications-update-by-id",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{bearer_token}}",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"6844cc0af5903db69817b16a\",\r\n    \"update\": {\r\n        \"type\": \"default\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{VERSION}}/notifications/by-id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"notifications",
+								"by-id"
+							],
+							"query": [
+								{
+									"key": "project",
+									"value": "displayName, continent",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Notifications-update-many-by-d",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"updates\": [\r\n        { \"_id\": \"6844cc0af5903db69817b16a\", \"update\": { \"type\": \"default\"} },\r\n        { \"_id\": \"6844cc0af5903db69817b16a\", \"update\": { \"type\": \"default\"} },\r\n        { \"_id\": \"6844cc0af5903db69817b16a\", \"update\": { \"type\": \"default\"}}\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{VERSION}}/notifications/many-by-id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"notifications",
+								"many-by-id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Notifications-create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -486,7 +586,442 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"test@google.com\",\r\n    \"role\": \"test\",\r\n    \"clerkId\": \"-1\",\r\n    \"username\": \"TestUser\"\r\n}",
+							"raw": "{\r\n    \"subject\": \"testing\",\r\n    \"participants\": [\r\n        \"68346c0aec5b1e0bf204d3e4\"\r\n    ],\r\n    \"messages\": [\r\n        {\r\n            \"to\": \"68346c0aec5b1e0bf204d3e4\",\r\n            \"from\": \"68346c0aec5b1e0bf204d3e4\",\r\n            \"content\": \"Test Message.\"\r\n        }\r\n    ],\r\n    \"type\": \"invitation\",\r\n    \"readBy\": \"none\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{VERSION}}/notifications/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"notifications",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Notifications-create-many",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"notifications\": [\r\n        {\r\n            \"subject\": \"testing-1\",\r\n            \"participants\": [\r\n                \"68346c0aec5b1e0bf204d3e4\"\r\n            ],\r\n            \"messages\": [\r\n                {\r\n                    \"to\": \"68346c0aec5b1e0bf204d3e4\",\r\n                    \"from\": \"68346c0aec5b1e0bf204d3e4\",\r\n                    \"content\": \"Test Message.\"\r\n                }\r\n            ],\r\n            \"type\": \"invitation\",\r\n            \"readBy\": \"none\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{VERSION}}/notifications/create-many",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"notifications",
+								"create-many"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Notifications-get-all",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"limit\": 200\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{VERSION}}/notifications/all",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"notifications",
+								"all"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "-subject",
+									"disabled": true
+								},
+								{
+									"key": "project",
+									"value": "subject, messages",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "subject",
+									"disabled": true
+								},
+								{
+									"key": "searchValue",
+									"value": "test",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "200",
+									"disabled": true
+								},
+								{
+									"key": "and",
+									"value": "type",
+									"disabled": true
+								},
+								{
+									"key": "andValue",
+									"value": "invitation",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Notifications-get-by-id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"6844cc0af5903db69817b16a\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{VERSION}}/notifications/by-id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"notifications",
+								"by-id"
+							],
+							"query": [
+								{
+									"key": "project",
+									"value": "displayName, continent",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Notifications-get-by-participants",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"participants\": [\"68346c0aec5b1e0bf204d3e4\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{VERSION}}/notifications/by-participants",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"notifications",
+								"by-participants"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "-displayName",
+									"disabled": true
+								},
+								{
+									"key": "project",
+									"value": "displayName, continent",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "continent, displayName",
+									"disabled": true
+								},
+								{
+									"key": "searchValue",
+									"value": "test",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "200",
+									"disabled": true
+								},
+								{
+									"key": "and",
+									"value": "continent",
+									"disabled": true
+								},
+								{
+									"key": "andValue",
+									"value": "Asia",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Notifications-delete-by-id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"6844d45d00313eaf8715e7b8\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{VERSION}}/notifications/by-id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"notifications",
+								"by-id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Notifications-delete-many-by-id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_ids\": [\r\n        \"6844cc0af5903db69817b16a\",\r\n        \"6844cce63dbdfbf816cbe103\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{VERSION}}/notifications/many-by-id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"notifications",
+								"many-by-id"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Users-update-by-id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"6842d490a66d0ae38bb23b20\",\r\n    \"update\": {\r\n        \"profileType\": \"public\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{VERSION}}/users/by-id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"users",
+								"by-id"
+							],
+							"query": [
+								{
+									"key": "project",
+									"value": "displayName, continent",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users-update-many-by-id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"updates\": [\r\n        { \"_id\": \"684308273530237beb28c3fe\", \"update\": { \"username\": \"new_test_user_1\"} },\r\n        { \"_id\": \"684308273530237beb28c400\", \"update\": { \"username\": \"new_test_user_2\"} },\r\n        { \"_id\": \"684308273530237beb28c402\", \"update\": { \"username\": \"new_test_user_3\"} }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{VERSION}}/users/many-by-id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"users",
+								"many-by-id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users-create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"test-1@google.com\",\r\n    \"role\": \"test\",\r\n    \"clerkId\": \"-2\",\r\n    \"username\": \"TestUser_2\",\r\n    \"profileType\": \"private\",\r\n    \"profileImageUrl\": \"\",\r\n    \"friends\": [{ \"status\": \"pending\", \"userId\": \"684308273530237beb28c3fe\"}]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -515,7 +1050,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{bearer_token}}",
+									"value": "{{BEARER_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -524,7 +1059,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"users\": [\r\n        {\r\n            \"email\": \"test_1@google.com\",\r\n            \"role\": \"test\",\r\n            \"clerkId\": \"test-1\",\r\n            \"username\": \"TestUser-1\"\r\n        },\r\n        {\r\n            \"email\": \"test_2@google.com\",\r\n            \"role\": \"test\",\r\n            \"clerkId\": \"test-2\",\r\n            \"username\": \"TestUser-2\"\r\n        },\r\n        {\r\n            \"email\": \"test_3@google.com\",\r\n            \"role\": \"test\",\r\n            \"clerkId\": \"test-3\",\r\n            \"username\": \"TestUser-3\"\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"users\": [\r\n        {\r\n            \"email\": \"test_1@google.com\",\r\n            \"role\": \"test\",\r\n            \"clerkId\": \"test-1\",\r\n            \"username\": \"TestUser-1\",\r\n            \"profileType\": \"staff\",\r\n            \"profileImageUrl\": \"\",\r\n            \"friends\": []\r\n        },\r\n        {\r\n            \"email\": \"test_2@google.com\",\r\n            \"role\": \"test\",\r\n            \"clerkId\": \"test-2\",\r\n            \"username\": \"TestUser-2\",\r\n            \"profileType\": \"staff\",\r\n            \"profileImageUrl\": \"\",\r\n            \"friends\": []\r\n        },\r\n        {\r\n            \"email\": \"test_3@google.com\",\r\n            \"role\": \"test\",\r\n            \"clerkId\": \"test-3\",\r\n            \"username\": \"TestUser-3\",\r\n            \"profileType\": \"staff\",\r\n            \"profileImageUrl\": \"\",\r\n            \"friends\": []\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -553,7 +1088,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{bearer_token}}",
+									"value": "{{BEARER_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -616,7 +1151,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{bearer_token}}",
+									"value": "{{BEARER_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -661,7 +1196,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{bearer_token}}",
+									"value": "{{BEARER_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -726,7 +1261,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{bearer_token}}",
+									"value": "{{BEARER_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -771,7 +1306,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{bearer_token}}",
+									"value": "{{BEARER_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -816,7 +1351,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{bearer_token}}",
+									"value": "{{BEARER_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -854,7 +1389,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{bearer_token}}",
+									"value": "{{BEARER_TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -864,89 +1399,6 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"_ids\": [\r\n        \"6843066ad90b8f155d23a019\",\r\n        \"6843066ad90b8f155d23a01b\",\r\n        \"6843066ad90b8f155d23a01d\"\r\n    ]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{BASE_URL}}/{{VERSION}}/users/many-by-id",
-							"host": [
-								"{{BASE_URL}}"
-							],
-							"path": [
-								"{{VERSION}}",
-								"users",
-								"many-by-id"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Users-update-by-id",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{bearer_token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"_id\": \"6842d490a66d0ae38bb23b20\",\r\n    \"update\": {\r\n        \"description\": \"A larger description\"\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{BASE_URL}}/{{VERSION}}/users/by-id",
-							"host": [
-								"{{BASE_URL}}"
-							],
-							"path": [
-								"{{VERSION}}",
-								"users",
-								"by-id"
-							],
-							"query": [
-								{
-									"key": "project",
-									"value": "displayName, continent",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Users-update-many-by-id",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{bearer_token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"updates\": [\r\n        { \"_id\": \"684308273530237beb28c3fe\", \"update\": { \"username\": \"new_test_user_1\"} },\r\n        { \"_id\": \"684308273530237beb28c400\", \"update\": { \"username\": \"new_test_user_2\"} },\r\n        { \"_id\": \"684308273530237beb28c402\", \"update\": { \"username\": \"new_test_user_3\"} }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

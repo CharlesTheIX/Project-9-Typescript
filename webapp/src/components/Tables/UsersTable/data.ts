@@ -34,6 +34,13 @@ export const users_table_headers: TableHeader[] = [
     canSort: true,
     value: "role",
     label: "Role",
+    roles: ["admin"],
+  },
+  {
+    canSort: true,
+    value: "profileType",
+    label: "Profile Type",
+    roles: ["admin"],
   },
   {
     value: "email",

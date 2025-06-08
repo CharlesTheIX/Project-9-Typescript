@@ -1,5 +1,4 @@
 "use client";
-import * as gbl from "@/globals";
 import FormCore from "./Form/Core";
 import { useRef, useState } from "react";
 import UrlInput from "@/Inputs/UrlInput";
@@ -9,6 +8,7 @@ import SelectInput from "@/Inputs/SelectInput";
 import updateUserById from "@/lib/users/updateUserById";
 import { useToastContext } from "@/contexts/toastContext";
 import validateUserCreation from "@/lib/forms/validateUserCreation";
+import { nullOption, userProfileTypeOptions, userRoleOptions } from "@/globals";
 
 type Props = {
   user: User;
@@ -34,14 +34,17 @@ const UserEditForm: React.FC<Props> = (props: Props) => {
       const formData = new FormData(form);
       const email: string = formData.get("email")?.toString() || "";
       const username: string = formData.get("username")?.toString() || "";
-      const profileImageURL: string = formData.get("profile-image-url")?.toString() || "";
-      const role = JSON.parse(formData.get("role")?.toString() || `${gbl.nullOption}`).value as UserRole;
+      const profileImageUrl: string = formData.get("profile-image-url")?.toString() || "";
+      const role = JSON.parse(formData.get("role")?.toString() || `${nullOption}`).value as UserRole;
+      const profileType = JSON.parse(formData.get("profile-type")?.toString() || `${userProfileTypeOptions[0]}`)
+        .value as UserProfileType;
 
       const requestData: Partial<User> = {
         role,
         email,
         username,
-        profileImageURL,
+        profileType,
+        profileImageUrl,
       };
 
       const hasErrors = validateUserCreation(requestData);
@@ -74,10 +77,17 @@ const UserEditForm: React.FC<Props> = (props: Props) => {
           name="role"
           label="Role"
           required={true}
-          options={gbl.userRoleOptions}
-          defaultValue={gbl.userRoleOptions.find((option: Option) => option.value === user?.role)}
+          options={userRoleOptions}
+          defaultValue={userRoleOptions.find((option: Option) => option.value === user?.role)}
         />
-        <UrlInput name="profile-image-url" label="Profile Image Url" defaultValue={user?.profileImageURL} />
+        <UrlInput name="profile-image-url" label="Profile Image Url" defaultValue={user?.profileImageUrl} />
+        <SelectInput
+          required={false}
+          name="profile-type"
+          label="Profile Type"
+          options={userProfileTypeOptions}
+          defaultValue={userProfileTypeOptions.find((option: Option) => option.value === user?.profileType)}
+        />
       </>
     </FormCore>
   );

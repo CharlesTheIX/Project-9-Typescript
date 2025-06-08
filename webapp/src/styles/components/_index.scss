@@ -18,12 +18,60 @@
 @use "./impersonation-controls";
 @use "./impersonation-restricted-banner";
 
+/* H */
 .hero-banner {
   .highlights {
     padding-left: calc(75px + (0.25rem * 2));
   }
 }
 
+/* I */
+.image-container {
+  overflow: hidden;
+  border-top-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  transition: border-color 300ms ease-out;
+}
+
+.image-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+
+  img {
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: auto;
+    min-width: 100%;
+    position: absolute;
+    translate: -50% -50%;
+  }
+}
+
+/* L */
+.link-text {
+  cursor: pointer;
+  font-weight: bold;
+  filter: brightness(1);
+  text-transform: uppercase;
+  transition: filter 300ms ease-out;
+
+  &:hover {
+    filter: brightness(0.5);
+  }
+}
+.link-wrapper {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  position: absolute;
+}
+
+/* S */
 .scrollbar-x,
 .scrollbar-y {
   overflow: hidden;
@@ -48,34 +96,6 @@
   overflow-y: scroll;
 }
 
-.image-container {
-  overflow: hidden;
-  border-top-right-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
-  transition: border-color 300ms ease-out;
-  // box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.5);
-}
-
-.link-text {
-  cursor: pointer;
-  font-weight: bold;
-  filter: brightness(1);
-  text-transform: uppercase;
-  transition: all 300ms ease-out;
-
-  &:hover {
-    filter: brightness(1.2);
-  }
-}
-.link-wrapper {
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-  position: absolute;
-}
-
 @each $theme-name, $theme-vars in t.$themes {
   .#{$theme-name} {
     $color-primary: map.get($theme-vars, color-primary);
@@ -85,6 +105,7 @@
     fill: $color-secondary;
     stroke: $color-secondary;
 
+    /* A */
     .admin,
     &.admin {
       fill: $color-highlight;
@@ -92,7 +113,7 @@
       stroke: $color-highlight;
     }
 
-    .link-text,
+    /* H */
     .highlight,
     &.highlight {
       fill: $color-highlight;
@@ -100,11 +121,7 @@
       stroke: $color-highlight;
     }
 
-    .loading-spinner {
-      fill: $color-secondary;
-      stroke: $color-secondary;
-    }
-
+    /* I */
     #impersonation-header-tag {
       div {
         fill: $color-secondary;
@@ -118,6 +135,19 @@
       }
     }
 
+    /* L */
+    .link-text {
+      fill: $color-highlight;
+      color: $color-highlight;
+      stroke: $color-highlight;
+    }
+
+    .loading-spinner {
+      fill: $color-secondary;
+      stroke: $color-secondary;
+    }
+
+    /* S */
     .scrollbar-x,
     .scrollbar-y {
       &::-webkit-scrollbar-track {

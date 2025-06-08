@@ -1,26 +1,25 @@
 import * as gbl from "../globals";
-import createUser from "../functions/user/createUser";
-import getAllUsers from "../functions/user/getAllUsers";
-import getUserById from "../functions/user/getUserById";
+import createUser from "../lib/user/createUser";
+import getAllUsers from "../lib/user/getAllUsers";
+import getUserById from "../lib/user/getUserById";
 import express, { Router, Request, Response } from "express";
-import getUserByEmail from "../functions/user/getUserByEmail";
-import updateUserById from "../functions/user/updateUserById";
-import deleteUserById from "../functions/user/deleteUserById";
-import createManyUsers from "../functions/user/createManyUsers";
-import getUserByClerkId from "../functions/user/getUserByClerkId";
-import getUserByUsername from "../functions/user/getUserByUsername";
-import updateManyUsersById from "../functions/user/updateManyUsersById";
-import deleteManyUsersById from "../functions/user/deleteManyUsersById";
+import getUserByEmail from "../lib/user/getUserByEmail";
+import updateUserById from "../lib/user/updateUserById";
+import deleteUserById from "../lib/user/deleteUserById";
+import createManyUsers from "../lib/user/createManyUsers";
+import getUserByClerkId from "../lib/user/getUserByClerkId";
+import getUserByUsername from "../lib/user/getUserByUsername";
+import updateManyUsersById from "../lib/user/updateManyUsersById";
+import deleteManyUsersById from "../lib/user/deleteManyUsersById";
 
 const router: Router = express.Router();
 
 // Get all users
 router.route("/all").post(async (request: Request, response: Response): Promise<any> => {
   const query = request.query;
-  const { limit } = request.body;
 
   try {
-    const res = await getAllUsers({ limit, query });
+    const res = await getAllUsers({ query });
     return response.json(res);
   } catch (error: any) {
     console.error(`Get all users error: ${error.message}`);
@@ -91,7 +90,7 @@ router.route("/by-clerk-id").post(async (request: Request, response: Response): 
 
 // Create user
 router.route("/create").post(async (request: Request, response: Response): Promise<any> => {
-  const { email, role, clerkId, username, profileImageURL } = request.body;
+  const { email, role, clerkId, username, profileImageUrl, profileType, friends } = request.body;
   if (!email || !role || !clerkId || !username) {
     return response.status(gbl.status.BAD).json({
       ...gbl.response_BAD,
@@ -100,7 +99,7 @@ router.route("/create").post(async (request: Request, response: Response): Promi
   }
 
   try {
-    const res = await createUser({ email, role, clerkId, username, profileImageURL });
+    const res = await createUser({ email, role, clerkId, username, profileImageUrl, profileType, friends });
     return response.json(res);
   } catch (error: any) {
     console.error(`Create user error: ${error.message}`);
@@ -152,7 +151,7 @@ router.route("/many-by-id").patch(async (request: Request, response: Response): 
       message: "Required Inputs: updates.",
     });
   }
-  
+
   try {
     const res = await updateManyUsersById({ updates });
     return response.json(res);
@@ -180,7 +179,8 @@ router.route("/by-id").delete(async (request: Request, response: Response): Prom
 // Delete many users by _id
 router.route("/many-by-id").delete(async (request: Request, response: Response): Promise<any> => {
   const { _ids } = request.body;
-  if (!_ids || _ids.length === 0) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: _ids." });
+  if (!_ids || _ids.length === 0)
+    return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: _ids." });
 
   try {
     const res = await deleteManyUsersById({ _ids });

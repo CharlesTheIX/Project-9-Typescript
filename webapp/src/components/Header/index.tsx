@@ -1,15 +1,67 @@
 "use client";
 import Link from "next/link";
 import { useUser } from "@clerk/nextjs";
+import { usePathname } from "next/navigation";
 import Terminal_SVG from "@/SVGs/Terminal_SVG";
 import { useUserContext } from "@/contexts/userContext";
 import { useThemeContext } from "@/contexts/themeContext";
 import { signedOutItems, signedInItems, adminItems } from "./data";
 
 const Header: React.FC = () => {
+  const pathname = usePathname();
   const { theme } = useThemeContext();
   const { user, isLoaded } = useUser();
   const userContext = useUserContext();
+
+  const getNavigationItems = () => {
+    if (pathname === "/") return <></>;
+
+    if (!user) {
+      return (
+        <>
+          {signedOutItems.map((item: NavigationItem, key: number) => {
+            return (
+              <li key={key} className="fade-in">
+                <Link href={item.href} className="link-text">
+                  {item.label}
+                </Link>
+              </li>
+            );
+          })}
+        </>
+      );
+    }
+
+    if (userContext.userRole === "admin") {
+      return (
+        <>
+          {adminItems.map((item: NavigationItem, key: number) => {
+            return (
+              <li key={key}>
+                <Link href={item.href} className="link-text">
+                  {item.label}
+                </Link>
+              </li>
+            );
+          })}
+        </>
+      );
+    }
+
+    return (
+      <>
+        {signedInItems.map((item: NavigationItem, key: number) => {
+          return (
+            <li key={key}>
+              <Link href={item.href} className="link-text">
+                {item.label}
+              </Link>
+            </li>
+          );
+        })}
+      </>
+    );
+  };
 
   return (
     <header id="header" className={`${theme}  relative pt-5 top-0 right-0 w-screen sticky`}>
@@ -22,49 +74,7 @@ const Header: React.FC = () => {
 
           {isLoaded && (
             <nav className="gap-5 flex flex-row items-center">
-              <ul className="gap-5 flex flex-row items-center">
-                {!user ? (
-                  <>
-                    {signedOutItems.map((item: NavigationItem, key: number) => {
-                      return (
-                        <li key={key}>
-                          <Link href={item.href} className="button">
-                            {item.label}
-                          </Link>
-                        </li>
-                      );
-                    })}
-                  </>
-                ) : (
-                  <>
-                    {userContext.userRole === "admin" ? (
-                      <>
-                        {adminItems.map((item: NavigationItem, key: number) => {
-                          return (
-                            <li key={key}>
-                              <Link href={item.href} className="button">
-                                {item.label}
-                              </Link>
-                            </li>
-                          );
-                        })}
-                      </>
-                    ) : (
-                      <>
-                        {signedInItems.map((item: NavigationItem, key: number) => {
-                          return (
-                            <li key={key}>
-                              <Link href={item.href} className="button">
-                                {item.label}
-                              </Link>
-                            </li>
-                          );
-                        })}
-                      </>
-                    )}
-                  </>
-                )}
-              </ul>
+              <ul className="gap-5 flex flex-row items-center">{getNavigationItems()}</ul>
             </nav>
           )}
         </div>

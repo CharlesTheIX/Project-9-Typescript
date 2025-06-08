@@ -154,4 +154,4 @@ This directory contains the source code for the application:
 
   This file contains all the shared types for the application.
 
-  Some of these types are shared with the relative [API types.d.ts](../api/src/types.d.ts) and [CLI types.d.ts](../cli/src/types.d.ts) and should be kept in sync where appropriate.
+  Some of these types are shared with the relative [API types.d.ts](../api/src/types.d.ts) and should be kept in sync where appropriate.

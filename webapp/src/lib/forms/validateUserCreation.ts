@@ -2,6 +2,7 @@ import isUrl from "@/lib/validation/isUrl";
 import isEmail from "@/lib/validation/isEmail";
 import isUserRole from "@/lib/validation/isUserRole";
 import isAlphanumeric from "@/lib/validation/isAlphanumeric";
+import isUserProfileType from "../validation/isUserProfileType";
 import updateFormErrorMessage from "@/lib/forms/updateFormErrorMessage";
 
 export default (requestData: Partial<User>): FormError => {
@@ -27,10 +28,16 @@ export default (requestData: Partial<User>): FormError => {
           formError.message = updateFormErrorMessage(formError.message, "Username");
         }
         break;
-      case "profileImageURL":
+      case "profileImageUrl":
         if (requestData[item] && !isUrl(requestData[item], "external")) {
           formError.error = true;
           formError.message = updateFormErrorMessage(formError.message, "Profile Image URL");
+        }
+        break;
+      case "profileType":
+        if (requestData[item] && !isUserProfileType(requestData[item])) {
+          formError.error = true;
+          formError.message = updateFormErrorMessage(formError.message, "Profile type");
         }
         break;
     }

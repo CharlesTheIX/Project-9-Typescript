@@ -3,14 +3,13 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
-    const { limit } = await request.json();
-    const response = await fetch(`${process.env.API_URL}/${process.env.API_VERSION}/users/all`, {
+    const { params } = await request.json();
+    const response = await fetch(`${process.env.API_URL}/${process.env.API_VERSION}/users/all${params}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${process.env.API_AUTH_TOKEN}`,
       },
-      body: JSON.stringify({ limit }),
     }).then((res: any) => res.json());
     return NextResponse.json(response);
   } catch (error: any) {

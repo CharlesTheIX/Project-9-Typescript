@@ -95,12 +95,17 @@ export const continents: Continent[] = ["Africa", "Asia", "Europe", "North Ameri
 
 // Users
 export const userRoles: UserRole[] = ["admin", "editor", "guest", "test", "user"];
+export const userProfileTypes: UserProfileType[] = ["public", "private"];
 export const userRoleOptions: Option[] = [
   { value: "user", label: "User" },
   { value: "guest", label: "Guest" },
   { value: "editor", label: "Editor" },
   { value: "test", label: "Test" },
   { value: "admin", label: "Admin" },
+];
+export const userProfileTypeOptions: Option[] = [
+  { value: "private", label: "Private" },
+  { value: "public", label: "Public" },
 ];
 
 // Rectangles

@@ -14,12 +14,8 @@ This repository uses the following languages / frameworks:
 
 - `/api`
 
-  - `Typescrpt` (.ts)
+  - `Typescript` (.ts)
   - `Express`
-
-- `/cli`
-
-  - `Typescrpt` (.ts)
 
 - `/webapp`
   - `Typescript` (.ts)
@@ -32,5 +28,3 @@ This repository uses the following languages / frameworks:
 ### [Webapp Documentation](./webapp/ReadMe.md)
 
 ### [API Documentation](./api/ReadMe.md)
-
-### [CLI Documentation](./cli/ReadMe.md)

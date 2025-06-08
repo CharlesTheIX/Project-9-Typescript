@@ -1,12 +1,19 @@
 @use "sass:map";
 @use "tailwindcss";
 @use "./components";
+@use "./animations";
 @use "./themes" as t;
 
 * {
   box-sizing: border-box;
 }
 
+/* A */
+aside {
+  animation: fade-in 1000ms ease-out forwards;
+}
+
+/* B */
 body {
   width: 100vw;
   display: flex;
@@ -17,17 +24,11 @@ body {
   background-color: map.get(map.get(t.$themes, dark), color-primary);
 }
 
-section {
-  @apply max-w-7xl;
-  width: 100%;
-  margin: 0 auto;
+button {
+  cursor: pointer;
 }
 
-aside,
-section {
-  animation: fade-in 1000ms ease-out forwards;
-}
-
+/* H */
 h1 {
   @apply text-7xl;
   font-weight: bold;
@@ -58,10 +59,13 @@ h6 {
   font-weight: bold;
 }
 
-button {
-  cursor: pointer;
+/* S */
+section {
+  @apply max-w-7xl;
+  width: 100%;
+  margin: 0 auto;
+  animation: fade-in 1000ms ease-out forwards;
 }
-
 svg {
   transition: fill 300ms ease-out;
 
@@ -76,91 +80,5 @@ svg {
 @each $theme-name, $theme-vars in t.$themes {
   .#{$theme-name} {
     transition: color 300ms ease-out, background-color 300ms ease-out, border-color 300ms ease-out;
-  }
-}
-
-@keyframes blink {
-  0% {
-    opacity: 0;
-  }
-  49% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-@keyframes slide-down {
-  0% {
-    opacity: 0;
-    transform: translateY(-50px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0px);
-  }
-}
-
-@keyframes slide-up {
-  0% {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0px);
-  }
-}
-
-@keyframes slide-left {
-  0% {
-    transform: translateX(100%);
-  }
-
-  100% {
-    transform: translateX(0px);
-  }
-}
-
-@keyframes slide-left-reverse {
-  0% {
-    transform: translateX(0px);
-  }
-
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-@keyframes slide-right {
-  0% {
-    transform: translateX(-100%);
-  }
-
-  100% {
-    transform: translateX(0px);
-  }
-}
-
-@keyframes fade-out {
-  0% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
   }
 }

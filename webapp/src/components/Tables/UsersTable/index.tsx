@@ -14,7 +14,7 @@ const UsersTable: React.FC = () => {
   const fetchUsers = async (): Promise<void> => {
     setIsLoading(true);
     try {
-      var response: ApiResponse = await getAllUsers(200);
+      var response: ApiResponse = await getAllUsers({ limit: 200 });
       if (response.error) throw new Error(response.message);
       setIsLoading(false);
       setUsers(response.data || []);

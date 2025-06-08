@@ -2,7 +2,6 @@
 import TableCore from "../Table/Core";
 import { useState, useEffect } from "react";
 import getAllCountries from "@/lib/countries/getAllCountries";
-import getCountriesByContinent from "@/lib/countries/getCountriesByContinent";
 import { countries_table_headers, countries_table_storage_token } from "./data";
 import { getLocalStorageItem, removeLocalStorageItem } from "@/lib/storage/localStorage";
 
@@ -19,9 +18,9 @@ const CountriesTable: React.FC = () => {
     try {
       var response: ApiResponse;
       if (item === "all") {
-        response = await getAllCountries(200);
+        response = await getAllCountries({ limit: 200 });
       } else {
-        response = await getCountriesByContinent({ continent: item, limit: 200 });
+        response = await getAllCountries({ limit: 200, and: "continent", andValue: item });
       }
       if (response.error) throw new Error(response.message);
       setContinent(item);

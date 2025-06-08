@@ -1,25 +1,23 @@
 import * as gbl from "../globals";
+import createCountry from "../lib/country/createCountry";
+import getCountryById from "../lib/country/getCountryById";
 import express, { Router, Request, Response } from "express";
-import createCountry from "../functions/country/createCountry";
-import getCountryById from "../functions/country/getCountryById";
-import getAllCountries from "../functions/country/getAllCountries";
-import deleteCountryById from "../functions/country/deleteCountryById";
-import updateCountryById from "../functions/country/updateCountryById";
-import createManyCountries from "../functions/country/createManyCountries";
-import getCountryByDisplayName from "../functions/country/getCountryByDisplayName";
-import getCountriesByContinent from "../functions/country/getCountriesByContinent";
-import deleteManyCountriesById from "../functions/country/deleteManyCountriesById";
-import updateManyCountriesById from "../functions/country/updateManyCountriesById";
+import getAllCountries from "../lib/country/getAllCountries";
+import deleteCountryById from "../lib/country/deleteCountryById";
+import updateCountryById from "../lib/country/updateCountryById";
+import createManyCountries from "../lib/country/createManyCountries";
+import getCountryByDisplayName from "../lib/country/getCountryByDisplayName";
+import deleteManyCountriesById from "../lib/country/deleteManyCountriesById";
+import updateManyCountriesById from "../lib/country/updateManyCountriesById";
 
 const router: Router = express.Router();
 
 // Get all countries
 router.route("/all").post(async (request: Request, response: Response): Promise<any> => {
   const query = request.query;
-  const { limit } = request.body;
 
   try {
-    const res = await getAllCountries({ limit, query });
+    const res = await getAllCountries({ query });
     return response.json(res);
   } catch (error: any) {
     console.error(`Get all countries error: ${error.message}`);
@@ -59,21 +57,6 @@ router.route("/by-display-name").post(async (request: Request, response: Respons
   }
 });
 
-// Get country by continent
-router.route("/by-continent").post(async (request: Request, response: Response): Promise<any> => {
-  const query = request.query;
-  const { continent, limit } = request.body;
-  if (!continent) return { ...gbl.response_BAD, message: "Required inputs: continent." };
-
-  try {
-    const res = await getCountriesByContinent({ continent, limit, query });
-    return response.json(res);
-  } catch (error: any) {
-    console.error(`Get country by continent error: ${error.message}`);
-    return response.status(gbl.status.SERVER_ERROR).json(gbl.response_SERVER_ERROR);
-  }
-});
-
 // Create country
 router.route("/create").post(async (request: Request, response: Response): Promise<any> => {
   const {
@@ -86,12 +69,12 @@ router.route("/create").post(async (request: Request, response: Response): Promi
     description,
     capitalCity,
     mapRectangle,
-    flagRectangle
+    flagRectangle,
   } = request.body;
   if (!displayName || !names || names.length === 0 || !flagRectangle || !mapRectangle || !continent) {
     return response.status(gbl.status.BAD).json({
       ...gbl.response_BAD,
-      message: "Required inputs: displayName, names, continent, flagRectangle, mapRectangle."
+      message: "Required inputs: displayName, names, continent, flagRectangle, mapRectangle.",
     });
   }
 
@@ -106,7 +89,7 @@ router.route("/create").post(async (request: Request, response: Response): Promi
       description,
       capitalCity,
       mapRectangle,
-      flagRectangle
+      flagRectangle,
     });
     return response.json(res);
   } catch (error: any) {
@@ -121,7 +104,7 @@ router.route("/create-many").post(async (request: Request, response: Response): 
   if (!countries || countries.length === 0) {
     return response.status(gbl.status.BAD).json({
       ...gbl.response_BAD,
-      message: "Required inputs: countries."
+      message: "Required inputs: countries.",
     });
   }
 
@@ -152,7 +135,8 @@ router.route("/by-id").patch(async (request: Request, response: Response): Promi
 // Update many countries by _id
 router.route("/many-by-id").patch(async (request: Request, response: Response): Promise<any> => {
   const { updates } = request.body;
-  if (!updates || updates.length === 0) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: updates." });
+  if (!updates || updates.length === 0)
+    return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: updates." });
 
   try {
     const res = await updateManyCountriesById({ updates });
@@ -180,7 +164,8 @@ router.route("/by-id").delete(async (request: Request, response: Response): Prom
 // Delete many countries by _id
 router.route("/many-by-id").delete(async (request: Request, response: Response): Promise<any> => {
   const { _ids } = request.body;
-  if (!_ids || _ids.length === 0) return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: _ids." });
+  if (!_ids || _ids.length === 0)
+    return response.status(gbl.status.BAD).json({ ...gbl.response_BAD, message: "Required inputs: _ids." });
 
   try {
     const res = await deleteManyCountriesById({ _ids });

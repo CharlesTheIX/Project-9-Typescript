@@ -68,7 +68,6 @@ const SelectInput: React.FC<Props> = (props: Props) => {
                   const targetOption = options[key];
                   setActive(false);
                   setValue(targetOption);
-                  console.log(targetOption);
                   onChange(targetOption.value);
                 }}
               >

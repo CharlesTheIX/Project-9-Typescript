@@ -1,52 +1,57 @@
-import { Schema, model} from "mongoose";
+import { Schema, model } from "mongoose";
 
-const schema = new Schema({
-  //auto assigned fields
-  // _id
-  //__v
-
-  createdAt: {
-    type: Date,
-    default: Date.now,
+const schema = new Schema(
+  {
+    //auto assigned fields (_id, __v)
+    username: {
+      type: String,
+      unique: true,
+      required: [true, "Please provide a username."],
+    },
+    email: {
+      type: String,
+      unique: true,
+      required: [true, "Please provide an email."],
+    },
+    clerkId: {
+      type: String,
+      unique: true,
+      required: [true, "Clerk ID not provided."],
+    },
+    profileImageUrl: {
+      type: String,
+      default: "",
+    },
+    role: {
+      type: String,
+      enum: ["admin", "editor", "user", "guest", "test"],
+      default: "user",
+    },
+    profileType: {
+      type: String,
+      enum: ["public", "private"],
+      default: "private",
+    },
+    friends: {
+      type: [
+        {
+          status: {
+            type: String,
+            enum: ["active", "pending", "blocked"],
+            default: "pending",
+          },
+          userId: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+            required: [true, "User id required."],
+          },
+        },
+      ],
+      default: [],
+    },
   },
-  updatedAt: {
-    type: Date,
-    default: Date.now,
-  },
-
-  username: {
-    type: String,
-    unique: true,
-    required: [true, "Please provide a username."],
-  },
-  email: {
-    type: String,
-    unique: true,
-    required: [true, "Please provide and email."],
-  },
-  clerkId: {
-    type: String,
-    unique: true,
-    required: [true, "Clerk ID not provided."],
-  },
-  // firstName: {
-  //   type: String,
-  //   required: [true, "Please provide a first name."],
-  // },
-  // surname: {
-  //   type: String,
-  //   required: [true, "Please provide a surname."],
-  // },
-  profileImageURL: {
-    type: String,
-    default: "",
-  },
-  role: {
-    type: String,
-    enum: ["admin", "editor", "user", "guest", "test"],
-    default: "user",
-  },
-});
+  { timestamps: true }
+);
 
 schema.pre("save", async function (next: any) {
   try {

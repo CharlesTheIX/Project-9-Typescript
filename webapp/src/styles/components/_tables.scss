@@ -49,6 +49,7 @@
 
         p {
           span {
+            line-clamp: 1;
             max-width: 400px;
             display: -webkit-box;
             word-wrap: break-word;
