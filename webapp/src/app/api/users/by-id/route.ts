@@ -1,10 +1,10 @@
-import * as gbl from "@/globals";
+import { response_SERVER_ERROR } from "@/globals";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
-    const { _id } = await request.json();
-    const response = await fetch(`${process.env.API_URL}/${process.env.API_VERSION}/users/by-id`, {
+    const { _id, params } = await request.json();
+    const response = await fetch(`${process.env.API_URL}/${process.env.API_VERSION}/users/by-id${params}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -15,14 +15,14 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(response);
   } catch (error: any) {
     console.error(`Get user by _id error: ${error.message}.`);
-    return NextResponse.json(gbl.response_SERVER_ERROR);
+    return NextResponse.json(response_SERVER_ERROR);
   }
 }
 
 export async function PATCH(request: NextRequest) {
   try {
-    const { _id, update } = await request.json();
-    const response = await fetch(`${process.env.API_URL}/${process.env.API_VERSION}/users/by-id`, {
+    const { _id, update, params } = await request.json();
+    const response = await fetch(`${process.env.API_URL}/${process.env.API_VERSION}/users/by-id${params}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -33,7 +33,7 @@ export async function PATCH(request: NextRequest) {
     return NextResponse.json(response);
   } catch (error: any) {
     console.error(`Update user by _id error: ${error.message}.`);
-    return NextResponse.json(gbl.response_SERVER_ERROR);
+    return NextResponse.json(response_SERVER_ERROR);
   }
 }
 
@@ -51,6 +51,6 @@ export async function PATCH(request: NextRequest) {
 //     return NextResponse.json(response);
 //   } catch (error: any) {
 //     console.error(`Delete user by _id error: ${error.message}.`);
-//     return NextResponse.json(gbl.response_SERVER_ERROR);
+//     return NextResponse.json(response_SERVER_ERROR);
 //   }
 // }

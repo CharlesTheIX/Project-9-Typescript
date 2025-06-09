@@ -54,6 +54,11 @@
       max-width: 300px;
     }
   }
+
+  &.games-feed-card {
+    max-width: 300px;
+    min-height: 150px;
+  }
 }
 
 @each $theme-name, $theme-vars in t.$themes {
@@ -74,12 +79,26 @@
           background-color: $color-secondary;
         }
       }
-    }
 
-    .profile-contact-tab-card {
-      color: $color-secondary;
-      border-color: $color-secondary;
-      background-color: $color-primary;
+      &.profile-contact-tab-card {
+        color: $color-secondary;
+        border-color: $color-secondary;
+        background-color: $color-primary;
+      }
+
+      &.games-feed-card {
+        color: $color-secondary;
+        border-color: $color-secondary;
+        background-color: $color-primary;
+
+        &:hover {
+          fill: $color-primary;
+          color: $color-primary;
+          stroke: $color-primary;
+          border-color: $color-primary;
+          background-color: $color-secondary;
+        }
+      }
     }
   }
 }

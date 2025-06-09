@@ -18,6 +18,21 @@
 @use "./impersonation-controls";
 @use "./impersonation-restricted-banner";
 
+/* G */
+.game-controller {
+  > .controller {
+    form {
+      > div {
+        max-height: 78px;
+
+        .input {
+          min-width: 300px;
+        }
+      }
+    }
+  }
+}
+
 /* H */
 .hero-banner {
   .highlights {

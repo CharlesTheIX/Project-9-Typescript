@@ -7,7 +7,7 @@ type Props = {
   required?: boolean;
   className?: string;
   defaultValue?: string;
-  onInput?: (event: any) => void;
+  onInput?: (event: any) => void | boolean;
 };
 
 const TextInput: React.FC<Props> = (props: Props) => {
@@ -31,7 +31,8 @@ const TextInput: React.FC<Props> = (props: Props) => {
         onInput={(event: any) => {
           const target = event.currentTarget || event.target;
           setValue(target.value);
-          onInput(target);
+          const clearInput = onInput(target);
+          if (!!clearInput) setValue("");
         }}
       />
     </div>

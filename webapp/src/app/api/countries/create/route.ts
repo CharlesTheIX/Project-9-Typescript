@@ -1,4 +1,4 @@
-import * as gbl from "@/globals";
+import { response_SERVER_ERROR } from "@/globals";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
@@ -15,6 +15,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(response);
   } catch (error: any) {
     console.error(`Create country error: ${error.message}.`);
-    return NextResponse.json(gbl.response_SERVER_ERROR);
+    return NextResponse.json(response_SERVER_ERROR);
   }
 }

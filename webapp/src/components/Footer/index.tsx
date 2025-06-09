@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
   return (
     <footer className={`${theme} px-10 py-5`}>
       <section className="text-[10px]">
-        <div className="flex flex-row gap-2 pb-2 items-center justify-center wrap w-full">
+        <div className="flex flex-row gap-2 pb-2 items-center justify-center flex-wrap w-full">
           {navigationItems.map((item: NavigationItem, key: number) => {
             return (
               <Fragment key={key}>

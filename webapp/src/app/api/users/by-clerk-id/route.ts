@@ -1,10 +1,10 @@
-import * as gbl from "@/globals";
+import { response_SERVER_ERROR } from "@/globals";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
-    const { clerkId } = await request.json();
-    const response = await fetch(`${process.env.API_URL}/${process.env.API_VERSION}/users/by-clerk-id`, {
+    const { clerkId, params } = await request.json();
+    const response = await fetch(`${process.env.API_URL}/${process.env.API_VERSION}/users/by-clerk-id${params}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -15,6 +15,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(response);
   } catch (error: any) {
     console.error(`Get user by clerkId error: ${error.message}.`);
-    return NextResponse.json(gbl.response_SERVER_ERROR);
+    return NextResponse.json(response_SERVER_ERROR);
   }
 }

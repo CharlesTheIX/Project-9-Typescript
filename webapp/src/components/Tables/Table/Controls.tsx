@@ -39,7 +39,7 @@ const TableControls: React.FC<Props> = (props: Props) => {
   return (
     <div className="controls gap-2 p-2 flex overflow-hidden flex-col">
       <div className="search gap-2 flex flex-row w-full justify-between">
-        <div className="flex flex-row gap-2 items-center px-2 w-auto gap-2 wrap justify-start">
+        <div className="flex flex-row gap-2 items-center px-2 w-auto gap-2 flex-wrap justify-start">
           <div
             className={`${
               showHideShowDropdown ? "active" : ""
@@ -66,7 +66,7 @@ const TableControls: React.FC<Props> = (props: Props) => {
         <div
           className={`search-bar font-bold ${
             searchValue ? "focused" : ""
-          } px-2 w-auto flex flex-row items-center wrap justify-start gap-2`}
+          } px-2 w-auto flex flex-row items-center flex-wrap justify-start gap-2`}
         >
           <label htmlFor="search-input">
             <Search_SVG width={40} height={40} />
@@ -88,7 +88,9 @@ const TableControls: React.FC<Props> = (props: Props) => {
         </div>
       </div>
 
-      <div className={`hide-show ${showHideShowDropdown ? "show" : ""} gap-5 flex flex-row overflow-hidden wrap px-2`}>
+      <div
+        className={`hide-show ${showHideShowDropdown ? "show" : ""} gap-5 flex flex-row overflow-hidden flex-wrap px-2`}
+      >
         {tableHeaders.map((header: TableHeader, key: number) => {
           if (!header.roles || header.roles.length === 0 || header.roles.includes(userRole)) {
             return (
@@ -96,7 +98,7 @@ const TableControls: React.FC<Props> = (props: Props) => {
                 key={key}
                 className={`button ${
                   !header.hidden ? "active" : ""
-                } px-2 flex wrap items-center flex-row justify-start gap-5`}
+                } px-2 flex flex-wrap items-center flex-row justify-start gap-5`}
                 onClick={() => {
                   const newFormPreferences: any = formPreferences || {};
                   if (!newFormPreferences.hide) newFormPreferences.hide = [];

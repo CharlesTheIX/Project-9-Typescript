@@ -68,3 +68,14 @@ export const notificationsDefaultQueryValues = (): any => {
     sort: { createdAt: 1 },
   };
 };
+export const gameDataDefaultQueryValues = (): any => {
+  return {
+    and: null,
+    search: "",
+    limit: 200,
+    andValue: "",
+    projection: {},
+    searchFields: ["_id"],
+    sort: { createdAt: 1 },
+  };
+};

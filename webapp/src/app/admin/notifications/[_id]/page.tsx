@@ -10,24 +10,24 @@ export const generateMetadata = async ({ params }: { params: Params }): Promise<
   const { _id } = await params;
 
   try {
-    const response = await getNotificationById(_id);
+    const response = await getNotificationById({ _id, options: {} });
     if (response.error) throw new Error();
     return {
       title: `Edit ${response.data.displayName} | Admin | P9`,
-      description: `${response.data.displayName}`
+      description: `${response.data.displayName}`,
     };
   } catch (error: any) {
     return {
       title: "404 | P9",
       description: "Notification not found",
-      robots: "noindex, nofollow"
+      robots: "noindex, nofollow",
     };
   }
 };
 
 export const generateStaticParams = async (): Promise<{ _id: string }[]> => {
   try {
-    const response = await getAllNotifications(500);
+    const response = await getAllNotifications({ limit: 500 });
     if (response.error) throw new Error();
     return response.data.map((user: User) => {
       return { _id: user._id };
@@ -40,7 +40,7 @@ export const generateStaticParams = async (): Promise<{ _id: string }[]> => {
 const Page = async ({ params }: { params: Params }): Promise<React.JSX.Element> => {
   try {
     const { _id } = await params;
-    const response = await getNotificationById(_id);
+    const response = await getNotificationById({ _id, options: {} });
     if (response.error) throw new Error(response.message);
     return <NotificationEditPage notification={response.data} />;
   } catch (error: any) {

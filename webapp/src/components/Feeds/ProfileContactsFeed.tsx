@@ -18,7 +18,7 @@ const ProfileContactsFeed: React.FC = () => {
     setIsLoading(true);
 
     try {
-      var response: ApiResponse = await getUserContacts(user._id || "");
+      var response: ApiResponse = await getUserContacts({ _id: user._id || "", options: {} });
       if (response.error) throw new Error(response.message);
       setContacts(response.data || []);
       setIsLoading(false);

@@ -8,7 +8,7 @@ export default async (options: ApiParamOptions): Promise<ApiResponse> => {
     const response: ApiResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users/all`, {
       method: "POST",
       headers: defaultInternalHeader,
-      body: JSON.stringify({ params: params }),
+      body: JSON.stringify({ params }),
     }).then((res: any) => res.json());
     return response;
   } catch (error: any) {

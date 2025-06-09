@@ -16,6 +16,7 @@ import Sass_SVG from "@/components/SVGs/Sass_SVG";
 import Node_SVG from "@/components/SVGs/Node_SVG";
 import Mongo_SVG from "@/components/SVGs/Mongo_SVG";
 import Stack_SVG from "@/components/SVGs/Stack_SVG";
+import Games_SVG from "@/components/SVGs/Games_SVG";
 import Nextjs_SVG from "@/components/SVGs/Nextjs_SVG";
 import Github_SVG from "@/components/SVGs/Github_SVG";
 import Docker_SVG from "@/components/SVGs/Docker_SVG";
@@ -37,6 +38,8 @@ export default (props: Props): React.ReactElement => {
   const { icon, size, color = "inherit" } = props;
 
   switch (icon) {
+    case "games":
+      return <Games_SVG width={size} height={size} primaryColor={color} />;
     case "document":
       return <Document_SVG width={size} height={size} primaryColor={color} />;
     case "terraform":

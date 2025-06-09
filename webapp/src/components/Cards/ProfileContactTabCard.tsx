@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Close_SVG from "@/SVGs/Close_SVG";
+import Email_SVG from "../SVGs/Email_SVG";
 import Pending_SVG from "@/SVGs/Pending_SVG";
 import Success_SVG from "@/SVGs/Success_SVG";
-import Email_SVG from "../SVGs/Email_SVG";
 
 type Props = {
   targetUser: Partial<User>;

@@ -31,7 +31,7 @@ const ImpersonationRestrictedBanner: React.FC<Props> = (props: Props) => {
 
               <p className="font-bold admin">Accepted Roles: {acceptedRoles.join(", ")}</p>
 
-              <div className="controls gap-2 flex wrap flex-row">
+              <div className="controls gap-2 flex flex-wrap flex-row">
                 <Link className="button" href={`/profile`}>
                   View User Profile
                 </Link>

@@ -51,7 +51,7 @@ const UserEditForm: React.FC<Props> = (props: Props) => {
       const hasErrors = validateUserCreation(requestData);
       if (hasErrors.error) throw new Error(`Invalid ${hasErrors.message}`);
 
-      const response = await updateUserById({ _id: user?._id, update: requestData });
+      const response = await updateUserById({ _id: user?._id, update: requestData, options: {} });
       if (response.error) throw new Error(response.message);
 
       setIsLoading(false);

@@ -10,7 +10,7 @@ export const generateMetadata = async ({ params }: { params: Params }): Promise<
   const { _id } = await params;
 
   try {
-    const response = await getUserById(_id);
+    const response = await getUserById({ _id, options: {} });
     if (response.error) throw new Error();
     return {
       title: `Edit ${response.data.displayName} | Admin | P9`,
@@ -40,7 +40,7 @@ export const generateStaticParams = async (): Promise<{ _id: string }[]> => {
 const Page = async ({ params }: { params: Params }): Promise<React.JSX.Element> => {
   try {
     const { _id } = await params;
-    const response = await getUserById(_id);
+    const response = await getUserById({ _id, options: {} });
     if (response.error) throw new Error(response.message);
     return <UserEditPage user={response.data} />;
   } catch (error: any) {

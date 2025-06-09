@@ -27,7 +27,10 @@ const ProfileNotificationsFeed: React.FC<Props> = (props: Props) => {
 
     try {
       if (!targetUser) throw new Error("no active user.");
-      const response = await getNotificationsContainingParticipants([`${targetUser._id}`]);
+      const response = await getNotificationsContainingParticipants({
+        options: {},
+        participants: [`${targetUser._id}`],
+      });
       if (response.error) throw new Error(response.message);
       setNotifications(response.data);
       setPingLoading(false);
@@ -48,7 +51,10 @@ const ProfileNotificationsFeed: React.FC<Props> = (props: Props) => {
       if (!targetUser) throw new Error("no active user.");
       const invitationResponse = await acceptContactInvitation(notificationId);
       if (invitationResponse.error) throw new Error(invitationResponse.message);
-      const notificationResponse = await getNotificationsContainingParticipants([`${targetUser._id}`]);
+      const notificationResponse = await getNotificationsContainingParticipants({
+        options: {},
+        participants: [`${targetUser._id}`],
+      });
       if (notificationResponse.error) throw new Error(notificationResponse.message);
       setNotifications(notificationResponse.data);
       setIsLoading(false);

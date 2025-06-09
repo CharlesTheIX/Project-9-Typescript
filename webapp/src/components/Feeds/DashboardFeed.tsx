@@ -42,7 +42,7 @@ const DashboardFeed: React.FC = () => {
   }, [user, impersonation.user]);
 
   return (
-    <div className="flex flex-row wrap gap-5 items-center justify-start">
+    <div className="flex flex-row flex-wrap gap-5 items-center justify-start">
       {targetUser?.role === "admin" && (
         <div className="card dashboard-card relative">
           <Link href="/admin" className="absolute top-0 left-0 w-full h-full z-1" />

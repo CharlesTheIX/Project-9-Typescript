@@ -1,14 +1,23 @@
-import * as gbl from "@/globals";
+import getApiParams from "../getApiParams";
+import { defaultInternalHeader, response_SERVER_ERROR } from "@/globals";
 
-export default async (_id: string): Promise<ApiResponse> => {
+type Props = {
+  _id: string;
+  options: ApiParamOptions;
+};
+
+export default async (props: Props): Promise<ApiResponse> => {
+  const { _id, options } = props;
+  const params = getApiParams(options);
+
   try {
     const response: ApiResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/notifications/by-id`, {
       method: "POST",
-      headers: gbl.defaultInternalHeader,
-      body: JSON.stringify({ _id }),
+      headers: defaultInternalHeader,
+      body: JSON.stringify({ _id, params }),
     }).then((res: any) => res.json());
     return response;
   } catch (error: any) {
-    return gbl.response_SERVER_ERROR;
+    return response_SERVER_ERROR;
   }
 };

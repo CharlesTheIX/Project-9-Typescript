@@ -127,7 +127,7 @@ const UserSearchbar: React.FC<Props> = (props: Props) => {
             {displayedUsers.length === 0 ? (
               <>{searchValue ? <p>No results found.</p> : <p>Start your search in the input above.</p>}</>
             ) : (
-              <ul className="flex flex-row gap-5 wrap">
+              <ul className="flex flex-row gap-5 flex-wrap">
                 {displayedUsers.map((displayedUser: Partial<User>, key: number) => {
                   return (
                     <li key={key}>

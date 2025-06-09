@@ -62,7 +62,7 @@ const CountryEditForm: React.FC<Props> = (props: Props) => {
       const hasErrors = validateCountryCreation(requestData);
       if (hasErrors.error) throw new Error(`Invalid ${hasErrors.message}`);
 
-      const response = await updateCountryById({ _id: country?._id, update: requestData });
+      const response = await updateCountryById({ _id: country?._id, update: requestData, options: {} });
       if (response.error) throw new Error(response.message);
 
       setIsLoading(false);

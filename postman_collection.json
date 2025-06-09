@@ -775,7 +775,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"NotificationId\": \"68455d16ec91c7ee8d9a5a78\"\r\n}",
+							"raw": "{\r\n    \"notificationId\": \"68455d16ec91c7ee8d9a5a78\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -986,6 +986,366 @@
 							"path": [
 								"{{VERSION}}",
 								"notifications",
+								"many-by-id"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Games",
+			"item": [
+				{
+					"name": "Games-update-by-id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"6844cc0af5903db69817b16a\",\r\n    \"update\": {\r\n        \"type\": \"default\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{VERSION}}/games/by-id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"games",
+								"by-id"
+							],
+							"query": [
+								{
+									"key": "project",
+									"value": "displayName, continent",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Games-update-many-by-d",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"updates\": [\r\n        {\r\n            \"_id\": \"68461b196de842314c78fb65\",\r\n            \"update\": {\r\n                \"score\": 101\r\n            }\r\n        },\r\n        {\r\n            \"_id\": \"68461b1a6de842314c78fb67\",\r\n            \"update\": {\r\n                \"score\": 202\r\n            }\r\n        },\r\n        {\r\n            \"_id\": \"68461b1b6de842314c78fb69\",\r\n            \"update\": {\r\n                \"score\": 303\r\n            }\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{VERSION}}/game-data/many-by-id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"game-data",
+								"many-by-id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Games-create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"gameType\": \"countries_memory\",\r\n    \"userId\": \"68346c0aec5b1e0bf204d3e4\",\r\n    \"score\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{VERSION}}/game-data/create",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"game-data",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Games-create-many",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"gameData\": [\r\n        {\r\n            \"gameType\": \"countries_memory\",\r\n            \"userId\": \"68346c0aec5b1e0bf204d3e4\",\r\n            \"score\": 200\r\n        },\r\n        {\r\n            \"gameType\": \"countries_memory\",\r\n            \"userId\": \"68346c0aec5b1e0bf204d3e4\",\r\n            \"score\": 300\r\n        },\r\n        {\r\n            \"gameType\": \"countries_memory\",\r\n            \"userId\": \"68346c0aec5b1e0bf204d3e4\",\r\n            \"score\": 400\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{VERSION}}/game-data/create-many",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"game-data",
+								"create-many"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Games-get-all",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{VERSION}}/game-data/all",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"game-data",
+								"all"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "-subject",
+									"disabled": true
+								},
+								{
+									"key": "project",
+									"value": "subject, messages",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "subject",
+									"disabled": true
+								},
+								{
+									"key": "searchValue",
+									"value": "test",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "200",
+									"disabled": true
+								},
+								{
+									"key": "and",
+									"value": "type",
+									"disabled": true
+								},
+								{
+									"key": "andValue",
+									"value": "invitation",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Games-get-by-id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"68461b196de842314c78fb65\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{VERSION}}/game-data/by-id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"game-data",
+								"by-id"
+							],
+							"query": [
+								{
+									"key": "project",
+									"value": "displayName, continent",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Games-delete-by-id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"68461b196de842314c78fb65\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{VERSION}}/game-data/by-id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"game-data",
+								"by-id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Games-delete-many-by-id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_ids\": [\r\n        \"68461b1b6de842314c78fb69\",\r\n        \"68461b1a6de842314c78fb67\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/{{VERSION}}/game-data/many-by-id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"{{VERSION}}",
+								"game-data",
 								"many-by-id"
 							]
 						}
@@ -1236,7 +1596,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"_id\": \"6842fe502585fe74d2354572\"\r\n}",
+							"raw": "{\r\n    \"_id\": \"68346c0aec5b1e0bf204d3e4\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1289,7 +1649,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/{{VERSION}}/users/contacts?project=username, profileImageUrl",
+							"raw": "{{BASE_URL}}/{{VERSION}}/users/contacts",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -1301,7 +1661,8 @@
 							"query": [
 								{
 									"key": "project",
-									"value": "username, profileImageUrl"
+									"value": "username, profileImageUrl",
+									"disabled": true
 								}
 							]
 						}

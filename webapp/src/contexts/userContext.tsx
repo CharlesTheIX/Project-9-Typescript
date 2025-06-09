@@ -54,7 +54,7 @@ export const UserContextProvider = (props: { children: React.ReactNode }) => {
 
     (async () => {
       try {
-        const response = await getUserByClerkId(user.id);
+        const response = await getUserByClerkId({ clerkId: user.id, options: {} });
         if (response.error) throw new Error(response.message);
         if (toggle === "sign-in") {
           toast.setType("hi");

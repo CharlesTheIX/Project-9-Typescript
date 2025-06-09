@@ -33,6 +33,14 @@ type Country = MongoDocDefaults & {
   flagRectangle: Rectangle;
 };
 
+/* G */
+type GameData = MongoDocDefaults & {
+  score: number;
+  userId: string;
+  gameType: GameDataType;
+};
+type GameDataType = "countries_memory";
+
 /* M */
 type MongoDocDefaults = {
   __v?: any;

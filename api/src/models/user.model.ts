@@ -16,7 +16,7 @@ const schema = new Schema(
     clerkId: {
       type: String,
       unique: true,
-      required: [true, "Clerk ID not provided."],
+      required: [true, "Please provide a ClerkId."],
     },
     profileImageUrl: {
       type: String,
@@ -43,7 +43,7 @@ const schema = new Schema(
           userId: {
             type: Schema.Types.ObjectId,
             ref: "User",
-            required: [true, "User id required."],
+            required: [true, "Please provide a userId."],
           },
         },
       ],
