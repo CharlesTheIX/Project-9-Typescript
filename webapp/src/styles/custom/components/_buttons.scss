@@ -1,26 +1,12 @@
 @use "sass:map";
-@use "../themes" as t;
+@use "../mixins" as m;
+@use "../themes.config" as t;
 
 .button {
-  @apply px-5 py-2;
-  width: auto;
-  cursor: pointer;
-  font-weight: bold;
-  border: 3px solid;
-  border-top-right-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
-  transition: all 300ms ease-out;
+  @include m.customBorderRadius();
 
-  &:hover,
-  &:focus,
-  &:active,
-  &:focus-within {
-    outline: none;
-    appearance: none;
-    border-top-right-radius: 0;
-    border-bottom-left-radius: 0;
-    border-top-left-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
+  &.disabled {
+    cursor: not-allowed;
   }
 }
 
@@ -49,7 +35,6 @@
       }
 
       &.disabled {
-        cursor: not-allowed;
         color: $color-secondary;
         border-color: $color-secondary;
         background-color: $color-primary;

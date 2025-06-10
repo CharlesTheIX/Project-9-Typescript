@@ -19,7 +19,7 @@ def batch_crop_export_to_webp():
             layer = pdb.gimp_image_get_active_layer(image);
             CROP_WIDTH = image.width;
 
-            # Crop image to sive - slicing off the bottom
+            # Crop image to size - slicing off the bottom
             pdb.gimp_image_crop(image, CROP_WIDTH, CROP_HEIGHT, CROP_ORIGIN_X, CROP_ORIGIN_Y)
 
             # Export image as webp

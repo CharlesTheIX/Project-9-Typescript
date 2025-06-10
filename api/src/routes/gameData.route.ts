@@ -41,20 +41,20 @@ router.route("/by-id").post(async (request: Request, response: Response): Promis
 });
 
 // Get game data by userId
-router.route("/by-user-id").post(async (request: Request, response: Response): Promise<any> => {
-  const query = request.query;
-  const { userId } = request.body;
+// router.route("/by-user-id").post(async (request: Request, response: Response): Promise<any> => {
+//   const query = request.query;
+//   const { userId } = request.body;
 
-  if (!userId) return response.status(status.BAD).json({ ...response_BAD, message: "Required inputs: userId." });
+//   if (!userId) return response.status(status.BAD).json({ ...response_BAD, message: "Required inputs: userId." });
 
-  try {
-    const res = await getGameDataByUserId({ userId, query });
-    return response.json(res);
-  } catch (error: any) {
-    console.error(`Get game data by UserId error: ${error.message}`);
-    return response.status(status.SERVER_ERROR).json(response_SERVER_ERROR);
-  }
-});
+//   try {
+//     const res = await getGameDataByUserId({ userId, query });
+//     return response.json(res);
+//   } catch (error: any) {
+//     console.error(`Get game data by UserId error: ${error.message}`);
+//     return response.status(status.SERVER_ERROR).json(response_SERVER_ERROR);
+//   }
+// });
 
 // Create game data
 router.route("/create").post(async (request: Request, response: Response): Promise<any> => {

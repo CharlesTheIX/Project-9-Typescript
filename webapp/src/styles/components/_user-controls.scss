@@ -1,5 +1,5 @@
 @use "sass:map";
-@use "../themes" as t;
+@use "../custom/themes.config" as t;
 
 #user-controls {
   z-index: 50;

@@ -1,0 +1,88 @@
+@use "sass:map";
+@use "../mixins" as m;
+@use "../../core" as c;
+@use "../themes.config" as t;
+
+@mixin themes() {
+  @each $theme-name, $theme-vars in t.$themes {
+    &.#{$theme-name} {
+      $color-primary: map.get($theme-vars, color-primary);
+      $color-secondary: map.get($theme-vars, color-secondary);
+
+      background: $color-primary;
+
+      > div {
+        color: $color-secondary;
+        background: $color-primary;
+
+        > div {
+          border-color: $color-secondary;
+        }
+      }
+    }
+  }
+}
+
+#header {
+  @include themes();
+
+  & {
+    top: 0;
+    right: 0;
+    z-index: 50;
+    width: 100vw;
+    position: sticky;
+    padding: map.get(c.$gaps, m) map.get(c.$gaps, l) 0 map.get(c.$gaps, l);
+
+    > div {
+      @include m.customBorderRadius(false);
+
+      & {
+        margin: 0 auto;
+        border: 3px solid;
+        max-width: map.get(c.$widths, max);
+        padding: map.get(c.$gaps, s) map.get(c.$gaps, m);
+
+        > div {
+          @include c.flexRow(map.get(c.$gaps, m));
+
+          & {
+            margin: 0 auto;
+            align-items: center;
+            justify-content: space-between;
+            max-width: map.get(c.$widths, content);
+
+            > a {
+              @include c.flexRow(map.get(c.$gaps, s));
+
+              & {
+                align-items: center;
+
+                > p {
+                  font-weight: bold;
+                  font-size: map.get(c.$font_sizes, 3xl);
+                }
+              }
+            }
+
+            > nav {
+              @include c.flexRow(map.get(c.$gaps, m));
+
+              & {
+                align-items: center;
+
+                > ul {
+                  @include c.flexRow(map.get(c.$gaps, m));
+
+                  & {
+                    align-items: center;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -14,16 +14,22 @@ const HomePage: React.FC = () => {
             Github
           </Link>{" "}
           page.
-            <br />
-          Check out the Project_9 <Link href="/tech-stack" className="link-text">tech stack</Link>.
+          <br />
+          Check out the Project_9{" "}
+          <Link href="/tech-stack" className="link-text">
+            tech stack
+          </Link>
+          .
         </p>
 
         <div className="flex flex-row gap-5">
-          <Link className="button" href="/sign-in">
+          <Link className="link-text" href="/sign-in">
             Sign In
           </Link>
 
-          <Link className="button" href="/sign-up">
+          <p>|</p>
+
+          <Link className="link-text" href="/sign-up">
             Sign Up
           </Link>
         </div>

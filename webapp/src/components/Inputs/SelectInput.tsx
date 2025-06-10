@@ -8,8 +8,8 @@ type Props = {
   name: string;
   label?: string;
   options: Option[];
-  required?: boolean;
   className?: string;
+  required?: boolean;
   defaultValue?: Option;
   onChange?: (value: any) => void;
 };
@@ -29,20 +29,15 @@ const SelectInput: React.FC<Props> = (props: Props) => {
   const [value, setValue] = useState<Option>(defaultValue);
 
   return (
-    <div className={`input select-input ${className} gap-2 flex flex-col text-left w-full ${active ? "active" : ""}`}>
+    <div className={`input select-input ${className}`}>
       <input type="hidden" value={JSON.stringify(value)} name={name} required={required} />
 
-      {label && (
-        <label htmlFor={`${name}-select`} className="font-bold">
-          {label}
-        </label>
-      )}
+      {label && <label htmlFor={`${name}-select`}>{label}</label>}
 
-      <div className="relative outline-none appearance-none overflow-hidden">
+      <div className="input-container">
         <button
           type="button"
           name={`${name}-select`}
-          className="px-5 py-2 w-full outline-none cursor-pointer text-left appearance-none"
           onClick={() => {
             if (browser === "safari") return setActive(!active);
           }}
@@ -58,12 +53,11 @@ const SelectInput: React.FC<Props> = (props: Props) => {
           <Chevron_SVG direction="down" />
         </button>
 
-        <ul className="scrollbar-y relative">
+        <ul>
           {options.map((option: Option, key: number) => {
             return (
               <li
                 key={key}
-                className="px-5 py-2 cursor-pointer relative"
                 onClick={() => {
                   const targetOption = options[key];
                   setActive(false);

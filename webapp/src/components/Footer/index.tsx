@@ -11,30 +11,33 @@ const Footer: React.FC = () => {
   const { theme } = useThemeContext();
 
   return (
-    <footer className={`${theme} px-10 py-5`}>
-      <section className="text-[10px]">
-        <div className="flex flex-row gap-2 pb-2 items-center justify-center flex-wrap w-full">
-          {navigationItems.map((item: NavigationItem, key: number) => {
-            return (
-              <Fragment key={key}>
-                <Link href={item.href} className="link-text" key={key}>
-                  {item.label}
-                </Link>
-                {key != navigationItems.length - 1 && <p>|</p>}
-              </Fragment>
-            );
-          })}
-        </div>
+    <footer className={theme}>
+      <section className="footer">
+        <nav>
+          <ul>
+            {navigationItems.map((item: NavigationItem, key: number) => {
+              return (
+                <Fragment key={key}>
+                  <li key={key}>
+                    <Link href={item.href} key={key} className="link-text">
+                      {item.label}
+                    </Link>
+                  </li>
 
-        <div className="flex flex-col text-center items-center justify-center">
-          <p>
-            Created by{" "}
-            <Link className="link-text" href={"https://github.com/CharlesTheIX"} target="_blank">
-              CharlesTheIX
-            </Link>
-            .
-          </p>
-        </div>
+                  {key != navigationItems.length - 1 && <li>|</li>}
+                </Fragment>
+              );
+            })}
+          </ul>
+        </nav>
+
+        <p>
+          Created by{" "}
+          <Link href={"https://github.com/CharlesTheIX"} target="_blank" className="link-text">
+            CharlesTheIX
+          </Link>
+          .
+        </p>
       </section>
 
       <UserControls />

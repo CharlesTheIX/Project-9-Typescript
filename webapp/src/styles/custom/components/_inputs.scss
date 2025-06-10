@@ -1,0 +1,119 @@
+@use "sass:map";
+@use "../themes.config" as t;
+
+.input {
+  input,
+  textarea {
+    border: 3px solid;
+    border-top-right-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    transition: border 300ms ease-out, color 300ms ease-out, background-color 300ms ease-out;
+
+    &:focus,
+    &:active,
+    &:focus-within {
+      border-top-right-radius: 0;
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0.5rem;
+      border-bottom-right-radius: 0.5rem;
+    }
+  }
+
+  &.select-input {
+    &:hover,
+    &.active {
+      > div {
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+      }
+    }
+
+    > div {
+      border: 3px solid;
+      transition: all 300ms ease-out;
+      border-top-right-radius: 0.5rem;
+      border-bottom-left-radius: 0.5rem;
+
+      button {
+        transition: background-color 300ms ease-out, color 300ms ease-out;
+      }
+
+      ul {
+        li {
+          transition: background-color 300ms ease-out, color 300ms ease-out;
+        }
+      }
+    }
+  }
+}
+
+@each $theme-name, $theme-vars in t.$themes {
+  .#{$theme-name} {
+    $color-primary: map.get($theme-vars, color-primary);
+    $color-secondary: map.get($theme-vars, color-secondary);
+    $color-highlight: map.get($theme-vars, color-highlight);
+
+    .input {
+      input,
+      select,
+      textarea {
+        border-color: $color-secondary;
+        background-color: $color-primary;
+
+        &:focus,
+        &:active,
+        &:focus-within {
+          color: $color-primary;
+          background-color: $color-secondary;
+
+          & + div {
+            fill: $color-primary;
+            stroke: $color-primary;
+          }
+        }
+
+        & + div {
+          fill: $color-secondary;
+          stroke: $color-secondary;
+        }
+      }
+
+      &.select-input {
+        &:hover,
+        &.active {
+          > div {
+            button {
+              fill: $color-primary;
+              color: $color-primary;
+              stroke: $color-primary;
+              background-color: $color-secondary;
+            }
+          }
+        }
+
+        > div {
+          button {
+            fill: $color-secondary;
+            color: $color-secondary;
+            stroke: $color-secondary;
+            background-color: $color-primary;
+          }
+
+          ul {
+            li {
+              color: $color-secondary;
+              background-color: $color-primary;
+
+              &:hover {
+                color: $color-primary;
+                background-color: $color-secondary;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

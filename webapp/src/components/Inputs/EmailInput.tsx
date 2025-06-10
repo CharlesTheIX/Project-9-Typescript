@@ -11,23 +11,19 @@ type Props = {
 };
 
 const EmailInput: React.FC<Props> = (props: Props) => {
-  const { required = false, name, label, className = "", defaultValue = "", onInput = () => {} } = props;
+  const { required = false, name, label, defaultValue = "", onInput = () => {}, className = "" } = props;
   const [value, setValue] = useState<string>(defaultValue);
 
   return (
-    <div className={`input email-input ${className} gap-2 flex flex-col text-left w-full`}>
-      {label && (
-        <label htmlFor={name} className="font-bold">
-          {label}
-        </label>
-      )}
+    <div className={`input email-input ${className}`}>
+      {label && <label htmlFor={name}>{label}</label>}
 
       <input
         name={name}
         type="email"
         value={value}
+        autoComplete="true"
         required={required}
-        className="px-5 py-2 outline-none appearance-none"
         onInput={(event: any) => {
           const target = event.currentTarget || event.target;
           setValue(target.value);

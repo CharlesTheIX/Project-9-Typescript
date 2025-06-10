@@ -1,5 +1,5 @@
 @use "sass:map";
-@use "../themes" as t;
+@use "../custom/themes.config" as t;
 
 #impersonation-controls {
   @apply bottom-5;

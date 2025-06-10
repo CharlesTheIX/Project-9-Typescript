@@ -1,0 +1,27 @@
+@use "sass:map";
+@use "../../core/" as c;
+
+.hero-banner {
+  @include c.flexColumn(map.get(c.$gaps, m));
+
+  > div {
+    @include c.flexColumn(map.get(c.$gaps, s));
+
+    .title {
+      @include c.flexRow(map.get(c.$gaps, s));
+      align-items: center;
+    }
+
+    .highlights {
+      @include c.flexRow(map.get(c.$gaps, s));
+      font-weight: bold;
+      position: relative;
+      align-items: center;
+      padding-left: calc(75px + (0.25rem * 2));
+    }
+  }
+
+  > p {
+    max-width: map.get(c.$widths, m);
+  }
+}

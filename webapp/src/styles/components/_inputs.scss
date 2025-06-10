@@ -1,88 +1,166 @@
 @use "sass:map";
-@use "../themes" as t;
+@use "../core" as c;
+@use "../custom/themes.config" as t;
 
 .input {
-  input,
-  textarea {
-    border: 3px solid;
-    border-top-right-radius: 0.5rem;
-    border-bottom-left-radius: 0.5rem;
-    transition: border 300ms ease-out, color 300ms ease-out, background-color 300ms ease-out;
+  @include c.flexColumn(map.get(c.$gaps, s));
 
-    &:focus,
-    &:active,
-    &:focus-within {
-      border-top-right-radius: 0;
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0.5rem;
-      border-bottom-right-radius: 0.5rem;
+  & {
+    width: 100%;
+    text-align: left;
+
+    label {
+      font-weight: bold;
     }
 
-    &::-webkit-outer-spin-button,
-    &::-webkit-inner-spin-button {
-      margin: 0;
-      -webkit-appearance: none;
-    }
-  }
-
-  textarea {
-    min-height: 150px;
-  }
-
-  input[type="number"] {
-    appearance: textfield;
-    -moz-appearance: textfield;
-  }
-
-  &.select-input {
-    &:hover,
-    &.active {
-      > div {
-        border-top-right-radius: 0;
-        border-bottom-left-radius: 0;
-        border-top-left-radius: 0.5rem;
-        border-bottom-right-radius: 0.5rem;
-      }
+    input,
+    textarea {
+      outline: none;
+      width: 100%;
+      appearance: none;
+      padding: map.get(c.$gaps, m) map.get(c.$gaps, s);
     }
 
-    &.active {
-      > div {
-        button {
-          svg {
-            rotate: 180deg;
+    &.multi-text-input {
+      .input-container {
+        @include c.flexRow(map.get(c.$gaps, s));
+
+        & {
+          width: 100%;
+
+          > input {
+            width: 100%;
           }
         }
+      }
 
-        ul {
-          max-height: 1000px;
+      .value-container {
+        @include c.flexRow(map.get(c.$gaps, s));
+
+        & {
+          width: 100%;
+          flex-wrap: wrap;
         }
       }
     }
 
-    > div {
-      border: 3px solid;
-      transition: all 300ms ease-out;
-      border-top-right-radius: 0.5rem;
-      border-bottom-left-radius: 0.5rem;
+    &.password-input {
+      > div {
+        @include c.flexColumn(map.get(c.$gaps, m));
 
-      button {
-        transition: background-color 300ms ease-out, color 300ms ease-out;
+        & {
+          width: 100%;
 
-        svg {
-          position: absolute;
-          top: calc(0.25rem * 2);
-          right: calc(0.25rem * 2);
-          transition: all 300ms ease-out;
+          .input-container {
+            width: 100%;
+            position: relative;
+          }
+
+          .confirmation-container {
+            @include c.flexColumn(map.get(c.$gaps, m));
+
+            & {
+              width: 100%;
+
+              > div {
+                width: 100%;
+                position: relative;
+              }
+            }
+          }
+
+          input {
+            width: 100%;
+          }
+
+          .hide-icon {
+            cursor: pointer;
+            position: absolute;
+            right: map.get(c.$gaps, l);
+            top: calc(map.get(c.$gaps, m) + (1rem / 4));
+          }
+        }
+      }
+    }
+
+    &.rectangle-input {
+      .input-container {
+        @include c.flexRow(map.get(c.$gaps, s));
+
+        & {
+          > div {
+            @include c.flexColumn(0);
+
+            & {
+              width: 100%;
+
+              p {
+                width: 100%;
+                font-size: map.get(c.$font_sizes, s);
+              }
+
+              input {
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &.select-input {
+      &.active {
+        > div {
+          button {
+            svg {
+              rotate: 180deg;
+            }
+          }
+
+          ul {
+            max-height: 1000px;
+          }
         }
       }
 
-      ul {
-        z-index: 48;
-        max-height: 0px;
-        transition: max-height 300ms ease-out;
+      .input-container {
+        width: 100%;
+        outline: none;
+        appearance: none;
+        overflow: hidden;
+        position: relative;
 
-        li {
-          transition: background-color 300ms ease-out, color 300ms ease-out;
+        button {
+          width: 100%;
+          outline: none;
+          cursor: pointer;
+          text-align: left;
+          appearance: none;
+          padding: map.get(c.$gaps, m) map.get(c.$gaps, s);
+
+          svg {
+            position: absolute;
+            top: map.get(c.$gaps, s);
+            right: map.get(c.$gaps, s);
+            transition: all map.get(c.$transition_durations, m) ease-out;
+          }
+
+          ul {
+            @include c.scrollbar(y);
+
+            & {
+              z-index: 48;
+              max-height: 0px;
+              position: relative;
+              transition: max-height map.get(c.$transition_durations, m) ease-out;
+
+              li {
+                cursor: pointer;
+                position: relative;
+                padding: map.get(c.$gaps, m) map.get(c.$gaps, s);
+              }
+            }
+          }
         }
       }
     }

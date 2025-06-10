@@ -19,19 +19,19 @@ type Props = {
 };
 
 const HeroBanner: React.FC<Props> = (props: Props) => {
-  const { icon, content, title, iconSize = 75, highlights = [] } = props;
+  const { icon, content, title, iconSize = 100, highlights = [] } = props;
 
   return (
-    <div className="hero-banner flex flex-col gap-5">
-      <div className="flex flex-col gap-2 ">
-        <div className="flex flex-row gap-2 items-end justify-start">
+    <div className="hero-banner">
+      <div>
+        <div className="title">
           {getSvg({ icon, size: iconSize })}
 
           <h1>{title}</h1>
         </div>
 
         {highlights && (
-          <div className="highlights flex flex-row gap-2 items-center relative font-bold">
+          <div className="highlights">
             {highlights.map((highlight: Highlight, key: number) => {
               switch (highlight.type) {
                 case "text":
@@ -73,7 +73,7 @@ const HeroBanner: React.FC<Props> = (props: Props) => {
         )}
       </div>
 
-      {content && <p className="max-w-3xl">{content}</p>}
+      {content && <p>{content}</p>}
     </div>
   );
 };

@@ -1,15 +1,12 @@
 @use "sass:map";
-@use "../themes" as t;
+@use "../custom/themes.config" as t;
 
 @use "./main";
 @use "./cards";
 @use "./forms";
-@use "./footer";
-@use "./header";
 @use "./inputs";
 @use "./tables";
 @use "./modals";
-@use "./buttons";
 @use "./layouts";
 @use "./cookie-banner";
 @use "./user-controls";
@@ -34,11 +31,6 @@
 }
 
 /* H */
-.hero-banner {
-  .highlights {
-    padding-left: calc(75px + (0.25rem * 2));
-  }
-}
 
 /* I */
 .image-container {
@@ -66,17 +58,6 @@
 }
 
 /* L */
-.link-text {
-  cursor: pointer;
-  font-weight: bold;
-  filter: brightness(1);
-  text-transform: uppercase;
-  transition: filter 300ms ease-out;
-
-  &:hover {
-    filter: brightness(0.5);
-  }
-}
 .link-wrapper {
   top: 0;
   left: 0;
@@ -151,11 +132,6 @@
     }
 
     /* L */
-    .link-text {
-      fill: $color-highlight;
-      color: $color-highlight;
-      stroke: $color-highlight;
-    }
 
     .loading-spinner {
       fill: $color-secondary;

@@ -29,21 +29,16 @@ const MultiTextInput: React.FC<Props> = (props: Props) => {
   const [currentValue, setCurrentValue] = useState<string>(defaultCurrentValue);
 
   return (
-    <div className={`input multi-text-input${className} gap-2 flex flex-col text-left w-full`}>
+    <div className={`input multi-text-input ${className}`}>
       <input type="hidden" value={JSON.stringify(values)} name={name} required={required} />
 
-      {label && (
-        <label htmlFor={`${name}-current`} className="font-bold">
-          {label}
-        </label>
-      )}
+      {label && <label htmlFor={`${name}-current`}>{label}</label>}
 
-      <div className="gap-2 w-full flex flex-row justify-start">
+      <div className="input-container">
         <input
           type="text"
           value={currentValue}
           name={`${name}-current`}
-          className="px-5 py-2 outline-none appearance-none w-full"
           onInput={(event: any) => {
             const target = event.currentTarget || event.target;
             setCurrentValue(target.value);
@@ -66,7 +61,7 @@ const MultiTextInput: React.FC<Props> = (props: Props) => {
         </button>
       </div>
 
-      <div className="values gap-2 w-full flex wrap flex-row justify-start">
+      <div className="value-container">
         {values.map((value: string, key: number) => {
           return (
             <button

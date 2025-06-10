@@ -1,0 +1,75 @@
+@use "sass:map";
+@use "../core" as c;
+@use "./themes.config" as t;
+@use "./components";
+
+@each $theme-name, $theme-vars in t.$themes {
+  $color-primary: map.get($theme-vars, color-primary);
+  $color-secondary: map.get($theme-vars, color-secondary);
+  $color-highlight: map.get($theme-vars, color-highlight);
+
+  .#{$theme-name} {
+    transition: color map.get(c.$transition_durations, m) ease-out,
+      background-color map.get(c.$transition_durations, m) ease-out,
+      border-color map.get(c.$transition_durations, m) ease-out;
+
+    .link-text {
+      fill: $color-highlight;
+      color: $color-highlight;
+      stroke: $color-highlight;
+    }
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.link-text {
+  filter: brightness(1);
+  transition: filter map.get(c.$transition_durations, m) ease-out;
+
+  &:hover {
+    filter: brightness(0.5);
+  }
+}
+
+aside {
+  @include c.fadeIn();
+}
+
+body {
+  @include c.flexColumn(0);
+
+  & {
+    width: 100vw;
+    line-height: 1.5;
+    overflow-x: hidden;
+    align-items: stretch;
+    justify-content: space-between;
+    font-size: map.get(c.$font_sizes, m);
+    background-color: map.get(map.get(t.$themes, dark), color-primary);
+  }
+}
+
+section {
+  @include c.fadeIn();
+  @include c.maxWidth(content);
+}
+
+svg {
+  transition: fill map.get(c.$transition_durations, m) ease-out;
+
+  path,
+  line,
+  rect,
+  polyline {
+    transition: stroke map.get(c.$transition_durations, m) ease-out;
+  }
+}

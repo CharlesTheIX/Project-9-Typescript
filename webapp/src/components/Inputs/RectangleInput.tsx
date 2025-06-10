@@ -10,28 +10,24 @@ type Props = {
 };
 
 const RectangleInput: React.FC<Props> = (props: Props) => {
-  const { name, label = "", className = "", defaultValue = gbl.nullRectangle } = props;
+  const { name, label = "", defaultValue = gbl.nullRectangle, className = "" } = props;
   const [value, setValue] = useState<Rectangle>(defaultValue);
 
   return (
-    <div className={`input rectangle-input ${className} gap-2 flex flex-col text-left w-full`}>
+    <div className={`input rectangle-input ${className}`}>
       <input type="hidden" value={JSON.stringify(value)} name={name} />
 
-      {label && (
-        <label htmlFor={`${name}-input-x`} className="font-bold">
-          {label}
-        </label>
-      )}
+      {label && <label htmlFor={`${name}-input-x`}>{label}</label>}
 
-      <div className="gap-2 flex flex-row">
-        <div className="w-full flex flex-col">
+      <div className="input-container">
+        <div>
           <p className="text-xs w-full">X</p>
           <input
             step="1"
             type="number"
             value={value.x}
+            className="w-full"
             name={`${name}-input-x`}
-            className="px-5 py-2 outline-none appearance-none w-full"
             onInput={(event: any) => {
               const target = event.currentTarget || event.target;
               setValue((prevValue: Rectangle) => {
@@ -44,14 +40,13 @@ const RectangleInput: React.FC<Props> = (props: Props) => {
           />
         </div>
 
-        <div className="w-full flex flex-col">
-          <p className="text-xs w-full">Y</p>
+        <div>
+          <p>Y</p>
           <input
             step="1"
             type="number"
             value={value.y}
             name={`${name}-input-y`}
-            className="px-5 py-2 outline-none appearance-none w-full"
             onInput={(event: any) => {
               const target = event.currentTarget || event.target;
               setValue((prevValue: Rectangle) => {
@@ -64,14 +59,13 @@ const RectangleInput: React.FC<Props> = (props: Props) => {
           />
         </div>
 
-        <div className="w-full flex flex-col">
-          <p className="text-xs w-full">Width</p>
+        <div>
+          <p>Width</p>
           <input
             step="1"
             type="number"
             value={value.width}
             name={`${name}-input-width`}
-            className="px-5 py-2 outline-none appearance-none w-full"
             onInput={(event: any) => {
               const target = event.currentTarget || event.target;
               setValue((prevValue: Rectangle) => {
@@ -84,14 +78,13 @@ const RectangleInput: React.FC<Props> = (props: Props) => {
           />
         </div>
 
-        <div className="w-full flex flex-col">
-          <p className="text-xs w-full">Height</p>
+        <div>
+          <p>Height</p>
           <input
             step="1"
             type="number"
             value={value.height}
             name={`${name}-input-height`}
-            className="px-5 py-2 outline-none appearance-none w-full"
             onInput={(event: any) => {
               const target = event.currentTarget || event.target;
               setValue((prevValue: Rectangle) => {

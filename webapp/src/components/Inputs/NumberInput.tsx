@@ -7,8 +7,8 @@ type Props = {
   name: string;
   step?: number;
   label?: string;
-  required?: boolean;
   className?: string;
+  required?: boolean;
   defaultValue?: string;
   onInput?: (event: any) => void;
 };
@@ -28,12 +28,8 @@ const NumberInput: React.FC<Props> = (props: Props) => {
   const [value, setValue] = useState<string>(defaultValue);
 
   return (
-    <div className={`input number-input ${className} gap-2 flex flex-col text-left w-full`}>
-      {label && (
-        <label htmlFor={name} className="font-bold">
-          {label}
-        </label>
-      )}
+    <div className={`input number-input ${className}`}>
+      {label && <label htmlFor={name}>{label}</label>}
 
       <input
         min={min}
@@ -43,7 +39,6 @@ const NumberInput: React.FC<Props> = (props: Props) => {
         type="number"
         value={value}
         required={required}
-        className="px-5 py-2 outline-none appearance-none"
         onInput={(event: any) => {
           const target = event.currentTarget || event.target;
           setValue(target.value);

@@ -58,7 +58,7 @@ const SignInForm: React.FC = () => {
   return (
     <FormCore ref={formRef} isLoading={isLoading} handleSubmit={handleSubmit}>
       <>
-        <EmailInput name="email" label="Email" required={true} />
+        <EmailInput name="email" label="Email" required={true} className="w-full" />
         <PasswordInput name="password" label="Password" required={true} />
       </>
     </FormCore>

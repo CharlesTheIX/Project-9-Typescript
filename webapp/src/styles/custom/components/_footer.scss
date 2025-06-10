@@ -1,0 +1,50 @@
+@use "sass:map";
+@use "../../core" as c;
+@use "../themes.config" as t;
+
+@mixin themes() {
+  @each $theme-name, $theme-vars in t.$themes {
+    &.#{$theme-name} {
+      $color-primary: map.get($theme-vars, color-primary);
+      $color-secondary: map.get($theme-vars, color-secondary);
+
+      color: $color-secondary;
+      background: $color-primary;
+      border-color: $color-secondary;
+    }
+  }
+}
+
+footer {
+  @include themes();
+
+  & {
+    border-top: 3px solid;
+    padding: map.get(c.$gaps, m) map.get(c.$gaps, l);
+
+    .footer {
+      font-size: map.get(c.$font_sizes, s);
+
+      > nav {
+        width: 100%;
+
+        > ul {
+          @include c.flexRow(map.get(c.$gaps, s));
+
+          & {
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+      }
+
+      > p {
+        width: 100%;
+        text-align: center;
+        padding-top: map.get(c.$gaps, s);
+        font-size: map.get(c.$font_sizes, xs);
+      }
+    }
+  }
+}
